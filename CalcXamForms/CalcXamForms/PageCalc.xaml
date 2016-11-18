@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:calcXamForms="clr-namespace:CalcXamForms;assembly=CalcXamForms"
+             x:Class="CalcXamForms.PageCalc"
+             Title="CalcXamForms"
+             >
+  <StackLayout VerticalOptions="FillAndExpand" BackgroundColor="White" Padding="6,6,6,6">
+    <Grid VerticalOptions="FillAndExpand">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="*" />
+      </Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+
+      <!-- Output control -->
+      <Label Grid.Row="0" FormattedText="{Binding Result}" BackgroundColor="Gray" />
+      
+      <!-- bottom controls -->
+      <Grid Grid.Row="1">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="*"/>
+          <RowDefinition Height="*"/>
+          <RowDefinition Height="*"/>
+          <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Button BackgroundColor="Gray" Text="1" Grid.Column="0" Grid.Row="0" Command="{Binding B1}"/>
+        <Button BackgroundColor="Gray" Text="2" Grid.Column="1" Grid.Row="0" Command="{Binding B2}"/>
+        <Button BackgroundColor="Gray" Text="3" Grid.Column="2" Grid.Row="0" Command="{Binding B3}"/>
+        <Button BackgroundColor="Gray" Text="+" Grid.Column="3" Grid.Row="0" Command="{Binding BPlus}"/>
+
+        <Button BackgroundColor="Gray" Text="4" Grid.Column="0" Grid.Row="1" Command="{Binding B4}"/>
+        <Button BackgroundColor="Gray" Text="5" Grid.Column="1" Grid.Row="1" Command="{Binding B5}"/>
+        <Button BackgroundColor="Gray" Text="6" Grid.Column="2" Grid.Row="1" Command="{Binding B6}"/>
+        <Button BackgroundColor="Gray" Text="-" Grid.Column="3" Grid.Row="1" Command="{Binding BMinus}"/>
+
+        <Button BackgroundColor="Gray" Text="7" Grid.Column="0" Grid.Row="2" Command="{Binding B7}"/>
+        <Button BackgroundColor="Gray" Text="8" Grid.Column="1" Grid.Row="2" Command="{Binding B8}"/>
+        <Button BackgroundColor="Gray" Text="9" Grid.Column="2" Grid.Row="2" Command="{Binding B9}"/>
+        <Button BackgroundColor="Gray" Text="*" Grid.Column="3" Grid.Row="2" Command="{Binding BStar}"/>
+
+        <Button BackgroundColor="Gray" Text="." Grid.Column="0" Grid.Row="3" Command="{Binding BDot}"/>
+        <Button BackgroundColor="Gray" Text="0" Grid.Column="1" Grid.Row="3" Command="{Binding B0}"/>
+        <Button BackgroundColor="Gray" Text="=" Grid.Column="2" Grid.Row="3" Command="{Binding BEquals}"/>
+        <Button BackgroundColor="Gray" Text="/" Grid.Column="3" Grid.Row="3" Command="{Binding BSlash}"/>
+      </Grid>
+
+      <!-- History control -->
+      <calcXamForms:MyListView Grid.Row="2"  ItemClickCommand="{Binding OnTap}" ItemsSource="{Binding Command}" VerticalOptions="Fill" >
+        <calcXamForms:MyListView.BackgroundColor>
+          <OnPlatform x:TypeArguments="Color"
+              iOS="#a4eaff"
+              Android="#2c3e50"
+              WinPhone="#2c3e50" />
+        </calcXamForms:MyListView.BackgroundColor>
+      </calcXamForms:MyListView>
+    </Grid>
+  </StackLayout>
+</ContentPage>
