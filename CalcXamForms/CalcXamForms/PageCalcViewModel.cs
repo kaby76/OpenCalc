@@ -13,17 +13,14 @@ namespace CalcXamForms
 {
     class PageCalcViewModel : INotifyPropertyChanged
     {
-        private List<List<char>> _command_buffer = new List<List<char>>();
-        private Stack<float> _stack = new Stack<float>();
-        private float _result;
-        private float _accumulator;
-        private Stack<char> _op = new Stack<char>();
+        private List<StringBuilder> _calculation_history = new List<StringBuilder>();
+        private string _result;
 
         public FormattedString Result
         {
             get
             {
-                string result = _result.ToString();
+                string result = _result;
                 var fs = new FormattedString();
 
                 fs.Spans.Add(
@@ -64,9 +61,9 @@ namespace CalcXamForms
             get
             {
                 List<FormattedString> res = new List<FormattedString>();
-                foreach (List<char> str in _command_buffer)
+                foreach (StringBuilder str in _calculation_history)
                 {
-                    string s = new string(str.ToArray());
+                    string s = str.ToString();
                     var fs = new FormattedString();
 
                     fs.Spans.Add(
@@ -100,6 +97,8 @@ namespace CalcXamForms
             }
         }
 
+        enum TokenTypes { StartSymbol = 0, E, Plus, Minus, Star, Slash, Num, Lp, Rp };
+
         public PageCalcViewModel()
         {
             //
@@ -119,7 +118,7 @@ namespace CalcXamForms
 
             Grammar grammar = new Grammar();
             grammar.Tokens = new string[] { "S'", "e", "+", "-", "*", "/", "i", "(", ")" };
-
+            
             grammar.PrecedenceGroups = new PrecedenceGroup[]
             {
                 new PrecedenceGroup
@@ -130,20 +129,23 @@ namespace CalcXamForms
                         //S' -> e
                         new Production
                         {
-                            Left = 0,
-                            Right = new int[] {1}
+                            Left = (int)TokenTypes.StartSymbol,
+                            Right = new int[] {(int)TokenTypes.E}
                         },
                         //e -> i
                         new Production
                         {
-                            Left = 1,
-                            Right = new int[] {6}
+                            Left = (int)TokenTypes.E,
+                            Right = new int[] {(int)TokenTypes.Num}
                         },
                         //e -> ( e )
                         new Production
                         {
-                            Left = 1,
-                            Right = new int[] {7, 1, 8}
+                            Left = (int)TokenTypes.E,
+                            Right = new int[] {
+                                (int)TokenTypes.Lp,
+                                (int)TokenTypes.E,
+                                (int)TokenTypes.Rp}
                         }
                     }
                 },
@@ -155,14 +157,20 @@ namespace CalcXamForms
                         //e -> e * e
                         new Production
                         {
-                            Left = 1,
-                            Right = new int[] {1, 4, 1}
+                            Left = (int)TokenTypes.E,
+                            Right = new int[] {
+                                (int)TokenTypes.E,
+                                (int)TokenTypes.Star,
+                                (int)TokenTypes.E}
                         },
                         //e -> e / e
                         new Production
                         {
-                            Left = 1,
-                            Right = new int[] {1, 5, 1}
+                            Left = (int)TokenTypes.E,
+                            Right = new int[] {
+                                (int)TokenTypes.E,
+                                (int)TokenTypes.Slash,
+                                (int)TokenTypes.E}
                         },
                     }
                 },
@@ -175,14 +183,20 @@ namespace CalcXamForms
                         //e -> e + e
                         new Production
                         {
-                            Left = 1,
-                            Right = new int[] {1, 2, 1}
+                            Left = (int)TokenTypes.E,
+                            Right = new int[] {
+                                (int)TokenTypes.E,
+                                (int)TokenTypes.Plus,
+                                (int)TokenTypes.E}
                         },
                         //e -> e - e
                         new Production
                         {
-                            Left = 1,
-                            Right = new int[] {1, 3, 1}
+                            Left = (int)TokenTypes.E,
+                            Right = new int[] {
+                                (int)TokenTypes.E,
+                                (int)TokenTypes.Minus,
+                                (int)TokenTypes.E}
                         }
                     }
                 }
@@ -196,112 +210,106 @@ namespace CalcXamForms
             string deb = Debug.Output();
 
             Parser parser = new Parser(parser_generator);
-            //parser.Input(7, "1"); // token type = "i"; value = 1.
-            //parser.Input(3, "+");
-            //parser.Input(7, "2");
-            //parser.Parse();
 
-            _command_buffer.Add(new List<char>());
+            _calculation_history.Add(new StringBuilder());
 
+            _bdot_command = new Command((nothing) =>
+            {
+                char c = '.';
+                StringBuilder sb = _calculation_history.Last();
+                sb.Append(c);
+                _result = Lexer(sb.ToString()).Last().token_value;
+                NotifyPropertyChanged("Result");
+                NotifyPropertyChanged("Command");
+            });
 
-            _stack.Push(0);
             _b0_command = new Command((nothing) =>
             {
-                int value = 0;
-                char c = (char)(value + (int)'0');
-                _command_buffer.Last().Add(c);
-                _accumulator = 10 * _accumulator + value;
-                _result = _accumulator;
+                char c = '0';
+                StringBuilder sb = _calculation_history.Last();
+                sb.Append(c);
+                _result = Lexer(sb.ToString()).Last().token_value;
                 NotifyPropertyChanged("Result");
                 NotifyPropertyChanged("Command");
             });
             _b1_command = new Command((nothing) =>
             {
-                int value = 1;
-                char c = (char)(value + (int)'0');
-                _command_buffer.Last().Add(c);
-                _accumulator = 10 * _accumulator + value;
-                _result = _accumulator;
+                char c = '1';
+                StringBuilder sb = _calculation_history.Last();
+                sb.Append(c);
+                _result = Lexer(sb.ToString()).Last().token_value;
                 NotifyPropertyChanged("Result");
                 NotifyPropertyChanged("Command");
             });
             _b2_command = new Command((nothing) =>
             {
-                int value = 2;
-                char c = (char)(value + (int)'0');
-                _command_buffer.Last().Add(c);
-                _accumulator = 10 * _accumulator + value;
-                _result = _accumulator;
+                char c = '2';
+                StringBuilder sb = _calculation_history.Last();
+                sb.Append(c);
+                _result = Lexer(sb.ToString()).Last().token_value;
                 NotifyPropertyChanged("Result");
                 NotifyPropertyChanged("Command");
             });
             _b3_command = new Command((nothing) =>
             {
-                int value = 3;
-                char c = (char)(value + (int)'0');
-                _command_buffer.Last().Add(c);
-                _accumulator = 10 * _accumulator + value;
-                _result = _accumulator;
+                char c = '3';
+                StringBuilder sb = _calculation_history.Last();
+                sb.Append(c);
+                _result = Lexer(sb.ToString()).Last().token_value;
                 NotifyPropertyChanged("Result");
                 NotifyPropertyChanged("Command");
             });
             _b4_command = new Command((nothing) =>
             {
-                int value = 4;
-                char c = (char)(value + (int)'0');
-                _command_buffer.Last().Add(c);
-                _accumulator = 10 * _accumulator + value;
-                _result = _accumulator;
+                char c = '4';
+                StringBuilder sb = _calculation_history.Last();
+                sb.Append(c);
+                _result = Lexer(sb.ToString()).Last().token_value;
                 NotifyPropertyChanged("Result");
                 NotifyPropertyChanged("Command");
             });
             _b5_command = new Command((nothing) =>
             {
-                int value = 5;
-                char c = (char)(value + (int)'0');
-                _command_buffer.Last().Add(c);
-                _accumulator = 10 * _accumulator + value;
-                _result = _accumulator;
+                char c = '5';
+                StringBuilder sb = _calculation_history.Last();
+                sb.Append(c);
+                _result = Lexer(sb.ToString()).Last().token_value;
                 NotifyPropertyChanged("Result");
                 NotifyPropertyChanged("Command");
             });
             _b6_command = new Command((nothing) =>
             {
-                int value = 6;
-                char c = (char)(value + (int)'0');
-                _command_buffer.Last().Add(c);
-                _accumulator = 10 * _accumulator + value;
-                _result = _accumulator;
+                char c = '6';
+                StringBuilder sb = _calculation_history.Last();
+                sb.Append(c);
+                _result = Lexer(sb.ToString()).Last().token_value;
                 NotifyPropertyChanged("Result");
                 NotifyPropertyChanged("Command");
             });
             _b7_command = new Command((nothing) =>
             {
-                int value = 7;
-                char c = (char)(value + (int)'0');
-                _command_buffer.Last().Add(c);
-                _accumulator = 10 * _accumulator + value;
-                _result = _accumulator;
+                char c = '7';
+                StringBuilder sb = _calculation_history.Last();
+                sb.Append(c);
+                _result = Lexer(sb.ToString()).Last().token_value;
                 NotifyPropertyChanged("Result");
                 NotifyPropertyChanged("Command");
             });
             _b8_command = new Command((nothing) =>
             {
-                int value = 8;
-                char c = (char)(value + (int)'0');
-                _command_buffer.Last().Add(c);
-                _accumulator = 10 * _accumulator + value;
-                _result = _accumulator;
+                char c = '8';
+                StringBuilder sb = _calculation_history.Last();
+                sb.Append(c);
+                _result = Lexer(sb.ToString()).Last().token_value;
                 NotifyPropertyChanged("Result");
                 NotifyPropertyChanged("Command");
             });
             _b9_command = new Command((nothing) =>
             {
-                int value = 9;
-                char c = (char)(value + (int)'0');
-                _command_buffer.Last().Add(c);
-                _accumulator = 10 * _accumulator + value;
-                _result = _accumulator;
+                char c = '9';
+                StringBuilder sb = _calculation_history.Last();
+                sb.Append(c);
+                _result = Lexer(sb.ToString()).Last().token_value;
                 NotifyPropertyChanged("Result");
                 NotifyPropertyChanged("Command");
             });
@@ -309,60 +317,64 @@ namespace CalcXamForms
 
             _bplus_command = new Command((nothing) =>
             {
-                parser.Input(7, _accumulator.ToString()); // token type = "i"; value = 1.
-                _accumulator = 0;
-                _command_buffer.Last().Add('+');
-                parser.Input(3, "0"); // +
+                StringBuilder sb = _calculation_history.Last();
+                sb.Append('+');
+                List<Node> tokens = Lexer(sb.ToString());
+                parser.Input(tokens);
                 float v = EvaluateTop(parser.Top(1));
-                _result = v;
+                _result = v.ToString();
                 NotifyPropertyChanged("Result");
                 NotifyPropertyChanged("Command");
             });
+
             _bminus_command = new Command((nothing) =>
             {
-                parser.Input(7, _accumulator.ToString()); // token type = "i"; value = 1.
-                _accumulator = 0;
-                _command_buffer.Last().Add('-');
-                parser.Input(4, "0"); // -
+                StringBuilder sb = _calculation_history.Last();
+                sb.Append('-');
+                List<Node> tokens = Lexer(sb.ToString());
+                parser.Input(tokens);
                 float v = EvaluateTop(parser.Top(1));
-                _result = v;
+                _result = v.ToString();
                 NotifyPropertyChanged("Result");
                 NotifyPropertyChanged("Command");
             });
+
             _bstar_command = new Command((nothing) =>
             {
-                parser.Input(7, _accumulator.ToString()); // token type = "i"; value = 1.
-                _accumulator = 0;
-                _command_buffer.Last().Add('*');
-                parser.Input(5, "0"); // *
+                StringBuilder sb = _calculation_history.Last();
+                sb.Append('*');
+                List<Node> tokens = Lexer(sb.ToString());
+                parser.Input(tokens);
                 float v = EvaluateTop(parser.Top(1));
-                _result = v;
+                _result = v.ToString();
                 NotifyPropertyChanged("Result");
                 NotifyPropertyChanged("Command");
             });
+
             _bslash_command = new Command((nothing) =>
             {
-                parser.Input(7, _accumulator.ToString()); // token type = "i"; value = 1.
-                _accumulator = 0;
-                _command_buffer.Last().Add('/');
-                parser.Input(6, "0"); // /
+                StringBuilder sb = _calculation_history.Last();
+                sb.Append('/');
+                List<Node> tokens = Lexer(sb.ToString());
+                parser.Input(tokens);
                 float v = EvaluateTop(parser.Top(1));
-                _result = v;
+                _result = v.ToString();
                 NotifyPropertyChanged("Result");
                 NotifyPropertyChanged("Command");
             });
+
             _bequals_command = new Command((nothing) =>
             {
-                parser.Input(7, _accumulator.ToString()); // token type = "i"; value = 1.
-                _accumulator = 0;
-                _command_buffer.Last().Add('=');
-                _command_buffer.Add(new List<char>());
-                parser.Input(0, "0"); //=
+                StringBuilder sb = _calculation_history.Last();
+                sb.Append('=');
+                List<Node> tokens = Lexer(sb.ToString());
+                parser.Input(tokens);
                 float v = EvaluateTop(parser.Top(0));
-                _result = v;
-                parser.Reset();
+                _result = v.ToString();
                 NotifyPropertyChanged("Result");
                 NotifyPropertyChanged("Command");
+                parser.Reset();
+                _calculation_history.Add(new StringBuilder());
             });
         }
 
@@ -581,22 +593,110 @@ namespace CalcXamForms
             return result;
         }
 
+        private List<Node> Lexer(string command)
+        {
+            List<Node> result = new List<Node>();
+            int i;
+            for (i = 0; i < command.Length; )
+            {
+                if (command[i] >= '0' && command[i] <= '9')
+                {
+                    int dot = 0;
+                    StringBuilder sb = new StringBuilder();
+                    while (i < command.Length && (command[i] >= '0' && command[i] <= '9' ||
+                        command[i] == '.'))
+                    {
+                        sb.Append(command[i]);
+                        if (command[i] == '.')
+                        {
+                            if (dot > 0) throw new Exception("invalid number");
+                            dot++;
+                        }
+                        ++i;
+                    }
+                    Node token = new Node();
+                    token.token_type = (int)TokenTypes.Num;
+                    token.token_value = sb.ToString();
+                    token.start = i - token.token_value.Length;
+                    token.end = i;
+                    result.Add(token);
+                }
+                else if (command[i] == '+')
+                {
+                    Node token = new Node();
+                    token.token_type = (int)TokenTypes.Plus;
+                    token.token_value = "+";
+                    token.start = i;
+                    token.end = i + 1;
+                    ++i;
+                    result.Add(token);
+                }
+                else if (command[i] == '-')
+                {
+                    Node token = new Node();
+                    token.token_type = (int)TokenTypes.Minus;
+                    token.token_value = "-";
+                    token.start = i;
+                    token.end = i + 1;
+                    ++i;
+                    result.Add(token);
+                }
+                else if (command[i] == '*')
+                {
+                    Node token = new Node();
+                    token.token_type = (int)TokenTypes.Star;
+                    token.token_value = "*";
+                    token.start = i;
+                    token.end = i + 1;
+                    ++i;
+                    result.Add(token);
+                }
+                else if (command[i] == '/')
+                {
+                    Node token = new Node();
+                    token.token_type = (int)TokenTypes.Slash;
+                    token.token_value = "/";
+                    token.start = i;
+                    token.end = i + 1;
+                    ++i;
+                    result.Add(token);
+                }
+                else if (command[i] == '=')
+                {
+                    Node token = new Node();
+                    token.token_type = -1;
+                    token.token_value = "=";
+                    token.start = i;
+                    token.end = i + 1;
+                    ++i;
+                    result.Add(token);
+                }
+            }
+            return result;
+        }
+
         private float Evaluate(Dictionary<Node, float> value, Node node)
         {
-            if (node.children == null)
+            if (node.Children == null)
                 throw new Exception("Should not be.");
-            int count = node.children.Count();
-            foreach (Node child in node.children)
+            int count = node.Children.Count();
+            foreach (Node child in node.Children)
                 Evaluate(value, child);
             if (count == 0)
             {
-                float res = Convert.ToSingle(node.token_value);
-                value[node] = res;
-                return res;
+                try
+                {
+                    float res = Convert.ToSingle(node.token_value);
+                    value[node] = res;
+                    return res;
+                }
+                catch (Exception)
+                { }
+                return 0;
             }
             else if (count == 1)
             {
-                float res = value[node.children[0]];
+                float res = value[node.Children[0]];
                 value[node] = res;
                 return res;
             }
@@ -607,22 +707,22 @@ namespace CalcXamForms
             else if (count == 3)
             {
                 float res = 0;
-                int tt = node.children[1].token_type;
+                int tt = node.Children[1].token_type;
                 if (tt == 3)
                 {
-                    res = value[node.children[0]] + value[node.children[2]];
+                    res = value[node.Children[0]] + value[node.Children[2]];
                 }
                 if (tt == 4)
                 {
-                    res = value[node.children[0]] - value[node.children[2]];
+                    res = value[node.Children[0]] - value[node.Children[2]];
                 }
                 if (tt == 5)
                 {
-                    res = value[node.children[0]] * value[node.children[2]];
+                    res = value[node.Children[0]] * value[node.Children[2]];
                 }
                 if (tt == 6)
                 {
-                    res = value[node.children[0]] / value[node.children[2]];
+                    res = value[node.Children[0]] / value[node.Children[2]];
                 }
                 value[node] = res;
                 return res;

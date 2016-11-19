@@ -12,3 +12,8 @@ CalcXamForms/CalcXamForms.Droid/bin/
 CalcXamForms/CodeProject.Syntax.LALR/bin/
 CalcXamForms/CodeProject.Syntax.LALR/obj/
 CalcXamForms/CalcXamForms.iOS/obj/
+.vs/CalcXamForms/v14/.suo
+*.pdb
+*.mdb
+*.dll
+packages/
