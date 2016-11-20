@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Antlr4.Runtime;
 using CodeProject.Syntax.LALR;
 using Xamarin.Forms;
+using Antlr4.Runtime.Tree;
+using Parser = CodeProject.Syntax.LALR.Parser;
 
 namespace CalcXamForms
 {
@@ -15,6 +19,7 @@ namespace CalcXamForms
     {
         private List<StringBuilder> _calculation_history = new List<StringBuilder>();
         private string _result;
+        private Antlr4.Runtime.Tree.IErrorNode xasdf;
 
         public FormattedString Result
         {
@@ -101,6 +106,19 @@ namespace CalcXamForms
 
         public PageCalcViewModel()
         {
+            if (true)
+            {
+                byte[] byteArray = Encoding.UTF8.GetBytes("1+2+".ToString());
+                StreamReader inputStream = new StreamReader(new MemoryStream(byteArray));
+                AntlrInputStream input = new AntlrInputStream(inputStream.ReadToEnd());
+                CSharp4Lexer lexer = new CSharp4Lexer(input);
+                CommonTokenStream tokens = new CommonTokenStream(lexer);
+                CSharp4Parser pp = new CSharp4Parser(tokens);
+                IParseTree tree = pp.expression();
+                var t = tree.ToStringTree(pp);
+                Visitor visitor = new Visitor();
+                //Console.WriteLine(visitor.Visit(tree));
+            }
             //
             // the following program produces a parse table for the following grammar
             // for infix expressions, and appropriately applies operator precedence of
