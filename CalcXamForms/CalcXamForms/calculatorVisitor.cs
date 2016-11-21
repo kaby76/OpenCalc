@@ -38,6 +38,12 @@ public interface IcalculatorVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitExpressionResult([NotNull] calculatorParser.ExpressionResultContext context);
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.equation"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitEquation([NotNull] calculatorParser.EquationContext context);
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="calculatorParser.expression"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -68,18 +74,6 @@ public interface IcalculatorVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitScientific([NotNull] calculatorParser.ScientificContext context);
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="calculatorParser.func"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitFunc([NotNull] calculatorParser.FuncContext context);
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="calculatorParser.funcname"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitFuncname([NotNull] calculatorParser.FuncnameContext context);
-	/// <summary>
 	/// Visit a parse tree produced by <see cref="calculatorParser.relop"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -91,10 +85,4 @@ public interface IcalculatorVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitNumber([NotNull] calculatorParser.NumberContext context);
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="calculatorParser.variable"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitVariable([NotNull] calculatorParser.VariableContext context);
 }

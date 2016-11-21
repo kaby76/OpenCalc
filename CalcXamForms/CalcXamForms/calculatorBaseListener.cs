@@ -47,6 +47,18 @@ public partial class calculatorBaseListener : IcalculatorListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitExpressionResult([NotNull] calculatorParser.ExpressionResultContext context) { }
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.equation"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterEquation([NotNull] calculatorParser.EquationContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.equation"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitEquation([NotNull] calculatorParser.EquationContext context) { }
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="calculatorParser.expression"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
@@ -107,30 +119,6 @@ public partial class calculatorBaseListener : IcalculatorListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitScientific([NotNull] calculatorParser.ScientificContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="calculatorParser.func"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterFunc([NotNull] calculatorParser.FuncContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="calculatorParser.func"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitFunc([NotNull] calculatorParser.FuncContext context) { }
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="calculatorParser.funcname"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterFuncname([NotNull] calculatorParser.FuncnameContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="calculatorParser.funcname"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitFuncname([NotNull] calculatorParser.FuncnameContext context) { }
-	/// <summary>
 	/// Enter a parse tree produced by <see cref="calculatorParser.relop"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
@@ -154,18 +142,6 @@ public partial class calculatorBaseListener : IcalculatorListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitNumber([NotNull] calculatorParser.NumberContext context) { }
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="calculatorParser.variable"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterVariable([NotNull] calculatorParser.VariableContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="calculatorParser.variable"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitVariable([NotNull] calculatorParser.VariableContext context) { }
 
 	/// <inheritdoc/>
 	/// <remarks>The default implementation does nothing.</remarks>

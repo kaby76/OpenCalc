@@ -104,18 +104,32 @@ namespace CalcXamForms
 
         enum TokenTypes { StartSymbol = 0, E, Plus, Minus, Star, Slash, Num, Lp, Rp };
 
+        public static IEnumerable<IToken> AllTokens(ITokenStream ts)
+        {
+            for (int ii = 0; ii < ts.Size; ++ii)
+            {
+                var tfasdf = ts.Get(ii);
+                yield return tfasdf;
+            }
+        }
+
         public PageCalcViewModel()
         {
             if (true)
             {
-                byte[] byteArray = Encoding.UTF8.GetBytes("1+22+3*1=".ToString());
-                StreamReader inputStream = new StreamReader(new MemoryStream(byteArray));
-                AntlrInputStream input = new AntlrInputStream(inputStream.ReadToEnd());
-                calculatorLexer lexer = new calculatorLexer(input);
-                CommonTokenStream tokens = new CommonTokenStream(lexer);
-                calculatorParser pp = new calculatorParser(tokens);
+                byte[] byteArray = Encoding.UTF8.GetBytes("1+22+3*4");
+                calculatorParser pp = new calculatorParser(
+                    new CommonTokenStream(
+                        new calculatorLexer(
+                            new AntlrInputStream(
+                                new StreamReader(
+                                    new MemoryStream(byteArray)).ReadToEnd()))));
                 IParseTree tree = pp.expressionResult();
+                ITokenStream ts = pp.TokenStream;
+                var last = AllTokens(ts).Reverse().Skip(1).First().Text;
+
                 var t = tree.ToStringTree(pp);
+
                 VisitorCalc visitor = new VisitorCalc();
                 Res re = visitor.Visit(tree);
                 
@@ -235,101 +249,189 @@ namespace CalcXamForms
 
             _bdot_command = new Command((nothing) =>
             {
-                char c = '.';
                 StringBuilder sb = _calculation_history.Last();
-                sb.Append(c);
-                _result = Lexer(sb.ToString()).Last().token_value;
+                sb.Append('.');
+                byte[] byteArray = Encoding.UTF8.GetBytes(sb.ToString());
+                calculatorParser pp = new calculatorParser(
+                    new CommonTokenStream(
+                        new calculatorLexer(
+                            new AntlrInputStream(
+                                new StreamReader(
+                                    new MemoryStream(byteArray)).ReadToEnd()))));
+                IParseTree tree = pp.expressionResult();
+                ITokenStream ts = pp.TokenStream;
+                _result = AllTokens(ts).Reverse().Skip(1).First().Text;
                 NotifyPropertyChanged("Result");
                 NotifyPropertyChanged("Command");
             });
 
             _b0_command = new Command((nothing) =>
             {
-                char c = '0';
                 StringBuilder sb = _calculation_history.Last();
-                sb.Append(c);
-                _result = Lexer(sb.ToString()).Last().token_value;
+                sb.Append('0');
+                byte[] byteArray = Encoding.UTF8.GetBytes(sb.ToString());
+                calculatorParser pp = new calculatorParser(
+                    new CommonTokenStream(
+                        new calculatorLexer(
+                            new AntlrInputStream(
+                                new StreamReader(
+                                    new MemoryStream(byteArray)).ReadToEnd()))));
+                IParseTree tree = pp.expressionResult();
+                ITokenStream ts = pp.TokenStream;
+                _result = AllTokens(ts).Reverse().Skip(1).First().Text;
                 NotifyPropertyChanged("Result");
                 NotifyPropertyChanged("Command");
             });
             _b1_command = new Command((nothing) =>
             {
-                char c = '1';
                 StringBuilder sb = _calculation_history.Last();
-                sb.Append(c);
-                _result = Lexer(sb.ToString()).Last().token_value;
+                sb.Append('1');
+                byte[] byteArray = Encoding.UTF8.GetBytes(sb.ToString());
+                calculatorParser pp = new calculatorParser(
+                    new CommonTokenStream(
+                        new calculatorLexer(
+                            new AntlrInputStream(
+                                new StreamReader(
+                                    new MemoryStream(byteArray)).ReadToEnd()))));
+                IParseTree tree = pp.expressionResult();
+                ITokenStream ts = pp.TokenStream;
+                _result = AllTokens(ts).Reverse().Skip(1).First().Text;
                 NotifyPropertyChanged("Result");
                 NotifyPropertyChanged("Command");
             });
             _b2_command = new Command((nothing) =>
             {
-                char c = '2';
                 StringBuilder sb = _calculation_history.Last();
-                sb.Append(c);
-                _result = Lexer(sb.ToString()).Last().token_value;
+                sb.Append('2');
+                byte[] byteArray = Encoding.UTF8.GetBytes(sb.ToString());
+                calculatorParser pp = new calculatorParser(
+                    new CommonTokenStream(
+                        new calculatorLexer(
+                            new AntlrInputStream(
+                                new StreamReader(
+                                    new MemoryStream(byteArray)).ReadToEnd()))));
+                IParseTree tree = pp.expressionResult();
+                ITokenStream ts = pp.TokenStream;
+                _result = AllTokens(ts).Reverse().Skip(1).First().Text;
                 NotifyPropertyChanged("Result");
                 NotifyPropertyChanged("Command");
             });
             _b3_command = new Command((nothing) =>
             {
-                char c = '3';
                 StringBuilder sb = _calculation_history.Last();
-                sb.Append(c);
-                _result = Lexer(sb.ToString()).Last().token_value;
+                sb.Append('3');
+                byte[] byteArray = Encoding.UTF8.GetBytes(sb.ToString());
+                calculatorParser pp = new calculatorParser(
+                    new CommonTokenStream(
+                        new calculatorLexer(
+                            new AntlrInputStream(
+                                new StreamReader(
+                                    new MemoryStream(byteArray)).ReadToEnd()))));
+                IParseTree tree = pp.expressionResult();
+                ITokenStream ts = pp.TokenStream;
+                _result = AllTokens(ts).Reverse().Skip(1).First().Text;
                 NotifyPropertyChanged("Result");
                 NotifyPropertyChanged("Command");
             });
             _b4_command = new Command((nothing) =>
             {
-                char c = '4';
                 StringBuilder sb = _calculation_history.Last();
-                sb.Append(c);
-                _result = Lexer(sb.ToString()).Last().token_value;
+                sb.Append('4');
+                byte[] byteArray = Encoding.UTF8.GetBytes(sb.ToString());
+                calculatorParser pp = new calculatorParser(
+                    new CommonTokenStream(
+                        new calculatorLexer(
+                            new AntlrInputStream(
+                                new StreamReader(
+                                    new MemoryStream(byteArray)).ReadToEnd()))));
+                IParseTree tree = pp.expressionResult();
+                ITokenStream ts = pp.TokenStream;
+                _result = AllTokens(ts).Reverse().Skip(1).First().Text;
                 NotifyPropertyChanged("Result");
                 NotifyPropertyChanged("Command");
             });
             _b5_command = new Command((nothing) =>
             {
-                char c = '5';
                 StringBuilder sb = _calculation_history.Last();
-                sb.Append(c);
-                _result = Lexer(sb.ToString()).Last().token_value;
+                sb.Append('5');
+                byte[] byteArray = Encoding.UTF8.GetBytes(sb.ToString());
+                calculatorParser pp = new calculatorParser(
+                    new CommonTokenStream(
+                        new calculatorLexer(
+                            new AntlrInputStream(
+                                new StreamReader(
+                                    new MemoryStream(byteArray)).ReadToEnd()))));
+                IParseTree tree = pp.expressionResult();
+                ITokenStream ts = pp.TokenStream;
+                _result = AllTokens(ts).Reverse().Skip(1).First().Text;
                 NotifyPropertyChanged("Result");
                 NotifyPropertyChanged("Command");
             });
             _b6_command = new Command((nothing) =>
             {
-                char c = '6';
                 StringBuilder sb = _calculation_history.Last();
-                sb.Append(c);
-                _result = Lexer(sb.ToString()).Last().token_value;
+                sb.Append('6');
+                byte[] byteArray = Encoding.UTF8.GetBytes(sb.ToString());
+                calculatorParser pp = new calculatorParser(
+                    new CommonTokenStream(
+                        new calculatorLexer(
+                            new AntlrInputStream(
+                                new StreamReader(
+                                    new MemoryStream(byteArray)).ReadToEnd()))));
+                IParseTree tree = pp.expressionResult();
+                ITokenStream ts = pp.TokenStream;
+                _result = AllTokens(ts).Reverse().Skip(1).First().Text;
                 NotifyPropertyChanged("Result");
                 NotifyPropertyChanged("Command");
             });
             _b7_command = new Command((nothing) =>
             {
-                char c = '7';
                 StringBuilder sb = _calculation_history.Last();
-                sb.Append(c);
-                _result = Lexer(sb.ToString()).Last().token_value;
+                sb.Append('7');
+                byte[] byteArray = Encoding.UTF8.GetBytes(sb.ToString());
+                calculatorParser pp = new calculatorParser(
+                    new CommonTokenStream(
+                        new calculatorLexer(
+                            new AntlrInputStream(
+                                new StreamReader(
+                                    new MemoryStream(byteArray)).ReadToEnd()))));
+                IParseTree tree = pp.expressionResult();
+                ITokenStream ts = pp.TokenStream;
+                _result = AllTokens(ts).Reverse().Skip(1).First().Text;
                 NotifyPropertyChanged("Result");
                 NotifyPropertyChanged("Command");
             });
             _b8_command = new Command((nothing) =>
             {
-                char c = '8';
                 StringBuilder sb = _calculation_history.Last();
-                sb.Append(c);
-                _result = Lexer(sb.ToString()).Last().token_value;
+                sb.Append('8');
+                byte[] byteArray = Encoding.UTF8.GetBytes(sb.ToString());
+                calculatorParser pp = new calculatorParser(
+                    new CommonTokenStream(
+                        new calculatorLexer(
+                            new AntlrInputStream(
+                                new StreamReader(
+                                    new MemoryStream(byteArray)).ReadToEnd()))));
+                IParseTree tree = pp.expressionResult();
+                ITokenStream ts = pp.TokenStream;
+                _result = AllTokens(ts).Reverse().Skip(1).First().Text;
                 NotifyPropertyChanged("Result");
                 NotifyPropertyChanged("Command");
             });
             _b9_command = new Command((nothing) =>
             {
-                char c = '9';
                 StringBuilder sb = _calculation_history.Last();
-                sb.Append(c);
-                _result = Lexer(sb.ToString()).Last().token_value;
+                sb.Append('9');
+                byte[] byteArray = Encoding.UTF8.GetBytes(sb.ToString());
+                calculatorParser pp = new calculatorParser(
+                    new CommonTokenStream(
+                        new calculatorLexer(
+                            new AntlrInputStream(
+                                new StreamReader(
+                                    new MemoryStream(byteArray)).ReadToEnd()))));
+                IParseTree tree = pp.expressionResult();
+                ITokenStream ts = pp.TokenStream;
+                _result = AllTokens(ts).Reverse().Skip(1).First().Text;
                 NotifyPropertyChanged("Result");
                 NotifyPropertyChanged("Command");
             });
