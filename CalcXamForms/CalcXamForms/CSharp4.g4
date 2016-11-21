@@ -773,6 +773,9 @@ assignment_operator
 	| OP_LEFT_SHIFT_ASSIGNMENT
 	| right_shift_assignment
 	;
+jesus
+  : expression EOF
+  ;
 expression 
 	: assignment
 	| non_assignment_expression

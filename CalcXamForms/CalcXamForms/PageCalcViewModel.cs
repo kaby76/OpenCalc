@@ -108,15 +108,17 @@ namespace CalcXamForms
         {
             if (true)
             {
-                byte[] byteArray = Encoding.UTF8.GetBytes("1+2+".ToString());
+                byte[] byteArray = Encoding.UTF8.GetBytes("1+22+3*1=".ToString());
                 StreamReader inputStream = new StreamReader(new MemoryStream(byteArray));
                 AntlrInputStream input = new AntlrInputStream(inputStream.ReadToEnd());
-                CSharp4Lexer lexer = new CSharp4Lexer(input);
+                calculatorLexer lexer = new calculatorLexer(input);
                 CommonTokenStream tokens = new CommonTokenStream(lexer);
-                CSharp4Parser pp = new CSharp4Parser(tokens);
-                IParseTree tree = pp.expression();
+                calculatorParser pp = new calculatorParser(tokens);
+                IParseTree tree = pp.expressionResult();
                 var t = tree.ToStringTree(pp);
-                Visitor visitor = new Visitor();
+                VisitorCalc visitor = new VisitorCalc();
+                Res re = visitor.Visit(tree);
+                
                 //Console.WriteLine(visitor.Visit(tree));
             }
             //
