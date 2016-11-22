@@ -20,10 +20,11 @@ namespace CalcXamForms
 
         public override Res VisitExpressionResult([NotNull] calculatorParser.ExpressionResultContext context)
         {
-            foreach (IParseTree c in context.children)
-            {
-                Visit(c);
-            }
+            if (context.children != null)
+                foreach (IParseTree c in context.children)
+                {
+                    Visit(c);
+                }
             if (context.ChildCount == 0)
             {
                 Res res = new CalcXamForms.Res { IsComplete = false, Value = 0 };
@@ -44,10 +45,11 @@ namespace CalcXamForms
         }
         public override Res VisitExpression([NotNull] calculatorParser.ExpressionContext context)
         {
-            foreach (var c in context.children)
-            {
-                Visit(c);
-            }
+            if (context.children != null)
+                foreach (IParseTree c in context.children)
+                {
+                    Visit(c);
+                }
             if (context.ChildCount == 0)
             {
                 Res res = new CalcXamForms.Res { IsComplete = false, Value = 0 };
@@ -100,10 +102,11 @@ namespace CalcXamForms
 
         public override Res VisitMultiplyingExpression([NotNull] calculatorParser.MultiplyingExpressionContext context)
         {
-            foreach (var c in context.children)
-            {
-                Visit(c);
-            }
+            if (context.children != null)
+                foreach (IParseTree c in context.children)
+                {
+                    Visit(c);
+                }
             if (context.ChildCount == 0)
             {
                 Res res = new CalcXamForms.Res { IsComplete = false, Value = 0 };
@@ -156,10 +159,11 @@ namespace CalcXamForms
 
         public override Res VisitScientific([NotNull] calculatorParser.ScientificContext context)
         {
-            foreach (var c in context.children)
-            {
-                Visit(c);
-            }
+            if (context.children != null)
+                foreach (IParseTree c in context.children)
+                {
+                    Visit(c);
+                }
             if (context.ChildCount != 1)
             {
                 Res res = new CalcXamForms.Res { IsComplete = false, Value = 0 };
@@ -186,10 +190,11 @@ namespace CalcXamForms
 
         public override Res VisitAtom([NotNull] calculatorParser.AtomContext context)
         {
-            foreach (var c in context.children)
-            {
-                Visit(c);
-            }
+            if (context.children != null)
+                foreach (var c in context.children)
+                {
+                    Visit(c);
+                }
             if (context.ChildCount == 0 || context.ChildCount == 2)
             {
                 Res res = new CalcXamForms.Res { IsComplete = false, Value = 0 };
@@ -237,10 +242,12 @@ namespace CalcXamForms
 
         public override Res VisitPowExpression([NotNull] calculatorParser.PowExpressionContext context)
         {
-            foreach (var c in context.children)
-            {
-                Visit(c);
-            }
+            if (context.children != null)
+                foreach (IParseTree c in context.children)
+                {
+                    Visit(c);
+                }
+
             if (context.ChildCount == 0)
             {
                 Res res = new CalcXamForms.Res { IsComplete = false, Value = 0 };

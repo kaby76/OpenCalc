@@ -42,6 +42,7 @@
     <Compile Include="calculatorListener.cs" />
     <Compile Include="calculatorParser.cs" />
     <Compile Include="calculatorVisitor.cs" />
+    <Compile Include="DFSVisitor.cs" />
     <Compile Include="MyListView.cs" />
     <Compile Include="OldPage.xaml.cs">
       <DependentUpon>OldPage.xaml</DependentUpon>
@@ -73,7 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Antlr4.Runtime">
-      <HintPath>..\..\..\antlr4\runtime\CSharp\runtime\CSharp\Antlr4.Runtime\bin\pcl\Debug\Antlr4.Runtime.dll</HintPath>
+      <HintPath>.\Antlr4.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xamarin.Forms.2.3.2.127\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Core.dll</HintPath>

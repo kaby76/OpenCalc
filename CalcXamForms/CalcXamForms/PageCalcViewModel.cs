@@ -115,136 +115,6 @@ namespace CalcXamForms
 
         public PageCalcViewModel()
         {
-            if (true)
-            {
-                byte[] byteArray = Encoding.UTF8.GetBytes("1+22+3*4");
-                calculatorParser pp = new calculatorParser(
-                    new CommonTokenStream(
-                        new calculatorLexer(
-                            new AntlrInputStream(
-                                new StreamReader(
-                                    new MemoryStream(byteArray)).ReadToEnd()))));
-                IParseTree tree = pp.expressionResult();
-                ITokenStream ts = pp.TokenStream;
-                var last = AllTokens(ts).Reverse().Skip(1).First().Text;
-
-                var t = tree.ToStringTree(pp);
-
-                VisitorCalc visitor = new VisitorCalc();
-                Res re = visitor.Visit(tree);
-                
-                //Console.WriteLine(visitor.Visit(tree));
-            }
-            //
-            // the following program produces a parse table for the following grammar
-            // for infix expressions, and appropriately applies operator precedence of
-            // the + - * / operators, otherwise evaluating the leftmost operations first
-            //
-            // S' -> e
-            // e -> i
-            // e -> ( e )
-            // e -> e * e
-            // e -> e / e
-            // e -> e + e
-            // e -> e - e
-            //
-            // 
-
-            Grammar grammar = new Grammar();
-            grammar.Tokens = new string[] { "S'", "e", "+", "-", "*", "/", "i", "(", ")" };
-            
-            grammar.PrecedenceGroups = new PrecedenceGroup[]
-            {
-                new PrecedenceGroup
-                {
-                    Derivation = Derivation.None,
-                    Productions = new Production[]
-                    {
-                        //S' -> e
-                        new Production
-                        {
-                            Left = (int)TokenTypes.StartSymbol,
-                            Right = new int[] {(int)TokenTypes.E}
-                        },
-                        //e -> i
-                        new Production
-                        {
-                            Left = (int)TokenTypes.E,
-                            Right = new int[] {(int)TokenTypes.Num}
-                        },
-                        //e -> ( e )
-                        new Production
-                        {
-                            Left = (int)TokenTypes.E,
-                            Right = new int[] {
-                                (int)TokenTypes.Lp,
-                                (int)TokenTypes.E,
-                                (int)TokenTypes.Rp}
-                        }
-                    }
-                },
-                new PrecedenceGroup
-                {
-                    Derivation = Derivation.LeftMost,
-                    Productions = new Production[]
-                    {
-                        //e -> e * e
-                        new Production
-                        {
-                            Left = (int)TokenTypes.E,
-                            Right = new int[] {
-                                (int)TokenTypes.E,
-                                (int)TokenTypes.Star,
-                                (int)TokenTypes.E}
-                        },
-                        //e -> e / e
-                        new Production
-                        {
-                            Left = (int)TokenTypes.E,
-                            Right = new int[] {
-                                (int)TokenTypes.E,
-                                (int)TokenTypes.Slash,
-                                (int)TokenTypes.E}
-                        },
-                    }
-                },
-                new PrecedenceGroup
-                {
-                    //productions are left associative and bind less tightly than * or /
-                    Derivation = Derivation.LeftMost,
-                    Productions = new Production[]
-                    {
-                        //e -> e + e
-                        new Production
-                        {
-                            Left = (int)TokenTypes.E,
-                            Right = new int[] {
-                                (int)TokenTypes.E,
-                                (int)TokenTypes.Plus,
-                                (int)TokenTypes.E}
-                        },
-                        //e -> e - e
-                        new Production
-                        {
-                            Left = (int)TokenTypes.E,
-                            Right = new int[] {
-                                (int)TokenTypes.E,
-                                (int)TokenTypes.Minus,
-                                (int)TokenTypes.E}
-                        }
-                    }
-                }
-            };
-
-            // generate the parse table
-            ParserGenerator parser_generator = new ParserGenerator(grammar);
-
-            // write the parse table.
-            Debug.DumpParseTable(parser_generator);
-            string deb = Debug.Output();
-
-            Parser parser = new Parser(parser_generator);
-
             _calculation_history.Add(new StringBuilder());
 
             _bdot_command = new Command((nothing) =>
@@ -441,10 +311,31 @@ namespace CalcXamForms
             {
                 StringBuilder sb = _calculation_history.Last();
                 sb.Append('+');
-                List<Node> tokens = Lexer(sb.ToString());
-                parser.Input(tokens);
-                float v = EvaluateTop(parser.Top(1));
-                _result = v.ToString();
+                byte[] byteArray = Encoding.UTF8.GetBytes(sb.ToString());
+                calculatorParser pp = new calculatorParser(
+                    new CommonTokenStream(
+                        new calculatorLexer(
+                            new AntlrInputStream(
+                                new StreamReader(
+                                    new MemoryStream(byteArray)).ReadToEnd()))));
+                IParseTree tree = pp.expressionResult();
+                VisitorCalc visitor = new VisitorCalc();
+                Res re = visitor.Visit(tree);
+                ParserRuleContext prc = tree as ParserRuleContext;
+                var list = DFSVisitor.DFS(prc);
+                var ar = list.ToArray();
+                var list2 = list.Reverse().Where((ParserRuleContext n)
+                =>
+                {
+                    return (n as calculatorParser.MultiplyingExpressionContext) != null;
+                });
+                var ar2 = list2.ToArray();
+                var list3 = list2.ToArray();
+                ParserRuleContext p = list3.Skip(1).First();
+                Res res;
+                if (visitor.Results.TryGetValue(p, out res))
+                    if (res.IsComplete)
+                        _result = res.Value.ToString();
                 NotifyPropertyChanged("Result");
                 NotifyPropertyChanged("Command");
             });
@@ -453,49 +344,24 @@ namespace CalcXamForms
             {
                 StringBuilder sb = _calculation_history.Last();
                 sb.Append('-');
-                List<Node> tokens = Lexer(sb.ToString());
-                parser.Input(tokens);
-                float v = EvaluateTop(parser.Top(1));
-                _result = v.ToString();
-                NotifyPropertyChanged("Result");
-                NotifyPropertyChanged("Command");
             });
 
             _bstar_command = new Command((nothing) =>
             {
                 StringBuilder sb = _calculation_history.Last();
                 sb.Append('*');
-                List<Node> tokens = Lexer(sb.ToString());
-                parser.Input(tokens);
-                float v = EvaluateTop(parser.Top(1));
-                _result = v.ToString();
-                NotifyPropertyChanged("Result");
-                NotifyPropertyChanged("Command");
             });
 
             _bslash_command = new Command((nothing) =>
             {
                 StringBuilder sb = _calculation_history.Last();
                 sb.Append('/');
-                List<Node> tokens = Lexer(sb.ToString());
-                parser.Input(tokens);
-                float v = EvaluateTop(parser.Top(1));
-                _result = v.ToString();
-                NotifyPropertyChanged("Result");
-                NotifyPropertyChanged("Command");
             });
 
             _bequals_command = new Command((nothing) =>
             {
                 StringBuilder sb = _calculation_history.Last();
                 sb.Append('=');
-                List<Node> tokens = Lexer(sb.ToString());
-                parser.Input(tokens);
-                float v = EvaluateTop(parser.Top(0));
-                _result = v.ToString();
-                NotifyPropertyChanged("Result");
-                NotifyPropertyChanged("Command");
-                parser.Reset();
                 _calculation_history.Add(new StringBuilder());
             });
         }
