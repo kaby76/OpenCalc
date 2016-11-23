@@ -45,6 +45,8 @@ namespace CalcXamForms
         }
         public override Res VisitExpression([NotNull] calculatorParser.ExpressionContext context)
         {
+            Res res = new CalcXamForms.Res { IsComplete = false, Value = 0 };
+            Results[context] = res;
             if (context.children != null)
                 foreach (IParseTree c in context.children)
                 {
@@ -52,56 +54,37 @@ namespace CalcXamForms
                 }
             if (context.ChildCount == 0)
             {
-                Res res = new CalcXamForms.Res { IsComplete = false, Value = 0 };
                 Results[context] = res;
                 return res;
             }
+            Res lhs = Results[context.GetChild(0)];
+            res.Value = lhs.Value;
             if (context.ChildCount == 1)
             {
-                Res lhs = Results[context.GetChild(0)];
-                Results[context] = lhs;
-                return lhs;
-            }
-            int count = 0;
-            Res result = new Res {IsComplete = true, Value = 0};
-            for (; count < context.ChildCount && count + 2 < context.ChildCount;)
-            {
-                if (count == 0)
-                {
-                    Res lhs = Results[context.GetChild(count)];
-                    result = new CalcXamForms.Res {IsComplete = lhs.IsComplete, Value = lhs.Value};
-                }
-                Res rhs = Results[context.GetChild(count + 2)];
-                if (!result.IsComplete || !rhs.IsComplete)
-                {
-                    Res res = new CalcXamForms.Res { IsComplete = false, Value = 0 };
-                    Results[context] = res;
-                    return res;
-                }
-                IParseTree op_pt = context.GetChild(count + 1);
-                string op = op_pt.GetText();
-                if (op == "+") result.Value += rhs.Value;
-                else if (op == "-") result.Value -= rhs.Value;
-                else
-                {
-                    Res res = new CalcXamForms.Res { IsComplete = false, Value = 0 };
-                    Results[context] = res;
-                    return res;
-                }
-                count += 2;
-            }
-            if (count + 1 != context.ChildCount)
-            {
-                Res res = new CalcXamForms.Res { IsComplete = false, Value = 0 };
+                res.IsComplete = true;
                 Results[context] = res;
                 return res;
             }
-            Results[context] = result;
-            return result;
+            int count = 0;
+            bool all_complete = lhs.IsComplete;
+            for (; count < context.ChildCount && count + 2 < context.ChildCount;)
+            {
+                Res rhs = Results[context.GetChild(count + 2)];
+                all_complete &= rhs.IsComplete;
+                IParseTree op_pt = context.GetChild(count + 1);
+                string op = op_pt.GetText();
+                if (op == "+") res.Value += rhs.Value;
+                else if (op == "-") res.Value -= rhs.Value;
+                count += 2;
+            }
+            Results[context] = res;
+            return res;
         }
 
         public override Res VisitMultiplyingExpression([NotNull] calculatorParser.MultiplyingExpressionContext context)
         {
+            Res res = new CalcXamForms.Res { IsComplete = false, Value = 0 };
+            Results[context] = res;
             if (context.children != null)
                 foreach (IParseTree c in context.children)
                 {
@@ -109,52 +92,31 @@ namespace CalcXamForms
                 }
             if (context.ChildCount == 0)
             {
-                Res res = new CalcXamForms.Res { IsComplete = false, Value = 0 };
                 Results[context] = res;
                 return res;
             }
+            Res lhs = Results[context.GetChild(0)];
+            res.Value = lhs.Value;
             if (context.ChildCount == 1)
             {
-                Res lhs = Results[context.GetChild(0)];
-                Results[context] = lhs;
-                return lhs;
-            }
-            int count = 0;
-            Res result = new Res { IsComplete = true, Value = 0 };
-            for (; count < context.ChildCount && count + 2 < context.ChildCount;)
-            {
-                if (count == 0)
-                {
-                    Res lhs = Results[context.GetChild(count)];
-                    result = new CalcXamForms.Res { IsComplete = lhs.IsComplete, Value = lhs.Value };
-                }
-                Res rhs = Results[context.GetChild(count + 2)];
-                if (!result.IsComplete || !rhs.IsComplete)
-                {
-                    Res res = new CalcXamForms.Res { IsComplete = false, Value = 0 };
-                    Results[context] = res;
-                    return res;
-                }
-                IParseTree op_pt = context.GetChild(count + 1);
-                string op = op_pt.GetText();
-                if (op == "*") result.Value *= rhs.Value;
-                else if (op == "/") result.Value /= rhs.Value;
-                else
-                {
-                    Res res = new CalcXamForms.Res { IsComplete = false, Value = 0 };
-                    Results[context] = res;
-                    return res;
-                }
-                count += 2;
-            }
-            if (count + 1 != context.ChildCount)
-            {
-                Res res = new CalcXamForms.Res { IsComplete = false, Value = 0 };
+                res.IsComplete = true;
                 Results[context] = res;
                 return res;
             }
-            Results[context] = result;
-            return result;
+            int count = 0;
+            bool all_complete = lhs.IsComplete;
+            for (; count < context.ChildCount && count + 2 < context.ChildCount;)
+            {
+                Res rhs = Results[context.GetChild(count + 2)];
+                all_complete &= rhs.IsComplete;
+                IParseTree op_pt = context.GetChild(count + 1);
+                string op = op_pt.GetText();
+                if (op == "*" && rhs.IsComplete) res.Value *= rhs.Value;
+                else if (op == "/" && rhs.IsComplete) res.Value /= rhs.Value;
+                count += 2;
+            }
+            Results[context] = res;
+            return res;
         }
 
         public override Res VisitScientific([NotNull] calculatorParser.ScientificContext context)

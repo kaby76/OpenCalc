@@ -337,14 +337,17 @@ fragment HEX_DIGIT
 // added by chw
 // For the rare case where 0.ToString() etc is used.
 // Explanation: 0.Equals() would be parsed as an invalid real (1. branch) causing a lexer error
-LiteralAccess
-  : INTEGER_LITERAL   
-    DOT               
-    IDENTIFIER       
-  ;
+//
+// KED KED KED DO NOT USE IN SIMPLE CALCULATOR.
+//LiteralAccess
+//  : INTEGER_LITERAL   
+//    DOT               
+//    IDENTIFIER       
+//  ;
 
 REAL_LITERAL 
   : Decimal_digits DOT Decimal_digits Exponent_part? Real_type_suffix?
+  | Decimal_digits DOT Exponent_part? Real_type_suffix?
   | DOT Decimal_digits Exponent_part? Real_type_suffix?
   | Decimal_digits Exponent_part Real_type_suffix?
   | Decimal_digits Real_type_suffix

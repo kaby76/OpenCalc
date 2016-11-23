@@ -49,17 +49,17 @@ public partial class calculatorParser : Parser {
 		STRUCT=88, SWITCH=89, THIS=90, THROW=91, TRUE=92, TRY=93, TYPEOF=94, UINT=95, 
 		ULONG=96, UNCHECKED=97, UNSAFE=98, USHORT=99, USING=100, VIRTUAL=101, 
 		VOID=102, VOLATILE=103, WHERE=104, WHILE=105, YIELD=106, IDENTIFIER=107, 
-		INTEGER_LITERAL=108, LiteralAccess=109, REAL_LITERAL=110, CHARACTER_LITERAL=111, 
-		STRING_LITERAL=112, OPEN_BRACE=113, CLOSE_BRACE=114, OPEN_BRACKET=115, 
-		CLOSE_BRACKET=116, OPEN_PARENS=117, CLOSE_PARENS=118, DOT=119, COMMA=120, 
-		COLON=121, SEMICOLON=122, PLUS=123, MINUS=124, STAR=125, DIV=126, PERCENT=127, 
-		AMP=128, BITWISE_OR=129, CARET=130, BANG=131, TILDE=132, ASSIGNMENT=133, 
-		LT=134, GT=135, INTERR=136, DOUBLE_COLON=137, OP_COALESCING=138, OP_INC=139, 
-		OP_DEC=140, OP_AND=141, OP_OR=142, OP_PTR=143, OP_EQ=144, OP_NE=145, OP_LE=146, 
-		OP_GE=147, OP_ADD_ASSIGNMENT=148, OP_SUB_ASSIGNMENT=149, OP_MULT_ASSIGNMENT=150, 
-		OP_DIV_ASSIGNMENT=151, OP_MOD_ASSIGNMENT=152, OP_AND_ASSIGNMENT=153, OP_OR_ASSIGNMENT=154, 
-		OP_XOR_ASSIGNMENT=155, OP_LEFT_SHIFT=156, OP_LEFT_SHIFT_ASSIGNMENT=157, 
-		QUOTE=158, DOUBLE_QUOTE=159, BACK_SLASH=160, DOUBLE_BACK_SLASH=161, SHARP=162;
+		INTEGER_LITERAL=108, REAL_LITERAL=109, CHARACTER_LITERAL=110, STRING_LITERAL=111, 
+		OPEN_BRACE=112, CLOSE_BRACE=113, OPEN_BRACKET=114, CLOSE_BRACKET=115, 
+		OPEN_PARENS=116, CLOSE_PARENS=117, DOT=118, COMMA=119, COLON=120, SEMICOLON=121, 
+		PLUS=122, MINUS=123, STAR=124, DIV=125, PERCENT=126, AMP=127, BITWISE_OR=128, 
+		CARET=129, BANG=130, TILDE=131, ASSIGNMENT=132, LT=133, GT=134, INTERR=135, 
+		DOUBLE_COLON=136, OP_COALESCING=137, OP_INC=138, OP_DEC=139, OP_AND=140, 
+		OP_OR=141, OP_PTR=142, OP_EQ=143, OP_NE=144, OP_LE=145, OP_GE=146, OP_ADD_ASSIGNMENT=147, 
+		OP_SUB_ASSIGNMENT=148, OP_MULT_ASSIGNMENT=149, OP_DIV_ASSIGNMENT=150, 
+		OP_MOD_ASSIGNMENT=151, OP_AND_ASSIGNMENT=152, OP_OR_ASSIGNMENT=153, OP_XOR_ASSIGNMENT=154, 
+		OP_LEFT_SHIFT=155, OP_LEFT_SHIFT_ASSIGNMENT=156, QUOTE=157, DOUBLE_QUOTE=158, 
+		BACK_SLASH=159, DOUBLE_BACK_SLASH=160, SHARP=161;
 	public const int
 		RULE_expressionResult = 0, RULE_equation = 1, RULE_expression = 2, RULE_multiplyingExpression = 3, 
 		RULE_powExpression = 4, RULE_atom = 5, RULE_scientific = 6, RULE_relop = 7, 
@@ -86,12 +86,12 @@ public partial class calculatorParser : Parser {
 		"'switch'", "'this'", "'throw'", "'true'", "'try'", "'typeof'", "'uint'", 
 		"'ulong'", "'unchecked'", "'unsafe'", "'ushort'", "'using'", "'virtual'", 
 		"'void'", "'volatile'", "'where'", "'while'", "'yield'", null, null, null, 
-		null, null, null, "'{'", "'}'", "'['", "']'", "'('", "')'", "'.'", "','", 
-		"':'", "';'", "'+'", "'-'", "'*'", "'/'", "'%'", "'&'", "'|'", "'^'", 
-		"'!'", "'~'", "'='", "'<'", "'>'", "'?'", "'::'", "'??'", "'++'", "'--'", 
-		"'&&'", "'||'", "'->'", "'=='", "'!='", "'<='", "'>='", "'+='", "'-='", 
-		"'*='", "'/='", "'%='", "'&='", "'|='", "'^='", "'<<'", "'<<='", "'''", 
-		"'\"'", "'\\'", "'\\\\'", "'#'"
+		null, null, "'{'", "'}'", "'['", "']'", "'('", "')'", "'.'", "','", "':'", 
+		"';'", "'+'", "'-'", "'*'", "'/'", "'%'", "'&'", "'|'", "'^'", "'!'", 
+		"'~'", "'='", "'<'", "'>'", "'?'", "'::'", "'??'", "'++'", "'--'", "'&&'", 
+		"'||'", "'->'", "'=='", "'!='", "'<='", "'>='", "'+='", "'-='", "'*='", 
+		"'/='", "'%='", "'&='", "'|='", "'^='", "'<<'", "'<<='", "'''", "'\"'", 
+		"'\\'", "'\\\\'", "'#'"
 	};
 	private static readonly string[] _SymbolicNames = {
 		null, "BYTE_ORDER_MARK", "SINGLE_LINE_DOC_COMMENT", "DELIMITED_DOC_COMMENT", 
@@ -109,16 +109,16 @@ public partial class calculatorParser : Parser {
 		"STRING", "STRUCT", "SWITCH", "THIS", "THROW", "TRUE", "TRY", "TYPEOF", 
 		"UINT", "ULONG", "UNCHECKED", "UNSAFE", "USHORT", "USING", "VIRTUAL", 
 		"VOID", "VOLATILE", "WHERE", "WHILE", "YIELD", "IDENTIFIER", "INTEGER_LITERAL", 
-		"LiteralAccess", "REAL_LITERAL", "CHARACTER_LITERAL", "STRING_LITERAL", 
-		"OPEN_BRACE", "CLOSE_BRACE", "OPEN_BRACKET", "CLOSE_BRACKET", "OPEN_PARENS", 
-		"CLOSE_PARENS", "DOT", "COMMA", "COLON", "SEMICOLON", "PLUS", "MINUS", 
-		"STAR", "DIV", "PERCENT", "AMP", "BITWISE_OR", "CARET", "BANG", "TILDE", 
-		"ASSIGNMENT", "LT", "GT", "INTERR", "DOUBLE_COLON", "OP_COALESCING", "OP_INC", 
-		"OP_DEC", "OP_AND", "OP_OR", "OP_PTR", "OP_EQ", "OP_NE", "OP_LE", "OP_GE", 
-		"OP_ADD_ASSIGNMENT", "OP_SUB_ASSIGNMENT", "OP_MULT_ASSIGNMENT", "OP_DIV_ASSIGNMENT", 
-		"OP_MOD_ASSIGNMENT", "OP_AND_ASSIGNMENT", "OP_OR_ASSIGNMENT", "OP_XOR_ASSIGNMENT", 
-		"OP_LEFT_SHIFT", "OP_LEFT_SHIFT_ASSIGNMENT", "QUOTE", "DOUBLE_QUOTE", 
-		"BACK_SLASH", "DOUBLE_BACK_SLASH", "SHARP"
+		"REAL_LITERAL", "CHARACTER_LITERAL", "STRING_LITERAL", "OPEN_BRACE", "CLOSE_BRACE", 
+		"OPEN_BRACKET", "CLOSE_BRACKET", "OPEN_PARENS", "CLOSE_PARENS", "DOT", 
+		"COMMA", "COLON", "SEMICOLON", "PLUS", "MINUS", "STAR", "DIV", "PERCENT", 
+		"AMP", "BITWISE_OR", "CARET", "BANG", "TILDE", "ASSIGNMENT", "LT", "GT", 
+		"INTERR", "DOUBLE_COLON", "OP_COALESCING", "OP_INC", "OP_DEC", "OP_AND", 
+		"OP_OR", "OP_PTR", "OP_EQ", "OP_NE", "OP_LE", "OP_GE", "OP_ADD_ASSIGNMENT", 
+		"OP_SUB_ASSIGNMENT", "OP_MULT_ASSIGNMENT", "OP_DIV_ASSIGNMENT", "OP_MOD_ASSIGNMENT", 
+		"OP_AND_ASSIGNMENT", "OP_OR_ASSIGNMENT", "OP_XOR_ASSIGNMENT", "OP_LEFT_SHIFT", 
+		"OP_LEFT_SHIFT_ASSIGNMENT", "QUOTE", "DOUBLE_QUOTE", "BACK_SLASH", "DOUBLE_BACK_SLASH", 
+		"SHARP"
 	};
 	public static readonly IVocabulary DefaultVocabulary = new Vocabulary(_LiteralNames, _SymbolicNames);
 
@@ -608,7 +608,7 @@ public partial class calculatorParser : Parser {
 			{
 			State = 55;
 			_la = TokenStream.La(1);
-			if ( !(((((_la - 134)) & ~0x3f) == 0 && ((1L << (_la - 134)) & ((1L << (LT - 134)) | (1L << (GT - 134)) | (1L << (OP_EQ - 134)))) != 0)) ) {
+			if ( !(((((_la - 133)) & ~0x3f) == 0 && ((1L << (_la - 133)) & ((1L << (LT - 133)) | (1L << (GT - 133)) | (1L << (OP_EQ - 133)))) != 0)) ) {
 			ErrorHandler.RecoverInline(this);
 			}
 			else {
@@ -683,30 +683,30 @@ public partial class calculatorParser : Parser {
 	private static string _serializeATN()
 	{
 	    StringBuilder sb = new StringBuilder();
-	    sb.Append("\x3\x430\xD6D1\x8206\xAD2D\x4417\xAEF1\x8D80\xAADD\x3\xA4");
+	    sb.Append("\x3\x430\xD6D1\x8206\xAD2D\x4417\xAEF1\x8D80\xAADD\x3\xA3");
 		sb.Append(">\x4\x2\t\x2\x4\x3\t\x3\x4\x4\t\x4\x4\x5\t\x5\x4\x6\t\x6\x4");
 		sb.Append("\a\t\a\x4\b\t\b\x4\t\t\t\x4\n\t\n\x3\x2\x3\x2\x3\x2\x3\x3\x3");
 		sb.Append("\x3\x3\x3\x3\x3\x3\x4\x3\x4\x3\x4\a\x4\x1F\n\x4\f\x4\xE\x4\"");
 		sb.Append("\v\x4\x3\x5\x3\x5\x3\x5\a\x5\'\n\x5\f\x5\xE\x5*\v\x5\x3\x6\x3");
 		sb.Append("\x6\x3\x6\x5\x6/\n\x6\x3\a\x3\a\x3\a\x3\a\x3\a\x5\a\x36\n\a");
 		sb.Append("\x3\b\x3\b\x3\t\x3\t\x3\n\x3\n\x3\n\x2\x2\v\x2\x4\x6\b\n\f\xE");
-		sb.Append("\x10\x12\x2\x6\x3\x2}~\x3\x2\x7F\x80\x4\x2\x88\x89\x92\x92\x4");
-		sb.Append("\x2nnpp\x38\x2\x14\x3\x2\x2\x2\x4\x17\x3\x2\x2\x2\x6\x1B\x3");
-		sb.Append("\x2\x2\x2\b#\x3\x2\x2\x2\n+\x3\x2\x2\x2\f\x35\x3\x2\x2\x2\xE");
-		sb.Append("\x37\x3\x2\x2\x2\x10\x39\x3\x2\x2\x2\x12;\x3\x2\x2\x2\x14\x15");
-		sb.Append("\x5\x6\x4\x2\x15\x16\a\x87\x2\x2\x16\x3\x3\x2\x2\x2\x17\x18");
-		sb.Append("\x5\x6\x4\x2\x18\x19\x5\x10\t\x2\x19\x1A\x5\x6\x4\x2\x1A\x5");
-		sb.Append("\x3\x2\x2\x2\x1B \x5\b\x5\x2\x1C\x1D\t\x2\x2\x2\x1D\x1F\x5\b");
-		sb.Append("\x5\x2\x1E\x1C\x3\x2\x2\x2\x1F\"\x3\x2\x2\x2 \x1E\x3\x2\x2\x2");
-		sb.Append(" !\x3\x2\x2\x2!\a\x3\x2\x2\x2\" \x3\x2\x2\x2#(\x5\n\x6\x2$%");
-		sb.Append("\t\x3\x2\x2%\'\x5\n\x6\x2&$\x3\x2\x2\x2\'*\x3\x2\x2\x2(&\x3");
-		sb.Append("\x2\x2\x2()\x3\x2\x2\x2)\t\x3\x2\x2\x2*(\x3\x2\x2\x2+.\x5\f");
-		sb.Append("\a\x2,-\a\x84\x2\x2-/\x5\x6\x4\x2.,\x3\x2\x2\x2./\x3\x2\x2\x2");
-		sb.Append("/\v\x3\x2\x2\x2\x30\x36\x5\xE\b\x2\x31\x32\aw\x2\x2\x32\x33");
-		sb.Append("\x5\x6\x4\x2\x33\x34\ax\x2\x2\x34\x36\x3\x2\x2\x2\x35\x30\x3");
-		sb.Append("\x2\x2\x2\x35\x31\x3\x2\x2\x2\x36\r\x3\x2\x2\x2\x37\x38\x5\x12");
-		sb.Append("\n\x2\x38\xF\x3\x2\x2\x2\x39:\t\x4\x2\x2:\x11\x3\x2\x2\x2;<");
-		sb.Append("\t\x5\x2\x2<\x13\x3\x2\x2\x2\x6 (.\x35");
+		sb.Append("\x10\x12\x2\x6\x3\x2|}\x3\x2~\x7F\x4\x2\x87\x88\x91\x91\x3\x2");
+		sb.Append("no\x38\x2\x14\x3\x2\x2\x2\x4\x17\x3\x2\x2\x2\x6\x1B\x3\x2\x2");
+		sb.Append("\x2\b#\x3\x2\x2\x2\n+\x3\x2\x2\x2\f\x35\x3\x2\x2\x2\xE\x37\x3");
+		sb.Append("\x2\x2\x2\x10\x39\x3\x2\x2\x2\x12;\x3\x2\x2\x2\x14\x15\x5\x6");
+		sb.Append("\x4\x2\x15\x16\a\x86\x2\x2\x16\x3\x3\x2\x2\x2\x17\x18\x5\x6");
+		sb.Append("\x4\x2\x18\x19\x5\x10\t\x2\x19\x1A\x5\x6\x4\x2\x1A\x5\x3\x2");
+		sb.Append("\x2\x2\x1B \x5\b\x5\x2\x1C\x1D\t\x2\x2\x2\x1D\x1F\x5\b\x5\x2");
+		sb.Append("\x1E\x1C\x3\x2\x2\x2\x1F\"\x3\x2\x2\x2 \x1E\x3\x2\x2\x2 !\x3");
+		sb.Append("\x2\x2\x2!\a\x3\x2\x2\x2\" \x3\x2\x2\x2#(\x5\n\x6\x2$%\t\x3");
+		sb.Append("\x2\x2%\'\x5\n\x6\x2&$\x3\x2\x2\x2\'*\x3\x2\x2\x2(&\x3\x2\x2");
+		sb.Append("\x2()\x3\x2\x2\x2)\t\x3\x2\x2\x2*(\x3\x2\x2\x2+.\x5\f\a\x2,");
+		sb.Append("-\a\x83\x2\x2-/\x5\x6\x4\x2.,\x3\x2\x2\x2./\x3\x2\x2\x2/\v\x3");
+		sb.Append("\x2\x2\x2\x30\x36\x5\xE\b\x2\x31\x32\av\x2\x2\x32\x33\x5\x6");
+		sb.Append("\x4\x2\x33\x34\aw\x2\x2\x34\x36\x3\x2\x2\x2\x35\x30\x3\x2\x2");
+		sb.Append("\x2\x35\x31\x3\x2\x2\x2\x36\r\x3\x2\x2\x2\x37\x38\x5\x12\n\x2");
+		sb.Append("\x38\xF\x3\x2\x2\x2\x39:\t\x4\x2\x2:\x11\x3\x2\x2\x2;<\t\x5");
+		sb.Append("\x2\x2<\x13\x3\x2\x2\x2\x6 (.\x35");
 	    return sb.ToString();
 	}
 

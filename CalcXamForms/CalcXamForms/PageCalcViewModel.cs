@@ -130,6 +130,7 @@ namespace CalcXamForms
                                     new MemoryStream(byteArray)).ReadToEnd()))));
                 IParseTree tree = pp.expressionResult();
                 ITokenStream ts = pp.TokenStream;
+                var ss = AllTokens(ts).ToArray();
                 _result = AllTokens(ts).Reverse().Skip(1).First().Text;
                 NotifyPropertyChanged("Result");
                 NotifyPropertyChanged("Command");
@@ -312,6 +313,7 @@ namespace CalcXamForms
                 StringBuilder sb = _calculation_history.Last();
                 sb.Append('+');
                 byte[] byteArray = Encoding.UTF8.GetBytes(sb.ToString());
+                int pos = sb.ToString().Length - 1;
                 calculatorParser pp = new calculatorParser(
                     new CommonTokenStream(
                         new calculatorLexer(
@@ -320,22 +322,30 @@ namespace CalcXamForms
                                     new MemoryStream(byteArray)).ReadToEnd()))));
                 IParseTree tree = pp.expressionResult();
                 VisitorCalc visitor = new VisitorCalc();
-                Res re = visitor.Visit(tree);
-                ParserRuleContext prc = tree as ParserRuleContext;
-                var list = DFSVisitor.DFS(prc);
-                var ar = list.ToArray();
-                var list2 = list.Reverse().Where((ParserRuleContext n)
+                visitor.Visit(tree);
+                var list = DFSVisitor.DFS(tree as ParserRuleContext).ToArray().Where((ParserRuleContext n)
                 =>
                 {
-                    return (n as calculatorParser.MultiplyingExpressionContext) != null;
+                    calculatorParser.ExpressionContext o = n as calculatorParser.ExpressionContext;
+                    if (o == null) return false;
+                    // Looking for child with "+".
+                    if (o.children == null) return false;
+                    for (int chi = 0; chi < o.children.Count; ++chi)
+                    {
+                        object obj = o.children[chi];
+                        TerminalNodeImpl t = obj as TerminalNodeImpl;
+                        if (t != null)
+                        {
+                            if (t.Payload.StartIndex == pos)
+                                return true;
+                        }
+                    }
+                    return false;
                 });
-                var ar2 = list2.ToArray();
-                var list3 = list2.ToArray();
-                ParserRuleContext p = list3.Skip(1).First();
+                ParserRuleContext p = list.First();
                 Res res;
                 if (visitor.Results.TryGetValue(p, out res))
-                    if (res.IsComplete)
-                        _result = res.Value.ToString();
+                    _result = res.Value.ToString();
                 NotifyPropertyChanged("Result");
                 NotifyPropertyChanged("Command");
             });
@@ -344,24 +354,168 @@ namespace CalcXamForms
             {
                 StringBuilder sb = _calculation_history.Last();
                 sb.Append('-');
+                byte[] byteArray = Encoding.UTF8.GetBytes(sb.ToString());
+                int pos = sb.ToString().Length - 1;
+                calculatorParser pp = new calculatorParser(
+                    new CommonTokenStream(
+                        new calculatorLexer(
+                            new AntlrInputStream(
+                                new StreamReader(
+                                    new MemoryStream(byteArray)).ReadToEnd()))));
+                IParseTree tree = pp.expressionResult();
+                VisitorCalc visitor = new VisitorCalc();
+                visitor.Visit(tree);
+                var list = DFSVisitor.DFS(tree as ParserRuleContext).ToArray().Where((ParserRuleContext n)
+                =>
+                {
+                    calculatorParser.ExpressionContext o = n as calculatorParser.ExpressionContext;
+                    if (o == null) return false;
+                    // Looking for child with "+".
+                    if (o.children == null) return false;
+                    for (int chi = 0; chi < o.children.Count; ++chi)
+                    {
+                        object obj = o.children[chi];
+                        TerminalNodeImpl t = obj as TerminalNodeImpl;
+                        if (t != null)
+                        {
+                            if (t.Payload.StartIndex == pos)
+                                return true;
+                        }
+                    }
+                    return false;
+                });
+                ParserRuleContext p = list.First();
+                Res res;
+                if (visitor.Results.TryGetValue(p, out res))
+                    _result = res.Value.ToString();
+                NotifyPropertyChanged("Result");
+                NotifyPropertyChanged("Command");
             });
 
             _bstar_command = new Command((nothing) =>
             {
                 StringBuilder sb = _calculation_history.Last();
                 sb.Append('*');
+                byte[] byteArray = Encoding.UTF8.GetBytes(sb.ToString());
+                int pos = sb.ToString().Length - 1;
+                calculatorParser pp = new calculatorParser(
+                    new CommonTokenStream(
+                        new calculatorLexer(
+                            new AntlrInputStream(
+                                new StreamReader(
+                                    new MemoryStream(byteArray)).ReadToEnd()))));
+                IParseTree tree = pp.expressionResult();
+                VisitorCalc visitor = new VisitorCalc();
+                visitor.Visit(tree);
+                var list = DFSVisitor.DFS(tree as ParserRuleContext).ToArray().Where((ParserRuleContext n)
+                =>
+                {
+                    calculatorParser.ExpressionContext o = n as calculatorParser.ExpressionContext;
+                    if (o == null) return false;
+                    // Looking for child with "+".
+                    if (o.children == null) return false;
+                    for (int chi = 0; chi < o.children.Count; ++chi)
+                    {
+                        object obj = o.children[chi];
+                        TerminalNodeImpl t = obj as TerminalNodeImpl;
+                        if (t != null)
+                        {
+                            if (t.Payload.StartIndex == pos)
+                                return true;
+                        }
+                    }
+                    return false;
+                });
+                ParserRuleContext p = list.First();
+                Res res;
+                if (visitor.Results.TryGetValue(p, out res))
+                    _result = res.Value.ToString();
+                NotifyPropertyChanged("Result");
+                NotifyPropertyChanged("Command");
             });
 
             _bslash_command = new Command((nothing) =>
             {
                 StringBuilder sb = _calculation_history.Last();
                 sb.Append('/');
+                byte[] byteArray = Encoding.UTF8.GetBytes(sb.ToString());
+                int pos = sb.ToString().Length - 1;
+                calculatorParser pp = new calculatorParser(
+                    new CommonTokenStream(
+                        new calculatorLexer(
+                            new AntlrInputStream(
+                                new StreamReader(
+                                    new MemoryStream(byteArray)).ReadToEnd()))));
+                IParseTree tree = pp.expressionResult();
+                VisitorCalc visitor = new VisitorCalc();
+                visitor.Visit(tree);
+                var list = DFSVisitor.DFS(tree as ParserRuleContext).ToArray().Where((ParserRuleContext n)
+                =>
+                {
+                    calculatorParser.ExpressionContext o = n as calculatorParser.ExpressionContext;
+                    if (o == null) return false;
+                    // Looking for child with "+".
+                    if (o.children == null) return false;
+                    for (int chi = 0; chi < o.children.Count; ++chi)
+                    {
+                        object obj = o.children[chi];
+                        TerminalNodeImpl t = obj as TerminalNodeImpl;
+                        if (t != null)
+                        {
+                            if (t.Payload.StartIndex == pos)
+                                return true;
+                        }
+                    }
+                    return false;
+                });
+                ParserRuleContext p = list.First();
+                Res res;
+                if (visitor.Results.TryGetValue(p, out res))
+                    _result = res.Value.ToString();
+                NotifyPropertyChanged("Result");
+                NotifyPropertyChanged("Command");
             });
 
             _bequals_command = new Command((nothing) =>
             {
                 StringBuilder sb = _calculation_history.Last();
                 sb.Append('=');
+                byte[] byteArray = Encoding.UTF8.GetBytes(sb.ToString());
+                int pos = sb.ToString().Length - 1;
+                calculatorParser pp = new calculatorParser(
+                    new CommonTokenStream(
+                        new calculatorLexer(
+                            new AntlrInputStream(
+                                new StreamReader(
+                                    new MemoryStream(byteArray)).ReadToEnd()))));
+                IParseTree tree = pp.expressionResult();
+                VisitorCalc visitor = new VisitorCalc();
+                visitor.Visit(tree);
+                var list = DFSVisitor.DFS(tree as ParserRuleContext).ToArray().Where((ParserRuleContext n)
+                =>
+                {
+                    calculatorParser.ExpressionResultContext o = n as calculatorParser.ExpressionResultContext;
+                    if (o == null) return false;
+                    // Looking for child with "+".
+                    if (o.children == null) return false;
+                    for (int chi = 0; chi < o.children.Count; ++chi)
+                    {
+                        object obj = o.children[chi];
+                        TerminalNodeImpl t = obj as TerminalNodeImpl;
+                        if (t != null)
+                        {
+                            if (t.Payload.StartIndex == pos)
+                                return true;
+                        }
+                    }
+                    return false;
+                });
+                ParserRuleContext p = list.First();
+                Res res;
+                if (visitor.Results.TryGetValue(p, out res))
+                    _result = res.Value.ToString();
+                NotifyPropertyChanged("Result");
+                NotifyPropertyChanged("Command");
                 _calculation_history.Add(new StringBuilder());
             });
         }
