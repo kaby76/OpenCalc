@@ -58,13 +58,12 @@ namespace CalcXamForms
                 return res;
             }
             Res lhs = Results[context.GetChild(0)];
-            res.Value = lhs.Value;
             if (context.ChildCount == 1)
             {
-                res.IsComplete = true;
-                Results[context] = res;
+                Results[context] = lhs;
                 return res;
             }
+            res.Value = lhs.Value;
             int count = 0;
             bool all_complete = lhs.IsComplete;
             for (; count < context.ChildCount && count + 2 < context.ChildCount;)
@@ -96,13 +95,12 @@ namespace CalcXamForms
                 return res;
             }
             Res lhs = Results[context.GetChild(0)];
-            res.Value = lhs.Value;
             if (context.ChildCount == 1)
             {
-                res.IsComplete = true;
-                Results[context] = res;
-                return res;
+                Results[context] = lhs;
+                return lhs;
             }
+            res.Value = lhs.Value;
             int count = 0;
             bool all_complete = lhs.IsComplete;
             for (; count < context.ChildCount && count + 2 < context.ChildCount;)
