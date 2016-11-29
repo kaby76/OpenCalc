@@ -66,18 +66,27 @@ namespace CalcXamForms
                 List<FormattedString> res = new List<FormattedString>();
                 foreach (StringBuilder str in _calculation_history)
                 {
-                    string s = str.ToString();
+                    string p1 = str.ToString(0, ErrorPos);
                     var fs = new FormattedString();
-
                     fs.Spans.Add(
                         new Span
                         {
-                            Text = s,
+                            Text = p1,
                             FontSize = 20,
                             FontAttributes = FontAttributes.Bold
                         }
                         );
-                    res.Insert(0, s);
+                    string p2 = str.ToString(ErrorPos, str.Length - ErrorPos);
+                    fs.Spans.Add(
+                        new Span
+                        {
+                            Text = p2,
+                            ForegroundColor = Color.Red,
+                            FontSize = 20,
+                            FontAttributes = FontAttributes.Bold
+                        }
+                        );
+                    res.Insert(0, fs);
                 }
                 return res;
             }
@@ -86,6 +95,8 @@ namespace CalcXamForms
                 NotifyPropertyChanged();
             }
         }
+
+        public int ErrorPos;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -149,100 +160,99 @@ namespace CalcXamForms
             pp.ErrorHandler = eh;
             IParseTree tree = pp.expressionResult();
 
+            var l = DFSVisitor.DFS(tree as ParserRuleContext).ToArray().Where((ParserRuleContext n) =>
             {
-                var l = DFSVisitor.DFS(tree as ParserRuleContext).ToArray().Where((ParserRuleContext n) =>
+                return n.exception != null;
+            });
+            var f = l.ToArray();
+            if (f.Length != 0)
+            {
+                RecognitionException e = f[0].exception;
+                IntervalSet s;
+                eh.LASet.TryGetValue(e, out s);
+                string error_str = "Expecting " + s.ToString(pp.Vocabulary);
+                ErrorPos = e.OffendingToken.StartIndex;
+                if (e.OffendingToken.Type == calculatorParser.Eof)
                 {
-                    return n.exception != null;
-                });
-                var f = l.ToArray();
-                if (f.Length != 0)
-                {
-                    RecognitionException e = f[0].exception;
-                    IntervalSet s;
-                    eh.LASet.TryGetValue(e, out s);
-                    string error_str = "Expecting " + s.ToString(pp.Vocabulary);
-                    if (e.OffendingToken.Type == calculatorParser.Eof)
+                    // OK
+                    VisitorCalc visitor = new VisitorCalc();
+                    visitor.Visit(tree);
+                    var list = DFSVisitor.DFS(tree as ParserRuleContext).ToArray().Where((ParserRuleContext n)
+                    =>
                     {
-                        // OK
-                        VisitorCalc visitor = new VisitorCalc();
-                        visitor.Visit(tree);
-                        var list = DFSVisitor.DFS(tree as ParserRuleContext).ToArray().Where((ParserRuleContext n)
-                        =>
+                        // Looking for child with "+".
+                        if (n.children == null) return false;
+                        for (int chi = 0; chi < n.children.Count; ++chi)
                         {
-                            // Looking for child with "+".
-                            if (n.children == null) return false;
-                            for (int chi = 0; chi < n.children.Count; ++chi)
+                            object obj = n.children[chi];
+                            TerminalNodeImpl t = obj as TerminalNodeImpl;
+                            if (t != null)
                             {
-                                object obj = n.children[chi];
-                                TerminalNodeImpl t = obj as TerminalNodeImpl;
-                                if (t != null)
-                                {
-                                    if (t.Payload.StartIndex == pos)
-                                        return true;
-                                }
+                                if (t.Payload.StartIndex == pos)
+                                    return true;
                             }
-                            return false;
-                        });
-                        var find = list.ToArray();
-                        if (find.Length == 1)
-                        {
-                            ParserRuleContext p = list.First();
-                            Res res;
-                            if (visitor.Results.TryGetValue(p, out res))
-                                _result = res.Value.ToString();
                         }
-                        else if (find.Length == 0)
-                        {
-                            // Could not find the operator!
-                            _result = "Invalid computation.";
-                        }
-                    }
-                    else
+                        return false;
+                    });
+                    var find = list.ToArray();
+                    if (find.Length == 1)
                     {
-                        // BAD
-                        _result = error_str;
+                        ParserRuleContext p = list.First();
+                        Res res;
+                        if (visitor.Results.TryGetValue(p, out res))
+                            _result = res.Value.ToString();
+                    }
+                    else if (find.Length == 0)
+                    {
+                        // Could not find the operator!
+                        _result = "Invalid computation.";
                     }
                 }
                 else
                 {
-                    {
-                        // OK
-                        VisitorCalc visitor = new VisitorCalc();
-                        visitor.Visit(tree);
-                        var list = DFSVisitor.DFS(tree as ParserRuleContext).ToArray().Where((ParserRuleContext n)
-                        =>
-                        {
-                            // Looking for child with "+".
-                            if (n.children == null) return false;
-                            for (int chi = 0; chi < n.children.Count; ++chi)
-                            {
-                                object obj = n.children[chi];
-                                TerminalNodeImpl t = obj as TerminalNodeImpl;
-                                if (t != null)
-                                {
-                                    if (t.Payload.StartIndex == pos)
-                                        return true;
-                                }
-                            }
-                            return false;
-                        });
-                        var find = list.ToArray();
-                        if (find.Length == 1)
-                        {
-                            ParserRuleContext p = list.First();
-                            Res res;
-                            if (visitor.Results.TryGetValue(p, out res))
-                                _result = res.Value.ToString();
-                        }
-                        else if (find.Length == 0)
-                        {
-                            // Could not find the operator!
-                            _result = "Invalid computation.";
-                        }
-                    }
-
+                    // BAD
+                    _result = error_str;
                 }
             }
+            else
+            {
+                {
+                    // OK
+                    VisitorCalc visitor = new VisitorCalc();
+                    visitor.Visit(tree);
+                    var list = DFSVisitor.DFS(tree as ParserRuleContext).ToArray().Where((ParserRuleContext n)
+                    =>
+                    {
+                        // Looking for child with "+".
+                        if (n.children == null) return false;
+                        for (int chi = 0; chi < n.children.Count; ++chi)
+                        {
+                            object obj = n.children[chi];
+                            TerminalNodeImpl t = obj as TerminalNodeImpl;
+                            if (t != null)
+                            {
+                                if (t.Payload.StartIndex == pos)
+                                    return true;
+                            }
+                        }
+                        return false;
+                    });
+                    var find = list.ToArray();
+                    if (find.Length == 1)
+                    {
+                        ParserRuleContext p = list.First();
+                        Res res;
+                        if (visitor.Results.TryGetValue(p, out res))
+                            _result = res.Value.ToString();
+                    }
+                    else if (find.Length == 0)
+                    {
+                        // Could not find the operator!
+                        _result = "Invalid computation.";
+                    }
+                }
+            }
+
             NotifyPropertyChanged("Result");
             NotifyPropertyChanged("Command");
         }
