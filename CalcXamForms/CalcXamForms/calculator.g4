@@ -1,7 +1,7 @@
 grammar calculator;
 
 expressionResult
-   : expression ASSIGNMENT
+   : expression ASSIGNMENT EOF
    ;
 
 equation
@@ -57,13 +57,13 @@ number
 
 BYTE_ORDER_MARK: '\u00EF\u00BB\u00BF';
 
-// A.1. Documentation Comments
-SINGLE_LINE_DOC_COMMENT 
-  : ('///' Input_character*) -> channel(HIDDEN)
-  ;
-DELIMITED_DOC_COMMENT 
-  : ('/**' Delimited_comment_section* Asterisks '/') -> channel(HIDDEN) 
-  ;
+//// A.1. Documentation Comments
+//SINGLE_LINE_DOC_COMMENT 
+//  : ('///' Input_character*) -> channel(HIDDEN)
+//  ;
+//DELIMITED_DOC_COMMENT 
+//  : ('/**' Delimited_comment_section* Asterisks '/') -> channel(HIDDEN) 
+//  ;
 
 //B.1.1 Line Terminators
 NEW_LINE 
@@ -76,10 +76,11 @@ NEW_LINE
   ) -> channel(HIDDEN)
   ;
 
-//B.1.2 Comments
-SINGLE_LINE_COMMENT 
-  : ('//' Input_character*) -> channel(HIDDEN)
-  ;
+////B.1.2 Comments
+//SINGLE_LINE_COMMENT 
+//  : ('//' Input_character*) -> channel(HIDDEN)
+//  ;
+
 fragment Input_characters
   : Input_character+
   ;
@@ -94,9 +95,10 @@ fragment NEW_LINE_CHARACTER
   | '\u2029' //'<Paragraph Separator Character (U+2029)>'
   ;
 
-DELIMITED_COMMENT 
-  : ('/*' Delimited_comment_section* Asterisks '/') -> channel(HIDDEN)
-  ;
+//DELIMITED_COMMENT 
+//  : ('/*' Delimited_comment_section* Asterisks '/') -> channel(HIDDEN)
+//  ;
+
 fragment Delimited_comment_section 
   : '/'
   | Asterisks? Not_slash_or_asterisk

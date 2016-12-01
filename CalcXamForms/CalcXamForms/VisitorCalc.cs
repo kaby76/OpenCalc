@@ -65,11 +65,11 @@ namespace CalcXamForms
             }
             res.Value = lhs.Value;
             int count = 0;
-            bool all_complete = lhs.IsComplete;
+            res.IsComplete = lhs.IsComplete;
             for (; count < context.ChildCount && count + 2 < context.ChildCount;)
             {
                 Res rhs = Results[context.GetChild(count + 2)];
-                all_complete &= rhs.IsComplete;
+                res.IsComplete &= rhs.IsComplete;
                 IParseTree op_pt = context.GetChild(count + 1);
                 string op = op_pt.GetText();
                 if (op == "+") res.Value += rhs.Value;
@@ -102,11 +102,11 @@ namespace CalcXamForms
             }
             res.Value = lhs.Value;
             int count = 0;
-            bool all_complete = lhs.IsComplete;
+            res.IsComplete = lhs.IsComplete;
             for (; count < context.ChildCount && count + 2 < context.ChildCount;)
             {
                 Res rhs = Results[context.GetChild(count + 2)];
-                all_complete &= rhs.IsComplete;
+                res.IsComplete &= rhs.IsComplete;
                 IParseTree op_pt = context.GetChild(count + 1);
                 string op = op_pt.GetText();
                 if (op == "*" && rhs.IsComplete) res.Value *= rhs.Value;

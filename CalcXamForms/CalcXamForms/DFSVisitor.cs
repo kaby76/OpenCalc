@@ -9,28 +9,27 @@ using Antlr4.Runtime;
 
 namespace CalcXamForms
 {
-    class DFSVisitor
+    internal class DFSVisitor
     {
 
-        public static IEnumerable<ParserRuleContext> DFS(ParserRuleContext root)
+        public static IEnumerable<IParseTree> DFS(ParserRuleContext root)
         {
-            var toVisit = new Stack<ParserRuleContext>();
-            var visitedAncestors = new Stack<ParserRuleContext>();
+            var toVisit = new Stack<IParseTree>();
+            var visitedAncestors = new Stack<IParseTree>();
             toVisit.Push(root);
             while (toVisit.Count > 0)
             {
-                var node = toVisit.Peek();
-                if (node.children != null && node.children.Count > 0)
+                IParseTree node = toVisit.Peek();
+                if (node.ChildCount > 0)
                 {
                     if (visitedAncestors.PeekOrDefault() != node)
                     {
                         visitedAncestors.Push(node);
-                        for (int i = node.children.Count-1; i>=0; --i)
+                        for (int i = node.ChildCount - 1; i>=0; --i)
                         {
-                            object o = node.children[i];
-                            bool as_prc = o as ParserRuleContext != null;
-                            if (as_prc)
-                                toVisit.Push(o as ParserRuleContext);
+                            IParseTree o = node.GetChild(i);
+                            Type t = o.GetType();
+                            toVisit.Push(o);
                         }
                         continue;
                     }
@@ -45,7 +44,7 @@ namespace CalcXamForms
 
     static class StackHelper
     {
-        public static ParserRuleContext PeekOrDefault(this Stack<ParserRuleContext> s)
+        public static IParseTree PeekOrDefault(this Stack<IParseTree> s)
         {
             return s.Count == 0 ? null : s.Peek();
         }

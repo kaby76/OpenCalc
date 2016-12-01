@@ -65,13 +65,7 @@
         <calcXamForms:MyListView.ItemTemplate>
           <DataTemplate>
             <ViewCell>
-              <Grid>
-                <ContentView Padding="10" >
-                  <Label BindingContext="{Binding}"
-              	    Grid.Column="1"
-              	    FormattedText="{Binding}" />
-                </ContentView>
-              </Grid>
+              <ContentView Content="{Binding Path=.}" />
             </ViewCell>
           </DataTemplate>
         </calcXamForms:MyListView.ItemTemplate>

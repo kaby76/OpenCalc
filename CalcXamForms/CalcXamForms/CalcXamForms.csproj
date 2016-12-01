@@ -43,10 +43,15 @@
     <Compile Include="calculatorParser.cs" />
     <Compile Include="calculatorVisitor.cs" />
     <Compile Include="DFSVisitor.cs" />
+    <Compile Include="FormattedStringHelper.cs" />
     <Compile Include="MyListView.cs" />
     <Compile Include="OldPage.xaml.cs">
       <DependentUpon>OldPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EditorPopup.xaml.cs">
+      <DependentUpon>EditorPopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Page1ViewModel.cs" />
     <Compile Include="PageCalc.xaml.cs">
       <DependentUpon>PageCalc.xaml</DependentUpon>
     </Compile>
@@ -74,6 +79,14 @@
     <Reference Include="Antlr4.Runtime">
       <HintPath>.\Antlr4.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="Rg.Plugins.Popup, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Rg.Plugins.Popup.1.0.4\lib\portable-win+net45+wp8+win8+wpa81\Rg.Plugins.Popup.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Rg.Plugins.Popup.Platform, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Rg.Plugins.Popup.1.0.4\lib\portable-win+net45+wp8+win8+wpa81\Rg.Plugins.Popup.Platform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xamarin.Forms.2.3.3.168\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Core.dll</HintPath>
       <Private>True</Private>
@@ -89,6 +102,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="OldPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="EditorPopup.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

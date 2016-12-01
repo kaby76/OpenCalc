@@ -12,7 +12,7 @@ namespace CalcXamForms
     {
         public PageCalc()
         {
-            this.BindingContext = new PageCalcViewModel();
+            this.BindingContext = PageCalcViewModel.Singleton(this);
             InitializeComponent();
         }
     }

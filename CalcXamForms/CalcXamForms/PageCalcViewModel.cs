@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -10,14 +11,34 @@ using Antlr4.Runtime;
 using Xamarin.Forms;
 using Antlr4.Runtime.Tree;
 using Antlr4.Runtime.Misc;
+using Rg.Plugins.Popup.Extensions;
 
 namespace CalcXamForms
 {
-    class PageCalcViewModel : INotifyPropertyChanged
+    public class PageCalcViewModel : INotifyPropertyChanged
     {
-        private List<StringBuilder> _calculation_history = new List<StringBuilder>();
+        private static PageCalcViewModel _singleton;
+        public static PageCalcViewModel Singleton(ContentPage cp = null)
+        {
+            if (_singleton == null) _singleton = new PageCalcViewModel(cp);
+            return _singleton;
+        }
+        private ObservableCollection<Label> _calculation_history = new ObservableCollection<Label>();
+        private Label _current_view = null;
         private string _result;
-        private Antlr4.Runtime.Tree.IErrorNode xasdf;
+        private ContentPage _page_calc;
+        private ICommand _on_tap_command;
+        public ICommand OnTap
+        {
+            get
+            {
+                return _on_tap_command;
+            }
+            set
+            {
+                _on_tap_command = value;
+            }
+        }
 
         public FormattedString Result
         {
@@ -59,44 +80,53 @@ namespace CalcXamForms
             }
         }
 
-        public List<FormattedString> Command
+        private FormattedString BuildCommand(string str, int error)
+        {
+            string p1 = str.Substring(0, error);
+            var fs = new FormattedString();
+            fs.Spans.Add(
+                new Span
+                {
+                    Text = p1,
+                    FontSize = 20,
+                    FontAttributes = FontAttributes.Bold
+                }
+                );
+            string p2 = str.Substring(error, str.Length - error);
+            fs.Spans.Add(
+                new Span
+                {
+                    Text = p2,
+                    ForegroundColor = Color.Red,
+                    FontSize = 20,
+                    FontAttributes = FontAttributes.Bold
+                }
+                );
+            return fs;
+        }
+
+        public ObservableCollection<Label> Command
         {
             get
             {
-                List<FormattedString> res = new List<FormattedString>();
-                foreach (StringBuilder str in _calculation_history)
-                {
-                    string p1 = str.ToString(0, ErrorPos);
-                    var fs = new FormattedString();
-                    fs.Spans.Add(
-                        new Span
-                        {
-                            Text = p1,
-                            FontSize = 20,
-                            FontAttributes = FontAttributes.Bold
-                        }
-                        );
-                    string p2 = str.ToString(ErrorPos, str.Length - ErrorPos);
-                    fs.Spans.Add(
-                        new Span
-                        {
-                            Text = p2,
-                            ForegroundColor = Color.Red,
-                            FontSize = 20,
-                            FontAttributes = FontAttributes.Bold
-                        }
-                        );
-                    res.Insert(0, fs);
-                }
-                return res;
+                return _calculation_history;
             }
             set
             {
                 NotifyPropertyChanged();
             }
         }
-
-        public int ErrorPos;
+        public Label CurrentView
+        {
+            get
+            {
+                return _current_view;
+            }
+            set
+            {
+                _current_view = value;
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -116,9 +146,32 @@ namespace CalcXamForms
             for (int i = 0; i < ts.Size; ++i) yield return ts.Get(i);
         }
 
-        public PageCalcViewModel()
+        private PageCalcViewModel(ContentPage page_calc)
         {
-            _calculation_history.Add(new StringBuilder());
+            _page_calc = page_calc;
+            CurrentView = new Label() {FormattedText = new FormattedString()};
+            _calculation_history.Add(CurrentView);
+            _on_tap_command = new Command(async (o) =>
+            {
+                Label label = o as Label;
+                if (label != null)
+                {
+                    int found = _calculation_history.IndexOf(label);
+                    if (found < 0)
+                        return;
+                    else if (found > 0)
+                    {
+                        CurrentView = new Label() {FormattedText = label.FormattedText.Copy()};
+                        _calculation_history.Insert(0, CurrentView);
+                    }
+                    else
+                    {
+                        CurrentView = label;
+                    }
+                    EditorPopup page = new EditorPopup(this);
+                    await _page_calc.Navigation.PushPopupAsync(page);
+                }
+            });
 
             _bdot_command = new Command((nothing) => InDigit('.'));
             _b0_command = new Command((nothing) => InDigit('0'));
@@ -140,127 +193,56 @@ namespace CalcXamForms
             _bequals_command = new Command((nothing) =>
             {
                 InOperator('=');
-                _calculation_history.Add(new StringBuilder());
+                CurrentView = new Label() { FormattedText = new FormattedString() };
+                _calculation_history.Insert(0, CurrentView);
             });
         }
 
-        private void InOperator(char op)
+        private calculatorParser Parser(string plain_old_command)
         {
-            StringBuilder sb = _calculation_history.Last();
-            sb.Append(op);
-            byte[] byteArray = Encoding.UTF8.GetBytes(sb.ToString());
-            int pos = sb.ToString().Length - 1;
+            byte[] byteArray = Encoding.UTF8.GetBytes(plain_old_command);
             calculatorParser pp = new calculatorParser(
                 new CommonTokenStream(
                     new calculatorLexer(
                         new AntlrInputStream(
                             new StreamReader(
                                 new MemoryStream(byteArray)).ReadToEnd()))));
-            MyErrorStrategy eh = new MyErrorStrategy();
-            pp.ErrorHandler = eh;
-            IParseTree tree = pp.expressionResult();
+            pp.ErrorHandler = new MyErrorStrategy();
+            return pp;
+        }
 
-            var l = DFSVisitor.DFS(tree as ParserRuleContext).ToArray().Where((ParserRuleContext n) =>
-            {
-                return n.exception != null;
-            });
-            var f = l.ToArray();
-            if (f.Length != 0)
-            {
-                RecognitionException e = f[0].exception;
-                IntervalSet s;
-                eh.LASet.TryGetValue(e, out s);
-                string error_str = "Expecting " + s.ToString(pp.Vocabulary);
-                ErrorPos = e.OffendingToken.StartIndex;
-                if (e.OffendingToken.Type == calculatorParser.Eof)
-                {
-                    // OK
-                    VisitorCalc visitor = new VisitorCalc();
-                    visitor.Visit(tree);
-                    var list = DFSVisitor.DFS(tree as ParserRuleContext).ToArray().Where((ParserRuleContext n)
-                    =>
-                    {
-                        // Looking for child with "+".
-                        if (n.children == null) return false;
-                        for (int chi = 0; chi < n.children.Count; ++chi)
-                        {
-                            object obj = n.children[chi];
-                            TerminalNodeImpl t = obj as TerminalNodeImpl;
-                            if (t != null)
-                            {
-                                if (t.Payload.StartIndex == pos)
-                                    return true;
-                            }
-                        }
-                        return false;
-                    });
-                    var find = list.ToArray();
-                    if (find.Length == 1)
-                    {
-                        ParserRuleContext p = list.First();
-                        Res res;
-                        if (visitor.Results.TryGetValue(p, out res))
-                            _result = res.Value.ToString();
-                    }
-                    else if (find.Length == 0)
-                    {
-                        // Could not find the operator!
-                        _result = "Invalid computation.";
-                    }
-                }
-                else
-                {
-                    // BAD
-                    _result = error_str;
-                }
-            }
-            else
-            {
-                {
-                    // OK
-                    VisitorCalc visitor = new VisitorCalc();
-                    visitor.Visit(tree);
-                    var list = DFSVisitor.DFS(tree as ParserRuleContext).ToArray().Where((ParserRuleContext n)
-                    =>
-                    {
-                        // Looking for child with "+".
-                        if (n.children == null) return false;
-                        for (int chi = 0; chi < n.children.Count; ++chi)
-                        {
-                            object obj = n.children[chi];
-                            TerminalNodeImpl t = obj as TerminalNodeImpl;
-                            if (t != null)
-                            {
-                                if (t.Payload.StartIndex == pos)
-                                    return true;
-                            }
-                        }
-                        return false;
-                    });
-                    var find = list.ToArray();
-                    if (find.Length == 1)
-                    {
-                        ParserRuleContext p = list.First();
-                        Res res;
-                        if (visitor.Results.TryGetValue(p, out res))
-                            _result = res.Value.ToString();
-                    }
-                    else if (find.Length == 0)
-                    {
-                        // Could not find the operator!
-                        _result = "Invalid computation.";
-                    }
-                }
-            }
+        private void InOperator(char op)
+        {
+            FormattedString fs;
+            Label label = CurrentView;
+            fs = label.FormattedText;
+            string plain_ole_command = fs.ToString() + op;
 
+            calculatorParser parser = Parser(plain_ole_command);
+            IParseTree tree = parser.expressionResult();
+            IParseTree[] all_nodes = DFSVisitor.DFS(tree as ParserRuleContext).ToArray();
+
+            if (CheckForExceptions(plain_ole_command, parser, tree, all_nodes)) return;
+            if (CheckForErrorToken(plain_ole_command, parser, tree, all_nodes)) return;
+            if (CheckForResult(plain_ole_command, parser, tree, all_nodes)) return;
+
+            _result = "Unknown.";
+
+            label.FormattedText = BuildCommand(plain_ole_command, 0);
+            _calculation_history[_calculation_history.IndexOf(CurrentView)] = label;
             NotifyPropertyChanged("Result");
             NotifyPropertyChanged("Command");
         }
 
         private void InDigit(char digit)
         {
-            StringBuilder sb = _calculation_history.Last();
+            FormattedString fs;
+            Label label = CurrentView;
+            fs = label.FormattedText;
+
+            StringBuilder sb = new StringBuilder(fs.ToString());
             sb.Append(digit);
+            int ErrorPos = sb.Length;
             byte[] byteArray = Encoding.UTF8.GetBytes(sb.ToString());
             calculatorParser pp = new calculatorParser(
                 new CommonTokenStream(
@@ -271,6 +253,113 @@ namespace CalcXamForms
             IParseTree tree = pp.expressionResult();
             ITokenStream ts = pp.TokenStream;
             _result = AllTokens(ts).Reverse().Skip(1).First().Text;
+            label.FormattedText = BuildCommand(sb.ToString(), ErrorPos);
+            _calculation_history[_calculation_history.IndexOf(CurrentView)] = label;
+            NotifyPropertyChanged("Result");
+            NotifyPropertyChanged("Command");
+        }
+
+        private bool CheckForExceptions(string plain_ole_command, calculatorParser parser, IParseTree tree, IParseTree[] all_nodes)
+        {
+            IEnumerable<IParseTree> re_nodes_iterator = all_nodes.Where((IParseTree n) =>
+            {
+                ParserRuleContext nn = n as ParserRuleContext;
+                if (nn == null) return false;
+                return nn.exception != null;
+            });
+            IParseTree[] all_re_nodes = re_nodes_iterator.ToArray();
+            if (all_re_nodes.Length == 0) return false;
+
+            RecognitionException re = (all_re_nodes.First() as ParserRuleContext)?.exception;
+            if (re.OffendingToken.Type == calculatorParser.Eof) return false;
+
+            IntervalSet s;
+            (parser.ErrorHandler as MyErrorStrategy).LASet.TryGetValue(re, out s);
+            string error_str = "Expecting " + s.ToString(parser.Vocabulary);
+            int ErrorPos = re.OffendingToken.StartIndex;
+
+            _result = error_str;
+            CurrentView.FormattedText = BuildCommand(plain_ole_command, ErrorPos);
+            _calculation_history[_calculation_history.IndexOf(CurrentView)] = CurrentView;
+            NotifyPropertyChanged("Result");
+            NotifyPropertyChanged("Command");
+
+            return true;
+        }
+
+        private bool CheckForErrorToken(string plain_ole_command, calculatorParser parser, IParseTree tree, IParseTree[] all_nodes)
+        {
+            IEnumerable<IParseTree> eni_nodes_iterator = all_nodes.Where((IParseTree n) =>
+            {
+                ErrorNodeImpl nn = n as ErrorNodeImpl;
+                return nn != null;
+            });
+            IParseTree[] all_eni_nodes_iterator = eni_nodes_iterator.ToArray();
+            if (!all_eni_nodes_iterator.Any()) return false;
+
+            ErrorNodeImpl eni = all_eni_nodes_iterator.First() as ErrorNodeImpl;
+            if (eni.GetText() == "<missing '='>") return false;
+
+            int ErrorPos = eni.Payload.StartIndex;
+
+            _result = "Extraneous input.";
+            CurrentView.FormattedText = BuildCommand(plain_ole_command, ErrorPos);
+            _calculation_history[_calculation_history.IndexOf(CurrentView)] = CurrentView;
+            NotifyPropertyChanged("Result");
+            NotifyPropertyChanged("Command");
+
+            return true;
+        }
+
+        private bool CheckForResult(string plain_ole_command, calculatorParser parser, IParseTree tree, IParseTree[] all_nodes)
+        {
+            int ErrorPos = plain_ole_command.Length;
+            // Find last good term.
+            VisitorCalc visitor = new VisitorCalc();
+            visitor.Visit(tree);
+            var list = all_nodes.Where((nn) =>
+            {
+                ParserRuleContext prc = nn as ParserRuleContext;
+                if (prc == null) return false;
+                Res r;
+                if (!visitor.Results.TryGetValue(prc, out r)) return false;
+                return r.IsComplete;
+            });
+            IParseTree[] find = list.ToArray();
+            if (find.Length == 0) return false;
+
+            ParserRuleContext p = find.Reverse().First() as ParserRuleContext;
+            Res res;
+            visitor.Results.TryGetValue(p, out res);
+            _result = res.Value.ToString();
+
+            CurrentView.FormattedText = BuildCommand(plain_ole_command, ErrorPos);
+            _calculation_history[_calculation_history.IndexOf(CurrentView)] = CurrentView;
+            NotifyPropertyChanged("Result");
+            NotifyPropertyChanged("Command");
+
+            return true;
+        }
+
+        public void CompileAndRun()
+        {
+            FormattedString fs;
+            Label label = CurrentView;
+            fs = label.FormattedText;
+            string plain_ole_command = fs.ToString();
+
+            calculatorParser parser = Parser(plain_ole_command);
+            IParseTree tree = parser.expressionResult();
+            IParseTree[] all_nodes = DFSVisitor.DFS(tree as ParserRuleContext).ToArray();
+
+            if (CheckForExceptions(plain_ole_command, parser, tree, all_nodes)) return;
+            if (CheckForErrorToken(plain_ole_command, parser, tree, all_nodes)) return;
+            if (CheckForResult(plain_ole_command, parser, tree, all_nodes)) return;
+
+            _result = "Unknown.";
+
+            label.FormattedText = BuildCommand(plain_ole_command, 0);
+            _calculation_history[_calculation_history.IndexOf(CurrentView)] = label;
             NotifyPropertyChanged("Result");
             NotifyPropertyChanged("Command");
         }
