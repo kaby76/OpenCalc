@@ -44,10 +44,8 @@
     <Compile Include="calculatorVisitor.cs" />
     <Compile Include="DFSVisitor.cs" />
     <Compile Include="FormattedStringHelper.cs" />
+    <Compile Include="MyButton.cs" />
     <Compile Include="MyListView.cs" />
-    <Compile Include="OldPage.xaml.cs">
-      <DependentUpon>OldPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="EditorPopup.xaml.cs">
       <DependentUpon>EditorPopup.xaml</DependentUpon>
     </Compile>
@@ -59,6 +57,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="packages.config" />
     <None Include="Visitor.cs" />
+    <Compile Include="View1.cs" />
     <Compile Include="VisitorCalc.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -99,12 +98,6 @@
       <HintPath>..\..\packages\Xamarin.Forms.2.3.3.168\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Xaml.dll</HintPath>
       <Private>True</Private>
     </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="OldPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="EditorPopup.xaml">
