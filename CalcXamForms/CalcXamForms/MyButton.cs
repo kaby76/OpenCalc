@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace CalcXamForms
@@ -12,7 +7,7 @@ namespace CalcXamForms
     {
         public MyButton()
         {
-            base.Margin = new Thickness(1,1,1,1);
+            base.Margin = new Thickness(0,0,0,0);
             TapGestureRecognizer gestureRecognizer = new TapGestureRecognizer();
             gestureRecognizer.Tapped += (s, e) => {
                 if (Command != null && Command.CanExecute(null))
@@ -33,7 +28,7 @@ namespace CalcXamForms
         }
 
         private FormattedString _text;
-        public string Fstext
+        public string Fext
         {
             get
             {

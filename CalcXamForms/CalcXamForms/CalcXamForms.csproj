@@ -44,12 +44,15 @@
     <Compile Include="calculatorVisitor.cs" />
     <Compile Include="DFSVisitor.cs" />
     <Compile Include="FormattedStringHelper.cs" />
+    <Compile Include="MasterPage.xaml.cs">
+      <DependentUpon>MasterPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MasterPageItem.cs" />
     <Compile Include="MyButton.cs" />
     <Compile Include="MyListView.cs" />
     <Compile Include="EditorPopup.xaml.cs">
       <DependentUpon>EditorPopup.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Page1ViewModel.cs" />
     <Compile Include="PageCalc.xaml.cs">
       <DependentUpon>PageCalc.xaml</DependentUpon>
     </Compile>
@@ -57,6 +60,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="packages.config" />
     <None Include="Visitor.cs" />
+    <Compile Include="RootPage.xaml.cs">
+      <DependentUpon>RootPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View1.cs" />
     <Compile Include="VisitorCalc.cs" />
   </ItemGroup>
@@ -101,6 +107,18 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="EditorPopup.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="RootPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MasterPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

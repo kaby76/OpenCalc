@@ -12,7 +12,22 @@ namespace CalcXamForms
         public App()
         {
             // The root page of your application
-            MainPage = new PageCalc();
+            //MainPage = new PageCalc();
+            switch (Device.OS)
+            {
+                case TargetPlatform.Android:
+                    MainPage = new RootPage();
+                    break;
+                //case TargetPlatform.iOS:
+                //    _app.MainPage = new EvolveNavigationPage(new RootPageiOS());
+                //    break;
+                //case TargetPlatform.Windows:
+                //case TargetPlatform.WinPhone:
+                //    _app.MainPage = new RootPageWindows();
+                //    break;
+                default:
+                    throw new NotImplementedException();
+            }
         }
 
         protected override void OnStart()
