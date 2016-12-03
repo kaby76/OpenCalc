@@ -43,6 +43,7 @@ namespace CalcXamForms
                 return res;
             }
         }
+
         public override Res VisitExpression([NotNull] calculatorParser.ExpressionContext context)
         {
             Res res = new CalcXamForms.Res { IsComplete = false, Value = 0 };

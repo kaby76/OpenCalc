@@ -173,29 +173,31 @@ namespace CalcXamForms
                 }
             });
 
-            _bdot_command = new Command((nothing) => InDigit('.'));
-            _b0_command = new Command((nothing) => InDigit('0'));
-            _b1_command = new Command((nothing) => InDigit('1'));
-            _b2_command = new Command((nothing) => InDigit('2'));
-            _b3_command = new Command((nothing) => InDigit('3'));
-            _b4_command = new Command((nothing) => InDigit('4'));
-            _b5_command = new Command((nothing) => InDigit('5'));
-            _b6_command = new Command((nothing) => InDigit('6'));
-            _b7_command = new Command((nothing) => InDigit('7'));
-            _b8_command = new Command((nothing) => InDigit('8'));
-            _b9_command = new Command((nothing) => InDigit('9'));
+            _bdot_command = new Command((nothing) => InDigit("."));
+            _b0_command = new Command((nothing) => InDigit("0"));
+            _b1_command = new Command((nothing) => InDigit("1"));
+            _b2_command = new Command((nothing) => InDigit("2"));
+            _b3_command = new Command((nothing) => InDigit("3"));
+            _b4_command = new Command((nothing) => InDigit("4"));
+            _b5_command = new Command((nothing) => InDigit("5"));
+            _b6_command = new Command((nothing) => InDigit("6"));
+            _b7_command = new Command((nothing) => InDigit("7"));
+            _b8_command = new Command((nothing) => InDigit("8"));
+            _b9_command = new Command((nothing) => InDigit("9"));
 
-            _bplus_command = new Command((nothing) => InOperator('+'));
-            _bminus_command = new Command((nothing) => InOperator('-'));
-            _bstar_command = new Command((nothing) => InOperator('*'));
-            _bslash_command = new Command((nothing) => InOperator('/'));
+            _bplus_command = new Command((nothing) => InOperator("+"));
+            _bminus_command = new Command((nothing) => InOperator("-"));
+            _bstar_command = new Command((nothing) => InOperator("*"));
+            _bslash_command = new Command((nothing) => InOperator("/"));
 
             _bequals_command = new Command((nothing) =>
             {
-                InOperator('=');
+                InOperator("=");
                 CurrentView = new Label() { FormattedText = new FormattedString() };
                 _calculation_history.Insert(0, CurrentView);
             });
+
+            _bsin_command = new Command((nothing) => InOperator("sin("));
         }
 
         private calculatorParser Parser(string plain_old_command)
@@ -211,7 +213,7 @@ namespace CalcXamForms
             return pp;
         }
 
-        private void InOperator(char op)
+        private void InOperator(string op)
         {
             FormattedString fs;
             Label label = CurrentView;
@@ -234,7 +236,7 @@ namespace CalcXamForms
             NotifyPropertyChanged("Command");
         }
 
-        private void InDigit(char digit)
+        private void InDigit(string digit)
         {
             FormattedString fs;
             Label label = CurrentView;
@@ -474,6 +476,13 @@ namespace CalcXamForms
         {
             get { return _bequals_command; }
             set { _bequals_command = value; }
+        }
+
+        private ICommand _bsin_command;
+        public ICommand BSin
+        {
+            get { return _bsin_command; }
+            set { _bsin_command = value; }
         }
     }
 

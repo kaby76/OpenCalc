@@ -32,6 +32,36 @@ using IToken = Antlr4.Runtime.IToken;
 [System.CLSCompliant(false)]
 public interface IcalculatorVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.identifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitIdentifier([NotNull] calculatorParser.IdentifierContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.argument_list"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitArgument_list([NotNull] calculatorParser.Argument_listContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.argument"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitArgument([NotNull] calculatorParser.ArgumentContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.argument_name"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitArgument_name([NotNull] calculatorParser.Argument_nameContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.argument_value"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitArgument_value([NotNull] calculatorParser.Argument_valueContext context);
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="calculatorParser.expressionResult"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -73,6 +103,18 @@ public interface IcalculatorVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitScientific([NotNull] calculatorParser.ScientificContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.func"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitFunc([NotNull] calculatorParser.FuncContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.funcname"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitFuncname([NotNull] calculatorParser.FuncnameContext context);
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="calculatorParser.relop"/>.
 	/// </summary>

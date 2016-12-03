@@ -1,5 +1,51 @@
 grammar calculator;
 
+//B.2 Syntactic grammar
+
+//B.2.1 Basic concepts
+
+identifier:
+     IDENTIFIER 
+    | FROM
+    | LET 
+    | WHERE 
+    | JOIN 
+    | ON 
+    | EQUALS 
+    | INTO
+    | ORDERBY
+    | ASCENDING
+    | DESCENDING
+    | SELECT
+    | GROUP
+    | BY
+    | PARTIAL
+    | ALIAS
+    | YIELD
+    | GET
+    | SET
+    | ADD
+    | REMOVE
+    | DYNAMIC
+    | ARGLIST
+    ;
+
+//B.2.4 Expressions
+argument_list 
+	: argument ( COMMA argument)*
+	;
+argument
+	: argument_name? argument_value
+	;
+argument_name 
+	: identifier COLON
+	;
+argument_value 
+	: expression
+//	| REF variable_reference
+//	| OUT variable_reference
+	;
+
 expressionResult
    : expression ASSIGNMENT EOF
    ;
@@ -24,20 +70,20 @@ atom
    : scientific
 //   | variable
    | OPEN_PARENS expression CLOSE_PARENS
-//   | func
+   | func
    ;
 
 scientific
    : number
    ;
 
-//func
-//   : funcname LPAREN expression RPAREN
-//   ;
+func
+   : funcname OPEN_PARENS argument_list? CLOSE_PARENS
+   ;
 
-//funcname
-//   : 
-//   ;
+funcname
+   : IDENTIFIER
+   ;
 
 relop
    : OP_EQ

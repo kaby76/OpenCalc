@@ -60,12 +60,15 @@ public partial class calculatorParser : Parser {
 		OP_LEFT_SHIFT_ASSIGNMENT=152, QUOTE=153, DOUBLE_QUOTE=154, BACK_SLASH=155, 
 		DOUBLE_BACK_SLASH=156, SHARP=157;
 	public const int
-		RULE_expressionResult = 0, RULE_equation = 1, RULE_expression = 2, RULE_multiplyingExpression = 3, 
-		RULE_powExpression = 4, RULE_atom = 5, RULE_scientific = 6, RULE_relop = 7, 
-		RULE_number = 8;
+		RULE_identifier = 0, RULE_argument_list = 1, RULE_argument = 2, RULE_argument_name = 3, 
+		RULE_argument_value = 4, RULE_expressionResult = 5, RULE_equation = 6, 
+		RULE_expression = 7, RULE_multiplyingExpression = 8, RULE_powExpression = 9, 
+		RULE_atom = 10, RULE_scientific = 11, RULE_func = 12, RULE_funcname = 13, 
+		RULE_relop = 14, RULE_number = 15;
 	public static readonly string[] ruleNames = {
+		"identifier", "argument_list", "argument", "argument_name", "argument_value", 
 		"expressionResult", "equation", "expression", "multiplyingExpression", 
-		"powExpression", "atom", "scientific", "relop", "number"
+		"powExpression", "atom", "scientific", "func", "funcname", "relop", "number"
 	};
 
 	private static readonly string[] _LiteralNames = {
@@ -139,6 +142,295 @@ public partial class calculatorParser : Parser {
 	{
 		Interpreter = new ParserATNSimulator(this,_ATN);
 	}
+	public partial class IdentifierContext : ParserRuleContext {
+		public ITerminalNode IDENTIFIER() { return GetToken(calculatorParser.IDENTIFIER, 0); }
+		public ITerminalNode FROM() { return GetToken(calculatorParser.FROM, 0); }
+		public ITerminalNode LET() { return GetToken(calculatorParser.LET, 0); }
+		public ITerminalNode WHERE() { return GetToken(calculatorParser.WHERE, 0); }
+		public ITerminalNode JOIN() { return GetToken(calculatorParser.JOIN, 0); }
+		public ITerminalNode ON() { return GetToken(calculatorParser.ON, 0); }
+		public ITerminalNode EQUALS() { return GetToken(calculatorParser.EQUALS, 0); }
+		public ITerminalNode INTO() { return GetToken(calculatorParser.INTO, 0); }
+		public ITerminalNode ORDERBY() { return GetToken(calculatorParser.ORDERBY, 0); }
+		public ITerminalNode ASCENDING() { return GetToken(calculatorParser.ASCENDING, 0); }
+		public ITerminalNode DESCENDING() { return GetToken(calculatorParser.DESCENDING, 0); }
+		public ITerminalNode SELECT() { return GetToken(calculatorParser.SELECT, 0); }
+		public ITerminalNode GROUP() { return GetToken(calculatorParser.GROUP, 0); }
+		public ITerminalNode BY() { return GetToken(calculatorParser.BY, 0); }
+		public ITerminalNode PARTIAL() { return GetToken(calculatorParser.PARTIAL, 0); }
+		public ITerminalNode ALIAS() { return GetToken(calculatorParser.ALIAS, 0); }
+		public ITerminalNode YIELD() { return GetToken(calculatorParser.YIELD, 0); }
+		public ITerminalNode GET() { return GetToken(calculatorParser.GET, 0); }
+		public ITerminalNode SET() { return GetToken(calculatorParser.SET, 0); }
+		public ITerminalNode ADD() { return GetToken(calculatorParser.ADD, 0); }
+		public ITerminalNode REMOVE() { return GetToken(calculatorParser.REMOVE, 0); }
+		public ITerminalNode DYNAMIC() { return GetToken(calculatorParser.DYNAMIC, 0); }
+		public ITerminalNode ARGLIST() { return GetToken(calculatorParser.ARGLIST, 0); }
+		public IdentifierContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_identifier; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IcalculatorListener typedListener = listener as IcalculatorListener;
+			if (typedListener != null) typedListener.EnterIdentifier(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IcalculatorListener typedListener = listener as IcalculatorListener;
+			if (typedListener != null) typedListener.ExitIdentifier(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IcalculatorVisitor<TResult> typedVisitor = visitor as IcalculatorVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIdentifier(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public IdentifierContext identifier() {
+		IdentifierContext _localctx = new IdentifierContext(Context, State);
+		EnterRule(_localctx, 0, RULE_identifier);
+		int _la;
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 32;
+			_la = TokenStream.La(1);
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << ADD) | (1L << ALIAS) | (1L << ARGLIST) | (1L << ASCENDING) | (1L << BY) | (1L << DESCENDING) | (1L << DYNAMIC) | (1L << EQUALS) | (1L << FROM) | (1L << GET) | (1L << GROUP) | (1L << INTO) | (1L << JOIN) | (1L << LET) | (1L << ON) | (1L << ORDERBY))) != 0) || ((((_la - 67)) & ~0x3f) == 0 && ((1L << (_la - 67)) & ((1L << (PARTIAL - 67)) | (1L << (REMOVE - 67)) | (1L << (SELECT - 67)) | (1L << (SET - 67)) | (1L << (WHERE - 67)) | (1L << (YIELD - 67)) | (1L << (IDENTIFIER - 67)))) != 0)) ) {
+			ErrorHandler.RecoverInline(this);
+			}
+			else {
+			    Consume();
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			ErrorHandler.ReportError(this, re);
+			ErrorHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class Argument_listContext : ParserRuleContext {
+		public ArgumentContext[] argument() {
+			return GetRuleContexts<ArgumentContext>();
+		}
+		public ArgumentContext argument(int i) {
+			return GetRuleContext<ArgumentContext>(i);
+		}
+		public ITerminalNode[] COMMA() { return GetTokens(calculatorParser.COMMA); }
+		public ITerminalNode COMMA(int i) {
+			return GetToken(calculatorParser.COMMA, i);
+		}
+		public Argument_listContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_argument_list; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IcalculatorListener typedListener = listener as IcalculatorListener;
+			if (typedListener != null) typedListener.EnterArgument_list(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IcalculatorListener typedListener = listener as IcalculatorListener;
+			if (typedListener != null) typedListener.ExitArgument_list(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IcalculatorVisitor<TResult> typedVisitor = visitor as IcalculatorVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitArgument_list(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public Argument_listContext argument_list() {
+		Argument_listContext _localctx = new Argument_listContext(Context, State);
+		EnterRule(_localctx, 2, RULE_argument_list);
+		int _la;
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 34; argument();
+			State = 39;
+			ErrorHandler.Sync(this);
+			_la = TokenStream.La(1);
+			while (_la==COMMA) {
+				{
+				{
+				State = 35; Match(COMMA);
+				State = 36; argument();
+				}
+				}
+				State = 41;
+				ErrorHandler.Sync(this);
+				_la = TokenStream.La(1);
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			ErrorHandler.ReportError(this, re);
+			ErrorHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class ArgumentContext : ParserRuleContext {
+		public Argument_valueContext argument_value() {
+			return GetRuleContext<Argument_valueContext>(0);
+		}
+		public Argument_nameContext argument_name() {
+			return GetRuleContext<Argument_nameContext>(0);
+		}
+		public ArgumentContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_argument; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IcalculatorListener typedListener = listener as IcalculatorListener;
+			if (typedListener != null) typedListener.EnterArgument(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IcalculatorListener typedListener = listener as IcalculatorListener;
+			if (typedListener != null) typedListener.ExitArgument(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IcalculatorVisitor<TResult> typedVisitor = visitor as IcalculatorVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitArgument(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public ArgumentContext argument() {
+		ArgumentContext _localctx = new ArgumentContext(Context, State);
+		EnterRule(_localctx, 4, RULE_argument);
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 43;
+			ErrorHandler.Sync(this);
+			switch ( Interpreter.AdaptivePredict(TokenStream,1,Context) ) {
+			case 1:
+				{
+				State = 42; argument_name();
+				}
+				break;
+			}
+			State = 45; argument_value();
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			ErrorHandler.ReportError(this, re);
+			ErrorHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class Argument_nameContext : ParserRuleContext {
+		public IdentifierContext identifier() {
+			return GetRuleContext<IdentifierContext>(0);
+		}
+		public ITerminalNode COLON() { return GetToken(calculatorParser.COLON, 0); }
+		public Argument_nameContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_argument_name; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IcalculatorListener typedListener = listener as IcalculatorListener;
+			if (typedListener != null) typedListener.EnterArgument_name(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IcalculatorListener typedListener = listener as IcalculatorListener;
+			if (typedListener != null) typedListener.ExitArgument_name(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IcalculatorVisitor<TResult> typedVisitor = visitor as IcalculatorVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitArgument_name(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public Argument_nameContext argument_name() {
+		Argument_nameContext _localctx = new Argument_nameContext(Context, State);
+		EnterRule(_localctx, 6, RULE_argument_name);
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 47; identifier();
+			State = 48; Match(COLON);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			ErrorHandler.ReportError(this, re);
+			ErrorHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class Argument_valueContext : ParserRuleContext {
+		public ExpressionContext expression() {
+			return GetRuleContext<ExpressionContext>(0);
+		}
+		public Argument_valueContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_argument_value; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IcalculatorListener typedListener = listener as IcalculatorListener;
+			if (typedListener != null) typedListener.EnterArgument_value(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IcalculatorListener typedListener = listener as IcalculatorListener;
+			if (typedListener != null) typedListener.ExitArgument_value(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IcalculatorVisitor<TResult> typedVisitor = visitor as IcalculatorVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitArgument_value(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public Argument_valueContext argument_value() {
+		Argument_valueContext _localctx = new Argument_valueContext(Context, State);
+		EnterRule(_localctx, 8, RULE_argument_value);
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 50; expression();
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			ErrorHandler.ReportError(this, re);
+			ErrorHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
 	public partial class ExpressionResultContext : ParserRuleContext {
 		public ExpressionContext expression() {
 			return GetRuleContext<ExpressionContext>(0);
@@ -168,13 +460,13 @@ public partial class calculatorParser : Parser {
 	[RuleVersion(0)]
 	public ExpressionResultContext expressionResult() {
 		ExpressionResultContext _localctx = new ExpressionResultContext(Context, State);
-		EnterRule(_localctx, 0, RULE_expressionResult);
+		EnterRule(_localctx, 10, RULE_expressionResult);
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 18; expression();
-			State = 19; Match(ASSIGNMENT);
-			State = 20; Match(Eof);
+			State = 52; expression();
+			State = 53; Match(ASSIGNMENT);
+			State = 54; Match(Eof);
 			}
 		}
 		catch (RecognitionException re) {
@@ -221,13 +513,13 @@ public partial class calculatorParser : Parser {
 	[RuleVersion(0)]
 	public EquationContext equation() {
 		EquationContext _localctx = new EquationContext(Context, State);
-		EnterRule(_localctx, 2, RULE_equation);
+		EnterRule(_localctx, 12, RULE_equation);
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 22; expression();
-			State = 23; relop();
-			State = 24; expression();
+			State = 56; expression();
+			State = 57; relop();
+			State = 58; expression();
 			}
 		}
 		catch (RecognitionException re) {
@@ -279,21 +571,21 @@ public partial class calculatorParser : Parser {
 	[RuleVersion(0)]
 	public ExpressionContext expression() {
 		ExpressionContext _localctx = new ExpressionContext(Context, State);
-		EnterRule(_localctx, 4, RULE_expression);
+		EnterRule(_localctx, 14, RULE_expression);
 		int _la;
 		try {
 			int _alt;
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 26; multiplyingExpression();
-			State = 31;
+			State = 60; multiplyingExpression();
+			State = 65;
 			ErrorHandler.Sync(this);
-			_alt = Interpreter.AdaptivePredict(TokenStream,0,Context);
+			_alt = Interpreter.AdaptivePredict(TokenStream,2,Context);
 			while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.InvalidAltNumber ) {
 				if ( _alt==1 ) {
 					{
 					{
-					State = 27;
+					State = 61;
 					_la = TokenStream.La(1);
 					if ( !(_la==PLUS || _la==MINUS) ) {
 					ErrorHandler.RecoverInline(this);
@@ -301,13 +593,13 @@ public partial class calculatorParser : Parser {
 					else {
 					    Consume();
 					}
-					State = 28; multiplyingExpression();
+					State = 62; multiplyingExpression();
 					}
 					} 
 				}
-				State = 33;
+				State = 67;
 				ErrorHandler.Sync(this);
-				_alt = Interpreter.AdaptivePredict(TokenStream,0,Context);
+				_alt = Interpreter.AdaptivePredict(TokenStream,2,Context);
 			}
 			}
 		}
@@ -360,21 +652,21 @@ public partial class calculatorParser : Parser {
 	[RuleVersion(0)]
 	public MultiplyingExpressionContext multiplyingExpression() {
 		MultiplyingExpressionContext _localctx = new MultiplyingExpressionContext(Context, State);
-		EnterRule(_localctx, 6, RULE_multiplyingExpression);
+		EnterRule(_localctx, 16, RULE_multiplyingExpression);
 		int _la;
 		try {
 			int _alt;
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 34; powExpression();
-			State = 39;
+			State = 68; powExpression();
+			State = 73;
 			ErrorHandler.Sync(this);
-			_alt = Interpreter.AdaptivePredict(TokenStream,1,Context);
+			_alt = Interpreter.AdaptivePredict(TokenStream,3,Context);
 			while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.InvalidAltNumber ) {
 				if ( _alt==1 ) {
 					{
 					{
-					State = 35;
+					State = 69;
 					_la = TokenStream.La(1);
 					if ( !(_la==STAR || _la==DIV) ) {
 					ErrorHandler.RecoverInline(this);
@@ -382,13 +674,13 @@ public partial class calculatorParser : Parser {
 					else {
 					    Consume();
 					}
-					State = 36; powExpression();
+					State = 70; powExpression();
 					}
 					} 
 				}
-				State = 41;
+				State = 75;
 				ErrorHandler.Sync(this);
-				_alt = Interpreter.AdaptivePredict(TokenStream,1,Context);
+				_alt = Interpreter.AdaptivePredict(TokenStream,3,Context);
 			}
 			}
 		}
@@ -434,18 +726,18 @@ public partial class calculatorParser : Parser {
 	[RuleVersion(0)]
 	public PowExpressionContext powExpression() {
 		PowExpressionContext _localctx = new PowExpressionContext(Context, State);
-		EnterRule(_localctx, 8, RULE_powExpression);
+		EnterRule(_localctx, 18, RULE_powExpression);
 		int _la;
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 42; atom();
-			State = 45;
+			State = 76; atom();
+			State = 79;
 			_la = TokenStream.La(1);
 			if (_la==CARET) {
 				{
-				State = 43; Match(CARET);
-				State = 44; expression();
+				State = 77; Match(CARET);
+				State = 78; expression();
 				}
 			}
 
@@ -471,6 +763,9 @@ public partial class calculatorParser : Parser {
 			return GetRuleContext<ExpressionContext>(0);
 		}
 		public ITerminalNode CLOSE_PARENS() { return GetToken(calculatorParser.CLOSE_PARENS, 0); }
+		public FuncContext func() {
+			return GetRuleContext<FuncContext>(0);
+		}
 		public AtomContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
 		{
@@ -494,23 +789,29 @@ public partial class calculatorParser : Parser {
 	[RuleVersion(0)]
 	public AtomContext atom() {
 		AtomContext _localctx = new AtomContext(Context, State);
-		EnterRule(_localctx, 10, RULE_atom);
+		EnterRule(_localctx, 20, RULE_atom);
 		try {
-			State = 52;
+			State = 87;
 			switch (TokenStream.La(1)) {
 			case INTEGER_LITERAL:
 			case REAL_LITERAL:
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 47; scientific();
+				State = 81; scientific();
 				}
 				break;
 			case OPEN_PARENS:
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 48; Match(OPEN_PARENS);
-				State = 49; expression();
-				State = 50; Match(CLOSE_PARENS);
+				State = 82; Match(OPEN_PARENS);
+				State = 83; expression();
+				State = 84; Match(CLOSE_PARENS);
+				}
+				break;
+			case IDENTIFIER:
+				EnterOuterAlt(_localctx, 3);
+				{
+				State = 86; func();
 				}
 				break;
 			default:
@@ -555,11 +856,115 @@ public partial class calculatorParser : Parser {
 	[RuleVersion(0)]
 	public ScientificContext scientific() {
 		ScientificContext _localctx = new ScientificContext(Context, State);
-		EnterRule(_localctx, 12, RULE_scientific);
+		EnterRule(_localctx, 22, RULE_scientific);
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 54; number();
+			State = 89; number();
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			ErrorHandler.ReportError(this, re);
+			ErrorHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class FuncContext : ParserRuleContext {
+		public FuncnameContext funcname() {
+			return GetRuleContext<FuncnameContext>(0);
+		}
+		public ITerminalNode OPEN_PARENS() { return GetToken(calculatorParser.OPEN_PARENS, 0); }
+		public ITerminalNode CLOSE_PARENS() { return GetToken(calculatorParser.CLOSE_PARENS, 0); }
+		public Argument_listContext argument_list() {
+			return GetRuleContext<Argument_listContext>(0);
+		}
+		public FuncContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_func; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IcalculatorListener typedListener = listener as IcalculatorListener;
+			if (typedListener != null) typedListener.EnterFunc(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IcalculatorListener typedListener = listener as IcalculatorListener;
+			if (typedListener != null) typedListener.ExitFunc(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IcalculatorVisitor<TResult> typedVisitor = visitor as IcalculatorVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFunc(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public FuncContext func() {
+		FuncContext _localctx = new FuncContext(Context, State);
+		EnterRule(_localctx, 24, RULE_func);
+		int _la;
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 91; funcname();
+			State = 92; Match(OPEN_PARENS);
+			State = 94;
+			_la = TokenStream.La(1);
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << ADD) | (1L << ALIAS) | (1L << ARGLIST) | (1L << ASCENDING) | (1L << BY) | (1L << DESCENDING) | (1L << DYNAMIC) | (1L << EQUALS) | (1L << FROM) | (1L << GET) | (1L << GROUP) | (1L << INTO) | (1L << JOIN) | (1L << LET) | (1L << ON) | (1L << ORDERBY))) != 0) || ((((_la - 67)) & ~0x3f) == 0 && ((1L << (_la - 67)) & ((1L << (PARTIAL - 67)) | (1L << (REMOVE - 67)) | (1L << (SELECT - 67)) | (1L << (SET - 67)) | (1L << (WHERE - 67)) | (1L << (YIELD - 67)) | (1L << (IDENTIFIER - 67)) | (1L << (INTEGER_LITERAL - 67)) | (1L << (REAL_LITERAL - 67)) | (1L << (OPEN_PARENS - 67)))) != 0)) {
+				{
+				State = 93; argument_list();
+				}
+			}
+
+			State = 96; Match(CLOSE_PARENS);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			ErrorHandler.ReportError(this, re);
+			ErrorHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class FuncnameContext : ParserRuleContext {
+		public ITerminalNode IDENTIFIER() { return GetToken(calculatorParser.IDENTIFIER, 0); }
+		public FuncnameContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_funcname; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IcalculatorListener typedListener = listener as IcalculatorListener;
+			if (typedListener != null) typedListener.EnterFuncname(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IcalculatorListener typedListener = listener as IcalculatorListener;
+			if (typedListener != null) typedListener.ExitFuncname(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IcalculatorVisitor<TResult> typedVisitor = visitor as IcalculatorVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFuncname(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public FuncnameContext funcname() {
+		FuncnameContext _localctx = new FuncnameContext(Context, State);
+		EnterRule(_localctx, 26, RULE_funcname);
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 98; Match(IDENTIFIER);
 			}
 		}
 		catch (RecognitionException re) {
@@ -600,12 +1005,12 @@ public partial class calculatorParser : Parser {
 	[RuleVersion(0)]
 	public RelopContext relop() {
 		RelopContext _localctx = new RelopContext(Context, State);
-		EnterRule(_localctx, 14, RULE_relop);
+		EnterRule(_localctx, 28, RULE_relop);
 		int _la;
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 56;
+			State = 100;
 			_la = TokenStream.La(1);
 			if ( !(((((_la - 129)) & ~0x3f) == 0 && ((1L << (_la - 129)) & ((1L << (LT - 129)) | (1L << (GT - 129)) | (1L << (OP_EQ - 129)))) != 0)) ) {
 			ErrorHandler.RecoverInline(this);
@@ -652,12 +1057,12 @@ public partial class calculatorParser : Parser {
 	[RuleVersion(0)]
 	public NumberContext number() {
 		NumberContext _localctx = new NumberContext(Context, State);
-		EnterRule(_localctx, 16, RULE_number);
+		EnterRule(_localctx, 30, RULE_number);
 		int _la;
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 58;
+			State = 102;
 			_la = TokenStream.La(1);
 			if ( !(_la==INTEGER_LITERAL || _la==REAL_LITERAL) ) {
 			ErrorHandler.RecoverInline(this);
@@ -683,29 +1088,45 @@ public partial class calculatorParser : Parser {
 	{
 	    StringBuilder sb = new StringBuilder();
 	    sb.Append("\x3\x430\xD6D1\x8206\xAD2D\x4417\xAEF1\x8D80\xAADD\x3\x9F");
-		sb.Append("?\x4\x2\t\x2\x4\x3\t\x3\x4\x4\t\x4\x4\x5\t\x5\x4\x6\t\x6\x4");
-		sb.Append("\a\t\a\x4\b\t\b\x4\t\t\t\x4\n\t\n\x3\x2\x3\x2\x3\x2\x3\x2\x3");
-		sb.Append("\x3\x3\x3\x3\x3\x3\x3\x3\x4\x3\x4\x3\x4\a\x4 \n\x4\f\x4\xE\x4");
-		sb.Append("#\v\x4\x3\x5\x3\x5\x3\x5\a\x5(\n\x5\f\x5\xE\x5+\v\x5\x3\x6\x3");
-		sb.Append("\x6\x3\x6\x5\x6\x30\n\x6\x3\a\x3\a\x3\a\x3\a\x3\a\x5\a\x37\n");
-		sb.Append("\a\x3\b\x3\b\x3\t\x3\t\x3\n\x3\n\x3\n\x2\x2\v\x2\x4\x6\b\n\f");
-		sb.Append("\xE\x10\x12\x2\x6\x3\x2xy\x3\x2z{\x4\x2\x83\x84\x8D\x8D\x3\x2");
-		sb.Append("jk\x39\x2\x14\x3\x2\x2\x2\x4\x18\x3\x2\x2\x2\x6\x1C\x3\x2\x2");
-		sb.Append("\x2\b$\x3\x2\x2\x2\n,\x3\x2\x2\x2\f\x36\x3\x2\x2\x2\xE\x38\x3");
-		sb.Append("\x2\x2\x2\x10:\x3\x2\x2\x2\x12<\x3\x2\x2\x2\x14\x15\x5\x6\x4");
-		sb.Append("\x2\x15\x16\a\x82\x2\x2\x16\x17\a\x2\x2\x3\x17\x3\x3\x2\x2\x2");
-		sb.Append("\x18\x19\x5\x6\x4\x2\x19\x1A\x5\x10\t\x2\x1A\x1B\x5\x6\x4\x2");
-		sb.Append("\x1B\x5\x3\x2\x2\x2\x1C!\x5\b\x5\x2\x1D\x1E\t\x2\x2\x2\x1E ");
-		sb.Append("\x5\b\x5\x2\x1F\x1D\x3\x2\x2\x2 #\x3\x2\x2\x2!\x1F\x3\x2\x2");
-		sb.Append("\x2!\"\x3\x2\x2\x2\"\a\x3\x2\x2\x2#!\x3\x2\x2\x2$)\x5\n\x6\x2");
-		sb.Append("%&\t\x3\x2\x2&(\x5\n\x6\x2\'%\x3\x2\x2\x2(+\x3\x2\x2\x2)\'\x3");
-		sb.Append("\x2\x2\x2)*\x3\x2\x2\x2*\t\x3\x2\x2\x2+)\x3\x2\x2\x2,/\x5\f");
-		sb.Append("\a\x2-.\a\x7F\x2\x2.\x30\x5\x6\x4\x2/-\x3\x2\x2\x2/\x30\x3\x2");
-		sb.Append("\x2\x2\x30\v\x3\x2\x2\x2\x31\x37\x5\xE\b\x2\x32\x33\ar\x2\x2");
-		sb.Append("\x33\x34\x5\x6\x4\x2\x34\x35\as\x2\x2\x35\x37\x3\x2\x2\x2\x36");
-		sb.Append("\x31\x3\x2\x2\x2\x36\x32\x3\x2\x2\x2\x37\r\x3\x2\x2\x2\x38\x39");
-		sb.Append("\x5\x12\n\x2\x39\xF\x3\x2\x2\x2:;\t\x4\x2\x2;\x11\x3\x2\x2\x2");
-		sb.Append("<=\t\x5\x2\x2=\x13\x3\x2\x2\x2\x6!)/\x36");
+		sb.Append("k\x4\x2\t\x2\x4\x3\t\x3\x4\x4\t\x4\x4\x5\t\x5\x4\x6\t\x6\x4");
+		sb.Append("\a\t\a\x4\b\t\b\x4\t\t\t\x4\n\t\n\x4\v\t\v\x4\f\t\f\x4\r\t\r");
+		sb.Append("\x4\xE\t\xE\x4\xF\t\xF\x4\x10\t\x10\x4\x11\t\x11\x3\x2\x3\x2");
+		sb.Append("\x3\x3\x3\x3\x3\x3\a\x3(\n\x3\f\x3\xE\x3+\v\x3\x3\x4\x5\x4.");
+		sb.Append("\n\x4\x3\x4\x3\x4\x3\x5\x3\x5\x3\x5\x3\x6\x3\x6\x3\a\x3\a\x3");
+		sb.Append("\a\x3\a\x3\b\x3\b\x3\b\x3\b\x3\t\x3\t\x3\t\a\t\x42\n\t\f\t\xE");
+		sb.Append("\t\x45\v\t\x3\n\x3\n\x3\n\a\nJ\n\n\f\n\xE\nM\v\n\x3\v\x3\v\x3");
+		sb.Append("\v\x5\vR\n\v\x3\f\x3\f\x3\f\x3\f\x3\f\x3\f\x5\fZ\n\f\x3\r\x3");
+		sb.Append("\r\x3\xE\x3\xE\x3\xE\x5\xE\x61\n\xE\x3\xE\x3\xE\x3\xF\x3\xF");
+		sb.Append("\x3\x10\x3\x10\x3\x11\x3\x11\x3\x11\x2\x2\x12\x2\x4\x6\b\n\f");
+		sb.Append("\xE\x10\x12\x14\x16\x18\x1A\x1C\x1E \x2\a\x13\x2\a\t\v\v\xF");
+		sb.Append("\xF\x1B\x1B\x1E\x1E!!+,..\x35\x35\x37\x38??\x41\x41\x45\x45");
+		sb.Append("KKOP\x66\x66hi\x3\x2xy\x3\x2z{\x4\x2\x83\x84\x8D\x8D\x3\x2j");
+		sb.Append("k\x62\x2\"\x3\x2\x2\x2\x4$\x3\x2\x2\x2\x6-\x3\x2\x2\x2\b\x31");
+		sb.Append("\x3\x2\x2\x2\n\x34\x3\x2\x2\x2\f\x36\x3\x2\x2\x2\xE:\x3\x2\x2");
+		sb.Append("\x2\x10>\x3\x2\x2\x2\x12\x46\x3\x2\x2\x2\x14N\x3\x2\x2\x2\x16");
+		sb.Append("Y\x3\x2\x2\x2\x18[\x3\x2\x2\x2\x1A]\x3\x2\x2\x2\x1C\x64\x3\x2");
+		sb.Append("\x2\x2\x1E\x66\x3\x2\x2\x2 h\x3\x2\x2\x2\"#\t\x2\x2\x2#\x3\x3");
+		sb.Append("\x2\x2\x2$)\x5\x6\x4\x2%&\au\x2\x2&(\x5\x6\x4\x2\'%\x3\x2\x2");
+		sb.Append("\x2(+\x3\x2\x2\x2)\'\x3\x2\x2\x2)*\x3\x2\x2\x2*\x5\x3\x2\x2");
+		sb.Append("\x2+)\x3\x2\x2\x2,.\x5\b\x5\x2-,\x3\x2\x2\x2-.\x3\x2\x2\x2.");
+		sb.Append("/\x3\x2\x2\x2/\x30\x5\n\x6\x2\x30\a\x3\x2\x2\x2\x31\x32\x5\x2");
+		sb.Append("\x2\x2\x32\x33\av\x2\x2\x33\t\x3\x2\x2\x2\x34\x35\x5\x10\t\x2");
+		sb.Append("\x35\v\x3\x2\x2\x2\x36\x37\x5\x10\t\x2\x37\x38\a\x82\x2\x2\x38");
+		sb.Append("\x39\a\x2\x2\x3\x39\r\x3\x2\x2\x2:;\x5\x10\t\x2;<\x5\x1E\x10");
+		sb.Append("\x2<=\x5\x10\t\x2=\xF\x3\x2\x2\x2>\x43\x5\x12\n\x2?@\t\x3\x2");
+		sb.Append("\x2@\x42\x5\x12\n\x2\x41?\x3\x2\x2\x2\x42\x45\x3\x2\x2\x2\x43");
+		sb.Append("\x41\x3\x2\x2\x2\x43\x44\x3\x2\x2\x2\x44\x11\x3\x2\x2\x2\x45");
+		sb.Append("\x43\x3\x2\x2\x2\x46K\x5\x14\v\x2GH\t\x4\x2\x2HJ\x5\x14\v\x2");
+		sb.Append("IG\x3\x2\x2\x2JM\x3\x2\x2\x2KI\x3\x2\x2\x2KL\x3\x2\x2\x2L\x13");
+		sb.Append("\x3\x2\x2\x2MK\x3\x2\x2\x2NQ\x5\x16\f\x2OP\a\x7F\x2\x2PR\x5");
+		sb.Append("\x10\t\x2QO\x3\x2\x2\x2QR\x3\x2\x2\x2R\x15\x3\x2\x2\x2SZ\x5");
+		sb.Append("\x18\r\x2TU\ar\x2\x2UV\x5\x10\t\x2VW\as\x2\x2WZ\x3\x2\x2\x2");
+		sb.Append("XZ\x5\x1A\xE\x2YS\x3\x2\x2\x2YT\x3\x2\x2\x2YX\x3\x2\x2\x2Z\x17");
+		sb.Append("\x3\x2\x2\x2[\\\x5 \x11\x2\\\x19\x3\x2\x2\x2]^\x5\x1C\xF\x2");
+		sb.Append("^`\ar\x2\x2_\x61\x5\x4\x3\x2`_\x3\x2\x2\x2`\x61\x3\x2\x2\x2");
+		sb.Append("\x61\x62\x3\x2\x2\x2\x62\x63\as\x2\x2\x63\x1B\x3\x2\x2\x2\x64");
+		sb.Append("\x65\ai\x2\x2\x65\x1D\x3\x2\x2\x2\x66g\t\x5\x2\x2g\x1F\x3\x2");
+		sb.Append("\x2\x2hi\t\x6\x2\x2i!\x3\x2\x2\x2\t)-\x43KQY`");
 	    return sb.ToString();
 	}
 

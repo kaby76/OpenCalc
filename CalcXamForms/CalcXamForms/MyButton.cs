@@ -3,7 +3,7 @@ using Xamarin.Forms;
 
 namespace CalcXamForms
 {
-    public class MyButton : Label
+    public class MyButton : Forms9Patch.Label
     {
         public MyButton()
         {
@@ -27,7 +27,7 @@ namespace CalcXamForms
             set { SetValue(CommandProperty, value); }
         }
 
-        private FormattedString _text;
+        private string _text;
         public string Fext
         {
             get
@@ -36,17 +36,8 @@ namespace CalcXamForms
             }
             set
             {
-                FormattedString fs = new FormattedString();
-                fs.Spans.Add(
-                    new Span()
-                    {
-                        Text = value,
-                        BackgroundColor = Color.Gray,
-                        ForegroundColor = Color.White,
-                        FontSize = 30
-                     });
-                _text = fs;
-                base.FormattedText = fs;
+                _text = value;
+                base.HtmlText = $@"<font size=""5"" >{_text}</font>";
                 base.HorizontalTextAlignment = TextAlignment.Center;
                 base.VerticalTextAlignment = TextAlignment.Center;
             }

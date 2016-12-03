@@ -35,6 +35,66 @@ using ParserRuleContext = Antlr4.Runtime.ParserRuleContext;
 [System.CLSCompliant(false)]
 public partial class calculatorBaseListener : IcalculatorListener {
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.identifier"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterIdentifier([NotNull] calculatorParser.IdentifierContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.identifier"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitIdentifier([NotNull] calculatorParser.IdentifierContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.argument_list"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterArgument_list([NotNull] calculatorParser.Argument_listContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.argument_list"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitArgument_list([NotNull] calculatorParser.Argument_listContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.argument"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterArgument([NotNull] calculatorParser.ArgumentContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.argument"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitArgument([NotNull] calculatorParser.ArgumentContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.argument_name"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterArgument_name([NotNull] calculatorParser.Argument_nameContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.argument_name"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitArgument_name([NotNull] calculatorParser.Argument_nameContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.argument_value"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterArgument_value([NotNull] calculatorParser.Argument_valueContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.argument_value"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitArgument_value([NotNull] calculatorParser.Argument_valueContext context) { }
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="calculatorParser.expressionResult"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
@@ -118,6 +178,30 @@ public partial class calculatorBaseListener : IcalculatorListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitScientific([NotNull] calculatorParser.ScientificContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.func"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterFunc([NotNull] calculatorParser.FuncContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.func"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitFunc([NotNull] calculatorParser.FuncContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.funcname"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterFuncname([NotNull] calculatorParser.FuncnameContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.funcname"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitFuncname([NotNull] calculatorParser.FuncnameContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="calculatorParser.relop"/>.
 	/// <para>The default implementation does nothing.</para>
