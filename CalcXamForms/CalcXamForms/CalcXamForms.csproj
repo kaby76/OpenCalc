@@ -58,13 +58,14 @@
     </Compile>
     <Compile Include="PageCalcViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VisitorCalc.cs" />
+    <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Visitor.cs" />
     <Compile Include="RootPage.xaml.cs">
       <DependentUpon>RootPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View1.cs" />
-    <Compile Include="VisitorCalc.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="calculator.g4" />
@@ -83,6 +84,10 @@
   <ItemGroup>
     <Reference Include="Antlr4.Runtime">
       <HintPath>.\Antlr4.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="ExifLib, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ExifLib.PCL.1.0.1\lib\portable-net45+sl50+win+WindowsPhoneApp81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10\ExifLib.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Forms9Patch, Version=0.9.11.14480, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Forms9Patch.0.9.13.5\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Forms9Patch.dll</HintPath>

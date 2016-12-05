@@ -197,7 +197,13 @@ namespace CalcXamForms
                 _calculation_history.Insert(0, CurrentView);
             });
 
-            _bsin_command = new Command((nothing) => InOperator("sin("));
+            _bsin_command = new Command((nothing) => InOperator("sin "));
+            _bcos_command = new Command((nothing) => InOperator("cos "));
+            _btan_command = new Command((nothing) => InOperator("tan "));
+            _barcsin_command = new Command((nothing) => InOperator("arcsin "));
+            _barccos_command = new Command((nothing) => InOperator("arccos "));
+            _barctan_command = new Command((nothing) => InOperator("arctan "));
+            _bexp_command = new Command((nothing) => InOperator("exp "));
         }
 
         private calculatorParser Parser(string plain_old_command)
@@ -483,6 +489,55 @@ namespace CalcXamForms
         {
             get { return _bsin_command; }
             set { _bsin_command = value; }
+        }
+
+        private ICommand _bcos_command;
+        public ICommand BCos
+        {
+            get { return _bcos_command; }
+            set { _bcos_command = value; }
+        }
+
+        private ICommand _btan_command;
+        public ICommand BTan
+        {
+            get { return _btan_command; }
+            set { _btan_command = value; }
+        }
+
+        private ICommand _barcsin_command;
+        public ICommand BArcSin
+        {
+            get { return _barcsin_command; }
+            set { _barcsin_command = value; }
+        }
+
+        private ICommand _barccos_command;
+        public ICommand BArcCos
+        {
+            get { return _barccos_command; }
+            set { _barccos_command = value; }
+        }
+
+        private ICommand _barctan_command;
+        public ICommand BArcTan
+        {
+            get { return _barctan_command; }
+            set { _barctan_command = value; }
+        }
+
+        private ICommand _bexp_command;
+        public ICommand BExp
+        {
+            get { return _bexp_command; }
+            set { _bexp_command = value; }
+        }
+
+        private ICommand _bln_command;
+        public ICommand BLn
+        {
+            get { return _bln_command; }
+            set { _bln_command = value; }
         }
     }
 

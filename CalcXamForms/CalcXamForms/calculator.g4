@@ -1,8 +1,21 @@
 grammar calculator;
 
+
+
+expressionResult
+   : expression ASSIGNMENT EOF
+   ;
+
+
 //B.2 Syntactic grammar
 
 //B.2.1 Basic concepts
+//namespace_name 
+//	: namespace_or_type_name
+//	;
+//type_name 
+//	: namespace_or_type_name
+//	;
 
 identifier:
      IDENTIFIER 
@@ -30,6 +43,107 @@ identifier:
     | ARGLIST
     ;
 
+//namespace_or_type_name 
+//  : ( identifier type_argument_list_opt
+//    | qualified_alias_member
+//    ) (DOT identifier type_argument_list_opt )*
+//  ;
+
+///** represents type_argument_list? */
+type_argument_list_opt
+//  : type_argument_list
+//  | /* empty */
+  : /* empty */
+  ;
+
+//B.2.2 Types
+//type 
+//  : base_type (INTERR | rank_specifier | STAR)*
+//  ;
+// added by chw
+//base_type
+//  : simple_type
+//  | class_type  // represents types: enum, class, interface, delegate, type_parameter
+//  | VOID STAR
+//  ;
+
+///** primitive types */
+//simple_type 
+//	: numeric_type
+//	| BOOL
+//	;
+//numeric_type 
+//	: integral_type
+//	| floating_point_type
+//	| DECIMAL
+//	;
+//integral_type 
+//	: SBYTE
+//	| BYTE
+//	| SHORT
+//	| USHORT
+//	| INT
+//	| UINT
+//	| LONG
+//	| ULONG
+//	| CHAR
+//	;
+//floating_point_type 
+//	: FLOAT
+//	| DOUBLE
+//	;
+//nullable_type 
+//	: non_nullable_value_type INTERR
+//	;
+
+// type without INTERR; undocumented but VS checks for this constraint
+//non_nullable_value_type 
+//	: base_type
+//    ( rank_specifier
+//    | STAR
+//    )*
+//	;
+
+//reference_type 
+//  : simple_type ((STAR | INTERR)* rank_specifier)* (STAR | INTERR)* rank_specifier 
+//  | class_type ((STAR | INTERR)* rank_specifier)*
+//  | VOID STAR ((STAR | INTERR)* rank_specifier)* (STAR | INTERR)* rank_specifier
+//  ;
+///** type_name, OBJECT, STRING */
+//class_type 
+//	: type_name
+//	| OBJECT
+//	| dynamic_contextual_keyword
+//	| STRING
+//	;
+///** type_name */
+//interface_type 
+//	: type_name
+//	;
+///** type_name */
+//delegate_type 
+//	: type_name
+//	;
+//type_argument_list 
+//	: LT type_arguments GT
+//	;
+//type_arguments 
+//	: type_argument ( COMMA type_argument)*
+//	;
+//type_argument 
+//	: type
+//	;
+// added by chw
+//type_void
+//  : VOID
+//  ;
+
+//B.2.3 Variables
+///** expression */
+variable_reference 
+	: expression
+	;
+
 //B.2.4 Expressions
 argument_list 
 	: argument ( COMMA argument)*
@@ -45,56 +159,679 @@ argument_value
 //	| REF variable_reference
 //	| OUT variable_reference
 	;
+primary_expression 
+  : pe=primary_expression_start  bracket_expression* (
+//        ( member_access2
+//		    | method_invocation2
+        ( method_invocation2
+		    | OP_INC
+		    | OP_DEC
+		    | OP_PTR identifier 
+		    )
+		    bracket_expression*
+		)*
+  ;
+primary_expression_start
+  : literal
+  | simple_name
+  | parenthesized_expression
+  | predefined_type // member_access
+//  | qualified_alias_member  // member_access
+  | this_access
+//  | base_access
+//  | NEW ( type ( object_creation_expression2
+//               | object_or_collection_initializer
+//               | OPEN_BRACKET expression_list CLOSE_BRACKET rank_specifiers? array_initializer?
+//               | rank_specifiers array_initializer
+//               )
+//        | anonymous_object_initializer
+//        | rank_specifier array_initializer
+//        )
+//  | typeof_expression
+  | checked_expression
+  | unchecked_expression
+//  | default_value_expression
+//  | anonymous_method_expression
+//  | sizeof_expression
+  ;
+bracket_expression
+  : OPEN_BRACKET expression_list CLOSE_BRACKET
+  ;
+///** identifier type_argument_list? */
+simple_name 
+	: identifier type_argument_list_opt
+	;
+///** OPEN_PARENS expression CLOSE_PARENS */
+parenthesized_expression 
+	: OPEN_PARENS expression CLOSE_PARENS
+	;
+///** primary_expression */
+member_access 
+  : primary_expression
+  ;
+predefined_type 
+	: BOOL
+	| BYTE
+	| CHAR
+	| DECIMAL
+	| DOUBLE
+	| FLOAT
+	| INT
+	| LONG
+	| OBJECT
+	| SBYTE
+	| SHORT
+	| STRING
+	| UINT
+	| ULONG
+	| USHORT
+	;
 
-expressionResult
-   : expression ASSIGNMENT EOF
-   ;
+expression_list 
+	: expression ( COMMA expression)*
+	;
+this_access 
+	: THIS
+	;
+///** BASE and more */
+//base_access
+//	: BASE DOT identifier type_argument_list_opt
+//	| BASE OPEN_BRACKET expression_list CLOSE_BRACKET
+//	;
+///** NEW type (OPEN_PARENS ... | OPEN_BRACE ...) */
+//object_creation_expression 
+//  : NEW type ( OPEN_PARENS argument_list? CLOSE_PARENS object_or_collection_initializer?
+//             | object_or_collection_initializer
+//             )
+//  ;
+///** starts with OPEN_BRACE */
+object_or_collection_initializer 
+	: object_initializer
+	| collection_initializer
+	;
 
-equation
-   : expression relop expression
-   ;
+///** starts with OPEN_BRACE */
+object_initializer 
+  : OPEN_BRACE CLOSE_BRACE
+  | OPEN_BRACE member_initializer_list COMMA? CLOSE_BRACE
+  ;
+member_initializer_list 
+	: member_initializer ( COMMA member_initializer)*
+	;
+member_initializer 
+	: identifier ASSIGNMENT initializer_value
+	;
+initializer_value 
+	: expression
+	| object_or_collection_initializer
+	;
+///** starts with OPEN_BRACE */
+collection_initializer 
+  : OPEN_BRACE element_initializer_list COMMA? CLOSE_BRACE
+  ;
+element_initializer_list 
+	: element_initializer ( COMMA element_initializer)*
+	;
+element_initializer 
+	: non_assignment_expression
+	| OPEN_BRACE expression_list CLOSE_BRACE
+	;
+//array_creation_expression 
+//  : NEW ( array_type array_initializer
+//        | non_array_type OPEN_BRACKET expression_list CLOSE_BRACKET rank_specifiers? array_initializer?
+//        | rank_specifier array_initializer
+//        )
+//  ;
+///** NEW delegate_type OPEN_PARENS expression CLOSE_PARENS */
+//delegate_creation_expression 
+//	: NEW delegate_type OPEN_PARENS expression CLOSE_PARENS
+//	;
+///** starts with NEW OPEN_BRACE */
+//anonymous_object_creation_expression 
+//	: NEW anonymous_object_initializer
+//	;
+///** starts with OPEN_BRACE */
+//anonymous_object_initializer 
+//  : OPEN_BRACE CLOSE_BRACE
+//  | OPEN_BRACE member_declarator_list COMMA? CLOSE_BRACE
+//  ;
+member_declarator_list 
+	: member_declarator ( COMMA member_declarator)*
+	;
+member_declarator 
+  : primary_expression
+  | identifier ASSIGNMENT expression
+  ;
+//typeof_expression 
+//	: TYPEOF OPEN_PARENS
+//	  ( unbound_type_name CLOSE_PARENS
+//	  | type CLOSE_PARENS
+//	  | VOID CLOSE_PARENS
+//	  )
+//	;
+unbound_type_name 
+  : identifier ( generic_dimension_specifier?
+               | DOUBLE_COLON identifier generic_dimension_specifier?
+               )
+    (DOT identifier generic_dimension_specifier?)*
+  ;
+generic_dimension_specifier 
+	: LT commas? GT
+	;
+commas 
+	: COMMA ( COMMA )*
+	;
+checked_expression 
+	: CHECKED OPEN_PARENS expression CLOSE_PARENS
+	;
+unchecked_expression 
+	: UNCHECKED OPEN_PARENS expression CLOSE_PARENS
+	;
+//default_value_expression 
+//	: DEFAULT OPEN_PARENS type CLOSE_PARENS
+//	;
 
-expression
-   : multiplyingExpression ((PLUS | MINUS) multiplyingExpression)*
-   ;
+unary_expression 
+//	: cast_expression
+//	| primary_expression
+	: primary_expression
+	| PLUS unary_expression
+	| MINUS unary_expression
+	| BANG unary_expression
+	| TILDE unary_expression
+	| pre_increment_expression
+	| pre_decrement_expression
+//	| unary_expression_unsafe
+	;
+// The sequence of tokens is correct grammar for a type, and the token immediately
+// following the closing parentheses is the token TILDE, the token BANG, the token OPEN_PARENS,
+// an identifier, a literal, or any keyword except AS and IS.
+//scan_for_cast_generic_precedence
+//  : OPEN_PARENS type CLOSE_PARENS cast_disambiguation_token
+//  ;
 
-multiplyingExpression
-   : powExpression ((STAR | DIV) powExpression)*
-   ;
+// One of these tokens must follow a valid cast in an expression, in order to
+// eliminate a grammar ambiguity.
+cast_disambiguation_token
+  : (TILDE | BANG | OPEN_PARENS | identifier | literal | ABSTRACT | BASE | BOOL | BREAK | BYTE | CASE | CATCH
+    | CHAR | CHECKED | CLASS | CONST | CONTINUE | DECIMAL | DEFAULT | DELEGATE | DO | DOUBLE | ELSE | ENUM
+    | EVENT | EXPLICIT | EXTERN | FINALLY | FIXED | FLOAT | FOR | FOREACH | GOTO | IF | IMPLICIT | IN | INT
+    | INTERFACE | INTERNAL | LOCK | LONG | NAMESPACE | NEW | OBJECT | OPERATOR | OUT | OVERRIDE | PARAMS
+    | PRIVATE | PROTECTED | PUBLIC | READONLY | REF | RETURN | SBYTE | SEALED | SHORT | SIZEOF | STACKALLOC
+    | STATIC | STRING | STRUCT | SWITCH | THIS | THROW | TRY | TYPEOF | UINT | ULONG | UNCHECKED | UNSAFE
+    | USHORT | USING | VIRTUAL | VOID | VOLATILE | WHILE
+    )
+  ;
 
-powExpression
-   : atom (CARET expression)?
-   ;
+pre_increment_expression 
+	: OP_INC unary_expression
+	;
+pre_decrement_expression 
+	: OP_DEC unary_expression
+	;
+//cast_expression 
+//	: OPEN_PARENS type CLOSE_PARENS unary_expression
+//	;
+multiplicative_expression 
+	: unary_expression ( ( STAR  unary_expression ) | ( DIV  unary_expression ) | ( PERCENT  unary_expression ) )*
+	;
+additive_expression 
+	: multiplicative_expression ( ( PLUS  multiplicative_expression ) | ( MINUS  multiplicative_expression ) )*
+	;
+shift_expression 
+	: additive_expression ( ( OP_LEFT_SHIFT  additive_expression ) | ( right_shift  additive_expression ) )*
+	;
+relational_expression
+  : /* shift_expression
+	|*/ shift_expression ( LT shift_expression
+                     | GT shift_expression
+                     | OP_LE shift_expression
+                     | OP_GE shift_expression
+//                     | IS isType
+//                     | AS type
+	                   )*
+	;
+// Syntactic predicate rule to disambiguate  "a<b,c>d" and a<b,c>(0)"
+// added by chw
+//scan_for_shift_generic_precedence
+//  : identifier LT type (COMMA type)* GT shift_disambiguation_token
+//  ;
+// One of these tokens must follow a valid generic in an expression, in order to
+// eliminate a grammar ambiguity.
+// added by chw
+shift_disambiguation_token
+  : OPEN_PARENS | CLOSE_PARENS | CLOSE_BRACKET | COLON | SEMICOLON | COMMA | DOT | INTERR | OP_EQ | OP_NE | GT
+  ;
+// added by chw
+//isType
+//  : non_nullable_value_type ( INTERR)?
+//  ;
+is_disambiguation_token
+  : CLOSE_PARENS | OP_AND | OP_OR| INTERR
+  ;
+equality_expression 
+	: relational_expression ( ( OP_EQ  relational_expression ) | ( OP_NE  relational_expression ) )*
+	;
+and_expression 
+	: equality_expression ( AMP equality_expression)*
+	;
+exclusive_or_expression 
+	: and_expression ( CARET and_expression)*
+	;
+inclusive_or_expression 
+	: exclusive_or_expression ( BITWISE_OR exclusive_or_expression)*
+	;
+conditional_and_expression 
+	: inclusive_or_expression ( OP_AND inclusive_or_expression)*
+	;
+conditional_or_expression 
+	: conditional_and_expression ( OP_OR conditional_and_expression)*
+	;
+null_coalescing_expression 
+  : conditional_or_expression (OP_COALESCING null_coalescing_expression)?
+  ;
+///** starts with unary_expression */
+conditional_expression 
+  : null_coalescing_expression (INTERR expression COLON expression)?
+  ;
+///** starts with OPEN_PARENS or identifier */
+//lambda_expression 
+//	: anonymous_function_signature right_arrow anonymous_function_body
+//	;
+///** starts with DELEGATE */
+//anonymous_method_expression 
+//	: DELEGATE explicit_anonymous_function_signature? block
+//	;
+///** starts with OPEN_PARENS or identifier */
+//anonymous_function_signature 
+//  : OPEN_PARENS CLOSE_PARENS
+//  | OPEN_PARENS explicit_anonymous_function_parameter_list CLOSE_PARENS
+//  | OPEN_PARENS implicit_anonymous_function_parameter_list CLOSE_PARENS
+//  | implicit_anonymous_function_parameter
+//  ;
+//explicit_anonymous_function_signature 
+//	: OPEN_PARENS explicit_anonymous_function_parameter_list? CLOSE_PARENS
+//	;
+//explicit_anonymous_function_parameter_list 
+//	: explicit_anonymous_function_parameter ( COMMA explicit_anonymous_function_parameter)*
+//	;
+//explicit_anonymous_function_parameter 
+//	: anonymous_function_parameter_modifier? type identifier
+//	;
+//anonymous_function_parameter_modifier 
+//	: REF
+//	| OUT
+//	;
+//implicit_anonymous_function_signature 
+//	: OPEN_PARENS implicit_anonymous_function_parameter_list? CLOSE_PARENS
+//	| implicit_anonymous_function_parameter
+//	;
+//implicit_anonymous_function_parameter_list 
+//	: implicit_anonymous_function_parameter ( COMMA implicit_anonymous_function_parameter)*
+//	;
+///** identifier */
+//implicit_anonymous_function_parameter 
+//	: identifier
+//	;
+//anonymous_function_body 
+//	: expression
+//	| block
+//	;
+///** starts with from_contextual_keyword */
+//query_expression 
+//	: from_clause query_body
+//	;
+//from_clause 
+//	: from_contextual_keyword type? identifier IN expression
+//	;
+//query_body 
+//  : query_body_clauses? select_or_group_clause query_continuation?
+//  ;
+//query_body_clauses 
+//	: query_body_clause ( query_body_clause )*
+//	;
+//query_body_clause 
+//  : from_clause
+//  | let_clause
+//  | where_clause
+//  | combined_join_clause
+//  | orderby_clause
+//  ;
+//let_clause 
+//	: let_contextual_keyword identifier ASSIGNMENT expression
+//	;
+//where_clause 
+//	: where_contextual_keyword boolean_expression
+//	;
+//join_clause 
+//	: join_contextual_keyword type? identifier IN expression on_contextual_keyword expression equals_contextual_keyword expression
+//	;
+//join_into_clause 
+//	: join_contextual_keyword type? identifier IN expression on_contextual_keyword expression equals_contextual_keyword expression into_contextual_keyword identifier
+//	;
+//// added by chw
+//combined_join_clause
+//  : join_contextual_keyword type? identifier IN expression on_contextual_keyword expression equals_contextual_keyword expression (into_contextual_keyword identifier)?
+//  ;
+//orderby_clause 
+//	: orderby_contextual_keyword orderings
+//	;
+//orderings 
+//	: ordering ( COMMA  ordering )*
+//	;
+//ordering 
+//	: expression ordering_direction?
+//	;
+//ordering_direction 
+//	: ascending_contextual_keyword
+//	| descending_contextual_keyword
+//	;
+//select_or_group_clause 
+//	: select_clause
+//	| group_clause
+//	;
+//select_clause 
+//	: select_contextual_keyword expression
+//	;
+//group_clause 
+//	: group_contextual_keyword expression by_contextual_keyword expression
+//	;
+///** starts with into_contextual_keyword */
+//query_continuation 
+//	: into_contextual_keyword identifier query_body
+//	;
 
-atom
-   : scientific
-//   | variable
-   | OPEN_PARENS expression CLOSE_PARENS
-   | func
-   ;
+///** starts with unary_expression */
+assignment 
+	: unary_expression assignment_operator expression
+	;
+assignment_operator 
+	: ASSIGNMENT
+	| OP_ADD_ASSIGNMENT
+	| OP_SUB_ASSIGNMENT
+	| OP_MULT_ASSIGNMENT
+	| OP_DIV_ASSIGNMENT
+	| OP_MOD_ASSIGNMENT
+	| OP_AND_ASSIGNMENT
+	| OP_OR_ASSIGNMENT
+	| OP_XOR_ASSIGNMENT
+	| OP_LEFT_SHIFT_ASSIGNMENT
+//	| right_shift_assignment
+	;
+expression 
+	: assignment
+	| non_assignment_expression
+	;
+non_assignment_expression
+//	: lambda_expression
+//	| query_expression
+//	| conditional_expression
+	: conditional_expression
+	;
+constant_expression 
+	: expression
+	;
+boolean_expression 
+	: expression
+	;
 
-scientific
-   : number
-   ;
+//B.2.5 Statements
+///** starts with identifier */
+variable_declarators
+	: variable_declarator ( COMMA  variable_declarator )*
+	;
+variable_declarator 
+	: identifier
+	| identifier ASSIGNMENT variable_initializer
+	;
+variable_initializer 
+	: expression
+	| array_initializer
+	;
 
-func
-   : funcname OPEN_PARENS argument_list? CLOSE_PARENS
-   ;
+//B.2.9 Arrays
+///** non_array_type rank_specifiers */
+//array_type 
+//	: base_type ((STAR | INTERR)* rank_specifier)+
+//	;
+///** type */
+//non_array_type 
+//	: base_type (rank_specifier | INTERR | STAR)*
+//	;
+///** starts with OPEN_BRACKET */
+rank_specifiers 
+  : rank_specifier+
+  ;
+///** OPEN_BRACKET dim_separators? CLOSE_BRACKET */
+rank_specifier 
+	: OPEN_BRACKET dim_separators? CLOSE_BRACKET
+	;
+dim_separators 
+	: COMMA ( COMMA )*
+	;
+///** starts with OPEN_BRACE */
+array_initializer 
+  : OPEN_BRACE CLOSE_BRACE
+  | OPEN_BRACE variable_initializer_list COMMA? CLOSE_BRACE
+  ;
+variable_initializer_list 
+	: variable_initializer ( COMMA  variable_initializer )*
+	;
 
-funcname
-   : IDENTIFIER
-   ;
+//B.3 Grammar extensions for unsafe code
 
-relop
-   : OP_EQ
-   | GT
-   | LT
-   ;
 
-number
-   : INTEGER_LITERAL
-   | REAL_LITERAL
-   ;
+from_contextual_keyword: FROM;
+let_contextual_keyword: LET;
+where_contextual_keyword: WHERE;
+join_contextual_keyword: JOIN;
+on_contextual_keyword: ON;
+equals_contextual_keyword: EQUALS;
+into_contextual_keyword: INTO;
+orderby_contextual_keyword: ORDERBY;
+ascending_contextual_keyword: ASCENDING;
+descending_contextual_keyword: DESCENDING;
+select_contextual_keyword: SELECT;
+group_contextual_keyword: GROUP;
+by_contextual_keyword: BY;
+partial_contextual_keyword: PARTIAL;
+alias_contextual_keyword: ALIAS;
+yield_contextual_keyword: YIELD;
+get_contextual_keyword: GET;
+set_contextual_keyword: SET;
+add_contextual_keyword: ADD;
+remove_contextual_keyword: REMOVE;
+dynamic_contextual_keyword: DYNAMIC;
+arglist: ARGLIST;
+right_arrow
+  : first=ASSIGNMENT second=GT {$first.index + 1 == $second.index}? // Nothing between the tokens?
+  ;
+right_shift
+  : first=GT second=GT {$first.index + 1 == $second.index}? // Nothing between the tokens?
+  ;
+right_shift_assignment
+  : first=GT second=OP_GE {$first.index + 1 == $second.index}? // Nothing between the tokens?
+  ;
+literal
+  : boolean_literal
+  | INTEGER_LITERAL
+  | REAL_LITERAL
+  | CHARACTER_LITERAL
+  | STRING_LITERAL
+  | NULL
+  ;
+boolean_literal
+  : TRUE
+  | FALSE
+  ;
+
+//B.1.7 Keywords
+keyword
+  : ABSTRACT
+  | AS
+  | BASE
+  | BOOL
+  | BREAK
+  | BYTE
+  | CASE
+  | CATCH
+  | CHAR
+  | CHECKED
+  | CLASS
+  | CONST
+  | CONTINUE
+  | DECIMAL
+  | DEFAULT
+  | DELEGATE
+  | DO
+  | DOUBLE
+  | ELSE
+  | ENUM
+  | EVENT
+  | EXPLICIT
+  | EXTERN
+  | FALSE
+  | FINALLY
+  | FIXED
+  | FLOAT
+  | FOR
+  | FOREACH
+  | GOTO
+  | IF
+  | IMPLICIT
+  | IN
+  | INT
+  | INTERFACE
+  | INTERNAL
+  | IS
+  | LOCK
+  | LONG
+  | NAMESPACE
+  | NEW
+  | NULL
+  | OBJECT
+  | OPERATOR
+  | OUT
+  | OVERRIDE
+  | PARAMS
+  | PRIVATE
+  | PROTECTED
+  | PUBLIC
+  | READONLY
+  | REF
+  | RETURN
+  | SBYTE
+  | SEALED
+  | SHORT
+  | SIZEOF
+  | STACKALLOC
+  | STATIC
+  | STRING
+  | STRUCT
+  | SWITCH
+  | THIS
+  | THROW
+  | TRUE
+  | TRY
+  | TYPEOF
+  | UINT
+  | ULONG
+  | UNCHECKED
+  | UNSAFE
+  | USHORT
+  | USING
+  | VIRTUAL
+  | VOID
+  | VOLATILE
+  | WHILE
+  ;
+// -------------------- extra rules for modularization --------------------------------
+
+//class_definition
+//  : CLASS identifier type_parameter_list? class_base? type_parameter_constraints_clauses?
+//      class_body SEMICOLON?
+//  ;
+//struct_definition
+//  : STRUCT identifier type_parameter_list? struct_interfaces? type_parameter_constraints_clauses?
+//      struct_body SEMICOLON?
+//  ;
+//interface_definition
+//  : INTERFACE identifier variant_type_parameter_list? interface_base?
+//      type_parameter_constraints_clauses? interface_body SEMICOLON?
+//  ;
+//enum_definition
+//  : ENUM identifier enum_base? enum_body SEMICOLON?
+//  ;
+//delegate_definition
+//  : DELEGATE return_type identifier variant_type_parameter_list? OPEN_PARENS
+//      formal_parameter_list? CLOSE_PARENS type_parameter_constraints_clauses? SEMICOLON
+//  ;
+//event_declaration2
+//  : EVENT type 
+//      ( variable_declarators SEMICOLON
+//      | member_name OPEN_BRACE event_accessor_declarations CLOSE_BRACE
+//      )
+//  ;
+//field_declaration2
+//  : variable_declarators SEMICOLON
+//  ;
+//property_declaration2
+//  : member_name OPEN_BRACE accessor_declarations CLOSE_BRACE
+//  ;
+//constant_declaration2
+//  : CONST type constant_declarators SEMICOLON
+//  ;
+//indexer_declaration2
+//  : THIS OPEN_BRACKET formal_parameter_list CLOSE_BRACKET
+//      OPEN_BRACE accessor_declarations CLOSE_BRACE
+//  ;
+//destructor_definition
+//  : TILDE identifier OPEN_PARENS CLOSE_PARENS destructor_body
+//  ;
+//constructor_declaration2
+//  : identifier OPEN_PARENS formal_parameter_list? CLOSE_PARENS constructor_initializer? body
+//  ;
+//method_declaration2
+//  : method_member_name type_parameter_list? OPEN_PARENS formal_parameter_list? CLOSE_PARENS
+//      type_parameter_constraints_clauses? method_body
+//  ;
+
+// added by chw to allow detection of type parameters for methods
+//method_member_name
+//  : method_member_name2
+//  ;
+//method_member_name2
+//  : ( identifier
+//    | identifier DOUBLE_COLON identifier
+//    ) (type_argument_list_opt DOT identifier)*
+//  ;
+//operator_declaration2
+//  : OPERATOR overloadable_operator OPEN_PARENS type identifier
+//         (COMMA type identifier)? CLOSE_PARENS operator_body
+//  ;
+//interface_method_declaration2
+//  : identifier type_parameter_list? OPEN_PARENS formal_parameter_list? CLOSE_PARENS type_parameter_constraints_clauses? SEMICOLON
+//  ;
+//interface_property_declaration2
+//  : identifier OPEN_BRACE interface_accessors CLOSE_BRACE
+//  ;
+//interface_event_declaration2
+//  : EVENT type identifier SEMICOLON
+//  ;
+//interface_indexer_declaration2
+//  : THIS OPEN_BRACKET formal_parameter_list CLOSE_BRACKET OPEN_BRACE interface_accessors CLOSE_BRACE
+//  ;
+///** starts with DOT identifier */
+//member_access2
+//  : DOT identifier type_argument_list_opt
+//  ;
+method_invocation2
+  : OPEN_PARENS argument_list? CLOSE_PARENS
+  | primary_expression_start
+  ;
+object_creation_expression2
+  : OPEN_PARENS argument_list? CLOSE_PARENS object_or_collection_initializer?
+  ;
 
 //=========================
 // LEXER

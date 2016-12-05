@@ -4,6 +4,7 @@ using Xamarin.Forms;
 namespace CalcXamForms
 {
     public class MyButton : Forms9Patch.Label
+    //public class MyButton : WebView
     {
         public MyButton()
         {
@@ -37,7 +38,15 @@ namespace CalcXamForms
             set
             {
                 _text = value;
+
+                //var htmlSource = new HtmlWebViewSource();
+                //htmlSource.Html = $@"<html><body><font size=""5"" >{_text}</font></body></html>";
+                //this.Source = htmlSource;
+                //this.HeightRequest = 20;
+                //this.WidthRequest = 20;
+
                 base.HtmlText = $@"<font size=""5"" >{_text}</font>";
+                base.HtmlText = $@"<html><body><font size=""5"" >{_text}</font></body></html>";
                 base.HorizontalTextAlignment = TextAlignment.Center;
                 base.VerticalTextAlignment = TextAlignment.Center;
             }

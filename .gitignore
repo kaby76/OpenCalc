@@ -17,3 +17,4 @@ CalcXamForms/CalcXamForms.iOS/obj/
 *.mdb
 *.dll
 packages/
+*.class
