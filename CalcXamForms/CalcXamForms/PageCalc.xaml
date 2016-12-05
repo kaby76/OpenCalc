@@ -69,6 +69,11 @@
           <calcXamForms:MyButton BackgroundColor="Gray" Fext="Cos&lt;sup&gt;-1&lt;/sup&gt;" Grid.Column="1" Grid.Row="5" Command="{Binding BACos}" />
           <calcXamForms:MyButton BackgroundColor="Gray" Fext="Tan&lt;sup&gt;-1&lt;/sup&gt;" Grid.Column="2" Grid.Row="5" Command="{Binding BBATan}" />
           <calcXamForms:MyButton BackgroundColor="Gray" Fext="ln" Grid.Column="3" Grid.Row="5" Command="{Binding BLn}" />
+
+          <calcXamForms:MyButton BackgroundColor="Gray" Fext="1/x" Grid.Column="0" Grid.Row="6" Command="{Binding BInv}" />
+          <calcXamForms:MyButton BackgroundColor="Gray" Fext="Pow" Grid.Column="1" Grid.Row="6" Command="{Binding BPow}" />
+          <calcXamForms:MyButton BackgroundColor="Gray" Fext="(" Grid.Column="2" Grid.Row="6" Command="{Binding BOP}" />
+          <calcXamForms:MyButton BackgroundColor="Gray" Fext=")" Grid.Column="3" Grid.Row="6" Command="{Binding BCP}" />
         </Grid>
       </ScrollView>
       

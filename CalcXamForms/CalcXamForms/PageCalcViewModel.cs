@@ -27,7 +27,27 @@ namespace CalcXamForms
         private Label _current_view = null;
         private string _result;
         private ContentPage _page_calc;
-        private ICommand _on_tap_command;
+        private ICommand _on_tap_command = new Command(async (o) =>
+        {
+            Label label = o as Label;
+            if (label != null)
+            {
+                int found = _singleton._calculation_history.IndexOf(label);
+                if (found< 0)
+                    return;
+                else if (found > 0)
+                {
+                    _singleton.CurrentView = new Label() { FormattedText = label.FormattedText.Copy()};
+                    _singleton._calculation_history.Insert(0, _singleton.CurrentView);
+                }
+                else
+                {
+                    _singleton.CurrentView = label;
+                }
+                EditorPopup page = new EditorPopup(_singleton);
+                await _singleton._page_calc.Navigation.PushPopupAsync(page);
+            }
+        });
         public ICommand OnTap
         {
             get
@@ -39,7 +59,6 @@ namespace CalcXamForms
                 _on_tap_command = value;
             }
         }
-
         public FormattedString Result
         {
             get
@@ -51,7 +70,7 @@ namespace CalcXamForms
                     new Span()
                     {
                         Text = "result",
-                        FontSize = 10,
+                        FontSize = 20,
                         FontAttributes = FontAttributes.Bold
                     }
                     );
@@ -68,7 +87,7 @@ namespace CalcXamForms
                     new Span
                     {
                         Text = result,
-                        FontSize = 20,
+                        FontSize = 40,
                         FontAttributes = FontAttributes.Bold
                     }
                     );
@@ -79,7 +98,6 @@ namespace CalcXamForms
                 NotifyPropertyChanged();
             }
         }
-
         private FormattedString BuildCommand(string str, int error)
         {
             string p1 = str.Substring(0, error);
@@ -104,7 +122,6 @@ namespace CalcXamForms
                 );
             return fs;
         }
-
         public ObservableCollection<Label> Command
         {
             get
@@ -127,7 +144,6 @@ namespace CalcXamForms
                 _current_view = value;
             }
         }
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         // This method is called by the Set accessor of each property.
@@ -151,59 +167,6 @@ namespace CalcXamForms
             _page_calc = page_calc;
             CurrentView = new Label() {FormattedText = new FormattedString()};
             _calculation_history.Add(CurrentView);
-            _on_tap_command = new Command(async (o) =>
-            {
-                Label label = o as Label;
-                if (label != null)
-                {
-                    int found = _calculation_history.IndexOf(label);
-                    if (found < 0)
-                        return;
-                    else if (found > 0)
-                    {
-                        CurrentView = new Label() {FormattedText = label.FormattedText.Copy()};
-                        _calculation_history.Insert(0, CurrentView);
-                    }
-                    else
-                    {
-                        CurrentView = label;
-                    }
-                    EditorPopup page = new EditorPopup(this);
-                    await _page_calc.Navigation.PushPopupAsync(page);
-                }
-            });
-
-            _bdot_command = new Command((nothing) => InDigit("."));
-            _b0_command = new Command((nothing) => InDigit("0"));
-            _b1_command = new Command((nothing) => InDigit("1"));
-            _b2_command = new Command((nothing) => InDigit("2"));
-            _b3_command = new Command((nothing) => InDigit("3"));
-            _b4_command = new Command((nothing) => InDigit("4"));
-            _b5_command = new Command((nothing) => InDigit("5"));
-            _b6_command = new Command((nothing) => InDigit("6"));
-            _b7_command = new Command((nothing) => InDigit("7"));
-            _b8_command = new Command((nothing) => InDigit("8"));
-            _b9_command = new Command((nothing) => InDigit("9"));
-
-            _bplus_command = new Command((nothing) => InOperator("+"));
-            _bminus_command = new Command((nothing) => InOperator("-"));
-            _bstar_command = new Command((nothing) => InOperator("*"));
-            _bslash_command = new Command((nothing) => InOperator("/"));
-
-            _bequals_command = new Command((nothing) =>
-            {
-                InOperator("=");
-                CurrentView = new Label() { FormattedText = new FormattedString() };
-                _calculation_history.Insert(0, CurrentView);
-            });
-
-            _bsin_command = new Command((nothing) => InOperator("sin "));
-            _bcos_command = new Command((nothing) => InOperator("cos "));
-            _btan_command = new Command((nothing) => InOperator("tan "));
-            _barcsin_command = new Command((nothing) => InOperator("arcsin "));
-            _barccos_command = new Command((nothing) => InOperator("arccos "));
-            _barctan_command = new Command((nothing) => InOperator("arctan "));
-            _bexp_command = new Command((nothing) => InOperator("exp "));
         }
 
         private calculatorParser Parser(string plain_old_command)
@@ -323,23 +286,31 @@ namespace CalcXamForms
         {
             int ErrorPos = plain_ole_command.Length;
             // Find last good term.
-            VisitorCalc visitor = new VisitorCalc();
-            visitor.Visit(tree);
-            var list = all_nodes.Where((nn) =>
+            try
             {
-                ParserRuleContext prc = nn as ParserRuleContext;
-                if (prc == null) return false;
-                Res r;
-                if (!visitor.Results.TryGetValue(prc, out r)) return false;
-                return r.IsComplete;
-            });
-            IParseTree[] find = list.ToArray();
-            if (find.Length == 0) return false;
+                VisitorCalc visitor = new VisitorCalc();
+                visitor.Visit(tree);
+                var list = all_nodes.Where((nn) =>
+                {
+                    ParserRuleContext prc = nn as ParserRuleContext;
+                    if (prc == null) return false;
+                    Res r;
+                    if (!visitor.Results.TryGetValue(prc, out r)) return false;
+                    return r.IsComplete;
+                });
+                IParseTree[] find = list.ToArray();
+                if (find.Length == 0) return false;
 
-            ParserRuleContext p = find.Reverse().First() as ParserRuleContext;
-            Res res;
-            visitor.Results.TryGetValue(p, out res);
-            _result = res.Value.ToString();
+                ParserRuleContext p = find.Reverse().First() as ParserRuleContext;
+                Res res;
+                visitor.Results.TryGetValue(p, out res);
+                _result = res.Value.ToString();
+            }
+            catch (Exception e)
+            {
+                ErrorPos = 0;
+                _result = e.Message;
+            }
 
             CurrentView.FormattedText = BuildCommand(plain_ole_command, ErrorPos);
             _calculation_history[_calculation_history.IndexOf(CurrentView)] = CurrentView;
@@ -372,173 +343,39 @@ namespace CalcXamForms
             NotifyPropertyChanged("Command");
         }
 
-        private ICommand _b0_command;
-        public ICommand B0
+        public ICommand B0 { get; set; } = new Command((nothing) => _singleton.InDigit("0"));
+        public ICommand B1 { get; set; } = new Command((nothing) => _singleton.InDigit("1"));
+        public ICommand B2 { get; set; } = new Command((nothing) => _singleton.InDigit("2"));
+        public ICommand B3 { get; set; } = new Command((nothing) => _singleton.InDigit("3"));
+        public ICommand B4 { get; set; } = new Command((nothing) => _singleton.InDigit("4"));
+        public ICommand B5 { get; set; } = new Command((nothing) => _singleton.InDigit("5"));
+        public ICommand B6 { get; set; } = new Command((nothing) => _singleton.InDigit("6"));
+        public ICommand B7 { get; set; } = new Command((nothing) => _singleton.InDigit("7"));
+        public ICommand B8 { get; set; } = new Command((nothing) => _singleton.InDigit("8"));
+        public ICommand B9 { get; set; } = new Command((nothing) => _singleton.InDigit("9"));
+        public ICommand BDot { get; set; } = new Command((nothing) => _singleton.InDigit("."));
+        public ICommand BPlus { get; set; } = new Command((nothing) => _singleton.InDigit("+"));
+        public ICommand BMinus { get; set; } = new Command((nothing) => _singleton.InDigit("-"));
+        public ICommand BStar { get; set; } = new Command((nothing) => _singleton.InDigit("*"));
+        public ICommand BSlash { get; set; } = new Command((nothing) => _singleton.InDigit("/"));
+        public ICommand BEquals { get; set; } = new Command((nothing) =>
         {
-            get { return _b0_command; }
-            set { _b0_command = value; }
-        }
-
-        private ICommand _b1_command;
-        public ICommand B1
-        {
-            get { return _b1_command; }
-            set { _b1_command = value; }
-        }
-
-        private ICommand _b2_command;
-        public ICommand B2
-        {
-            get { return _b2_command; }
-            set { _b2_command = value; }
-        }
-
-        private ICommand _b3_command;
-        public ICommand B3
-        {
-            get { return _b3_command; }
-            set { _b3_command = value; }
-        }
-
-        private ICommand _b4_command;
-        public ICommand B4
-        {
-            get { return _b4_command; }
-            set { _b4_command = value; }
-        }
-
-        private ICommand _b5_command;
-        public ICommand B5
-        {
-            get { return _b5_command; }
-            set { _b5_command = value; }
-        }
-
-        private ICommand _b6_command;
-        public ICommand B6
-        {
-            get { return _b6_command; }
-            set { _b6_command = value; }
-        }
-
-        private ICommand _b7_command;
-        public ICommand B7
-        {
-            get { return _b7_command; }
-            set { _b7_command = value; }
-        }
-
-        private ICommand _b8_command;
-        public ICommand B8
-        {
-            get { return _b8_command; }
-            set { _b8_command = value; }
-        }
-
-        private ICommand _b9_command;
-        public ICommand B9
-        {
-            get { return _b9_command; }
-            set { _b9_command = value; }
-        }
-
-        private ICommand _bdot_command;
-        public ICommand BDot
-        {
-            get { return _bdot_command; }
-            set { _bdot_command = value; }
-        }
-
-        private ICommand _bplus_command;
-        public ICommand BPlus
-        {
-            get { return _bplus_command; }
-            set { _bplus_command = value; }
-        }
-
-        private ICommand _bminus_command;
-        public ICommand BMinus
-        {
-            get { return _bminus_command; }
-            set { _bminus_command = value; }
-        }
-
-        private ICommand _bstar_command;
-        public ICommand BStar
-        {
-            get { return _bstar_command; }
-            set { _bstar_command = value; }
-        }
-
-        private ICommand _bslash_command;
-        public ICommand BSlash
-        {
-            get { return _bslash_command; }
-            set { _bslash_command = value; }
-        }
-
-        private ICommand _bequals_command;
-        public ICommand BEquals
-        {
-            get { return _bequals_command; }
-            set { _bequals_command = value; }
-        }
-
-        private ICommand _bsin_command;
-        public ICommand BSin
-        {
-            get { return _bsin_command; }
-            set { _bsin_command = value; }
-        }
-
-        private ICommand _bcos_command;
-        public ICommand BCos
-        {
-            get { return _bcos_command; }
-            set { _bcos_command = value; }
-        }
-
-        private ICommand _btan_command;
-        public ICommand BTan
-        {
-            get { return _btan_command; }
-            set { _btan_command = value; }
-        }
-
-        private ICommand _barcsin_command;
-        public ICommand BArcSin
-        {
-            get { return _barcsin_command; }
-            set { _barcsin_command = value; }
-        }
-
-        private ICommand _barccos_command;
-        public ICommand BArcCos
-        {
-            get { return _barccos_command; }
-            set { _barccos_command = value; }
-        }
-
-        private ICommand _barctan_command;
-        public ICommand BArcTan
-        {
-            get { return _barctan_command; }
-            set { _barctan_command = value; }
-        }
-
-        private ICommand _bexp_command;
-        public ICommand BExp
-        {
-            get { return _bexp_command; }
-            set { _bexp_command = value; }
-        }
-
-        private ICommand _bln_command;
-        public ICommand BLn
-        {
-            get { return _bln_command; }
-            set { _bln_command = value; }
-        }
+            _singleton.InOperator("=");
+            _singleton.CurrentView = new Label() { FormattedText = new FormattedString() };
+            _singleton._calculation_history.Insert(0, _singleton.CurrentView);
+        });
+        public ICommand BSin { get; set; } = new Command((nothing) => _singleton.InDigit("sin "));
+        public ICommand BCos { get; set; } = new Command((nothing) => _singleton.InDigit("cos "));
+        public ICommand BTan { get; set; } = new Command((nothing) => _singleton.InDigit("tan "));
+        public ICommand BArcSin { get; set; } = new Command((nothing) => _singleton.InDigit("arcsin "));
+        public ICommand BArcCos { get; set; } = new Command((nothing) => _singleton.InDigit("arccos "));
+        public ICommand BArcTan { get; set; } = new Command((nothing) => _singleton.InDigit("arctan "));
+        public ICommand BExp { get; set; } = new Command((nothing) => _singleton.InDigit("exp "));
+        public ICommand BLn { get; set; } = new Command((nothing) => _singleton.InDigit("ln "));
+        public ICommand BInv { get; set; } = new Command((nothing) => _singleton.InDigit("1/"));
+        public ICommand BPow { get; set; } = new Command((nothing) => _singleton.InDigit("pow "));
+        public ICommand BOP { get; set; } = new Command((nothing) => _singleton.InDigit("("));
+        public ICommand BCP { get; set; } = new Command((nothing) => _singleton.InDigit(")"));
     }
 
     public class MyErrorStrategy : Antlr4.Runtime.DefaultErrorStrategy

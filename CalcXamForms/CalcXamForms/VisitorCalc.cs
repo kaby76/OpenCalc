@@ -937,5 +937,28 @@ namespace CalcXamForms
             Results[context] = res;
             return res;
         }
+
+        public override Res VisitParenthesized_expression([NotNull] calculatorParser.Parenthesized_expressionContext context)
+        {
+            Res res = new CalcXamForms.Res { IsComplete = true, Value = 0 };
+            if (context.children != null)
+                foreach (IParseTree c in context.children)
+                {
+                    Visit(c);
+                }
+            if (context.ChildCount == 3)
+            {
+                Res r = Results[context.GetChild(1)];
+                res.IsComplete &= r.IsComplete;
+                res.Value = r.Value;
+            }
+            Results[context] = res;
+            return res;
+        }
+
+        public override Res VisitAssignment([NotNull] calculatorParser.AssignmentContext context)
+        {
+            throw new Exception("Assignment not allowed.");
+        }
     }
 }
