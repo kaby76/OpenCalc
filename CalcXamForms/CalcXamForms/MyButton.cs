@@ -3,8 +3,9 @@ using Xamarin.Forms;
 
 namespace CalcXamForms
 {
-    public class MyButton : Forms9Patch.Label
+    //public class MyButton : Forms9Patch.Label
     //public class MyButton : WebView
+    public class MyButton : HtmlLabel
     {
         public MyButton()
         {
@@ -45,8 +46,11 @@ namespace CalcXamForms
                 //this.HeightRequest = 20;
                 //this.WidthRequest = 20;
 
-                base.HtmlText = $@"<font size=""5"" >{_text}</font>";
-                base.HtmlText = $@"<html><body><font size=""5"" >{_text}</font></body></html>";
+                //base.HtmlText = $@"<font size=""5"" >{_text}</font>";
+                //base.HtmlText = $@"<html><body><font size=""5"" >{_text}</font></body></html>";
+
+                this.FontSize = 28;// Font size is not observed in html at all!
+                this.Text = $@"<html><body><font size=""35"" >{_text}</font></body></html>";
                 base.HorizontalTextAlignment = TextAlignment.Center;
                 base.VerticalTextAlignment = TextAlignment.Center;
             }
