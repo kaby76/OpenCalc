@@ -49,8 +49,9 @@ namespace CalcXamForms
                 //base.HtmlText = $@"<font size=""5"" >{_text}</font>";
                 //base.HtmlText = $@"<html><body><font size=""5"" >{_text}</font></body></html>";
 
-                this.FontSize = 28;// Font size is not observed in html at all!
-                this.Text = $@"<html><body><font size=""35"" >{_text}</font></body></html>";
+                //this.FontSize = 28;// Font size is not observed in html at all!
+                // See http://stackoverflow.com/questions/7247113/using-size-html-attribute-in-textview
+                this.Text = $@"<html><body><h3>{_text}</h3></body></html>";
                 base.HorizontalTextAlignment = TextAlignment.Center;
                 base.VerticalTextAlignment = TextAlignment.Center;
             }
