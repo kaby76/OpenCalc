@@ -69,7 +69,6 @@
     <Compile Include="RootPage.xaml.cs">
       <DependentUpon>RootPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View1.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="calculator.g4" />
