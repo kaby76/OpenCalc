@@ -166,7 +166,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="NoChacheWebViewRenderer.cs" />
+    <Compile Include="GridSplitterRenderer.cs" />
+    <Compile Include="StyleExtension.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 using Xamarin.Forms;
 
 namespace CalcXamForms
 {
-    public class App : Application
+    public partial class App : Xamarin.Forms.Application
     {
         public App()
         {
+            InitializeComponent();
+
             // The root page of your application
             //MainPage = new PageCalc();
             switch (Device.OS)
@@ -29,7 +32,6 @@ namespace CalcXamForms
                     throw new NotImplementedException();
             }
         }
-
         protected override void OnStart()
         {
             // Handle when your app starts
