@@ -874,7 +874,7 @@ namespace CalcXamForms
 
         public override Res VisitIdentifier([NotNull] calculatorParser.IdentifierContext context)
         {
-            Res res = new CalcXamForms.Res { IsComplete = true, Value = 0 };
+            Res res = new CalcXamForms.Res { IsComplete = false, Value = 0 };
             Results[context] = res;
             if (context.children != null)
                 foreach (IParseTree c in context.children)

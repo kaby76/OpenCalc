@@ -301,9 +301,11 @@ namespace CalcXamForms
                 IParseTree[] find = list.ToArray();
                 if (find.Length == 0) return false;
 
-                ParserRuleContext p = find.Reverse().First() as ParserRuleContext;
+                ParserRuleContext child = find.Reverse().First() as ParserRuleContext;
+                // Grab parent as partial results are valuable.
+                ParserRuleContext parent = child.Parent as ParserRuleContext;
                 Res res;
-                visitor.Results.TryGetValue(p, out res);
+                visitor.Results.TryGetValue(parent != null ? parent : child, out res);
                 _result = res.Value.ToString();
             }
             catch (Exception e)
@@ -354,28 +356,28 @@ namespace CalcXamForms
         public ICommand B8 { get; set; } = new Command((nothing) => _singleton.InDigit("8"));
         public ICommand B9 { get; set; } = new Command((nothing) => _singleton.InDigit("9"));
         public ICommand BDot { get; set; } = new Command((nothing) => _singleton.InDigit("."));
-        public ICommand BPlus { get; set; } = new Command((nothing) => _singleton.InDigit("+"));
-        public ICommand BMinus { get; set; } = new Command((nothing) => _singleton.InDigit("-"));
-        public ICommand BStar { get; set; } = new Command((nothing) => _singleton.InDigit("*"));
-        public ICommand BSlash { get; set; } = new Command((nothing) => _singleton.InDigit("/"));
+        public ICommand BPlus { get; set; } = new Command((nothing) => _singleton.InOperator("+"));
+        public ICommand BMinus { get; set; } = new Command((nothing) => _singleton.InOperator("-"));
+        public ICommand BStar { get; set; } = new Command((nothing) => _singleton.InOperator("*"));
+        public ICommand BSlash { get; set; } = new Command((nothing) => _singleton.InOperator("/"));
         public ICommand BEquals { get; set; } = new Command((nothing) =>
         {
             _singleton.InOperator("=");
             _singleton.CurrentView = new Label() { FormattedText = new FormattedString() };
             _singleton._calculation_history.Insert(0, _singleton.CurrentView);
         });
-        public ICommand BSin { get; set; } = new Command((nothing) => _singleton.InDigit("sin "));
-        public ICommand BCos { get; set; } = new Command((nothing) => _singleton.InDigit("cos "));
-        public ICommand BTan { get; set; } = new Command((nothing) => _singleton.InDigit("tan "));
-        public ICommand BArcSin { get; set; } = new Command((nothing) => _singleton.InDigit("arcsin "));
-        public ICommand BArcCos { get; set; } = new Command((nothing) => _singleton.InDigit("arccos "));
-        public ICommand BArcTan { get; set; } = new Command((nothing) => _singleton.InDigit("arctan "));
-        public ICommand BExp { get; set; } = new Command((nothing) => _singleton.InDigit("exp "));
-        public ICommand BLn { get; set; } = new Command((nothing) => _singleton.InDigit("ln "));
-        public ICommand BInv { get; set; } = new Command((nothing) => _singleton.InDigit("1/"));
-        public ICommand BPow { get; set; } = new Command((nothing) => _singleton.InDigit("pow "));
-        public ICommand BOP { get; set; } = new Command((nothing) => _singleton.InDigit("("));
-        public ICommand BCP { get; set; } = new Command((nothing) => _singleton.InDigit(")"));
+        public ICommand BSin { get; set; } = new Command((nothing) => _singleton.InOperator("sin "));
+        public ICommand BCos { get; set; } = new Command((nothing) => _singleton.InOperator("cos "));
+        public ICommand BTan { get; set; } = new Command((nothing) => _singleton.InOperator("tan "));
+        public ICommand BArcSin { get; set; } = new Command((nothing) => _singleton.InOperator("arcsin "));
+        public ICommand BArcCos { get; set; } = new Command((nothing) => _singleton.InOperator("arccos "));
+        public ICommand BArcTan { get; set; } = new Command((nothing) => _singleton.InOperator("arctan "));
+        public ICommand BExp { get; set; } = new Command((nothing) => _singleton.InOperator("exp "));
+        public ICommand BLn { get; set; } = new Command((nothing) => _singleton.InOperator("ln "));
+        public ICommand BInv { get; set; } = new Command((nothing) => _singleton.InOperator("1/"));
+        public ICommand BPow { get; set; } = new Command((nothing) => _singleton.InOperator("pow "));
+        public ICommand BOP { get; set; } = new Command((nothing) => _singleton.InOperator("("));
+        public ICommand BCP { get; set; } = new Command((nothing) => _singleton.InOperator(")"));
     }
 
     public class MyErrorStrategy : Antlr4.Runtime.DefaultErrorStrategy
@@ -555,32 +557,11 @@ namespace CalcXamForms
         private IntervalSet Filter(IntervalSet original)
         {
             IntervalSet result = new IntervalSet();
-            IEnumerable<Interval> list = original.GetIntervals().Where(
-                (i) =>
-                {
-                    if (i.a == i.b)
-                    {
-                        if (_not_used.Contains(i.a))
-                            return false;
-                        else
-                            return true;
-                    }
-                    else
-                    {
-                        for (int j = i.a; j <= i.b; ++j)
-                        {
-                            if (_not_used.Contains(j))
-                                return false;
-                        }
-                        return true;
-                    }
-                }).ToList();
-            foreach (Interval r in list)
+            foreach (Interval i in original.GetIntervals())
             {
-                if (r.a == r.b)
-                    result.Add(r.a);
-                else
-                    result.Add(r.a, r.b);
+                for (int j = i.a; j <= i.b; ++j)
+                    if (!_not_used.Contains(j))
+                        result.Add(j);
             }
             return result;
         }
