@@ -65,9 +65,9 @@
           <calcXamForms:MyButton BackgroundColor="Gray" Fext="Tan" Grid.Column="2" Grid.Row="4" Command="{Binding BTan}" />
           <calcXamForms:MyButton BackgroundColor="Gray" Fext="e&lt;sup&gt;x&lt;/sup&gt;" Grid.Column="3" Grid.Row="4" Command="{Binding BExp}" />
 
-          <calcXamForms:MyButton BackgroundColor="Gray" Fext="Sin&lt;sup&gt;-1&lt;/sup&gt;" Grid.Column="0" Grid.Row="5" Command="{Binding BASin}" />
-          <calcXamForms:MyButton BackgroundColor="Gray" Fext="Cos&lt;sup&gt;-1&lt;/sup&gt;" Grid.Column="1" Grid.Row="5" Command="{Binding BACos}" />
-          <calcXamForms:MyButton BackgroundColor="Gray" Fext="Tan&lt;sup&gt;-1&lt;/sup&gt;" Grid.Column="2" Grid.Row="5" Command="{Binding BBATan}" />
+          <calcXamForms:MyButton BackgroundColor="Gray" Fext="Sin&lt;sup&gt;-1&lt;/sup&gt;" Grid.Column="0" Grid.Row="5" Command="{Binding BArcSin}" />
+          <calcXamForms:MyButton BackgroundColor="Gray" Fext="Cos&lt;sup&gt;-1&lt;/sup&gt;" Grid.Column="1" Grid.Row="5" Command="{Binding BArcCos}" />
+          <calcXamForms:MyButton BackgroundColor="Gray" Fext="Tan&lt;sup&gt;-1&lt;/sup&gt;" Grid.Column="2" Grid.Row="5" Command="{Binding BArcTan}" />
           <calcXamForms:MyButton BackgroundColor="Gray" Fext="ln" Grid.Column="3" Grid.Row="5" Command="{Binding BLn}" />
 
           <calcXamForms:MyButton BackgroundColor="Gray" Fext="1/x" Grid.Column="0" Grid.Row="6" Command="{Binding BInv}" />
