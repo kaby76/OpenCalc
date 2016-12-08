@@ -33,7 +33,7 @@ namespace CalcXamForms
             if (label != null)
             {
                 int found = _singleton._calculation_history.IndexOf(label);
-                if (found< 0)
+                if (found < 0)
                     return;
                 else if (found > 0)
                 {

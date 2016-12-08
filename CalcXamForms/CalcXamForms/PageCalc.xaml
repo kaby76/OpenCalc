@@ -7,7 +7,7 @@
              >
   <StackLayout VerticalOptions="FillAndExpand" BackgroundColor="White" Padding="0,0,0,0">
     <!-- Output control -->
-    <Label FormattedText="{Binding Result}" BackgroundColor="Gray" />
+    <Label FormattedText="{Binding Result}" HeightRequest="200"  BackgroundColor="Gray" />
 
     <Grid VerticalOptions="FillAndExpand" RowSpacing="1" ColumnSpacing="1" >
       <Grid.RowDefinitions>
@@ -15,6 +15,7 @@
         <RowDefinition Height="Auto" />
         <RowDefinition Height="*" />
       </Grid.RowDefinitions>
+      
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
