@@ -59,6 +59,19 @@ namespace CalcXamForms
                 _on_tap_command = value;
             }
         }
+        private Size _size;
+        public Size Dimensions
+        {
+            get
+            {
+                return _size;
+            }
+            set
+            {
+                _size = value;
+                NotifyPropertyChanged("Result");
+            }
+        }
         public FormattedString Result
         {
             get
@@ -70,7 +83,7 @@ namespace CalcXamForms
                     new Span()
                     {
                         Text = "result",
-                        FontSize = 20,
+                        FontSize = FontSize,
                         FontAttributes = FontAttributes.Bold
                     }
                     );
@@ -79,7 +92,7 @@ namespace CalcXamForms
                     new Span
                     {
                         Text = Environment.NewLine,
-                        FontSize = 20
+                        FontSize = FontSize
                     }
                     );
 
@@ -87,7 +100,7 @@ namespace CalcXamForms
                     new Span
                     {
                         Text = result,
-                        FontSize = 40,
+                        FontSize = FontSize * 2,
                         FontAttributes = FontAttributes.Bold
                     }
                     );
@@ -144,6 +157,79 @@ namespace CalcXamForms
                 _current_view = value;
             }
         }
+
+        public int FontSize
+        {
+            get
+            {
+                if (this._size.Height > this._size.Width)
+                    return 20;
+                return 10;
+            }
+        }
+
+        private int _current_bank = 1;
+        public bool Bank1
+        {
+            get { return _current_bank == 1; }
+            set
+            {
+                NotifyPropertyChanged();
+            }
+        }
+        public bool Bank2
+        {
+            get { return _current_bank == 2; }
+            set
+            {
+                NotifyPropertyChanged();
+            }
+        }
+        public void Rotate()
+        {
+            if (_current_bank == 1) _current_bank = 2;
+            else _current_bank = 1;
+            NotifyPropertyChanged("Bank1");
+            NotifyPropertyChanged("Bank2");
+        }
+        public ICommand BRotate { get; set; } = new Command((nothing) => _singleton.Rotate());
+
+        public ICommand B0 { get; set; } = new Command((nothing) => _singleton.InDigit("0"));
+        public ICommand B1 { get; set; } = new Command((nothing) => _singleton.InDigit("1"));
+        public ICommand B2 { get; set; } = new Command((nothing) => _singleton.InDigit("2"));
+        public ICommand B3 { get; set; } = new Command((nothing) => _singleton.InDigit("3"));
+        public ICommand B4 { get; set; } = new Command((nothing) => _singleton.InDigit("4"));
+        public ICommand B5 { get; set; } = new Command((nothing) => _singleton.InDigit("5"));
+        public ICommand B6 { get; set; } = new Command((nothing) => _singleton.InDigit("6"));
+        public ICommand B7 { get; set; } = new Command((nothing) => _singleton.InDigit("7"));
+        public ICommand B8 { get; set; } = new Command((nothing) => _singleton.InDigit("8"));
+        public ICommand B9 { get; set; } = new Command((nothing) => _singleton.InDigit("9"));
+        public ICommand BDot { get; set; } = new Command((nothing) => _singleton.InDigit("."));
+        public ICommand BPlus { get; set; } = new Command((nothing) => _singleton.InOperator("+"));
+        public ICommand BMinus { get; set; } = new Command((nothing) => _singleton.InOperator("-"));
+        public ICommand BStar { get; set; } = new Command((nothing) => _singleton.InOperator("*"));
+        public ICommand BSlash { get; set; } = new Command((nothing) => _singleton.InOperator("/"));
+        public ICommand BEquals { get; set; } = new Command((nothing) =>
+        {
+            _singleton.InOperator("=");
+            _singleton.CurrentView = new Label() { FormattedText = new FormattedString() };
+            _singleton._calculation_history.Insert(0, _singleton.CurrentView);
+        });
+        public ICommand BSin { get; set; } = new Command((nothing) => _singleton.InOperator("sin "));
+        public ICommand BCos { get; set; } = new Command((nothing) => _singleton.InOperator("cos "));
+        public ICommand BTan { get; set; } = new Command((nothing) => _singleton.InOperator("tan "));
+        public ICommand BArcSin { get; set; } = new Command((nothing) => _singleton.InOperator("arcsin "));
+        public ICommand BArcCos { get; set; } = new Command((nothing) => _singleton.InOperator("arccos "));
+        public ICommand BArcTan { get; set; } = new Command((nothing) => _singleton.InOperator("arctan "));
+        public ICommand BExp { get; set; } = new Command((nothing) => _singleton.InOperator("exp "));
+        public ICommand BLn { get; set; } = new Command((nothing) => _singleton.InOperator("ln "));
+        public ICommand BInv { get; set; } = new Command((nothing) => _singleton.InOperator("1/"));
+        public ICommand BPow { get; set; } = new Command((nothing) => _singleton.InOperator("pow "));
+        public ICommand BOP { get; set; } = new Command((nothing) => _singleton.InOperator("("));
+        public ICommand BCP { get; set; } = new Command((nothing) => _singleton.InOperator(")"));
+
+
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         // This method is called by the Set accessor of each property.
@@ -345,39 +431,6 @@ namespace CalcXamForms
             NotifyPropertyChanged("Command");
         }
 
-        public ICommand B0 { get; set; } = new Command((nothing) => _singleton.InDigit("0"));
-        public ICommand B1 { get; set; } = new Command((nothing) => _singleton.InDigit("1"));
-        public ICommand B2 { get; set; } = new Command((nothing) => _singleton.InDigit("2"));
-        public ICommand B3 { get; set; } = new Command((nothing) => _singleton.InDigit("3"));
-        public ICommand B4 { get; set; } = new Command((nothing) => _singleton.InDigit("4"));
-        public ICommand B5 { get; set; } = new Command((nothing) => _singleton.InDigit("5"));
-        public ICommand B6 { get; set; } = new Command((nothing) => _singleton.InDigit("6"));
-        public ICommand B7 { get; set; } = new Command((nothing) => _singleton.InDigit("7"));
-        public ICommand B8 { get; set; } = new Command((nothing) => _singleton.InDigit("8"));
-        public ICommand B9 { get; set; } = new Command((nothing) => _singleton.InDigit("9"));
-        public ICommand BDot { get; set; } = new Command((nothing) => _singleton.InDigit("."));
-        public ICommand BPlus { get; set; } = new Command((nothing) => _singleton.InOperator("+"));
-        public ICommand BMinus { get; set; } = new Command((nothing) => _singleton.InOperator("-"));
-        public ICommand BStar { get; set; } = new Command((nothing) => _singleton.InOperator("*"));
-        public ICommand BSlash { get; set; } = new Command((nothing) => _singleton.InOperator("/"));
-        public ICommand BEquals { get; set; } = new Command((nothing) =>
-        {
-            _singleton.InOperator("=");
-            _singleton.CurrentView = new Label() { FormattedText = new FormattedString() };
-            _singleton._calculation_history.Insert(0, _singleton.CurrentView);
-        });
-        public ICommand BSin { get; set; } = new Command((nothing) => _singleton.InOperator("sin "));
-        public ICommand BCos { get; set; } = new Command((nothing) => _singleton.InOperator("cos "));
-        public ICommand BTan { get; set; } = new Command((nothing) => _singleton.InOperator("tan "));
-        public ICommand BArcSin { get; set; } = new Command((nothing) => _singleton.InOperator("arcsin "));
-        public ICommand BArcCos { get; set; } = new Command((nothing) => _singleton.InOperator("arccos "));
-        public ICommand BArcTan { get; set; } = new Command((nothing) => _singleton.InOperator("arctan "));
-        public ICommand BExp { get; set; } = new Command((nothing) => _singleton.InOperator("exp "));
-        public ICommand BLn { get; set; } = new Command((nothing) => _singleton.InOperator("ln "));
-        public ICommand BInv { get; set; } = new Command((nothing) => _singleton.InOperator("1/"));
-        public ICommand BPow { get; set; } = new Command((nothing) => _singleton.InOperator("pow "));
-        public ICommand BOP { get; set; } = new Command((nothing) => _singleton.InOperator("("));
-        public ICommand BCP { get; set; } = new Command((nothing) => _singleton.InOperator(")"));
     }
 
     public class MyErrorStrategy : Antlr4.Runtime.DefaultErrorStrategy
