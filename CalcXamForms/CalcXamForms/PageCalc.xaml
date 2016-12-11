@@ -11,14 +11,14 @@
     <ScrollView HeightRequest="200" BackgroundColor="Gray" >
       <Label FormattedText="{Binding Result}" BackgroundColor="Gray" />
     </ScrollView>
-    
-    <Grid VerticalOptions="FillAndExpand" RowSpacing="1" ColumnSpacing="1" >
+
+    <Grid IsVisible="{Binding IsPortraitMode}" VerticalOptions="FillAndExpand" RowSpacing="1" ColumnSpacing="1" >
       <Grid.RowDefinitions>
         <RowDefinition Height="Auto" />
         <RowDefinition Height="Auto" />
         <RowDefinition Height="*" />
       </Grid.RowDefinitions>
-      
+
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
@@ -44,13 +44,13 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
           </Grid.RowDefinitions>
-         
-          
+
+
           <calcXamForms:MyButton BackgroundColor="Yellow" Fext="Sft" Grid.Column="0" Grid.Row="0" Command="{Binding BRotate}" />
           <calcXamForms:MyButton BackgroundColor="Yellow" Fext="Clr" Grid.Column="1" Grid.Row="0" Command="{Binding BClear}" />
           <calcXamForms:MyButton BackgroundColor="Yellow" Fext="Undo" Grid.Column="2" Grid.Row="0" Command="{Binding BUndo}" />
           <calcXamForms:MyButton BackgroundColor="Yellow" Fext="Redo" Grid.Column="3" Grid.Row="0" Command="{Binding BRedo}" />
-          
+
           <calcXamForms:MyButton IsVisible="{Binding Bank1}" BackgroundColor="Gray" Fext="1" Grid.Column="0" Grid.Row="1" Command="{Binding B1}" />
           <calcXamForms:MyButton IsVisible="{Binding Bank1}" BackgroundColor="Gray" Fext="2" Grid.Column="1" Grid.Row="1" Command="{Binding B2}" />
           <calcXamForms:MyButton IsVisible="{Binding Bank1}" BackgroundColor="Gray" Fext="3" Grid.Column="2" Grid.Row="1" Command="{Binding B3}" />
@@ -71,7 +71,7 @@
           <calcXamForms:MyButton IsVisible="{Binding Bank1}" BackgroundColor="Gray" Fext="=" Grid.Column="2" Grid.Row="4" Command="{Binding BEquals}" />
           <calcXamForms:MyButton IsVisible="{Binding Bank1}" BackgroundColor="Gray" Fext="/" Grid.Column="3" Grid.Row="4" Command="{Binding BSlash}" />
 
-          
+
           <calcXamForms:MyButton IsVisible="{Binding Bank2}" BackgroundColor="Gray" Fext="Sin" Grid.Column="0" Grid.Row="1" Command="{Binding BSin}" />
           <calcXamForms:MyButton IsVisible="{Binding Bank2}" BackgroundColor="Gray" Fext="Cos" Grid.Column="1" Grid.Row="1" Command="{Binding BCos}" />
           <calcXamForms:MyButton IsVisible="{Binding Bank2}" BackgroundColor="Gray" Fext="Tan" Grid.Column="2" Grid.Row="1" Command="{Binding BTan}" />
@@ -88,9 +88,9 @@
           <calcXamForms:MyButton IsVisible="{Binding Bank2}" BackgroundColor="Gray" Fext=")" Grid.Column="3" Grid.Row="3" Command="{Binding BCP}" />
         </Grid>
       </ScrollView>
-      
+
       <calcXamForms:GridSplitter Grid.Row="1" VerticalOptions="Center"/>
-      
+
       <!-- History control -->
       <calcXamForms:MyListView Grid.Row="2"  ItemClickCommand="{Binding OnTap}" ItemsSource="{Binding Command}" VerticalOptions="Fill" >
         <calcXamForms:MyListView.BackgroundColor>
@@ -107,6 +107,81 @@
           </DataTemplate>
         </calcXamForms:MyListView.ItemTemplate>
       </calcXamForms:MyListView>
+    </Grid>
+    
+    <Grid IsVisible="{Binding IsLandscapeMode}" VerticalOptions="FillAndExpand" RowSpacing="1" ColumnSpacing="1" >
+      <Grid.RowDefinitions>
+        <RowDefinition Height="*" />
+      </Grid.RowDefinitions>
+
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition Width="Auto"/>
+      </Grid.ColumnDefinitions>
+
+      <!-- buttons -->
+      <Grid Grid.Row="0"  RowSpacing="1" ColumnSpacing="1">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <calcXamForms:MyButton BackgroundColor="Yellow" Fext=" " Grid.Column="0" Grid.Row="0" />
+        <calcXamForms:MyButton BackgroundColor="Yellow" Fext="Clr" Grid.Column="1" Grid.Row="0" Command="{Binding BClear}" />
+        <calcXamForms:MyButton BackgroundColor="Yellow" Fext="Undo" Grid.Column="2" Grid.Row="0" Command="{Binding BUndo}" />
+        <calcXamForms:MyButton BackgroundColor="Yellow" Fext="Redo" Grid.Column="3" Grid.Row="0" Command="{Binding BRedo}" />
+
+        <calcXamForms:MyButton BackgroundColor="Gray" Fext="1" Grid.Column="0" Grid.Row="1" Command="{Binding B1}" />
+        <calcXamForms:MyButton BackgroundColor="Gray" Fext="2" Grid.Column="1" Grid.Row="1" Command="{Binding B2}" />
+        <calcXamForms:MyButton BackgroundColor="Gray" Fext="3" Grid.Column="2" Grid.Row="1" Command="{Binding B3}" />
+        <calcXamForms:MyButton BackgroundColor="Gray" Fext="+" Grid.Column="3" Grid.Row="1" Command="{Binding BPlus}" />
+
+        <calcXamForms:MyButton BackgroundColor="Gray" Fext="4" Grid.Column="0" Grid.Row="2" Command="{Binding B4}" />
+        <calcXamForms:MyButton BackgroundColor="Gray" Fext="5" Grid.Column="1" Grid.Row="2" Command="{Binding B5}" />
+        <calcXamForms:MyButton BackgroundColor="Gray" Fext="6" Grid.Column="2" Grid.Row="2" Command="{Binding B6}" />
+        <calcXamForms:MyButton BackgroundColor="Gray" Fext="-" Grid.Column="3" Grid.Row="2" Command="{Binding BMinus}" />
+
+        <calcXamForms:MyButton BackgroundColor="Gray" Fext="7" Grid.Column="0" Grid.Row="3" Command="{Binding B7}" />
+        <calcXamForms:MyButton BackgroundColor="Gray" Fext="8" Grid.Column="1" Grid.Row="3" Command="{Binding B8}" />
+        <calcXamForms:MyButton BackgroundColor="Gray" Fext="9" Grid.Column="2" Grid.Row="3" Command="{Binding B9}" />
+        <calcXamForms:MyButton BackgroundColor="Gray" Fext="*" Grid.Column="3" Grid.Row="3" Command="{Binding BStar}" />
+
+        <calcXamForms:MyButton BackgroundColor="Gray" Fext="." Grid.Column="0" Grid.Row="4" Command="{Binding BDot}" />
+        <calcXamForms:MyButton BackgroundColor="Gray" Fext="0" Grid.Column="1" Grid.Row="4" Command="{Binding B0}" />
+        <calcXamForms:MyButton BackgroundColor="Gray" Fext="=" Grid.Column="2" Grid.Row="4" Command="{Binding BEquals}" />
+        <calcXamForms:MyButton BackgroundColor="Gray" Fext="/" Grid.Column="3" Grid.Row="4" Command="{Binding BSlash}" />
+
+        <calcXamForms:MyButton BackgroundColor="Gray" Fext="Sin" Grid.Column="4" Grid.Row="1" Command="{Binding BSin}" />
+        <calcXamForms:MyButton BackgroundColor="Gray" Fext="Cos" Grid.Column="5" Grid.Row="1" Command="{Binding BCos}" />
+        <calcXamForms:MyButton BackgroundColor="Gray" Fext="Tan" Grid.Column="6" Grid.Row="1" Command="{Binding BTan}" />
+        <calcXamForms:MyButton BackgroundColor="Gray" Fext="e&lt;sup&gt;x&lt;/sup&gt;" Grid.Column="7" Grid.Row="1" Command="{Binding BExp}" />
+
+        <calcXamForms:MyButton BackgroundColor="Gray" Fext="Sin&lt;sup&gt;-1&lt;/sup&gt;" Grid.Column="4" Grid.Row="2" Command="{Binding BArcSin}" />
+        <calcXamForms:MyButton BackgroundColor="Gray" Fext="Cos&lt;sup&gt;-1&lt;/sup&gt;" Grid.Column="5" Grid.Row="2" Command="{Binding BArcCos}" />
+        <calcXamForms:MyButton BackgroundColor="Gray" Fext="Tan&lt;sup&gt;-1&lt;/sup&gt;" Grid.Column="6" Grid.Row="2" Command="{Binding BArcTan}" />
+        <calcXamForms:MyButton BackgroundColor="Gray" Fext="ln" Grid.Column="7" Grid.Row="2" Command="{Binding BLn}" />
+
+        <calcXamForms:MyButton BackgroundColor="Gray" Fext="1/x" Grid.Column="4" Grid.Row="3" Command="{Binding BInv}" />
+        <calcXamForms:MyButton BackgroundColor="Gray" Fext="Pow" Grid.Column="5" Grid.Row="3" Command="{Binding BPow}" />
+        <calcXamForms:MyButton BackgroundColor="Gray" Fext="(" Grid.Column="6" Grid.Row="3" Command="{Binding BOP}" />
+        <calcXamForms:MyButton BackgroundColor="Gray" Fext=")" Grid.Column="7" Grid.Row="3" Command="{Binding BCP}" />
+      </Grid>
     </Grid>
   </StackLayout>
 </ContentPage>

@@ -70,6 +70,8 @@ namespace CalcXamForms
             {
                 _size = value;
                 NotifyPropertyChanged("Result");
+                NotifyPropertyChanged("IsPortraitMode");
+                NotifyPropertyChanged("IsLandscapeMode");
             }
         }
         public FormattedString Result
@@ -158,6 +160,21 @@ namespace CalcXamForms
             }
         }
 
+        public bool IsPortraitMode
+        {
+            get
+            {
+                return this._size.Height > this._size.Width;
+            }
+        }
+
+        public bool IsLandscapeMode
+        {
+            get
+            {
+                return this._size.Height < this._size.Width;
+            }
+        }
         public int FontSize
         {
             get
