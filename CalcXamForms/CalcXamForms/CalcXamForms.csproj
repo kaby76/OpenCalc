@@ -46,7 +46,6 @@
     <Compile Include="calculatorVisitor.cs" />
     <Compile Include="GridSplitter.cs" />
     <Compile Include="DFSVisitor.cs" />
-    <Compile Include="FormattedStringHelper.cs" />
     <Compile Include="HtmlLabel.cs" />
     <Compile Include="MasterPage.xaml.cs">
       <DependentUpon>MasterPage.xaml</DependentUpon>

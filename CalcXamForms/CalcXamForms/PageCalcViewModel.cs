@@ -15,15 +15,15 @@ using Rg.Plugins.Popup.Extensions;
 
 namespace CalcXamForms
 {
-    public class PageCalcViewModel : INotifyPropertyChanged
+    public class PageCalcViewModel : BindableObject, INotifyPropertyChanged
     {
         private static PageCalcViewModel _singleton;
-        public static PageCalcViewModel Singleton(ContentPage cp = null)
+        public static PageCalcViewModel Singleton(PageCalc cp = null)
         {
             if (_singleton == null) _singleton = new PageCalcViewModel(cp);
             return _singleton;
         }
-        private ContentPage _page_calc;
+        private PageCalc _page_calc;
         private ICommand _on_tap_command = new Command(async (o) =>
         {
             HtmlLabel label = o as HtmlLabel;
@@ -207,6 +207,8 @@ namespace CalcXamForms
             _singleton.InOperator("=");
             _singleton._display_buffer.Add(new HtmlLabel() { Align = HtmlLabel.Alignment.Right });
             _singleton._calculation_buffer.Add("");
+            HtmlLabel item = _singleton._display_buffer[_singleton._display_buffer.Count - 1];
+            _singleton._page_calc.DoScroll(item);
         });
         public ICommand BSin { get; set; } = new Command((nothing) => _singleton.InOperator("sin "));
         public ICommand BCos { get; set; } = new Command((nothing) => _singleton.InOperator("cos "));
@@ -239,7 +241,7 @@ namespace CalcXamForms
             for (int i = 0; i < ts.Size; ++i) yield return ts.Get(i);
         }
 
-        private PageCalcViewModel(ContentPage page_calc)
+        private PageCalcViewModel(PageCalc page_calc)
         {
             _page_calc = page_calc;
             _display_buffer.Add(new HtmlLabel() { Align = HtmlLabel.Alignment.Right });
@@ -261,6 +263,9 @@ namespace CalcXamForms
 
         private void InOperator(string op)
         {
+            HtmlLabel item = _singleton._display_buffer[_singleton._display_buffer.Count - 1];
+            _singleton._page_calc.DoScroll(item);
+
             string plain_ole_command = _calculation_buffer[_singleton._calculation_buffer.Count - 1] + op;
             _calculation_buffer[_singleton._calculation_buffer.Count - 1] = plain_ole_command;
             calculatorParser parser = Parser(plain_ole_command);
@@ -278,6 +283,9 @@ namespace CalcXamForms
 
         private void InDigit(string digit)
         {
+            HtmlLabel item = _singleton._display_buffer[_singleton._display_buffer.Count - 1];
+            _singleton._page_calc.DoScroll(item);
+
             string plain_ole_command = _calculation_buffer[_calculation_buffer.Count - 1] + digit;
             _calculation_buffer[_calculation_buffer.Count - 1] = plain_ole_command;
             int ErrorPos = plain_ole_command.Length;
@@ -384,6 +392,9 @@ namespace CalcXamForms
 
         public void CompileAndRun()
         {
+            HtmlLabel item = _singleton._display_buffer[_singleton._display_buffer.Count - 1];
+            _singleton._page_calc.DoScroll(item);
+
             string plain_ole_command = _calculation_buffer[_calculation_buffer.Count - 1];
 
             calculatorParser parser = Parser(plain_ole_command);

@@ -25,5 +25,10 @@ namespace CalcXamForms
                 PageCalcViewModel.Singleton(this).Dimensions = new Size(width, height);
             }
         }
+
+        public void DoScroll(HtmlLabel item)
+        {
+            Display.ScrollTo(item, ScrollToPosition.Start, false);
+        }
     }
 }
