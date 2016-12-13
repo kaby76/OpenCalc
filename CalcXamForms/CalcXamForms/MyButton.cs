@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Text;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace CalcXamForms
@@ -18,6 +19,15 @@ namespace CalcXamForms
                 }
             };
             this.GestureRecognizers.Add(gestureRecognizer);
+        }
+
+        public static readonly BindableProperty FontSizeProperty =
+            BindableProperty.Create<MyButton, int>(x => x.FontSize, 0);
+
+        public int FontSize
+        {
+            get { return (int)GetValue(FontSizeProperty); }
+            set { SetValue(FontSizeProperty, value); }
         }
 
         public static readonly BindableProperty CommandProperty =
@@ -42,7 +52,13 @@ namespace CalcXamForms
 
                 // Font size in html is not observed!
                 // See http://stackoverflow.com/questions/7247113/using-size-html-attribute-in-textview
-                this.Text = $@"<big><big><big><big>{_text}</big></big></big></big>";
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < FontSize/10; ++i)
+                    sb.Append("<big><big>");
+                sb.Append(_text);
+                for (int i = 0; i < FontSize / 10; ++i)
+                    sb.Append("</big></big>");
+                this.Text = sb.ToString();
                 base.HorizontalTextAlignment = TextAlignment.Center;
                 base.VerticalTextAlignment = TextAlignment.Center;
             }

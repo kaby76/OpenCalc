@@ -78,8 +78,33 @@ namespace CalcXamForms
                 NotifyPropertyChanged("Results");
                 NotifyPropertyChanged("IsPortraitMode");
                 NotifyPropertyChanged("IsLandscapeMode");
+                NotifyPropertyChanged("DisplayHeight");
+                NotifyPropertyChanged("ButtonHeight");
             }
         }
+
+        public int DisplayHeight
+        {
+            get
+            {
+                if (IsPortraitMode)
+                    return 250;
+                else
+                    return 150;
+            }
+        }
+
+        public int ButtonHeight
+        {
+            get
+            {
+                if (IsPortraitMode)
+                    return 20;
+                else
+                    return 10;
+            }
+        }
+
         private string BuildFormattedCommandAndResult(string str, int error, string result)
         {
             string p1 = str.Substring(0, error);
