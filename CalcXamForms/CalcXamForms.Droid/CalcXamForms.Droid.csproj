@@ -127,6 +127,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HtmlLabelRenderer.cs" />
+    <Compile Include="MyListViewRenderer.cs" />
     <Compile Include="NoChacheWebViewRenderer.cs" />
     <Compile Include="GridSplitterRenderer.cs" />
     <Compile Include="StyleExtension.cs" />

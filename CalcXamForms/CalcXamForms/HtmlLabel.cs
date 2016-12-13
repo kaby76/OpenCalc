@@ -7,5 +7,17 @@ namespace CalcXamForms
     /// </summary>
     public class HtmlLabel : Label
     {
+        public enum Alignment { Left = 0, Center, Right };
+
+        public HtmlLabel()
+            : base()
+        {
+            Text = "";
+        }
+
+        public Alignment Align
+        {
+            get; set;
+        } = Alignment.Center;
     }
 }

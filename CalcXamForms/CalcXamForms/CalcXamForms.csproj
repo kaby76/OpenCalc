@@ -53,6 +53,7 @@
     </Compile>
     <Compile Include="MasterPageItem.cs" />
     <Compile Include="MyButton.cs" />
+    <Compile Include="MyErrorStrategy.cs" />
     <Compile Include="MyListView.cs" />
     <Compile Include="EditorPopup.xaml.cs">
       <DependentUpon>EditorPopup.xaml</DependentUpon>

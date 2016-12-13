@@ -17,23 +17,33 @@ namespace CalcXamForms.Droid
             base.OnElementChanged(e);
             if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.N)
             {
-                Control?.SetText(Html.FromHtml(Element.Text, Android.Text.FromHtmlOptions.ModeLegacy), TextView.BufferType.Spannable);
-                //Label label = Element;
-                //TextView x = Control;
-                //x.Text = label.Text;
-                //x.Gravity = Android.Views.GravityFlags.CenterHorizontal | Android.Views.GravityFlags.CenterVertical;
-                //x.SetIncludeFontPadding(false);
-                //LayoutParams pa = x.LayoutParameters;
+                if (Control != null)
+                {
+                    HtmlLabel wer = Element as HtmlLabel;
+                    Control?.SetText(Html.FromHtml(Element.Text, Android.Text.FromHtmlOptions.ModeLegacy), TextView.BufferType.Spannable);
+                    TextView x = Control;
+                    if (wer != null && wer.Align == HtmlLabel.Alignment.Right)
+                        x.Gravity = Android.Views.GravityFlags.Right | Android.Views.GravityFlags.CenterVertical;
+                    else if (wer != null && wer.Align == HtmlLabel.Alignment.Center)
+                        x.Gravity = Android.Views.GravityFlags.Center | Android.Views.GravityFlags.CenterVertical;
+                    else if (wer != null && wer.Align == HtmlLabel.Alignment.Left)
+                        x.Gravity = Android.Views.GravityFlags.Left | Android.Views.GravityFlags.CenterVertical;
+                }
             }
             else
             {
-                Control?.SetText(Html.FromHtml(Element.Text), TextView.BufferType.Spannable);
-                //Label label = Element;
-                //TextView x = Control;
-                //x.SetSingleLine();
-                //x.Gravity = Android.Views.GravityFlags.CenterHorizontal | Android.Views.GravityFlags.CenterVertical;
-                //x.SetIncludeFontPadding(false);
-                //LayoutParams pa = x.LayoutParameters;
+                if (Control != null)
+                {
+                    HtmlLabel wer = Element as HtmlLabel;
+                    Control?.SetText(Html.FromHtml(Element.Text), TextView.BufferType.Spannable);
+                    TextView x = Control;
+                    if (wer != null && wer.Align == HtmlLabel.Alignment.Right)
+                        x.Gravity = Android.Views.GravityFlags.Right | Android.Views.GravityFlags.CenterVertical;
+                    else if (wer != null && wer.Align == HtmlLabel.Alignment.Center)
+                        x.Gravity = Android.Views.GravityFlags.Center | Android.Views.GravityFlags.CenterVertical;
+                    else if (wer != null && wer.Align == HtmlLabel.Alignment.Left)
+                        x.Gravity = Android.Views.GravityFlags.Left | Android.Views.GravityFlags.CenterVertical;
+                }
             }
         }
 
@@ -43,10 +53,18 @@ namespace CalcXamForms.Droid
 
             if (e.PropertyName == Label.TextProperty.PropertyName)
             {
-                Control?.SetText(Html.FromHtml(Element.Text), TextView.BufferType.Spannable);
-                //TextView x = Control;
-                //x.Gravity = Android.Views.GravityFlags.CenterHorizontal | Android.Views.GravityFlags.CenterVertical;
-                //x.SetIncludeFontPadding(false);
+                if (Control != null)
+                {
+                    HtmlLabel wer = Element as HtmlLabel;
+                    Control?.SetText(Html.FromHtml(Element.Text), TextView.BufferType.Spannable);
+                    TextView x = Control;
+                    if (wer != null && wer.Align == HtmlLabel.Alignment.Right)
+                        x.Gravity = Android.Views.GravityFlags.Right | Android.Views.GravityFlags.CenterVertical;
+                    else if (wer != null && wer.Align == HtmlLabel.Alignment.Center)
+                        x.Gravity = Android.Views.GravityFlags.Center | Android.Views.GravityFlags.CenterVertical;
+                    else if (wer != null && wer.Align == HtmlLabel.Alignment.Left)
+                        x.Gravity = Android.Views.GravityFlags.Left | Android.Views.GravityFlags.CenterVertical;
+                }
             }
         }
     }

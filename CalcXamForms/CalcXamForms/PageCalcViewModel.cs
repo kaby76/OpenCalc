@@ -23,26 +23,32 @@ namespace CalcXamForms
             if (_singleton == null) _singleton = new PageCalcViewModel(cp);
             return _singleton;
         }
-        private ObservableCollection<Label> _calculation_history = new ObservableCollection<Label>();
-        private Label _current_view = null;
-        private string _result;
         private ContentPage _page_calc;
         private ICommand _on_tap_command = new Command(async (o) =>
         {
-            Label label = o as Label;
+            HtmlLabel label = o as HtmlLabel;
             if (label != null)
             {
-                int found = _singleton._calculation_history.IndexOf(label);
+                int found = _singleton.Results.IndexOf(label);
                 if (found < 0)
                     return;
                 else if (found > 0)
                 {
-                    _singleton.CurrentView = new Label() { FormattedText = label.FormattedText.Copy()};
-                    _singleton._calculation_history.Insert(0, _singleton.CurrentView);
-                }
-                else
-                {
-                    _singleton.CurrentView = label;
+                    // Insert a copy of the command into top (or overwrite if empty).
+                    string command = _singleton._calculation_buffer[found];
+                    HtmlLabel results = _singleton._display_buffer[found];
+                    if (_singleton._calculation_buffer[_singleton._calculation_buffer.Count - 1] == "")
+                    {
+                        _singleton._calculation_buffer[_singleton._calculation_buffer.Count - 1] = command;
+                        _singleton._display_buffer[_singleton._calculation_buffer.Count - 1] = results;
+                    }
+                    else
+                    {
+                        _singleton._display_buffer.Add(new HtmlLabel() { Align = HtmlLabel.Alignment.Right });
+                        _singleton._calculation_buffer.Add("");
+                        _singleton._calculation_buffer[_singleton._calculation_buffer.Count - 1] = command;
+                        _singleton._display_buffer[_singleton._display_buffer.Count - 1] = results;
+                    }
                 }
                 EditorPopup page = new EditorPopup(_singleton);
                 await _singleton._page_calc.Navigation.PushPopupAsync(page);
@@ -69,94 +75,41 @@ namespace CalcXamForms
             set
             {
                 _size = value;
-                NotifyPropertyChanged("Result");
+                NotifyPropertyChanged("Results");
                 NotifyPropertyChanged("IsPortraitMode");
                 NotifyPropertyChanged("IsLandscapeMode");
             }
         }
-        public FormattedString Result
-        {
-            get
-            {
-                string result = _result;
-                var fs = new FormattedString();
-
-                fs.Spans.Add(
-                    new Span()
-                    {
-                        Text = "result",
-                        FontSize = FontSize,
-                        FontAttributes = FontAttributes.Bold
-                    }
-                    );
-
-                fs.Spans.Add(
-                    new Span
-                    {
-                        Text = Environment.NewLine,
-                        FontSize = FontSize
-                    }
-                    );
-
-                fs.Spans.Add(
-                    new Span
-                    {
-                        Text = result,
-                        FontSize = FontSize * 2,
-                        FontAttributes = FontAttributes.Bold
-                    }
-                    );
-                return fs;
-            }
-            set
-            {
-                NotifyPropertyChanged();
-            }
-        }
-        private FormattedString BuildCommand(string str, int error)
+        private string BuildFormattedCommandAndResult(string str, int error, string result)
         {
             string p1 = str.Substring(0, error);
-            var fs = new FormattedString();
-            fs.Spans.Add(
-                new Span
-                {
-                    Text = p1,
-                    FontSize = 20,
-                    FontAttributes = FontAttributes.Bold
-                }
-                );
+            StringBuilder fs = new StringBuilder("");
+            fs.Append("<big>" + p1);
             string p2 = str.Substring(error, str.Length - error);
-            fs.Spans.Add(
-                new Span
-                {
-                    Text = p2,
-                    ForegroundColor = Color.Red,
-                    FontSize = 20,
-                    FontAttributes = FontAttributes.Bold
-                }
-                );
-            return fs;
+            fs.Append("<font color=\"red\">" + p2 + "</Font></big>");
+            fs.Append("<br/>");
+            fs.Append("<big><big><big><big><big>" + result + "</big></big></big></big></big>");
+            return fs.ToString();
         }
-        public ObservableCollection<Label> Command
+        private ObservableCollection<HtmlLabel> _display_buffer = new ObservableCollection<HtmlLabel>();
+        private ObservableCollection<string> _calculation_buffer = new ObservableCollection<string>();
+        public ObservableCollection<string> Commands
         {
-            get
-            {
-                return _calculation_history;
-            }
+            get { return _calculation_buffer; }
             set
             {
                 NotifyPropertyChanged();
             }
         }
-        public Label CurrentView
+        public ObservableCollection<HtmlLabel> Results
         {
             get
             {
-                return _current_view;
+                return _display_buffer;
             }
             set
             {
-                _current_view = value;
+                NotifyPropertyChanged();
             }
         }
 
@@ -167,7 +120,6 @@ namespace CalcXamForms
                 return this._size.Height > this._size.Width;
             }
         }
-
         public bool IsLandscapeMode
         {
             get
@@ -184,7 +136,6 @@ namespace CalcXamForms
                 return 10;
             }
         }
-
         private int _current_bank = 1;
         public bool Bank1
         {
@@ -229,8 +180,8 @@ namespace CalcXamForms
         public ICommand BEquals { get; set; } = new Command((nothing) =>
         {
             _singleton.InOperator("=");
-            _singleton.CurrentView = new Label() { FormattedText = new FormattedString() };
-            _singleton._calculation_history.Insert(0, _singleton.CurrentView);
+            _singleton._display_buffer.Add(new HtmlLabel() { Align = HtmlLabel.Alignment.Right });
+            _singleton._calculation_buffer.Add("");
         });
         public ICommand BSin { get; set; } = new Command((nothing) => _singleton.InOperator("sin "));
         public ICommand BCos { get; set; } = new Command((nothing) => _singleton.InOperator("cos "));
@@ -244,8 +195,6 @@ namespace CalcXamForms
         public ICommand BPow { get; set; } = new Command((nothing) => _singleton.InOperator("pow "));
         public ICommand BOP { get; set; } = new Command((nothing) => _singleton.InOperator("("));
         public ICommand BCP { get; set; } = new Command((nothing) => _singleton.InOperator(")"));
-
-
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -268,8 +217,8 @@ namespace CalcXamForms
         private PageCalcViewModel(ContentPage page_calc)
         {
             _page_calc = page_calc;
-            CurrentView = new Label() {FormattedText = new FormattedString()};
-            _calculation_history.Add(CurrentView);
+            _display_buffer.Add(new HtmlLabel() { Align = HtmlLabel.Alignment.Right });
+            _calculation_buffer.Add("");
         }
 
         private calculatorParser Parser(string plain_old_command)
@@ -287,11 +236,8 @@ namespace CalcXamForms
 
         private void InOperator(string op)
         {
-            FormattedString fs;
-            Label label = CurrentView;
-            fs = label.FormattedText;
-            string plain_ole_command = fs.ToString() + op;
-
+            string plain_ole_command = _calculation_buffer[_singleton._calculation_buffer.Count - 1] + op;
+            _calculation_buffer[_singleton._calculation_buffer.Count - 1] = plain_ole_command;
             calculatorParser parser = Parser(plain_ole_command);
             IParseTree tree = parser.expressionResult();
             IParseTree[] all_nodes = DFSVisitor.DFS(tree as ParserRuleContext).ToArray();
@@ -300,24 +246,17 @@ namespace CalcXamForms
             if (CheckForErrorToken(plain_ole_command, parser, tree, all_nodes)) return;
             if (CheckForResult(plain_ole_command, parser, tree, all_nodes)) return;
 
-            _result = "Unknown.";
-
-            label.FormattedText = BuildCommand(plain_ole_command, 0);
-            _calculation_history[_calculation_history.IndexOf(CurrentView)] = label;
-            NotifyPropertyChanged("Result");
-            NotifyPropertyChanged("Command");
+            string result = "Unknown.";
+            _display_buffer[_display_buffer.Count - 1].Text = BuildFormattedCommandAndResult(plain_ole_command, 0, result);
+            NotifyPropertyChanged("Results");
         }
 
         private void InDigit(string digit)
         {
-            FormattedString fs;
-            Label label = CurrentView;
-            fs = label.FormattedText;
-
-            StringBuilder sb = new StringBuilder(fs.ToString());
-            sb.Append(digit);
-            int ErrorPos = sb.Length;
-            byte[] byteArray = Encoding.UTF8.GetBytes(sb.ToString());
+            string plain_ole_command = _calculation_buffer[_calculation_buffer.Count - 1] + digit;
+            _calculation_buffer[_calculation_buffer.Count - 1] = plain_ole_command;
+            int ErrorPos = plain_ole_command.Length;
+            byte[] byteArray = Encoding.UTF8.GetBytes(plain_ole_command);
             calculatorParser pp = new calculatorParser(
                 new CommonTokenStream(
                     new calculatorLexer(
@@ -326,11 +265,9 @@ namespace CalcXamForms
                                 new MemoryStream(byteArray)).ReadToEnd()))));
             IParseTree tree = pp.expressionResult();
             ITokenStream ts = pp.TokenStream;
-            _result = AllTokens(ts).Reverse().Skip(1).First().Text;
-            label.FormattedText = BuildCommand(sb.ToString(), ErrorPos);
-            _calculation_history[_calculation_history.IndexOf(CurrentView)] = label;
-            NotifyPropertyChanged("Result");
-            NotifyPropertyChanged("Command");
+            string result = AllTokens(ts).Reverse().Skip(1).First().Text;
+            _display_buffer[_display_buffer.Count - 1].Text = BuildFormattedCommandAndResult(plain_ole_command, ErrorPos, result);
+            NotifyPropertyChanged("Results");
         }
 
         private bool CheckForExceptions(string plain_ole_command, calculatorParser parser, IParseTree tree, IParseTree[] all_nodes)
@@ -352,11 +289,9 @@ namespace CalcXamForms
             string error_str = "Expecting " + s.ToString(parser.Vocabulary);
             int ErrorPos = re.OffendingToken.StartIndex;
 
-            _result = error_str;
-            CurrentView.FormattedText = BuildCommand(plain_ole_command, ErrorPos);
-            _calculation_history[_calculation_history.IndexOf(CurrentView)] = CurrentView;
-            NotifyPropertyChanged("Result");
-            NotifyPropertyChanged("Command");
+            string result = error_str;
+            _display_buffer[_display_buffer.Count - 1].Text = BuildFormattedCommandAndResult(plain_ole_command, ErrorPos, result);
+            NotifyPropertyChanged("Results");
 
             return true;
         }
@@ -376,17 +311,16 @@ namespace CalcXamForms
 
             int ErrorPos = eni.Payload.StartIndex;
 
-            _result = "Extraneous input.";
-            CurrentView.FormattedText = BuildCommand(plain_ole_command, ErrorPos);
-            _calculation_history[_calculation_history.IndexOf(CurrentView)] = CurrentView;
-            NotifyPropertyChanged("Result");
-            NotifyPropertyChanged("Command");
+            string result = "Extraneous input.";
+            _display_buffer[_display_buffer.Count - 1].Text = BuildFormattedCommandAndResult(plain_ole_command, ErrorPos, result);
+            NotifyPropertyChanged("Results");
 
             return true;
         }
 
         private bool CheckForResult(string plain_ole_command, calculatorParser parser, IParseTree tree, IParseTree[] all_nodes)
         {
+            string result = "";
             int ErrorPos = plain_ole_command.Length;
             // Find last good term.
             try
@@ -409,28 +343,23 @@ namespace CalcXamForms
                 ParserRuleContext parent = child.Parent as ParserRuleContext;
                 Res res;
                 visitor.Results.TryGetValue(parent != null ? parent : child, out res);
-                _result = res.Value.ToString();
+                result = res.Value.ToString();
             }
             catch (Exception e)
             {
                 ErrorPos = 0;
-                _result = e.Message;
+                result = e.Message;
             }
 
-            CurrentView.FormattedText = BuildCommand(plain_ole_command, ErrorPos);
-            _calculation_history[_calculation_history.IndexOf(CurrentView)] = CurrentView;
-            NotifyPropertyChanged("Result");
-            NotifyPropertyChanged("Command");
+            _display_buffer[_display_buffer.Count - 1].Text = BuildFormattedCommandAndResult(plain_ole_command, ErrorPos, result);
+            NotifyPropertyChanged("Results");
 
             return true;
         }
 
         public void CompileAndRun()
         {
-            FormattedString fs;
-            Label label = CurrentView;
-            fs = label.FormattedText;
-            string plain_ole_command = fs.ToString();
+            string plain_ole_command = _calculation_buffer[_calculation_buffer.Count - 1];
 
             calculatorParser parser = Parser(plain_ole_command);
             IParseTree tree = parser.expressionResult();
@@ -440,200 +369,10 @@ namespace CalcXamForms
             if (CheckForErrorToken(plain_ole_command, parser, tree, all_nodes)) return;
             if (CheckForResult(plain_ole_command, parser, tree, all_nodes)) return;
 
-            _result = "Unknown.";
+            string result = "Unknown.";
 
-            label.FormattedText = BuildCommand(plain_ole_command, 0);
-            _calculation_history[_calculation_history.IndexOf(CurrentView)] = label;
-            NotifyPropertyChanged("Result");
-            NotifyPropertyChanged("Command");
-        }
-
-    }
-
-    public class MyErrorStrategy : Antlr4.Runtime.DefaultErrorStrategy
-    {
-        public MyErrorStrategy() : base()
-        { }
-
-        public Dictionary<RecognitionException, IntervalSet> LASet = new Dictionary<RecognitionException, IntervalSet>();
-
-        public override void ReportError(Antlr4.Runtime.Parser recognizer, RecognitionException e)
-        {
-            IntervalSet x = recognizer.GetExpectedTokens();
-            LASet[e] = Filter(x);
-            base.ReportError(recognizer, e);
-        }
-
-        public List<int> _not_used =
-            new List<int>()
-            {
-                calculatorParser.BYTE_ORDER_MARK,
-                calculatorParser.ABSTRACT,
-                calculatorParser.ADD,
-                calculatorParser.ALIAS,
-                calculatorParser.ARGLIST,
-                calculatorParser.AS,
-                calculatorParser.ASCENDING,
-                calculatorParser.BASE,
-                calculatorParser.BOOL,
-                calculatorParser.BREAK,
-                calculatorParser.BY,
-                calculatorParser.BYTE,
-                calculatorParser.CASE,
-                calculatorParser.CATCH,
-                calculatorParser.CHAR,
-                calculatorParser.CHECKED,
-                calculatorParser.CLASS,
-                calculatorParser.CONST,
-                calculatorParser.CONTINUE,
-                calculatorParser.DECIMAL,
-                calculatorParser.DEFAULT,
-                calculatorParser.DELEGATE,
-                calculatorParser.DESCENDING,
-                calculatorParser.DO,
-                calculatorParser.DOUBLE,
-                calculatorParser.DYNAMIC,
-                calculatorParser.ELSE,
-                calculatorParser.ENUM,
-                calculatorParser.EQUALS,
-                calculatorParser.EVENT,
-                calculatorParser.EXPLICIT,
-                calculatorParser.EXTERN,
-                //calculatorParser.FALSE,
-                calculatorParser.FINALLY,
-                calculatorParser.FIXED,
-                calculatorParser.FLOAT,
-                calculatorParser.FOR,
-                calculatorParser.FOREACH,
-                calculatorParser.FROM,
-                calculatorParser.GET,
-                calculatorParser.GOTO,
-                calculatorParser.GROUP,
-                calculatorParser.IF,
-                calculatorParser.IMPLICIT,
-                calculatorParser.IN,
-                calculatorParser.INT,
-                calculatorParser.INTERFACE,
-                calculatorParser.INTERNAL,
-                calculatorParser.INTO,
-                calculatorParser.IS,
-                calculatorParser.JOIN,
-                calculatorParser.LET,
-                calculatorParser.LOCK,
-                calculatorParser.LONG,
-                calculatorParser.NAMESPACE,
-                calculatorParser.NEW,
-                calculatorParser.NULL,
-                calculatorParser.OBJECT,
-                calculatorParser.ON,
-                calculatorParser.OPERATOR,
-                calculatorParser.ORDERBY,
-                calculatorParser.OUT,
-                calculatorParser.OVERRIDE,
-                calculatorParser.PARAMS,
-                calculatorParser.PARTIAL,
-                calculatorParser.PRIVATE,
-                calculatorParser.PROTECTED,
-                calculatorParser.PUBLIC,
-                calculatorParser.READONLY,
-                calculatorParser.REF,
-                calculatorParser.REMOVE,
-                calculatorParser.RETURN,
-                calculatorParser.SBYTE,
-                calculatorParser.SEALED,
-                calculatorParser.SELECT,
-                calculatorParser.SET,
-                calculatorParser.SHORT,
-                calculatorParser.SIZEOF,
-                calculatorParser.STACKALLOC,
-                calculatorParser.STATIC,
-                calculatorParser.STRING,
-                calculatorParser.STRUCT,
-                calculatorParser.SWITCH,
-                calculatorParser.THIS,
-                calculatorParser.THROW,
-                //calculatorParser.TRUE,
-                calculatorParser.TRY,
-                calculatorParser.TYPEOF,
-                calculatorParser.UINT,
-                calculatorParser.ULONG,
-                calculatorParser.UNCHECKED,
-                calculatorParser.UNSAFE,
-                calculatorParser.USHORT,
-                calculatorParser.USING,
-                calculatorParser.VIRTUAL,
-                calculatorParser.VOID,
-                calculatorParser.VOLATILE,
-                calculatorParser.WHERE,
-                calculatorParser.WHILE,
-                calculatorParser.YIELD,
-                calculatorParser.IDENTIFIER,
-                //calculatorParser.INTEGER_LITERAL,
-                //calculatorParser.REAL_LITERAL,
-                calculatorParser.CHARACTER_LITERAL,
-                calculatorParser.STRING_LITERAL,
-                calculatorParser.OPEN_BRACE,
-                calculatorParser.CLOSE_BRACE,
-                calculatorParser.OPEN_BRACKET,
-                calculatorParser.CLOSE_BRACKET,
-                //calculatorParser.OPEN_PARENS,
-                //calculatorParser.CLOSE_PARENS,
-                calculatorParser.DOT,
-                //calculatorParser.COMMA,
-                calculatorParser.COLON,
-                calculatorParser.SEMICOLON,
-                //calculatorParser.PLUS,
-                //calculatorParser.MINUS,
-                //calculatorParser.STAR,
-                //calculatorParser.DIV,
-                //calculatorParser.PERCENT,
-                //calculatorParser.AMP,
-                //calculatorParser.BITWISE_OR,
-                //calculatorParser.CARET,
-                //calculatorParser.BANG,
-                //calculatorParser.TILDE,
-                //calculatorParser.ASSIGNMENT,
-                //calculatorParser.LT,
-                //calculatorParser.GT,
-                calculatorParser.INTERR,
-                calculatorParser.DOUBLE_COLON,
-                calculatorParser.OP_COALESCING,
-                calculatorParser.OP_INC,
-                calculatorParser.OP_DEC,
-                //calculatorParser.OP_AND,
-                //calculatorParser.OP_OR,
-                calculatorParser.OP_PTR,
-                //calculatorParser.OP_EQ,
-                //calculatorParser.OP_NE,
-                //calculatorParser.OP_LE,
-                //calculatorParser.OP_GE,
-                calculatorParser.OP_ADD_ASSIGNMENT,
-                calculatorParser.OP_SUB_ASSIGNMENT,
-                calculatorParser.OP_MULT_ASSIGNMENT,
-                calculatorParser.OP_DIV_ASSIGNMENT,
-                calculatorParser.OP_MOD_ASSIGNMENT,
-                calculatorParser.OP_AND_ASSIGNMENT,
-                calculatorParser.OP_OR_ASSIGNMENT,
-                calculatorParser.OP_XOR_ASSIGNMENT,
-                //calculatorParser.OP_LEFT_SHIFT,
-                calculatorParser.OP_LEFT_SHIFT_ASSIGNMENT,
-                calculatorParser.QUOTE,
-                calculatorParser.DOUBLE_QUOTE,
-                calculatorParser.BACK_SLASH,
-                calculatorParser.DOUBLE_BACK_SLASH,
-                calculatorParser.SHARP
-            };
-
-        private IntervalSet Filter(IntervalSet original)
-        {
-            IntervalSet result = new IntervalSet();
-            foreach (Interval i in original.GetIntervals())
-            {
-                for (int j = i.a; j <= i.b; ++j)
-                    if (!_not_used.Contains(j))
-                        result.Add(j);
-            }
-            return result;
+            _display_buffer[_display_buffer.Count - 1].Text = BuildFormattedCommandAndResult(plain_ole_command, 0, result);
+            NotifyPropertyChanged("Results");
         }
     }
 }

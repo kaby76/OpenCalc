@@ -17,14 +17,14 @@ namespace CalcXamForms
         {
             _pcvm = pcvm;
             InitializeComponent();
-            string str = (pcvm.CurrentView as Label).FormattedText.ToString();
+            string str = _pcvm.Commands[_pcvm.Commands.Count - 1];
             TheEditor.Text = str;
         }
 
         private async void OnClose(object sender, EventArgs e)
         {
             await Navigation.PopPopupAsync();
-            (_pcvm.CurrentView as Label).FormattedText = TheEditor.Text;
+            _pcvm.Commands[_pcvm.Commands.Count - 1] = TheEditor.Text;
             _pcvm.CompileAndRun();
         }
     }
