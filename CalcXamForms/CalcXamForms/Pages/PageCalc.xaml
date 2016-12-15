@@ -47,7 +47,7 @@
       containing trig functions. For landscape mode, the trig keypad
       is placed to the right.
       -->
-      <StackLayout Grid.Row="1" IsVisible="{Binding IsPortraitMode}" HeightRequest="{Binding DisplayHeight}"
+      <StackLayout Grid.Row="1" IsVisible="{Binding IsPortraitMode}" HeightRequest="{Binding KeypadHeight}"
           VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Blue" >
         <Grid RowSpacing="1" ColumnSpacing="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
           <Grid.ColumnDefinitions>
@@ -63,42 +63,42 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
           </Grid.RowDefinitions>
-          <controls:MyButton Grid.Row="0" Grid.Column="0" FSize="{Binding ButtonHeight}" BackgroundColor="Yellow" TextColor="Blue" Fext="Sft" Command="{Binding BRotate}" />
-          <controls:MyButton Grid.Row="0" Grid.Column="1" FSize="{Binding ButtonHeight}" BackgroundColor="Yellow" TextColor="Blue" Fext="Clr" Command="{Binding BClear}" />
-          <controls:MyButton Grid.Row="0" Grid.Column="2" FSize="{Binding ButtonHeight}" BackgroundColor="Yellow" TextColor="Blue" Fext="Undo" Command="{Binding BUndo}" />
-          <controls:MyButton Grid.Row="0" Grid.Column="3" FSize="{Binding ButtonHeight}" BackgroundColor="Yellow" TextColor="Blue" Fext="Redo" Command="{Binding BRedo}" />
-          <controls:MyButton Grid.Row="1" Grid.Column="0" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank1}" Fext="1" Command="{Binding B1}" />
-          <controls:MyButton Grid.Row="1" Grid.Column="1" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank1}" Fext="2" Command="{Binding B2}" />
-          <controls:MyButton Grid.Row="1" Grid.Column="2" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank1}" Fext="3" Command="{Binding B3}" />
-          <controls:MyButton Grid.Row="1" Grid.Column="3" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank1}" Fext="+" Command="{Binding BPlus}" />
-          <controls:MyButton Grid.Row="2" Grid.Column="0" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank1}" Fext="4" Command="{Binding B4}" />
-          <controls:MyButton Grid.Row="2" Grid.Column="1" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank1}" Fext="5" Command="{Binding B5}" />
-          <controls:MyButton Grid.Row="2" Grid.Column="2" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank1}" Fext="6" Command="{Binding B6}" />
-          <controls:MyButton Grid.Row="2" Grid.Column="3" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank1}" Fext="-" Command="{Binding BMinus}" />
-          <controls:MyButton Grid.Row="3" Grid.Column="0" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank1}" Fext="7" Command="{Binding B7}" />
-          <controls:MyButton Grid.Row="3" Grid.Column="1" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank1}" Fext="8" Command="{Binding B8}" />
-          <controls:MyButton Grid.Row="3" Grid.Column="2" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank1}" Fext="9" Command="{Binding B9}" />
-          <controls:MyButton Grid.Row="3" Grid.Column="3" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank1}" Fext="*" Command="{Binding BStar}" />
-          <controls:MyButton Grid.Row="4" Grid.Column="0" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank1}" Fext="." Command="{Binding BDot}" />
-          <controls:MyButton Grid.Row="4" Grid.Column="1" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank1}" Fext="0" Command="{Binding B0}" />
-          <controls:MyButton Grid.Row="4" Grid.Column="2" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank1}" Fext="=" Command="{Binding BEquals}" />
-          <controls:MyButton Grid.Row="4" Grid.Column="3" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank1}" Fext="/" Command="{Binding BSlash}" />
-          <controls:MyButton Grid.Row="1" Grid.Column="0" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank2}" Fext="Sin" Command="{Binding BSin}" />
-          <controls:MyButton Grid.Row="1" Grid.Column="1" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank2}" Fext="Cos" Command="{Binding BCos}" />
-          <controls:MyButton Grid.Row="1" Grid.Column="2" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank2}" Fext="Tan" Command="{Binding BTan}" />
-          <controls:MyButton Grid.Row="1" Grid.Column="3" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank2}" Fext="e&lt;sup&gt;x&lt;/sup&gt;" Command="{Binding BExp}" />
-          <controls:MyButton Grid.Row="2" Grid.Column="0" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank2}" Fext="Sin&lt;sup&gt;-1&lt;/sup&gt;" Command="{Binding BArcSin}" />
-          <controls:MyButton Grid.Row="2" Grid.Column="1" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank2}" Fext="Cos&lt;sup&gt;-1&lt;/sup&gt;" Command="{Binding BArcCos}" />
-          <controls:MyButton Grid.Row="2" Grid.Column="2" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank2}" Fext="Tan&lt;sup&gt;-1&lt;/sup&gt;" Command="{Binding BArcTan}" />
-          <controls:MyButton Grid.Row="2" Grid.Column="3" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank2}" Fext="ln" Command="{Binding BLn}" />
-          <controls:MyButton Grid.Row="3" Grid.Column="0" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank2}" Fext="1/x" Command="{Binding BInv}" />
-          <controls:MyButton Grid.Row="3" Grid.Column="1" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank2}" Fext="Pow" Command="{Binding BPow}" />
-          <controls:MyButton Grid.Row="3" Grid.Column="2" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank2}" Fext="(" Command="{Binding BOP}" />
-          <controls:MyButton Grid.Row="3" Grid.Column="3" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank2}" Fext=")" Command="{Binding BCP}" />
+          <controls:MyButton Grid.Row="0" Grid.Column="0" FSize="{Binding ButtonHeight}" BackgroundColor="Yellow" TextColor="Blue" HtmlText="Sft" Command="{Binding BRotate}" />
+          <controls:MyButton Grid.Row="0" Grid.Column="1" FSize="{Binding ButtonHeight}" BackgroundColor="Yellow" TextColor="Blue" HtmlText="Clr" Command="{Binding BClear}" />
+          <controls:MyButton Grid.Row="0" Grid.Column="2" FSize="{Binding ButtonHeight}" BackgroundColor="Yellow" TextColor="Blue" HtmlText="Undo" Command="{Binding BUndo}" />
+          <controls:MyButton Grid.Row="0" Grid.Column="3" FSize="{Binding ButtonHeight}" BackgroundColor="Yellow" TextColor="Blue" HtmlText="Redo" Command="{Binding BRedo}" />
+          <controls:MyButton Grid.Row="1" Grid.Column="0" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank1}" HtmlText="1" Command="{Binding B1}" />
+          <controls:MyButton Grid.Row="1" Grid.Column="1" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank1}" HtmlText="2" Command="{Binding B2}" />
+          <controls:MyButton Grid.Row="1" Grid.Column="2" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank1}" HtmlText="3" Command="{Binding B3}" />
+          <controls:MyButton Grid.Row="1" Grid.Column="3" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank1}" HtmlText="+" Command="{Binding BPlus}" />
+          <controls:MyButton Grid.Row="2" Grid.Column="0" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank1}" HtmlText="4" Command="{Binding B4}" />
+          <controls:MyButton Grid.Row="2" Grid.Column="1" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank1}" HtmlText="5" Command="{Binding B5}" />
+          <controls:MyButton Grid.Row="2" Grid.Column="2" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank1}" HtmlText="6" Command="{Binding B6}" />
+          <controls:MyButton Grid.Row="2" Grid.Column="3" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank1}" HtmlText="-" Command="{Binding BMinus}" />
+          <controls:MyButton Grid.Row="3" Grid.Column="0" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank1}" HtmlText="7" Command="{Binding B7}" />
+          <controls:MyButton Grid.Row="3" Grid.Column="1" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank1}" HtmlText="8" Command="{Binding B8}" />
+          <controls:MyButton Grid.Row="3" Grid.Column="2" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank1}" HtmlText="9" Command="{Binding B9}" />
+          <controls:MyButton Grid.Row="3" Grid.Column="3" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank1}" HtmlText="*" Command="{Binding BStar}" />
+          <controls:MyButton Grid.Row="4" Grid.Column="0" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank1}" HtmlText="." Command="{Binding BDot}" />
+          <controls:MyButton Grid.Row="4" Grid.Column="1" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank1}" HtmlText="0" Command="{Binding B0}" />
+          <controls:MyButton Grid.Row="4" Grid.Column="2" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank1}" HtmlText="=" Command="{Binding BEquals}" />
+          <controls:MyButton Grid.Row="4" Grid.Column="3" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank1}" HtmlText="/" Command="{Binding BSlash}" />
+          <controls:MyButton Grid.Row="1" Grid.Column="0" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank2}" HtmlText="Sin" Command="{Binding BSin}" />
+          <controls:MyButton Grid.Row="1" Grid.Column="1" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank2}" HtmlText="Cos" Command="{Binding BCos}" />
+          <controls:MyButton Grid.Row="1" Grid.Column="2" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank2}" HtmlText="Tan" Command="{Binding BTan}" />
+          <controls:MyButton Grid.Row="1" Grid.Column="3" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank2}" HtmlText="e&lt;sup&gt;x&lt;/sup&gt;" Command="{Binding BExp}" />
+          <controls:MyButton Grid.Row="2" Grid.Column="0" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank2}" HtmlText="Sin&lt;sup&gt;-1&lt;/sup&gt;" Command="{Binding BArcSin}" />
+          <controls:MyButton Grid.Row="2" Grid.Column="1" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank2}" HtmlText="Cos&lt;sup&gt;-1&lt;/sup&gt;" Command="{Binding BArcCos}" />
+          <controls:MyButton Grid.Row="2" Grid.Column="2" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank2}" HtmlText="Tan&lt;sup&gt;-1&lt;/sup&gt;" Command="{Binding BArcTan}" />
+          <controls:MyButton Grid.Row="2" Grid.Column="3" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank2}" HtmlText="ln" Command="{Binding BLn}" />
+          <controls:MyButton Grid.Row="3" Grid.Column="0" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank2}" HtmlText="1/x" Command="{Binding BInv}" />
+          <controls:MyButton Grid.Row="3" Grid.Column="1" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank2}" HtmlText="Pow" Command="{Binding BPow}" />
+          <controls:MyButton Grid.Row="3" Grid.Column="2" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank2}" HtmlText="(" Command="{Binding BOP}" />
+          <controls:MyButton Grid.Row="3" Grid.Column="3" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank2}" HtmlText=")" Command="{Binding BCP}" />
         </Grid>
       </StackLayout>
 
-      <StackLayout IsVisible="{Binding IsLandscapeMode}" Grid.Row="1" HeightRequest="{Binding DisplayHeight}"
+      <StackLayout IsVisible="{Binding IsLandscapeMode}" Grid.Row="1" HeightRequest="{Binding KeypadHeight}"
         VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Blue" >
         <Grid RowSpacing="1" ColumnSpacing="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
           <Grid.ColumnDefinitions>
@@ -118,38 +118,38 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
           </Grid.RowDefinitions>
-          <controls:MyButton Grid.Row="0" Grid.Column="0" FSize="{Binding ButtonHeight}" BackgroundColor="Yellow" TextColor="Blue" Fext=" " />
-          <controls:MyButton Grid.Row="0" Grid.Column="1" FSize="{Binding ButtonHeight}" BackgroundColor="Yellow" TextColor="Blue" Fext="Clr" Command="{Binding BClear}" />
-          <controls:MyButton Grid.Row="0" Grid.Column="2" FSize="{Binding ButtonHeight}" BackgroundColor="Yellow" TextColor="Blue" Fext="Undo" Command="{Binding BUndo}" />
-          <controls:MyButton Grid.Row="0" Grid.Column="3" FSize="{Binding ButtonHeight}" BackgroundColor="Yellow" TextColor="Blue" Fext="Redo" Command="{Binding BRedo}" />
-          <controls:MyButton Grid.Row="1" Grid.Column="0" FSize="{Binding ButtonHeight}" Fext="1" Command="{Binding B1}" />
-          <controls:MyButton Grid.Row="1" Grid.Column="1" FSize="{Binding ButtonHeight}" Fext="2" Command="{Binding B2}" />
-          <controls:MyButton Grid.Row="1" Grid.Column="2" FSize="{Binding ButtonHeight}" Fext="3" Command="{Binding B3}" />
-          <controls:MyButton Grid.Row="1" Grid.Column="3" FSize="{Binding ButtonHeight}" Fext="+" Command="{Binding BPlus}" />
-          <controls:MyButton Grid.Row="2" Grid.Column="0" FSize="{Binding ButtonHeight}" Fext="4" Command="{Binding B4}" />
-          <controls:MyButton Grid.Row="2" Grid.Column="1" FSize="{Binding ButtonHeight}" Fext="5" Command="{Binding B5}" />
-          <controls:MyButton Grid.Row="2" Grid.Column="2" FSize="{Binding ButtonHeight}" Fext="6" Command="{Binding B6}" />
-          <controls:MyButton Grid.Row="2" Grid.Column="3" FSize="{Binding ButtonHeight}" Fext="-" Command="{Binding BMinus}" />
-          <controls:MyButton Grid.Row="3" Grid.Column="0" FSize="{Binding ButtonHeight}" Fext="7" Command="{Binding B7}" />
-          <controls:MyButton Grid.Row="3" Grid.Column="1" FSize="{Binding ButtonHeight}" Fext="8" Command="{Binding B8}" />
-          <controls:MyButton Grid.Row="3" Grid.Column="2" FSize="{Binding ButtonHeight}" Fext="9" Command="{Binding B9}" />
-          <controls:MyButton Grid.Row="3" Grid.Column="3" FSize="{Binding ButtonHeight}" Fext="*" Command="{Binding BStar}" />
-          <controls:MyButton Grid.Row="4" Grid.Column="0" FSize="{Binding ButtonHeight}" Fext="." Command="{Binding BDot}" />
-          <controls:MyButton Grid.Row="4" Grid.Column="1" FSize="{Binding ButtonHeight}" Fext="0" Command="{Binding B0}" />
-          <controls:MyButton Grid.Row="4" Grid.Column="2" FSize="{Binding ButtonHeight}" Fext="=" Command="{Binding BEquals}" />
-          <controls:MyButton Grid.Row="4" Grid.Column="3" FSize="{Binding ButtonHeight}" Fext="/" Command="{Binding BSlash}" />
-          <controls:MyButton Grid.Row="1" Grid.Column="4" FSize="{Binding ButtonHeight}" Fext="Sin" Command="{Binding BSin}" />
-          <controls:MyButton Grid.Row="1" Grid.Column="5" FSize="{Binding ButtonHeight}" Fext="Cos" Command="{Binding BCos}" />
-          <controls:MyButton Grid.Row="1" Grid.Column="6" FSize="{Binding ButtonHeight}" Fext="Tan" Command="{Binding BTan}" />
-          <controls:MyButton Grid.Row="1" Grid.Column="7" FSize="{Binding ButtonHeight}" Fext="e&lt;sup&gt;x&lt;/sup&gt;" Command="{Binding BExp}" />
-          <controls:MyButton Grid.Row="2" Grid.Column="4" FSize="{Binding ButtonHeight}" Fext="Sin&lt;sup&gt;-1&lt;/sup&gt;" Command="{Binding BArcSin}" />
-          <controls:MyButton Grid.Row="2" Grid.Column="5" FSize="{Binding ButtonHeight}" Fext="Cos&lt;sup&gt;-1&lt;/sup&gt;" Command="{Binding BArcCos}" />
-          <controls:MyButton Grid.Row="2" Grid.Column="6" FSize="{Binding ButtonHeight}" Fext="Tan&lt;sup&gt;-1&lt;/sup&gt;" Command="{Binding BArcTan}" />
-          <controls:MyButton Grid.Row="2" Grid.Column="7" FSize="{Binding ButtonHeight}" Fext="ln" Command="{Binding BLn}" />
-          <controls:MyButton Grid.Row="3" Grid.Column="4" FSize="{Binding ButtonHeight}" Fext="1/x" Command="{Binding BInv}" />
-          <controls:MyButton Grid.Row="3" Grid.Column="5" FSize="{Binding ButtonHeight}" Fext="Pow" Command="{Binding BPow}" />
-          <controls:MyButton Grid.Row="3" Grid.Column="6" FSize="{Binding ButtonHeight}" Fext="(" Command="{Binding BOP}" />
-          <controls:MyButton Grid.Row="3" Grid.Column="7" FSize="{Binding ButtonHeight}" Fext=")" Command="{Binding BCP}" />
+          <controls:MyButton Grid.Row="0" Grid.Column="0" FSize="{Binding ButtonHeight}" BackgroundColor="Yellow" TextColor="Blue" HtmlText=" " />
+          <controls:MyButton Grid.Row="0" Grid.Column="1" FSize="{Binding ButtonHeight}" BackgroundColor="Yellow" TextColor="Blue" HtmlText="Clr" Command="{Binding BClear}" />
+          <controls:MyButton Grid.Row="0" Grid.Column="2" FSize="{Binding ButtonHeight}" BackgroundColor="Yellow" TextColor="Blue" HtmlText="Undo" Command="{Binding BUndo}" />
+          <controls:MyButton Grid.Row="0" Grid.Column="3" FSize="{Binding ButtonHeight}" BackgroundColor="Yellow" TextColor="Blue" HtmlText="Redo" Command="{Binding BRedo}" />
+          <controls:MyButton Grid.Row="1" Grid.Column="0" FSize="{Binding ButtonHeight}" HtmlText="1" Command="{Binding B1}" />
+          <controls:MyButton Grid.Row="1" Grid.Column="1" FSize="{Binding ButtonHeight}" HtmlText="2" Command="{Binding B2}" />
+          <controls:MyButton Grid.Row="1" Grid.Column="2" FSize="{Binding ButtonHeight}" HtmlText="3" Command="{Binding B3}" />
+          <controls:MyButton Grid.Row="1" Grid.Column="3" FSize="{Binding ButtonHeight}" HtmlText="+" Command="{Binding BPlus}" />
+          <controls:MyButton Grid.Row="2" Grid.Column="0" FSize="{Binding ButtonHeight}" HtmlText="4" Command="{Binding B4}" />
+          <controls:MyButton Grid.Row="2" Grid.Column="1" FSize="{Binding ButtonHeight}" HtmlText="5" Command="{Binding B5}" />
+          <controls:MyButton Grid.Row="2" Grid.Column="2" FSize="{Binding ButtonHeight}" HtmlText="6" Command="{Binding B6}" />
+          <controls:MyButton Grid.Row="2" Grid.Column="3" FSize="{Binding ButtonHeight}" HtmlText="-" Command="{Binding BMinus}" />
+          <controls:MyButton Grid.Row="3" Grid.Column="0" FSize="{Binding ButtonHeight}" HtmlText="7" Command="{Binding B7}" />
+          <controls:MyButton Grid.Row="3" Grid.Column="1" FSize="{Binding ButtonHeight}" HtmlText="8" Command="{Binding B8}" />
+          <controls:MyButton Grid.Row="3" Grid.Column="2" FSize="{Binding ButtonHeight}" HtmlText="9" Command="{Binding B9}" />
+          <controls:MyButton Grid.Row="3" Grid.Column="3" FSize="{Binding ButtonHeight}" HtmlText="*" Command="{Binding BStar}" />
+          <controls:MyButton Grid.Row="4" Grid.Column="0" FSize="{Binding ButtonHeight}" HtmlText="." Command="{Binding BDot}" />
+          <controls:MyButton Grid.Row="4" Grid.Column="1" FSize="{Binding ButtonHeight}" HtmlText="0" Command="{Binding B0}" />
+          <controls:MyButton Grid.Row="4" Grid.Column="2" FSize="{Binding ButtonHeight}" HtmlText="=" Command="{Binding BEquals}" />
+          <controls:MyButton Grid.Row="4" Grid.Column="3" FSize="{Binding ButtonHeight}" HtmlText="/" Command="{Binding BSlash}" />
+          <controls:MyButton Grid.Row="1" Grid.Column="4" FSize="{Binding ButtonHeight}" HtmlText="Sin" Command="{Binding BSin}" />
+          <controls:MyButton Grid.Row="1" Grid.Column="5" FSize="{Binding ButtonHeight}" HtmlText="Cos" Command="{Binding BCos}" />
+          <controls:MyButton Grid.Row="1" Grid.Column="6" FSize="{Binding ButtonHeight}" HtmlText="Tan" Command="{Binding BTan}" />
+          <controls:MyButton Grid.Row="1" Grid.Column="7" FSize="{Binding ButtonHeight}" HtmlText="e&lt;sup&gt;x&lt;/sup&gt;" Command="{Binding BExp}" />
+          <controls:MyButton Grid.Row="2" Grid.Column="4" FSize="{Binding ButtonHeight}" HtmlText="Sin&lt;sup&gt;-1&lt;/sup&gt;" Command="{Binding BArcSin}" />
+          <controls:MyButton Grid.Row="2" Grid.Column="5" FSize="{Binding ButtonHeight}" HtmlText="Cos&lt;sup&gt;-1&lt;/sup&gt;" Command="{Binding BArcCos}" />
+          <controls:MyButton Grid.Row="2" Grid.Column="6" FSize="{Binding ButtonHeight}" HtmlText="Tan&lt;sup&gt;-1&lt;/sup&gt;" Command="{Binding BArcTan}" />
+          <controls:MyButton Grid.Row="2" Grid.Column="7" FSize="{Binding ButtonHeight}" HtmlText="ln" Command="{Binding BLn}" />
+          <controls:MyButton Grid.Row="3" Grid.Column="4" FSize="{Binding ButtonHeight}" HtmlText="1/x" Command="{Binding BInv}" />
+          <controls:MyButton Grid.Row="3" Grid.Column="5" FSize="{Binding ButtonHeight}" HtmlText="Pow" Command="{Binding BPow}" />
+          <controls:MyButton Grid.Row="3" Grid.Column="6" FSize="{Binding ButtonHeight}" HtmlText="(" Command="{Binding BOP}" />
+          <controls:MyButton Grid.Row="3" Grid.Column="7" FSize="{Binding ButtonHeight}" HtmlText=")" Command="{Binding BCP}" />
         </Grid>
       </StackLayout>
     </Grid>

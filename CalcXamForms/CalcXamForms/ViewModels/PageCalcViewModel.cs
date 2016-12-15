@@ -78,35 +78,22 @@ namespace CalcXamForms.ViewModels
             set
             {
                 _size = value;
-                // If the dimensions change, then everything pretty much has to be changed.
                 NotifyPropertyChanged("Results");
                 NotifyPropertyChanged("IsPortraitMode");
                 NotifyPropertyChanged("IsLandscapeMode");
-                NotifyPropertyChanged("DisplayHeight");
+                NotifyPropertyChanged("KeypadHeight");
                 NotifyPropertyChanged("ButtonHeight");
             }
         }
 
-        public int DisplayHeight
+        public int KeypadHeight
         {
-            get
-            {
-                if (IsPortraitMode)
-                    return 250;
-                else
-                    return 150;
-            }
+            get { return (int) (IsPortraitMode ? Dimensions.Height*0.5 : Dimensions.Height*0.6); }
         }
 
         public int ButtonHeight
         {
-            get
-            {
-                if (IsPortraitMode)
-                    return 40;
-                else
-                    return 10;
-            }
+            get { return IsPortraitMode ? 30 : 10; }
         }
 
         private string BuildFormattedCommandAndResult(string str, int error, string result)

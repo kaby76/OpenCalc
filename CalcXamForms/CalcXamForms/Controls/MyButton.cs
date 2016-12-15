@@ -66,18 +66,30 @@ namespace CalcXamForms.Controls
                 }
                 );
 
-        public static BindableProperty xx = 
-        BindableProperty.Create<MyButton, int>(x => x.FSize, 0);
-
         public int FSize
         {
             get { return (int)GetValue(FSizeProperty); }
             set { SetValue(FSizeProperty, value); }
         }
 
-
         public static readonly BindableProperty CommandProperty =
-            BindableProperty.Create<MyButton, ICommand>(x => x.Command, null);
+            BindableProperty.Create(
+                "Command" // propertyName
+                , typeof(ICommand) // returnType
+                , typeof(MyButton) // declaringType
+                , default(ICommand) // defaultValue
+                , BindingMode.TwoWay // defaultBindingMode, copy only to this control.
+                , // validateValue, null = no validation.
+                (bindable, value) => true
+                , // propertyChanged, bool function fired after set.
+                (bindable, oldValue, newValue) => { }
+                , // propertyChanging, void function fired before set.
+                (bindable, oldValue, newValue) => { }
+                , // coerceValue, mutator of value fired before set.
+                (bindable, value) => value
+                , // defaultValueCreator, function that returns default value.
+                (bindable) => default(ICommand)
+                );
 
         public ICommand Command
         {
@@ -85,17 +97,6 @@ namespace CalcXamForms.Controls
             set { SetValue(CommandProperty, value); }
         }
 
-        private string _text;
-        public string Fext
-        {
-            get
-            {
-                return _text;
-            }
-            set
-            {
-                _text = value;
-            }
-        }
+        public string HtmlText { get; set; }
     }
 }

@@ -24,7 +24,7 @@ namespace CalcXamForms.Droid
                 StringBuilder sb = new StringBuilder();
                 for (int i = 0; i < b.FSize / 10; ++i)
                     sb.Append("<big>");
-                sb.Append(b.Fext);
+                sb.Append(b.HtmlText);
                 for (int i = 0; i < b.FSize / 10; ++i)
                     sb.Append("</big>");
                 b.Text = sb.ToString();
