@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace CalcXamForms
+namespace CalcXamForms.Controls
 {
     /// <summary>
     /// HtmlLabel -- see https://forums.xamarin.com/discussion/comment/167131#Comment_167131

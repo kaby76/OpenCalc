@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using Xamarin.Forms.Platform.Android;
 using CalcXamForms;
+using CalcXamForms.Controls;
 using CalcXamForms.Droid;
 using Xamarin.Forms;
 

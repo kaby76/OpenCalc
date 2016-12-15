@@ -1,7 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 
-namespace CalcXamForms
+namespace CalcXamForms.Pages
 {
     public partial class RootPage : MasterDetailPage
     {

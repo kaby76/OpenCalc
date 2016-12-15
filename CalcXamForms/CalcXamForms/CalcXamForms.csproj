@@ -38,48 +38,43 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="calculatorBaseListener.cs" />
-    <Compile Include="calculatorBaseVisitor.cs" />
-    <Compile Include="calculatorLexer.cs" />
-    <Compile Include="calculatorListener.cs" />
-    <Compile Include="calculatorParser.cs" />
-    <Compile Include="calculatorVisitor.cs" />
-    <Compile Include="GridSplitter.cs" />
-    <Compile Include="DFSVisitor.cs" />
-    <Compile Include="HtmlLabel.cs" />
-    <Compile Include="MasterPage.xaml.cs">
+    <Compile Include="Grammar\calculatorBaseListener.cs" />
+    <Compile Include="Grammar\calculatorBaseVisitor.cs" />
+    <Compile Include="Grammar\calculatorLexer.cs" />
+    <Compile Include="Grammar\calculatorListener.cs" />
+    <Compile Include="Grammar\calculatorParser.cs" />
+    <Compile Include="Grammar\calculatorVisitor.cs" />
+    <Compile Include="Trees\DFSVisitor.cs" />
+    <Compile Include="Controls\HtmlLabel.cs" />
+    <Compile Include="Pages\MasterPage.xaml.cs">
       <DependentUpon>MasterPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MasterPageItem.cs" />
-    <Compile Include="MyButton.cs" />
-    <Compile Include="MyErrorStrategy.cs" />
-    <Compile Include="MyListView.cs" />
-    <Compile Include="EditorPopup.xaml.cs">
+    <Compile Include="Pages\MasterPageItem.cs" />
+    <Compile Include="Controls\MyButton.cs" />
+    <Compile Include="Grammar\MyErrorStrategy.cs" />
+    <Compile Include="Controls\MyListView.cs" />
+    <Compile Include="Pages\EditorPopup.xaml.cs">
       <DependentUpon>EditorPopup.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PageCalc.xaml.cs">
+    <Compile Include="Pages\PageCalc.xaml.cs">
       <DependentUpon>PageCalc.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PageCalcViewModel.cs" />
+    <Compile Include="ViewModels\PageCalcViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VisitorCalc.cs" />
+    <Compile Include="Trees\VisitorCalc.cs" />
     <None Include="app.config" />
     <None Include="packages.config" />
-    <None Include="Visitor.cs" />
-    <Compile Include="RootPage.xaml.cs">
+    <None Include="Trees\Visitor.cs" />
+    <Compile Include="Pages\RootPage.xaml.cs">
       <DependentUpon>RootPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="calculator.g4" />
-    <None Include="CSharp4.g4" />
-    <None Include="CSharp4Lexer.g4" />
-    <None Include="CSharp4PreProcessor.g4" />
-    <None Include="doit.sh" />
-    <None Include="GettingStarted.Xamarin" />
+    <None Include="Grammar\calculator.g4" />
+    <None Include="Grammar\doit.sh" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="PageCalc.xaml">
+    <EmbeddedResource Include="Pages\PageCalc.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -114,19 +109,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="EditorPopup.xaml">
+    <EmbeddedResource Include="Pages\EditorPopup.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="RootPage.xaml">
+    <EmbeddedResource Include="Pages\RootPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="MasterPage.xaml">
+    <EmbeddedResource Include="Pages\MasterPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -137,6 +132,7 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.3.168\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.3.168\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

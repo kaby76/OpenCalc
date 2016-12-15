@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Xamarin.Forms;
 
-namespace CalcXamForms
+namespace CalcXamForms.Pages
 {
     public partial class MasterPage : ContentPage
     {

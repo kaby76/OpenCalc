@@ -1,7 +1,7 @@
 ﻿using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace CalcXamForms
+namespace CalcXamForms.Controls
 {
     public class MyListView : Xamarin.Forms.ListView
     {

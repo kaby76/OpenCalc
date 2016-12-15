@@ -126,11 +126,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HtmlLabelRenderer.cs" />
-    <Compile Include="MyListViewRenderer.cs" />
-    <Compile Include="NoChacheWebViewRenderer.cs" />
-    <Compile Include="GridSplitterRenderer.cs" />
-    <Compile Include="StyleExtension.cs" />
+    <Compile Include="Renderers\HtmlLabelRenderer.cs" />
+    <Compile Include="Renderers\MyListViewRenderer.cs" />
+    <Compile Include="Renderers\NoChacheWebViewRenderer.cs" />
+    <Compile Include="Extensions\StyleExtension.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

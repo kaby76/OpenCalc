@@ -11,9 +11,12 @@ using Antlr4.Runtime;
 using Xamarin.Forms;
 using Antlr4.Runtime.Tree;
 using Antlr4.Runtime.Misc;
+using CalcXamForms.Controls;
 using Rg.Plugins.Popup.Extensions;
+using CalcXamForms.Pages;
+using CalcXamForms.Trees;
 
-namespace CalcXamForms
+namespace CalcXamForms.ViewModels
 {
     public class PageCalcViewModel : BindableObject, INotifyPropertyChanged
     {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Antlr4.Runtime.Misc;
 using Antlr4.Runtime.Tree;
 
-namespace CalcXamForms
+namespace CalcXamForms.Trees
 {
 
     class Visitor : CSharp4BaseVisitor<Res>

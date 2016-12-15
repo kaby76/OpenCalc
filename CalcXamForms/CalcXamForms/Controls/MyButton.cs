@@ -5,7 +5,7 @@ using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace CalcXamForms
+namespace CalcXamForms.Controls
 {
     //public class MyButton : Forms9Patch.Label
     //public class MyButton : WebView

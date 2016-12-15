@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Antlr4.Runtime.Misc;
 using Antlr4.Runtime.Tree;
 
-namespace CalcXamForms
+namespace CalcXamForms.Trees
 {
     class Res
     {
@@ -27,14 +27,14 @@ namespace CalcXamForms
                 }
             if (context.ChildCount != 1)
             {
-                Res res = new CalcXamForms.Res { IsComplete = false, Value = 0 };
+                Res res = new Res { IsComplete = false, Value = 0 };
                 Results[context] = res;
                 return res;
             }
             try
             {
                 Res r = Results[context.GetChild(0)];
-                Res res = new CalcXamForms.Res
+                Res res = new Res
                 {
                     IsComplete = r.IsComplete,
                     Value = r.Value
@@ -46,7 +46,7 @@ namespace CalcXamForms
             {
             }
             {
-                Res res = new CalcXamForms.Res { IsComplete = false, Value = 0 };
+                Res res = new Res { IsComplete = false, Value = 0 };
                 Results[context] = res;
                 return res;
             }
@@ -61,14 +61,14 @@ namespace CalcXamForms
                 }
             if (context.ChildCount != 1)
             {
-                Res res = new CalcXamForms.Res { IsComplete = false, Value = 0 };
+                Res res = new Res { IsComplete = false, Value = 0 };
                 Results[context] = res;
                 return res;
             }
             try
             {
                 Res r = Results[context.GetChild(0)];
-                Res res = new CalcXamForms.Res
+                Res res = new Res
                 {
                     IsComplete = r.IsComplete,
                     Value = r.Value
@@ -80,7 +80,7 @@ namespace CalcXamForms
             {
             }
             {
-                Res res = new CalcXamForms.Res { IsComplete = false, Value = 0 };
+                Res res = new Res { IsComplete = false, Value = 0 };
                 Results[context] = res;
                 return res;
             }
@@ -95,14 +95,14 @@ namespace CalcXamForms
                 }
             if (context.ChildCount != 1)
             {
-                Res res = new CalcXamForms.Res { IsComplete = false, Value = 0 };
+                Res res = new Res { IsComplete = false, Value = 0 };
                 Results[context] = res;
                 return res;
             }
             try
             {
                 Res r = Results[context.GetChild(0)];
-                Res res = new CalcXamForms.Res
+                Res res = new Res
                 {
                     IsComplete = r.IsComplete,
                     Value = r.Value
@@ -114,7 +114,7 @@ namespace CalcXamForms
             {
             }
             {
-                Res res = new CalcXamForms.Res { IsComplete = false, Value = 0 };
+                Res res = new Res { IsComplete = false, Value = 0 };
                 Results[context] = res;
                 return res;
             }
@@ -129,13 +129,13 @@ namespace CalcXamForms
                 }
             if (context.ChildCount == 0)
             {
-                Res res = new CalcXamForms.Res { IsComplete = false, Value = 0 };
+                Res res = new Res { IsComplete = false, Value = 0 };
                 Results[context] = res;
                 return res;
             }
             if (context.ChildCount == 1)
             {
-                Res res = new CalcXamForms.Res { IsComplete = false, Value = 0 };
+                Res res = new Res { IsComplete = false, Value = 0 };
                 Results[context] = res;
                 return res;
             }
@@ -148,7 +148,7 @@ namespace CalcXamForms
 
         public override Res VisitExpression([NotNull] calculatorParser.ExpressionContext context)
         {
-            Res res = new CalcXamForms.Res { IsComplete = false, Value = 0 };
+            Res res = new Res { IsComplete = false, Value = 0 };
             Results[context] = res;
             if (context.children != null)
                 foreach (IParseTree c in context.children)
@@ -176,7 +176,7 @@ namespace CalcXamForms
             {
                 string str = context.GetText();
                 double val = Convert.ToDouble(str);
-                Res res = new CalcXamForms.Res { IsComplete = true, Value = val };
+                Res res = new Res { IsComplete = true, Value = val };
                 Results[context] = res;
                 return res;
             }
@@ -184,7 +184,7 @@ namespace CalcXamForms
             {
             }
             {
-                Res res = new CalcXamForms.Res { IsComplete = false, Value = 0 };
+                Res res = new Res { IsComplete = false, Value = 0 };
                 Results[context] = res;
                 return res;
             }
@@ -204,7 +204,7 @@ namespace CalcXamForms
                 return lhs;
             }
             {
-                Res res = new CalcXamForms.Res { IsComplete = false, Value = 0 };
+                Res res = new Res { IsComplete = false, Value = 0 };
                 Results[context] = res;
                 return res;
             }
@@ -225,7 +225,7 @@ namespace CalcXamForms
             }
             if (context.ChildCount == 2 && context.GetChild(1) as calculatorParser.Method_invocation2Context != null)
             {
-                Res res = new CalcXamForms.Res { IsComplete = false, Value = 0 };
+                Res res = new Res { IsComplete = false, Value = 0 };
                 calculatorParser.Method_invocation2Context mi =
                     context.GetChild(1) as calculatorParser.Method_invocation2Context;
                 // Evaluate....
@@ -384,7 +384,7 @@ namespace CalcXamForms
                 }
             }
             {
-                Res res = new CalcXamForms.Res { IsComplete = false, Value = 0 };
+                Res res = new Res { IsComplete = false, Value = 0 };
                 Results[context] = res;
                 return res;
             }
@@ -415,7 +415,7 @@ namespace CalcXamForms
                 return res;
             }
             {
-                Res res = new CalcXamForms.Res { IsComplete = false, Value = 0 };
+                Res res = new Res { IsComplete = false, Value = 0 };
                 Results[context] = res;
                 return res;
             }
@@ -423,7 +423,7 @@ namespace CalcXamForms
 
         public override Res VisitMultiplicative_expression([NotNull] calculatorParser.Multiplicative_expressionContext context)
         {
-            Res res = new CalcXamForms.Res { IsComplete = false, Value = 0 };
+            Res res = new Res { IsComplete = false, Value = 0 };
             Results[context] = res;
             if (context.children != null)
                 foreach (IParseTree c in context.children)
@@ -460,7 +460,7 @@ namespace CalcXamForms
 
         public override Res VisitAdditive_expression([NotNull] calculatorParser.Additive_expressionContext context)
         {
-            Res res = new CalcXamForms.Res { IsComplete = false, Value = 0 };
+            Res res = new Res { IsComplete = false, Value = 0 };
             Results[context] = res;
             if (context.children != null)
                 foreach (IParseTree c in context.children)
@@ -497,7 +497,7 @@ namespace CalcXamForms
 
         public override Res VisitShift_expression([NotNull] calculatorParser.Shift_expressionContext context)
         {
-            Res res = new CalcXamForms.Res { IsComplete = false, Value = 0 };
+            Res res = new Res { IsComplete = false, Value = 0 };
             Results[context] = res;
             if (context.children != null)
                 foreach (IParseTree c in context.children)
@@ -534,7 +534,7 @@ namespace CalcXamForms
 
         public override Res VisitRelational_expression([NotNull] calculatorParser.Relational_expressionContext context)
         {
-            Res res = new CalcXamForms.Res { IsComplete = false, Value = 0 };
+            Res res = new Res { IsComplete = false, Value = 0 };
             Results[context] = res;
             if (context.children != null)
                 foreach (IParseTree c in context.children)
@@ -573,7 +573,7 @@ namespace CalcXamForms
 
         public override Res VisitEquality_expression([NotNull] calculatorParser.Equality_expressionContext context)
         {
-            Res res = new CalcXamForms.Res { IsComplete = false, Value = 0 };
+            Res res = new Res { IsComplete = false, Value = 0 };
             Results[context] = res;
             if (context.children != null)
                 foreach (IParseTree c in context.children)
@@ -610,7 +610,7 @@ namespace CalcXamForms
 
         public override Res VisitAnd_expression([NotNull] calculatorParser.And_expressionContext context)
         {
-            Res res = new CalcXamForms.Res { IsComplete = false, Value = 0 };
+            Res res = new Res { IsComplete = false, Value = 0 };
             Results[context] = res;
             if (context.children != null)
                 foreach (IParseTree c in context.children)
@@ -646,7 +646,7 @@ namespace CalcXamForms
 
         public override Res VisitExclusive_or_expression([NotNull] calculatorParser.Exclusive_or_expressionContext context)
         {
-            Res res = new CalcXamForms.Res { IsComplete = false, Value = 0 };
+            Res res = new Res { IsComplete = false, Value = 0 };
             Results[context] = res;
             if (context.children != null)
                 foreach (IParseTree c in context.children)
@@ -682,7 +682,7 @@ namespace CalcXamForms
 
         public override Res VisitInclusive_or_expression([NotNull] calculatorParser.Inclusive_or_expressionContext context)
         {
-            Res res = new CalcXamForms.Res { IsComplete = false, Value = 0 };
+            Res res = new Res { IsComplete = false, Value = 0 };
             Results[context] = res;
             if (context.children != null)
                 foreach (IParseTree c in context.children)
@@ -718,7 +718,7 @@ namespace CalcXamForms
 
         public override Res VisitConditional_and_expression([NotNull] calculatorParser.Conditional_and_expressionContext context)
         {
-            Res res = new CalcXamForms.Res { IsComplete = false, Value = 0 };
+            Res res = new Res { IsComplete = false, Value = 0 };
             Results[context] = res;
             if (context.children != null)
                 foreach (IParseTree c in context.children)
@@ -754,7 +754,7 @@ namespace CalcXamForms
 
         public override Res VisitConditional_or_expression([NotNull] calculatorParser.Conditional_or_expressionContext context)
         {
-            Res res = new CalcXamForms.Res { IsComplete = false, Value = 0 };
+            Res res = new Res { IsComplete = false, Value = 0 };
             Results[context] = res;
             if (context.children != null)
                 foreach (IParseTree c in context.children)
@@ -790,7 +790,7 @@ namespace CalcXamForms
 
         public override Res VisitNull_coalescing_expression([NotNull] calculatorParser.Null_coalescing_expressionContext context)
         {
-            Res res = new CalcXamForms.Res { IsComplete = false, Value = 0 };
+            Res res = new Res { IsComplete = false, Value = 0 };
             Results[context] = res;
             if (context.children != null)
                 foreach (IParseTree c in context.children)
@@ -826,7 +826,7 @@ namespace CalcXamForms
 
         public override Res VisitConditional_expression([NotNull] calculatorParser.Conditional_expressionContext context)
         {
-            Res res = new CalcXamForms.Res { IsComplete = false, Value = 0 };
+            Res res = new Res { IsComplete = false, Value = 0 };
             Results[context] = res;
             if (context.children != null)
                 foreach (IParseTree c in context.children)
@@ -850,7 +850,7 @@ namespace CalcXamForms
 
         public override Res VisitNon_assignment_expression([NotNull] calculatorParser.Non_assignment_expressionContext context)
         {
-            Res res = new CalcXamForms.Res { IsComplete = false, Value = 0 };
+            Res res = new Res { IsComplete = false, Value = 0 };
             Results[context] = res;
             if (context.children != null)
                 foreach (IParseTree c in context.children)
@@ -874,7 +874,7 @@ namespace CalcXamForms
 
         public override Res VisitIdentifier([NotNull] calculatorParser.IdentifierContext context)
         {
-            Res res = new CalcXamForms.Res { IsComplete = false, Value = 0 };
+            Res res = new Res { IsComplete = false, Value = 0 };
             Results[context] = res;
             if (context.children != null)
                 foreach (IParseTree c in context.children)
@@ -887,7 +887,7 @@ namespace CalcXamForms
 
         public override Res VisitType_argument_list_opt([NotNull] calculatorParser.Type_argument_list_optContext context)
         {
-            Res res = new CalcXamForms.Res { IsComplete = true, Value = 0 };
+            Res res = new Res { IsComplete = true, Value = 0 };
             Results[context] = res;
             if (context.children != null)
                 foreach (IParseTree c in context.children)
@@ -906,7 +906,7 @@ namespace CalcXamForms
 
         public override Res VisitMethod_invocation2([NotNull] calculatorParser.Method_invocation2Context context)
         {
-            Res res = new CalcXamForms.Res { IsComplete = true, Value = 0 };
+            Res res = new Res { IsComplete = true, Value = 0 };
             if (context.children != null)
                 foreach (IParseTree c in context.children)
                 {
@@ -933,14 +933,14 @@ namespace CalcXamForms
                 {
                     Visit(c);
                 }
-            Res res = new CalcXamForms.Res { IsComplete = true, Value = 0 };
+            Res res = new Res { IsComplete = true, Value = 0 };
             Results[context] = res;
             return res;
         }
 
         public override Res VisitParenthesized_expression([NotNull] calculatorParser.Parenthesized_expressionContext context)
         {
-            Res res = new CalcXamForms.Res { IsComplete = true, Value = 0 };
+            Res res = new Res { IsComplete = true, Value = 0 };
             if (context.children != null)
                 foreach (IParseTree c in context.children)
                 {

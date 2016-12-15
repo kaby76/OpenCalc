@@ -3,6 +3,7 @@ using System.ComponentModel;
 using Android.Text;
 using Android.Views;
 using CalcXamForms;
+using CalcXamForms.Controls;
 using CalcXamForms.Droid;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;

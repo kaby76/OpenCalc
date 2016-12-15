@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using CalcXamForms.Controls;
 using Xamarin.Forms;
+using CalcXamForms.ViewModels;
 
-namespace CalcXamForms
+namespace CalcXamForms.Pages
 {
     public partial class PageCalc : ContentPage
     {
