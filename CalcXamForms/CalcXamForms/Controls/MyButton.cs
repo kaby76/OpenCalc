@@ -7,13 +7,12 @@ using Xamarin.Forms;
 
 namespace CalcXamForms.Controls
 {
-    //public class MyButton : Forms9Patch.Label
-    //public class MyButton : WebView
     public class MyButton : HtmlLabel
     {
         public MyButton()
         {
             base.Margin = new Thickness(0,0,0,0);
+            BackgroundColor = Color.Gray;
             TapGestureRecognizer gestureRecognizer = new TapGestureRecognizer();
             gestureRecognizer.Tapped += (s, e) => {
                 if (Command != null && Command.CanExecute(null))
@@ -44,9 +43,7 @@ namespace CalcXamForms.Controls
                 {
                     // Property has changed
                     MyButton b = bindable as MyButton;
-                    // Force recompute of Fext using unadulterated cached text label.
-                    // Note, this is done because we haven't written a renderer for MyButton.
-                    b.Fext = b.Fext;
+                    b.OnPropertyChanged("FSize");
                 }
                 , // propertyChanging, void function fired before set.
                 (bindable, oldValue, newValue) =>
@@ -75,14 +72,7 @@ namespace CalcXamForms.Controls
         public int FSize
         {
             get { return (int)GetValue(FSizeProperty); }
-            set
-            {
-                SetValue(FSizeProperty, value);
-                // recompute...
-                Fext = _text;
-//                OnPropertyChanged("Fext");
-                //NotifyPropertyChange("Fext");
-            }
+            set { SetValue(FSizeProperty, value); }
         }
 
 
@@ -105,18 +95,6 @@ namespace CalcXamForms.Controls
             set
             {
                 _text = value;
-                // Font size in html is not observed!
-                // See http://stackoverflow.com/questions/7247113/using-size-html-attribute-in-textview
-                StringBuilder sb = new StringBuilder();
-                for (int i = 0; i < FSize / 10; ++i)
-                    sb.Append("<big><big>");
-                sb.Append(_text);
-                for (int i = 0; i < FSize / 10; ++i)
-                    sb.Append("</big></big>");
-                this.Text = sb.ToString();
-                base.HorizontalTextAlignment = TextAlignment.Center;
-                base.VerticalTextAlignment = TextAlignment.Center;
-                OnPropertyChanged("Fext");
             }
         }
     }

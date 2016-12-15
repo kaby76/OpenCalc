@@ -78,6 +78,7 @@ namespace CalcXamForms.ViewModels
             set
             {
                 _size = value;
+                // If the dimensions change, then everything pretty much has to be changed.
                 NotifyPropertyChanged("Results");
                 NotifyPropertyChanged("IsPortraitMode");
                 NotifyPropertyChanged("IsLandscapeMode");
@@ -102,7 +103,7 @@ namespace CalcXamForms.ViewModels
             get
             {
                 if (IsPortraitMode)
-                    return 20;
+                    return 40;
                 else
                     return 10;
             }

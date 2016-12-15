@@ -126,6 +126,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Renderers\MyButtonRenderer.cs" />
     <Compile Include="Renderers\HtmlLabelRenderer.cs" />
     <Compile Include="Renderers\MyListViewRenderer.cs" />
     <Compile Include="Renderers\NoChacheWebViewRenderer.cs" />
