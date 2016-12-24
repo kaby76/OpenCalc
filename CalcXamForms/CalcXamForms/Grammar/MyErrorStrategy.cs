@@ -187,5 +187,48 @@ namespace CalcXamForms
             }
             return result;
         }
+
+        [return: Nullable]
+        protected override IToken SingleTokenDeletion(Parser recognizer)
+        {
+            IToken res = base.SingleTokenDeletion(recognizer);
+            return res;
+        }
+
+        protected override bool SingleTokenInsertion(Parser recognizer)
+        {
+            var res = base.SingleTokenInsertion(recognizer);
+            return res;
+        }
+
+        protected override void ReportUnwantedToken(Parser recognizer)
+        {
+            base.ReportUnwantedToken(recognizer);
+        }
+
+        protected override void ReportMissingToken(Parser recognizer)
+        {
+            base.ReportMissingToken(recognizer);
+        }
+
+        protected override void ReportInputMismatch(Parser recognizer, InputMismatchException e)
+        {
+            base.ReportInputMismatch(recognizer, e);
+        }
+
+        protected override void ReportFailedPredicate(Parser recognizer, FailedPredicateException e)
+        {
+            base.ReportFailedPredicate(recognizer, e);
+        }
+
+        public override void ReportMatch(Parser recognizer)
+        {
+            base.ReportMatch(recognizer);
+        }
+
+        protected override void ReportNoViableAlternative(Parser recognizer, NoViableAltException e)
+        {
+            base.ReportNoViableAlternative(recognizer, e);
+        }
     }
 }

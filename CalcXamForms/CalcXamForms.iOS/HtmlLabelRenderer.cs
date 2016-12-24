@@ -7,9 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using CalcXamForms;
+using CalcXamForms.Controls;
 using CalcXamForms.iOS;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
 
 [assembly: ExportRenderer(typeof(HtmlLabel), typeof(HtmlLabelRenderer))]
 namespace CalcXamForms.iOS

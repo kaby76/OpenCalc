@@ -919,7 +919,8 @@ namespace CalcXamForms.Trees
             }
             else if (context.ChildCount == 1)
             {
-                Res r = Results[context.GetChild(0)];
+                var child = context.GetChild(0);
+                Res r = Results[child];
                 res.IsComplete &= r.IsComplete;
             }
             Results[context] = res;
@@ -959,6 +960,13 @@ namespace CalcXamForms.Trees
         public override Res VisitAssignment([NotNull] calculatorParser.AssignmentContext context)
         {
             throw new Exception("Assignment not allowed.");
+        }
+
+        public override Res Visit(IParseTree tree)
+        {
+            if (tree as TerminalNodeImpl != null)
+                Results[tree] = new Res { IsComplete = true, Value = 0 };
+            return tree.Accept(this);
         }
     }
 }

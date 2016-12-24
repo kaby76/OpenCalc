@@ -27,7 +27,7 @@ namespace CalcXamForms.ViewModels
             return _singleton;
         }
         private PageCalc _page_calc;
-        private ICommand _on_tap_command = new Command(async (o) =>
+        public ICommand OnTap { get; set; } = new Command(async (o) =>
         {
             HtmlLabel label = o as HtmlLabel;
             if (label != null)
@@ -57,17 +57,6 @@ namespace CalcXamForms.ViewModels
                 await _singleton._page_calc.Navigation.PushPopupAsync(page);
             }
         });
-        public ICommand OnTap
-        {
-            get
-            {
-                return _on_tap_command;
-            }
-            set
-            {
-                _on_tap_command = value;
-            }
-        }
         private Size _size;
         public Size Dimensions
         {
@@ -85,17 +74,14 @@ namespace CalcXamForms.ViewModels
                 NotifyPropertyChanged("ButtonHeight");
             }
         }
-
         public int KeypadHeight
         {
             get { return (int) (IsPortraitMode ? Dimensions.Height*0.5 : Dimensions.Height*0.6); }
         }
-
         public int ButtonHeight
         {
             get { return IsPortraitMode ? 30 : 10; }
         }
-
         private string BuildFormattedCommandAndResult(string str, int error, string result)
         {
             string p1 = str.Substring(0, error);
@@ -128,7 +114,6 @@ namespace CalcXamForms.ViewModels
                 NotifyPropertyChanged();
             }
         }
-
         public bool IsPortraitMode
         {
             get
@@ -330,10 +315,20 @@ namespace CalcXamForms.ViewModels
             IParseTree[] all_eni_nodes_iterator = eni_nodes_iterator.ToArray();
             if (!all_eni_nodes_iterator.Any()) return false;
 
-            ErrorNodeImpl eni = all_eni_nodes_iterator.First() as ErrorNodeImpl;
-            if (eni.GetText() == "<missing '='>") return false;
+            // For now, report nothing if there isn't an equal.
+            foreach (var en in all_eni_nodes_iterator)
+            {
+                ErrorNodeImpl eni = en as ErrorNodeImpl;
+                if (eni != null)
+                {
+                    if (eni.GetText() == "<missing '='>") return false;
+                }
+            }
 
-            int ErrorPos = eni.Payload.StartIndex;
+            var enn = all_eni_nodes_iterator.First() as ErrorNodeImpl;
+            if (enn == null) return false;
+
+            int ErrorPos = enn.Payload.StartIndex;
 
             string result = "Extraneous input.";
             _display_buffer[_display_buffer.Count - 1].Text = BuildFormattedCommandAndResult(plain_ole_command, ErrorPos, result);
@@ -349,8 +344,12 @@ namespace CalcXamForms.ViewModels
             // Find last good term.
             try
             {
+                ComputeCompleteness completeness_visitor = new ComputeCompleteness();
+                completeness_visitor.Visit(tree);
+
                 VisitorCalc visitor = new VisitorCalc();
                 visitor.Visit(tree);
+
                 var list = all_nodes.Where((nn) =>
                 {
                     ParserRuleContext prc = nn as ParserRuleContext;

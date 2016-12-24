@@ -4,7 +4,7 @@ using CalcXamForms.Pages;
 
 namespace CalcXamForms
 {
-    public partial class App : Xamarin.Forms.Application
+    public partial class App : Application
     {
         public App()
         {

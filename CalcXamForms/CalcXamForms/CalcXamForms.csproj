@@ -44,6 +44,9 @@
     <Compile Include="Grammar\calculatorListener.cs" />
     <Compile Include="Grammar\calculatorParser.cs" />
     <Compile Include="Grammar\calculatorVisitor.cs" />
+    <Compile Include="Trees\Class1.cs" />
+    <Compile Include="Trees\ComputeCompleteness.cs" />
+    <Compile Include="Trees\ComputeLinqExpr.cs" />
     <Compile Include="Trees\DFSVisitor.cs" />
     <Compile Include="Controls\HtmlLabel.cs" />
     <Compile Include="Pages\MasterPage.xaml.cs">
