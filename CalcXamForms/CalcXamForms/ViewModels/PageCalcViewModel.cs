@@ -347,6 +347,9 @@ namespace CalcXamForms.ViewModels
                 ComputeCompleteness completeness_visitor = new ComputeCompleteness();
                 completeness_visitor.Visit(tree);
 
+                ComputeLinqExpr linq_visitor = new ComputeLinqExpr(completeness_visitor);
+                linq_visitor.Visit(tree);
+
                 VisitorCalc visitor = new VisitorCalc();
                 visitor.Visit(tree);
 
