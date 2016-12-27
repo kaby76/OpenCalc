@@ -199,7 +199,11 @@ namespace CalcXamForms.Trees
             if (context.children != null)
                 foreach (var c in context.children)
                 {
-                    Visit(c);
+                    if (!Visit(c))
+                    {
+                        Results[context] = false;
+                        return false;
+                    }
                 }
             if (context.ChildCount == 1)
             {
@@ -335,7 +339,7 @@ namespace CalcXamForms.Trees
             if (context.ChildCount == 1)
             {
                 Results[context] = lhs;
-                return res;
+                return lhs;
             }
             int count = 0;
             res = lhs;
@@ -372,7 +376,7 @@ namespace CalcXamForms.Trees
             if (context.ChildCount == 1)
             {
                 Results[context] = lhs;
-                return res;
+                return lhs;
             }
             int count = 0;
             res = lhs;
@@ -410,7 +414,7 @@ namespace CalcXamForms.Trees
             if (context.ChildCount == 1)
             {
                 Results[context] = lhs;
-                return res;
+                return lhs;
             }
             int count = 0;
             res = lhs;
@@ -448,7 +452,7 @@ namespace CalcXamForms.Trees
             if (context.ChildCount == 1)
             {
                 Results[context] = lhs;
-                return res;
+                return lhs;
             }
             int count = 0;
             res = lhs;
@@ -485,7 +489,7 @@ namespace CalcXamForms.Trees
             if (context.ChildCount == 1)
             {
                 Results[context] = lhs;
-                return res;
+                return lhs;
             }
             int count = 0;
             res = lhs;
@@ -523,7 +527,7 @@ namespace CalcXamForms.Trees
             if (context.ChildCount == 1)
             {
                 Results[context] = lhs;
-                return res;
+                return lhs;
             }
             int count = 0;
             res = lhs;
@@ -558,7 +562,7 @@ namespace CalcXamForms.Trees
             if (context.ChildCount == 1)
             {
                 Results[context] = lhs;
-                return res;
+                return lhs;
             }
             int count = 0;
             res = lhs;
@@ -593,7 +597,7 @@ namespace CalcXamForms.Trees
             if (context.ChildCount == 1)
             {
                 Results[context] = lhs;
-                return res;
+                return lhs;
             }
             int count = 0;
             res = lhs;
@@ -629,7 +633,7 @@ namespace CalcXamForms.Trees
             if (context.ChildCount == 1)
             {
                 Results[context] = lhs;
-                return res;
+                return lhs;
             }
             int count = 0;
             res = lhs;
@@ -665,7 +669,7 @@ namespace CalcXamForms.Trees
             if (context.ChildCount == 1)
             {
                 Results[context] = lhs;
-                return res;
+                return lhs;
             }
             int count = 0;
             res = lhs;
@@ -701,10 +705,10 @@ namespace CalcXamForms.Trees
             if (context.ChildCount == 1)
             {
                 Results[context] = lhs;
-                return res;
+                return lhs;
             }
-            Results[context] = res;
-            return res;
+            Results[context] = lhs;
+            return lhs;
         }
 
         public override bool VisitNon_assignment_expression([NotNull] calculatorParser.Non_assignment_expressionContext context)
@@ -729,7 +733,7 @@ namespace CalcXamForms.Trees
             if (context.ChildCount == 1)
             {
                 Results[context] = lhs;
-                return res;
+                return lhs;
             }
             Results[context] = res;
             return res;

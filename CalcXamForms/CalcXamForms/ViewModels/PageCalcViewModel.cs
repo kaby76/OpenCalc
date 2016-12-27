@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows.Input;
@@ -35,7 +36,7 @@ namespace CalcXamForms.ViewModels
                 int found = _singleton.Results.IndexOf(label);
                 if (found < 0)
                     return;
-                else if (found > 0)
+                else
                 {
                     // Insert a copy of the command into top (or overwrite if empty).
                     string command = _singleton._calculation_buffer[found];
@@ -52,6 +53,7 @@ namespace CalcXamForms.ViewModels
                         _singleton._calculation_buffer[_singleton._calculation_buffer.Count - 1] = command;
                         _singleton._display_buffer[_singleton._display_buffer.Count - 1] = results;
                     }
+                    _singleton.NotifyPropertyChanged("Results");
                 }
                 EditorPopup page = new EditorPopup(_singleton);
                 await _singleton._page_calc.Navigation.PushPopupAsync(page);
@@ -348,18 +350,15 @@ namespace CalcXamForms.ViewModels
                 completeness_visitor.Visit(tree);
 
                 ComputeLinqExpr linq_visitor = new ComputeLinqExpr(completeness_visitor);
-                linq_visitor.Visit(tree);
-
-                VisitorCalc visitor = new VisitorCalc();
-                visitor.Visit(tree);
+                Expression top_expr = linq_visitor.Visit(tree);
 
                 var list = all_nodes.Where((nn) =>
                 {
                     ParserRuleContext prc = nn as ParserRuleContext;
                     if (prc == null) return false;
-                    Res r;
-                    if (!visitor.Results.TryGetValue(prc, out r)) return false;
-                    return r.IsComplete;
+                    bool r;
+                    if (!completeness_visitor.Results.TryGetValue(prc, out r)) return false;
+                    return r;
                 });
                 IParseTree[] find = list.ToArray();
                 if (find.Length == 0) return false;
@@ -367,9 +366,23 @@ namespace CalcXamForms.ViewModels
                 ParserRuleContext child = find.Reverse().First() as ParserRuleContext;
                 // Grab parent as partial results are valuable.
                 ParserRuleContext parent = child.Parent as ParserRuleContext;
-                Res res;
-                visitor.Results.TryGetValue(parent != null ? parent : child, out res);
-                result = res.Value.ToString();
+
+                // Eval.
+                try
+                {
+                    Expression exp = null;
+                    linq_visitor.Results.TryGetValue(parent != null ? parent : child, out exp);
+                    Func<double> compiled_expr = Expression.Lambda<Func<double>>(exp).Compile();
+                    double res = compiled_expr();
+                    result = res.ToString();
+                }
+                catch (Exception e)
+                {
+                }
+
+                //Res res;
+                //visitor.Results.TryGetValue(parent != null ? parent : child, out res);
+                //result = res.Value.ToString();
             }
             catch (Exception e)
             {
