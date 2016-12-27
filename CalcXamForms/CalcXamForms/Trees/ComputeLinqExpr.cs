@@ -76,59 +76,72 @@ namespace CalcXamForms.Trees
                     Visit(c);
                 }
             var child = context.children[0];
-            if (!(child is TerminalNodeImpl)) return null;
-            TerminalNodeImpl c2 = child as TerminalNodeImpl;
-            IToken sym = c2.Symbol;
-            int type = sym.Type;
-            switch (type)
+            if (child is TerminalNodeImpl)
             {
-                case calculatorParser.REAL_LITERAL:
-                    try
-                    {
-                        string str = context.GetText();
-                        double val = Convert.ToDouble(str);
-                        Expression result = Expression.Constant((double)val, typeof(double));
-                        Results[context] = result;
-                        return result;
-                    }
-                    catch (Exception)
-                    {
-                    }
-                    return null;
-                case calculatorParser.INTEGER_LITERAL:
-                    try
-                    {
-                        string str = context.GetText();
-                        int val = Convert.ToInt32(str);
-                        Expression result = Expression.Constant((double)val, typeof(double));
-                        Results[context] = result;
-                        return result;
-                    }
-                    catch (Exception)
-                    {
-                    }
-                    return null;
+                TerminalNodeImpl c2 = child as TerminalNodeImpl;
+                IToken sym = c2.Symbol;
+                int type = sym.Type;
+                switch (type)
+                {
+                    case calculatorParser.REAL_LITERAL:
+                        try
+                        {
+                            string str = context.GetText();
+                            double val = Convert.ToDouble(str);
+                            Expression result = Expression.Constant((double) val, typeof(double));
+                            Results[context] = result;
+                            return result;
+                        }
+                        catch (Exception)
+                        {
+                        }
+                        return null;
+                    case calculatorParser.INTEGER_LITERAL:
+                        try
+                        {
+                            string str = context.GetText();
+                            int val = Convert.ToInt32(str);
+                            Expression result = Expression.Constant((double) val, typeof(double));
+                            Results[context] = result;
+                            return result;
+                        }
+                        catch (Exception)
+                        {
+                        }
+                        return null;
 
-                case calculatorParser.TRUE:
+                    case calculatorParser.TRUE:
                     {
                         Expression result = Expression.Constant(true, typeof(bool));
                         Results[context] = result;
                         return result;
                     }
 
-                case calculatorParser.FALSE:
+                    case calculatorParser.FALSE:
                     {
                         Expression result = Expression.Constant(false, typeof(bool));
                         Results[context] = result;
                         return result;
                     }
 
-                default:
+                    default:
                     {
                         Expression result = null;
                         Results[context] = result;
                         return result;
                     }
+                }
+            }
+            else
+            {
+                if (_completeness.Results[context])
+                {
+                    Expression lhs = Results[context.GetChild(0)];
+                    Results[context] = lhs;
+                    return lhs;
+                }
+                Results[context] = null;
+                return null;
             }
         }
 
@@ -145,11 +158,47 @@ namespace CalcXamForms.Trees
             {
                 string str = context.GetText();
                 bool val = Convert.ToBoolean(str);
-                return Expression.Constant(val, typeof(bool));
+                Expression result = Expression.Constant(val, typeof(bool));
+                Results[context] = result;
+                return result;
             }
             catch (Exception)
             {
             }
+            return null;
+        }
+
+        public override Expression VisitBoolean_expression([NotNull] calculatorParser.Boolean_expressionContext context)
+        {
+            if (context.children != null)
+                foreach (IParseTree c in context.children)
+                {
+                    Visit(c);
+                }
+            if (_completeness.Results[context])
+            {
+                Expression lhs = Results[context.GetChild(0)];
+                Results[context] = lhs;
+                return lhs;
+            }
+            Results[context] = null;
+            return null;
+        }
+
+        public override Expression VisitConstant_expression([NotNull] calculatorParser.Constant_expressionContext context)
+        {
+            if (context.children != null)
+                foreach (IParseTree c in context.children)
+                {
+                    Visit(c);
+                }
+            if (_completeness.Results[context])
+            {
+                Expression lhs = Results[context.GetChild(0)];
+                Results[context] = lhs;
+                return lhs;
+            }
+            Results[context] = null;
             return null;
         }
 
@@ -544,7 +593,7 @@ namespace CalcXamForms.Trees
                     Expression rhs = Results[context.GetChild(count + 2)];
                     IParseTree op_pt = context.GetChild(count + 1);
                     string op = op_pt.GetText();
-                    if (op == "||") lhs = Expression.And(lhs, rhs);
+                    if (op == "||") lhs = Expression.Or(lhs, rhs);
                     count += 2;
                 }
                 Results[context] = lhs;

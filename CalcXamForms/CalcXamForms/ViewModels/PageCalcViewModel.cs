@@ -372,8 +372,9 @@ namespace CalcXamForms.ViewModels
                 {
                     Expression exp = null;
                     linq_visitor.Results.TryGetValue(parent != null ? parent : child, out exp);
-                    Func<double> compiled_expr = Expression.Lambda<Func<double>>(exp).Compile();
-                    double res = compiled_expr();
+                    Type type = exp.Type;
+                    Delegate compiled_expr = Expression.Lambda(exp, null).Compile();
+                    var res = compiled_expr.DynamicInvoke();
                     result = res.ToString();
                 }
                 catch (Exception e)

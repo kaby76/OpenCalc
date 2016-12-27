@@ -171,6 +171,67 @@ namespace CalcXamForms.Trees
             return true;
         }
 
+        public override bool VisitBoolean_literal([NotNull] calculatorParser.Boolean_literalContext context)
+        {
+            if (context.children != null)
+                foreach (var c in context.children)
+                {
+                    if (!Visit(c))
+                    {
+                        Results[context] = false;
+                        return false;
+                    }
+                }
+            Results[context] = true;
+            return true;
+        }
+
+        public override bool VisitBoolean_expression([NotNull] calculatorParser.Boolean_expressionContext context)
+        {
+            if (context.children != null)
+                foreach (var c in context.children)
+                {
+                    if (!Visit(c))
+                    {
+                        Results[context] = false;
+                        return false;
+                    }
+                }
+            if (context.ChildCount == 1)
+            {
+                bool lhs = Results[context.GetChild(0)];
+                Results[context] = lhs;
+                return lhs;
+            }
+            {
+                Results[context] = false;
+                return false;
+            }
+        }
+
+        public override bool VisitConstant_expression([NotNull] calculatorParser.Constant_expressionContext context)
+        {
+            if (context.children != null)
+                foreach (var c in context.children)
+                {
+                    if (!Visit(c))
+                    {
+                        Results[context] = false;
+                        return false;
+                    }
+                }
+            if (context.ChildCount == 1)
+            {
+                bool lhs = Results[context.GetChild(0)];
+                Results[context] = lhs;
+                return lhs;
+            }
+            {
+                Results[context] = false;
+                return false;
+            }
+        }
+
         public override bool VisitPrimary_expression_start([NotNull] calculatorParser.Primary_expression_startContext context)
         {
             if (context.children != null)
