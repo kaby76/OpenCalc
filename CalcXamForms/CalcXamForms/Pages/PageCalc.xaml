@@ -81,7 +81,7 @@
           <controls:MyButton Grid.Row="3" Grid.Column="3" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank1}" HtmlText="*" Command="{Binding BStar}" />
           <controls:MyButton Grid.Row="4" Grid.Column="0" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank1}" HtmlText="." Command="{Binding BDot}" />
           <controls:MyButton Grid.Row="4" Grid.Column="1" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank1}" HtmlText="0" Command="{Binding B0}" />
-          <controls:MyButton Grid.Row="4" Grid.Column="2" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank1}" HtmlText="=" Command="{Binding BEquals}" />
+          <controls:MyButton Grid.Row="4" Grid.Column="2" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank1}" HtmlText="&amp;crarr;" Command="{Binding BEquals}" />
           <controls:MyButton Grid.Row="4" Grid.Column="3" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank1}" HtmlText="/" Command="{Binding BSlash}" />
           <controls:MyButton Grid.Row="1" Grid.Column="0" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank2}" HtmlText="Sin" Command="{Binding BSin}" />
           <controls:MyButton Grid.Row="1" Grid.Column="1" FSize="{Binding ButtonHeight}" IsVisible="{Binding Bank2}" HtmlText="Cos" Command="{Binding BCos}" />

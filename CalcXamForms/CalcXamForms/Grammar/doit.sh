@@ -7,6 +7,14 @@ for i in antlr-4.5.3-complete.jar; do
 echo i is $i
 
 rm -rf *.tokens
+rm -rf *.class
+rm -rf calculator*.java
+rm -rf CSharp4*.java
+rm -rf calculator*.cs
+rm -rf CSharp4*.cs
+
+#java -cp ".;h:\\Downloads\\$i" org.antlr.v4.Tool -Dlanguage=CSharp -visitor CSharp4Lexer.g4
+#java -cp ".;h:\\Downloads\\$i" org.antlr.v4.Tool -visitor CSharp4Lexer.g4
 
 java -cp ".;h:\\Downloads\\$i" org.antlr.v4.Tool -Dlanguage=CSharp -visitor calculator.g4
 java -cp ".;h:\\Downloads\\$i" org.antlr.v4.Tool -visitor calculator.g4

@@ -184,7 +184,7 @@ namespace CalcXamForms.ViewModels
         public ICommand BSlash { get; set; } = new Command((nothing) => _singleton.InOperator("/"));
         public ICommand BEquals { get; set; } = new Command((nothing) =>
         {
-            _singleton.InOperator("=");
+            _singleton.InOperator("");
             _singleton._display_buffer.Add(new HtmlLabel() { Align = HtmlLabel.Alignment.Right });
             _singleton._calculation_buffer.Add("");
             HtmlLabel item = _singleton._display_buffer[_singleton._display_buffer.Count - 1];

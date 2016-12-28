@@ -41,6 +41,26 @@ public interface IcalculatorListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitExpressionResult([NotNull] calculatorParser.ExpressionResultContext context);
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.namespace_name"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterNamespace_name([NotNull] calculatorParser.Namespace_nameContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.namespace_name"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitNamespace_name([NotNull] calculatorParser.Namespace_nameContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.type_name"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterType_name([NotNull] calculatorParser.Type_nameContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.type_name"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitType_name([NotNull] calculatorParser.Type_nameContext context);
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="calculatorParser.identifier"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -51,6 +71,16 @@ public interface IcalculatorListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitIdentifier([NotNull] calculatorParser.IdentifierContext context);
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.namespace_or_type_name"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterNamespace_or_type_name([NotNull] calculatorParser.Namespace_or_type_nameContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.namespace_or_type_name"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitNamespace_or_type_name([NotNull] calculatorParser.Namespace_or_type_nameContext context);
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="calculatorParser.type_argument_list_opt"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -60,6 +90,166 @@ public interface IcalculatorListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitType_argument_list_opt([NotNull] calculatorParser.Type_argument_list_optContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterType([NotNull] calculatorParser.TypeContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitType([NotNull] calculatorParser.TypeContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.base_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterBase_type([NotNull] calculatorParser.Base_typeContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.base_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitBase_type([NotNull] calculatorParser.Base_typeContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.simple_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterSimple_type([NotNull] calculatorParser.Simple_typeContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.simple_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitSimple_type([NotNull] calculatorParser.Simple_typeContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.numeric_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterNumeric_type([NotNull] calculatorParser.Numeric_typeContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.numeric_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitNumeric_type([NotNull] calculatorParser.Numeric_typeContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.integral_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterIntegral_type([NotNull] calculatorParser.Integral_typeContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.integral_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitIntegral_type([NotNull] calculatorParser.Integral_typeContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.floating_point_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterFloating_point_type([NotNull] calculatorParser.Floating_point_typeContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.floating_point_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitFloating_point_type([NotNull] calculatorParser.Floating_point_typeContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.nullable_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterNullable_type([NotNull] calculatorParser.Nullable_typeContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.nullable_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitNullable_type([NotNull] calculatorParser.Nullable_typeContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.non_nullable_value_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterNon_nullable_value_type([NotNull] calculatorParser.Non_nullable_value_typeContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.non_nullable_value_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitNon_nullable_value_type([NotNull] calculatorParser.Non_nullable_value_typeContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.reference_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterReference_type([NotNull] calculatorParser.Reference_typeContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.reference_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitReference_type([NotNull] calculatorParser.Reference_typeContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.class_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterClass_type([NotNull] calculatorParser.Class_typeContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.class_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitClass_type([NotNull] calculatorParser.Class_typeContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.interface_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterInterface_type([NotNull] calculatorParser.Interface_typeContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.interface_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitInterface_type([NotNull] calculatorParser.Interface_typeContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.delegate_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterDelegate_type([NotNull] calculatorParser.Delegate_typeContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.delegate_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitDelegate_type([NotNull] calculatorParser.Delegate_typeContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.type_argument_list"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterType_argument_list([NotNull] calculatorParser.Type_argument_listContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.type_argument_list"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitType_argument_list([NotNull] calculatorParser.Type_argument_listContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.type_arguments"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterType_arguments([NotNull] calculatorParser.Type_argumentsContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.type_arguments"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitType_arguments([NotNull] calculatorParser.Type_argumentsContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.type_argument"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterType_argument([NotNull] calculatorParser.Type_argumentContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.type_argument"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitType_argument([NotNull] calculatorParser.Type_argumentContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.type_void"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterType_void([NotNull] calculatorParser.Type_voidContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.type_void"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitType_void([NotNull] calculatorParser.Type_voidContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="calculatorParser.variable_reference"/>.
 	/// </summary>
@@ -201,6 +391,26 @@ public interface IcalculatorListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitThis_access([NotNull] calculatorParser.This_accessContext context);
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.base_access"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterBase_access([NotNull] calculatorParser.Base_accessContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.base_access"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitBase_access([NotNull] calculatorParser.Base_accessContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.object_creation_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterObject_creation_expression([NotNull] calculatorParser.Object_creation_expressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.object_creation_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitObject_creation_expression([NotNull] calculatorParser.Object_creation_expressionContext context);
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="calculatorParser.object_or_collection_initializer"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -281,6 +491,46 @@ public interface IcalculatorListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitElement_initializer([NotNull] calculatorParser.Element_initializerContext context);
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.array_creation_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterArray_creation_expression([NotNull] calculatorParser.Array_creation_expressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.array_creation_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitArray_creation_expression([NotNull] calculatorParser.Array_creation_expressionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.delegate_creation_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterDelegate_creation_expression([NotNull] calculatorParser.Delegate_creation_expressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.delegate_creation_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitDelegate_creation_expression([NotNull] calculatorParser.Delegate_creation_expressionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.anonymous_object_creation_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterAnonymous_object_creation_expression([NotNull] calculatorParser.Anonymous_object_creation_expressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.anonymous_object_creation_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitAnonymous_object_creation_expression([NotNull] calculatorParser.Anonymous_object_creation_expressionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.anonymous_object_initializer"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterAnonymous_object_initializer([NotNull] calculatorParser.Anonymous_object_initializerContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.anonymous_object_initializer"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitAnonymous_object_initializer([NotNull] calculatorParser.Anonymous_object_initializerContext context);
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="calculatorParser.member_declarator_list"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -300,6 +550,16 @@ public interface IcalculatorListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitMember_declarator([NotNull] calculatorParser.Member_declaratorContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.typeof_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterTypeof_expression([NotNull] calculatorParser.Typeof_expressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.typeof_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitTypeof_expression([NotNull] calculatorParser.Typeof_expressionContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="calculatorParser.unbound_type_name"/>.
 	/// </summary>
@@ -351,6 +611,16 @@ public interface IcalculatorListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitUnchecked_expression([NotNull] calculatorParser.Unchecked_expressionContext context);
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.default_value_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterDefault_value_expression([NotNull] calculatorParser.Default_value_expressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.default_value_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitDefault_value_expression([NotNull] calculatorParser.Default_value_expressionContext context);
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="calculatorParser.unary_expression"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -360,6 +630,16 @@ public interface IcalculatorListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitUnary_expression([NotNull] calculatorParser.Unary_expressionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.scan_for_cast_generic_precedence"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterScan_for_cast_generic_precedence([NotNull] calculatorParser.Scan_for_cast_generic_precedenceContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.scan_for_cast_generic_precedence"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitScan_for_cast_generic_precedence([NotNull] calculatorParser.Scan_for_cast_generic_precedenceContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="calculatorParser.cast_disambiguation_token"/>.
 	/// </summary>
@@ -390,6 +670,16 @@ public interface IcalculatorListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitPre_decrement_expression([NotNull] calculatorParser.Pre_decrement_expressionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.cast_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterCast_expression([NotNull] calculatorParser.Cast_expressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.cast_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitCast_expression([NotNull] calculatorParser.Cast_expressionContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="calculatorParser.multiplicative_expression"/>.
 	/// </summary>
@@ -431,6 +721,16 @@ public interface IcalculatorListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitRelational_expression([NotNull] calculatorParser.Relational_expressionContext context);
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.scan_for_shift_generic_precedence"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterScan_for_shift_generic_precedence([NotNull] calculatorParser.Scan_for_shift_generic_precedenceContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.scan_for_shift_generic_precedence"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitScan_for_shift_generic_precedence([NotNull] calculatorParser.Scan_for_shift_generic_precedenceContext context);
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="calculatorParser.shift_disambiguation_token"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -440,6 +740,16 @@ public interface IcalculatorListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitShift_disambiguation_token([NotNull] calculatorParser.Shift_disambiguation_tokenContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.isType"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterIsType([NotNull] calculatorParser.IsTypeContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.isType"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitIsType([NotNull] calculatorParser.IsTypeContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="calculatorParser.is_disambiguation_token"/>.
 	/// </summary>
@@ -531,6 +841,296 @@ public interface IcalculatorListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitConditional_expression([NotNull] calculatorParser.Conditional_expressionContext context);
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.lambda_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterLambda_expression([NotNull] calculatorParser.Lambda_expressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.lambda_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitLambda_expression([NotNull] calculatorParser.Lambda_expressionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.anonymous_method_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterAnonymous_method_expression([NotNull] calculatorParser.Anonymous_method_expressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.anonymous_method_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitAnonymous_method_expression([NotNull] calculatorParser.Anonymous_method_expressionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.anonymous_function_signature"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterAnonymous_function_signature([NotNull] calculatorParser.Anonymous_function_signatureContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.anonymous_function_signature"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitAnonymous_function_signature([NotNull] calculatorParser.Anonymous_function_signatureContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.explicit_anonymous_function_signature"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterExplicit_anonymous_function_signature([NotNull] calculatorParser.Explicit_anonymous_function_signatureContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.explicit_anonymous_function_signature"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitExplicit_anonymous_function_signature([NotNull] calculatorParser.Explicit_anonymous_function_signatureContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.explicit_anonymous_function_parameter_list"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterExplicit_anonymous_function_parameter_list([NotNull] calculatorParser.Explicit_anonymous_function_parameter_listContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.explicit_anonymous_function_parameter_list"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitExplicit_anonymous_function_parameter_list([NotNull] calculatorParser.Explicit_anonymous_function_parameter_listContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.explicit_anonymous_function_parameter"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterExplicit_anonymous_function_parameter([NotNull] calculatorParser.Explicit_anonymous_function_parameterContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.explicit_anonymous_function_parameter"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitExplicit_anonymous_function_parameter([NotNull] calculatorParser.Explicit_anonymous_function_parameterContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.anonymous_function_parameter_modifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterAnonymous_function_parameter_modifier([NotNull] calculatorParser.Anonymous_function_parameter_modifierContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.anonymous_function_parameter_modifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitAnonymous_function_parameter_modifier([NotNull] calculatorParser.Anonymous_function_parameter_modifierContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.implicit_anonymous_function_signature"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterImplicit_anonymous_function_signature([NotNull] calculatorParser.Implicit_anonymous_function_signatureContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.implicit_anonymous_function_signature"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitImplicit_anonymous_function_signature([NotNull] calculatorParser.Implicit_anonymous_function_signatureContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.implicit_anonymous_function_parameter_list"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterImplicit_anonymous_function_parameter_list([NotNull] calculatorParser.Implicit_anonymous_function_parameter_listContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.implicit_anonymous_function_parameter_list"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitImplicit_anonymous_function_parameter_list([NotNull] calculatorParser.Implicit_anonymous_function_parameter_listContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.implicit_anonymous_function_parameter"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterImplicit_anonymous_function_parameter([NotNull] calculatorParser.Implicit_anonymous_function_parameterContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.implicit_anonymous_function_parameter"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitImplicit_anonymous_function_parameter([NotNull] calculatorParser.Implicit_anonymous_function_parameterContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.anonymous_function_body"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterAnonymous_function_body([NotNull] calculatorParser.Anonymous_function_bodyContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.anonymous_function_body"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitAnonymous_function_body([NotNull] calculatorParser.Anonymous_function_bodyContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.query_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterQuery_expression([NotNull] calculatorParser.Query_expressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.query_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitQuery_expression([NotNull] calculatorParser.Query_expressionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.from_clause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterFrom_clause([NotNull] calculatorParser.From_clauseContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.from_clause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitFrom_clause([NotNull] calculatorParser.From_clauseContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.query_body"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterQuery_body([NotNull] calculatorParser.Query_bodyContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.query_body"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitQuery_body([NotNull] calculatorParser.Query_bodyContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.query_body_clauses"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterQuery_body_clauses([NotNull] calculatorParser.Query_body_clausesContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.query_body_clauses"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitQuery_body_clauses([NotNull] calculatorParser.Query_body_clausesContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.query_body_clause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterQuery_body_clause([NotNull] calculatorParser.Query_body_clauseContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.query_body_clause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitQuery_body_clause([NotNull] calculatorParser.Query_body_clauseContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.let_clause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterLet_clause([NotNull] calculatorParser.Let_clauseContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.let_clause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitLet_clause([NotNull] calculatorParser.Let_clauseContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.where_clause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterWhere_clause([NotNull] calculatorParser.Where_clauseContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.where_clause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitWhere_clause([NotNull] calculatorParser.Where_clauseContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.join_clause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterJoin_clause([NotNull] calculatorParser.Join_clauseContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.join_clause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitJoin_clause([NotNull] calculatorParser.Join_clauseContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.join_into_clause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterJoin_into_clause([NotNull] calculatorParser.Join_into_clauseContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.join_into_clause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitJoin_into_clause([NotNull] calculatorParser.Join_into_clauseContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.combined_join_clause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterCombined_join_clause([NotNull] calculatorParser.Combined_join_clauseContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.combined_join_clause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitCombined_join_clause([NotNull] calculatorParser.Combined_join_clauseContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.orderby_clause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterOrderby_clause([NotNull] calculatorParser.Orderby_clauseContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.orderby_clause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitOrderby_clause([NotNull] calculatorParser.Orderby_clauseContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.orderings"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterOrderings([NotNull] calculatorParser.OrderingsContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.orderings"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitOrderings([NotNull] calculatorParser.OrderingsContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.ordering"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterOrdering([NotNull] calculatorParser.OrderingContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.ordering"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitOrdering([NotNull] calculatorParser.OrderingContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.ordering_direction"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterOrdering_direction([NotNull] calculatorParser.Ordering_directionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.ordering_direction"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitOrdering_direction([NotNull] calculatorParser.Ordering_directionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.select_or_group_clause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterSelect_or_group_clause([NotNull] calculatorParser.Select_or_group_clauseContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.select_or_group_clause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitSelect_or_group_clause([NotNull] calculatorParser.Select_or_group_clauseContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.select_clause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterSelect_clause([NotNull] calculatorParser.Select_clauseContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.select_clause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitSelect_clause([NotNull] calculatorParser.Select_clauseContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.group_clause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterGroup_clause([NotNull] calculatorParser.Group_clauseContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.group_clause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitGroup_clause([NotNull] calculatorParser.Group_clauseContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.query_continuation"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterQuery_continuation([NotNull] calculatorParser.Query_continuationContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.query_continuation"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitQuery_continuation([NotNull] calculatorParser.Query_continuationContext context);
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="calculatorParser.assignment"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -591,6 +1191,910 @@ public interface IcalculatorListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitBoolean_expression([NotNull] calculatorParser.Boolean_expressionContext context);
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterStatement([NotNull] calculatorParser.StatementContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitStatement([NotNull] calculatorParser.StatementContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.embedded_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterEmbedded_statement([NotNull] calculatorParser.Embedded_statementContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.embedded_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitEmbedded_statement([NotNull] calculatorParser.Embedded_statementContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.simple_embedded_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterSimple_embedded_statement([NotNull] calculatorParser.Simple_embedded_statementContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.simple_embedded_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitSimple_embedded_statement([NotNull] calculatorParser.Simple_embedded_statementContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.block"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterBlock([NotNull] calculatorParser.BlockContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.block"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitBlock([NotNull] calculatorParser.BlockContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.statement_list"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterStatement_list([NotNull] calculatorParser.Statement_listContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.statement_list"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitStatement_list([NotNull] calculatorParser.Statement_listContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.empty_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterEmpty_statement([NotNull] calculatorParser.Empty_statementContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.empty_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitEmpty_statement([NotNull] calculatorParser.Empty_statementContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.labeled_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterLabeled_statement([NotNull] calculatorParser.Labeled_statementContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.labeled_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitLabeled_statement([NotNull] calculatorParser.Labeled_statementContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.declaration_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterDeclaration_statement([NotNull] calculatorParser.Declaration_statementContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.declaration_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitDeclaration_statement([NotNull] calculatorParser.Declaration_statementContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.local_variable_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterLocal_variable_declaration([NotNull] calculatorParser.Local_variable_declarationContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.local_variable_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitLocal_variable_declaration([NotNull] calculatorParser.Local_variable_declarationContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.local_variable_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterLocal_variable_type([NotNull] calculatorParser.Local_variable_typeContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.local_variable_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitLocal_variable_type([NotNull] calculatorParser.Local_variable_typeContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.local_variable_declarators"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterLocal_variable_declarators([NotNull] calculatorParser.Local_variable_declaratorsContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.local_variable_declarators"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitLocal_variable_declarators([NotNull] calculatorParser.Local_variable_declaratorsContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.local_variable_declarator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterLocal_variable_declarator([NotNull] calculatorParser.Local_variable_declaratorContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.local_variable_declarator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitLocal_variable_declarator([NotNull] calculatorParser.Local_variable_declaratorContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.local_variable_initializer"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterLocal_variable_initializer([NotNull] calculatorParser.Local_variable_initializerContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.local_variable_initializer"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitLocal_variable_initializer([NotNull] calculatorParser.Local_variable_initializerContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.local_constant_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterLocal_constant_declaration([NotNull] calculatorParser.Local_constant_declarationContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.local_constant_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitLocal_constant_declaration([NotNull] calculatorParser.Local_constant_declarationContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.expression_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterExpression_statement([NotNull] calculatorParser.Expression_statementContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.expression_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitExpression_statement([NotNull] calculatorParser.Expression_statementContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.statement_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterStatement_expression([NotNull] calculatorParser.Statement_expressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.statement_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitStatement_expression([NotNull] calculatorParser.Statement_expressionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.selection_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterSelection_statement([NotNull] calculatorParser.Selection_statementContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.selection_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitSelection_statement([NotNull] calculatorParser.Selection_statementContext context);
+	/// <summary>
+	/// Enter a parse tree produced by the <c>ifBodyBlock</c>
+	/// labeled alternative in <see cref="calculatorParser.if_body"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterIfBodyBlock([NotNull] calculatorParser.IfBodyBlockContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>ifBodyBlock</c>
+	/// labeled alternative in <see cref="calculatorParser.if_body"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitIfBodyBlock([NotNull] calculatorParser.IfBodyBlockContext context);
+	/// <summary>
+	/// Enter a parse tree produced by the <c>ifBodySingle</c>
+	/// labeled alternative in <see cref="calculatorParser.if_body"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterIfBodySingle([NotNull] calculatorParser.IfBodySingleContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>ifBodySingle</c>
+	/// labeled alternative in <see cref="calculatorParser.if_body"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitIfBodySingle([NotNull] calculatorParser.IfBodySingleContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.if_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterIf_statement([NotNull] calculatorParser.If_statementContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.if_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitIf_statement([NotNull] calculatorParser.If_statementContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.switch_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterSwitch_statement([NotNull] calculatorParser.Switch_statementContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.switch_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitSwitch_statement([NotNull] calculatorParser.Switch_statementContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.switch_block"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterSwitch_block([NotNull] calculatorParser.Switch_blockContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.switch_block"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitSwitch_block([NotNull] calculatorParser.Switch_blockContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.switch_sections"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterSwitch_sections([NotNull] calculatorParser.Switch_sectionsContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.switch_sections"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitSwitch_sections([NotNull] calculatorParser.Switch_sectionsContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.switch_section"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterSwitch_section([NotNull] calculatorParser.Switch_sectionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.switch_section"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitSwitch_section([NotNull] calculatorParser.Switch_sectionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.switch_labels"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterSwitch_labels([NotNull] calculatorParser.Switch_labelsContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.switch_labels"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitSwitch_labels([NotNull] calculatorParser.Switch_labelsContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.switch_label"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterSwitch_label([NotNull] calculatorParser.Switch_labelContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.switch_label"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitSwitch_label([NotNull] calculatorParser.Switch_labelContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.iteration_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterIteration_statement([NotNull] calculatorParser.Iteration_statementContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.iteration_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitIteration_statement([NotNull] calculatorParser.Iteration_statementContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.while_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterWhile_statement([NotNull] calculatorParser.While_statementContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.while_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitWhile_statement([NotNull] calculatorParser.While_statementContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.do_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterDo_statement([NotNull] calculatorParser.Do_statementContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.do_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitDo_statement([NotNull] calculatorParser.Do_statementContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.for_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterFor_statement([NotNull] calculatorParser.For_statementContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.for_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitFor_statement([NotNull] calculatorParser.For_statementContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.for_initializer"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterFor_initializer([NotNull] calculatorParser.For_initializerContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.for_initializer"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitFor_initializer([NotNull] calculatorParser.For_initializerContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.for_condition"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterFor_condition([NotNull] calculatorParser.For_conditionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.for_condition"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitFor_condition([NotNull] calculatorParser.For_conditionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.for_iterator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterFor_iterator([NotNull] calculatorParser.For_iteratorContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.for_iterator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitFor_iterator([NotNull] calculatorParser.For_iteratorContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.statement_expression_list"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterStatement_expression_list([NotNull] calculatorParser.Statement_expression_listContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.statement_expression_list"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitStatement_expression_list([NotNull] calculatorParser.Statement_expression_listContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.foreach_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterForeach_statement([NotNull] calculatorParser.Foreach_statementContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.foreach_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitForeach_statement([NotNull] calculatorParser.Foreach_statementContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.jump_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterJump_statement([NotNull] calculatorParser.Jump_statementContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.jump_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitJump_statement([NotNull] calculatorParser.Jump_statementContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.break_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterBreak_statement([NotNull] calculatorParser.Break_statementContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.break_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitBreak_statement([NotNull] calculatorParser.Break_statementContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.continue_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterContinue_statement([NotNull] calculatorParser.Continue_statementContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.continue_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitContinue_statement([NotNull] calculatorParser.Continue_statementContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.goto_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterGoto_statement([NotNull] calculatorParser.Goto_statementContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.goto_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitGoto_statement([NotNull] calculatorParser.Goto_statementContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.return_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterReturn_statement([NotNull] calculatorParser.Return_statementContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.return_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitReturn_statement([NotNull] calculatorParser.Return_statementContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.throw_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterThrow_statement([NotNull] calculatorParser.Throw_statementContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.throw_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitThrow_statement([NotNull] calculatorParser.Throw_statementContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.try_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterTry_statement([NotNull] calculatorParser.Try_statementContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.try_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitTry_statement([NotNull] calculatorParser.Try_statementContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.catch_clauses"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterCatch_clauses([NotNull] calculatorParser.Catch_clausesContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.catch_clauses"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitCatch_clauses([NotNull] calculatorParser.Catch_clausesContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.specific_catch_clauses"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterSpecific_catch_clauses([NotNull] calculatorParser.Specific_catch_clausesContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.specific_catch_clauses"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitSpecific_catch_clauses([NotNull] calculatorParser.Specific_catch_clausesContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.specific_catch_clause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterSpecific_catch_clause([NotNull] calculatorParser.Specific_catch_clauseContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.specific_catch_clause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitSpecific_catch_clause([NotNull] calculatorParser.Specific_catch_clauseContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.general_catch_clause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterGeneral_catch_clause([NotNull] calculatorParser.General_catch_clauseContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.general_catch_clause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitGeneral_catch_clause([NotNull] calculatorParser.General_catch_clauseContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.finally_clause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterFinally_clause([NotNull] calculatorParser.Finally_clauseContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.finally_clause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitFinally_clause([NotNull] calculatorParser.Finally_clauseContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.checked_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterChecked_statement([NotNull] calculatorParser.Checked_statementContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.checked_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitChecked_statement([NotNull] calculatorParser.Checked_statementContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.unchecked_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterUnchecked_statement([NotNull] calculatorParser.Unchecked_statementContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.unchecked_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitUnchecked_statement([NotNull] calculatorParser.Unchecked_statementContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.lock_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterLock_statement([NotNull] calculatorParser.Lock_statementContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.lock_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitLock_statement([NotNull] calculatorParser.Lock_statementContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.using_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterUsing_statement([NotNull] calculatorParser.Using_statementContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.using_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitUsing_statement([NotNull] calculatorParser.Using_statementContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.resource_acquisition"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterResource_acquisition([NotNull] calculatorParser.Resource_acquisitionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.resource_acquisition"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitResource_acquisition([NotNull] calculatorParser.Resource_acquisitionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.yield_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterYield_statement([NotNull] calculatorParser.Yield_statementContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.yield_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitYield_statement([NotNull] calculatorParser.Yield_statementContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.compilation_unit"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterCompilation_unit([NotNull] calculatorParser.Compilation_unitContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.compilation_unit"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitCompilation_unit([NotNull] calculatorParser.Compilation_unitContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.namespace_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterNamespace_declaration([NotNull] calculatorParser.Namespace_declarationContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.namespace_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitNamespace_declaration([NotNull] calculatorParser.Namespace_declarationContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.qualified_identifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterQualified_identifier([NotNull] calculatorParser.Qualified_identifierContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.qualified_identifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitQualified_identifier([NotNull] calculatorParser.Qualified_identifierContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.namespace_body"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterNamespace_body([NotNull] calculatorParser.Namespace_bodyContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.namespace_body"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitNamespace_body([NotNull] calculatorParser.Namespace_bodyContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.extern_alias_directives"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterExtern_alias_directives([NotNull] calculatorParser.Extern_alias_directivesContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.extern_alias_directives"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitExtern_alias_directives([NotNull] calculatorParser.Extern_alias_directivesContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.extern_alias_directive"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterExtern_alias_directive([NotNull] calculatorParser.Extern_alias_directiveContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.extern_alias_directive"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitExtern_alias_directive([NotNull] calculatorParser.Extern_alias_directiveContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.using_directives"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterUsing_directives([NotNull] calculatorParser.Using_directivesContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.using_directives"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitUsing_directives([NotNull] calculatorParser.Using_directivesContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.using_directive"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterUsing_directive([NotNull] calculatorParser.Using_directiveContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.using_directive"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitUsing_directive([NotNull] calculatorParser.Using_directiveContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.using_alias_directive"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterUsing_alias_directive([NotNull] calculatorParser.Using_alias_directiveContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.using_alias_directive"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitUsing_alias_directive([NotNull] calculatorParser.Using_alias_directiveContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.using_namespace_directive"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterUsing_namespace_directive([NotNull] calculatorParser.Using_namespace_directiveContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.using_namespace_directive"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitUsing_namespace_directive([NotNull] calculatorParser.Using_namespace_directiveContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.namespace_member_declarations"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterNamespace_member_declarations([NotNull] calculatorParser.Namespace_member_declarationsContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.namespace_member_declarations"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitNamespace_member_declarations([NotNull] calculatorParser.Namespace_member_declarationsContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.namespace_member_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterNamespace_member_declaration([NotNull] calculatorParser.Namespace_member_declarationContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.namespace_member_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitNamespace_member_declaration([NotNull] calculatorParser.Namespace_member_declarationContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.type_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterType_declaration([NotNull] calculatorParser.Type_declarationContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.type_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitType_declaration([NotNull] calculatorParser.Type_declarationContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.qualified_alias_member"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterQualified_alias_member([NotNull] calculatorParser.Qualified_alias_memberContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.qualified_alias_member"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitQualified_alias_member([NotNull] calculatorParser.Qualified_alias_memberContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.class_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterClass_declaration([NotNull] calculatorParser.Class_declarationContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.class_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitClass_declaration([NotNull] calculatorParser.Class_declarationContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.class_modifiers"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterClass_modifiers([NotNull] calculatorParser.Class_modifiersContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.class_modifiers"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitClass_modifiers([NotNull] calculatorParser.Class_modifiersContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.class_modifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterClass_modifier([NotNull] calculatorParser.Class_modifierContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.class_modifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitClass_modifier([NotNull] calculatorParser.Class_modifierContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.type_parameter_list"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterType_parameter_list([NotNull] calculatorParser.Type_parameter_listContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.type_parameter_list"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitType_parameter_list([NotNull] calculatorParser.Type_parameter_listContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.type_parameters"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterType_parameters([NotNull] calculatorParser.Type_parametersContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.type_parameters"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitType_parameters([NotNull] calculatorParser.Type_parametersContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.type_parameter"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterType_parameter([NotNull] calculatorParser.Type_parameterContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.type_parameter"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitType_parameter([NotNull] calculatorParser.Type_parameterContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.class_base"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterClass_base([NotNull] calculatorParser.Class_baseContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.class_base"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitClass_base([NotNull] calculatorParser.Class_baseContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.interface_type_list"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterInterface_type_list([NotNull] calculatorParser.Interface_type_listContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.interface_type_list"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitInterface_type_list([NotNull] calculatorParser.Interface_type_listContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.type_parameter_constraints_clauses"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterType_parameter_constraints_clauses([NotNull] calculatorParser.Type_parameter_constraints_clausesContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.type_parameter_constraints_clauses"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitType_parameter_constraints_clauses([NotNull] calculatorParser.Type_parameter_constraints_clausesContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.type_parameter_constraints_clause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterType_parameter_constraints_clause([NotNull] calculatorParser.Type_parameter_constraints_clauseContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.type_parameter_constraints_clause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitType_parameter_constraints_clause([NotNull] calculatorParser.Type_parameter_constraints_clauseContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.type_parameter_constraints"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterType_parameter_constraints([NotNull] calculatorParser.Type_parameter_constraintsContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.type_parameter_constraints"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitType_parameter_constraints([NotNull] calculatorParser.Type_parameter_constraintsContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.primary_constraint"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterPrimary_constraint([NotNull] calculatorParser.Primary_constraintContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.primary_constraint"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitPrimary_constraint([NotNull] calculatorParser.Primary_constraintContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.secondary_constraints"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterSecondary_constraints([NotNull] calculatorParser.Secondary_constraintsContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.secondary_constraints"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitSecondary_constraints([NotNull] calculatorParser.Secondary_constraintsContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.constructor_constraint"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterConstructor_constraint([NotNull] calculatorParser.Constructor_constraintContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.constructor_constraint"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitConstructor_constraint([NotNull] calculatorParser.Constructor_constraintContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.class_body"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterClass_body([NotNull] calculatorParser.Class_bodyContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.class_body"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitClass_body([NotNull] calculatorParser.Class_bodyContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.class_member_declarations"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterClass_member_declarations([NotNull] calculatorParser.Class_member_declarationsContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.class_member_declarations"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitClass_member_declarations([NotNull] calculatorParser.Class_member_declarationsContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.class_member_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterClass_member_declaration([NotNull] calculatorParser.Class_member_declarationContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.class_member_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitClass_member_declaration([NotNull] calculatorParser.Class_member_declarationContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.all_member_modifiers"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterAll_member_modifiers([NotNull] calculatorParser.All_member_modifiersContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.all_member_modifiers"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitAll_member_modifiers([NotNull] calculatorParser.All_member_modifiersContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.all_member_modifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterAll_member_modifier([NotNull] calculatorParser.All_member_modifierContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.all_member_modifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitAll_member_modifier([NotNull] calculatorParser.All_member_modifierContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.common_member_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterCommon_member_declaration([NotNull] calculatorParser.Common_member_declarationContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.common_member_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitCommon_member_declaration([NotNull] calculatorParser.Common_member_declarationContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.typed_member_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterTyped_member_declaration([NotNull] calculatorParser.Typed_member_declarationContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.typed_member_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitTyped_member_declaration([NotNull] calculatorParser.Typed_member_declarationContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.constant_declarators"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterConstant_declarators([NotNull] calculatorParser.Constant_declaratorsContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.constant_declarators"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitConstant_declarators([NotNull] calculatorParser.Constant_declaratorsContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.constant_declarator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterConstant_declarator([NotNull] calculatorParser.Constant_declaratorContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.constant_declarator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitConstant_declarator([NotNull] calculatorParser.Constant_declaratorContext context);
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="calculatorParser.variable_declarators"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -620,6 +2124,636 @@ public interface IcalculatorListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitVariable_initializer([NotNull] calculatorParser.Variable_initializerContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.method_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterMethod_declaration([NotNull] calculatorParser.Method_declarationContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.method_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitMethod_declaration([NotNull] calculatorParser.Method_declarationContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.method_header"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterMethod_header([NotNull] calculatorParser.Method_headerContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.method_header"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitMethod_header([NotNull] calculatorParser.Method_headerContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.method_modifiers"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterMethod_modifiers([NotNull] calculatorParser.Method_modifiersContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.method_modifiers"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitMethod_modifiers([NotNull] calculatorParser.Method_modifiersContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.method_modifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterMethod_modifier([NotNull] calculatorParser.Method_modifierContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.method_modifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitMethod_modifier([NotNull] calculatorParser.Method_modifierContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.return_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterReturn_type([NotNull] calculatorParser.Return_typeContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.return_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitReturn_type([NotNull] calculatorParser.Return_typeContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.member_name"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterMember_name([NotNull] calculatorParser.Member_nameContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.member_name"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitMember_name([NotNull] calculatorParser.Member_nameContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.method_body"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterMethod_body([NotNull] calculatorParser.Method_bodyContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.method_body"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitMethod_body([NotNull] calculatorParser.Method_bodyContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.formal_parameter_list"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterFormal_parameter_list([NotNull] calculatorParser.Formal_parameter_listContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.formal_parameter_list"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitFormal_parameter_list([NotNull] calculatorParser.Formal_parameter_listContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.fixed_parameters"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterFixed_parameters([NotNull] calculatorParser.Fixed_parametersContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.fixed_parameters"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitFixed_parameters([NotNull] calculatorParser.Fixed_parametersContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.fixed_parameter"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterFixed_parameter([NotNull] calculatorParser.Fixed_parameterContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.fixed_parameter"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitFixed_parameter([NotNull] calculatorParser.Fixed_parameterContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.default_argument"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterDefault_argument([NotNull] calculatorParser.Default_argumentContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.default_argument"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitDefault_argument([NotNull] calculatorParser.Default_argumentContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.parameter_modifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterParameter_modifier([NotNull] calculatorParser.Parameter_modifierContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.parameter_modifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitParameter_modifier([NotNull] calculatorParser.Parameter_modifierContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.parameter_array"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterParameter_array([NotNull] calculatorParser.Parameter_arrayContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.parameter_array"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitParameter_array([NotNull] calculatorParser.Parameter_arrayContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.property_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterProperty_declaration([NotNull] calculatorParser.Property_declarationContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.property_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitProperty_declaration([NotNull] calculatorParser.Property_declarationContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.property_modifiers"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterProperty_modifiers([NotNull] calculatorParser.Property_modifiersContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.property_modifiers"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitProperty_modifiers([NotNull] calculatorParser.Property_modifiersContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.property_modifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterProperty_modifier([NotNull] calculatorParser.Property_modifierContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.property_modifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitProperty_modifier([NotNull] calculatorParser.Property_modifierContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.accessor_declarations"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterAccessor_declarations([NotNull] calculatorParser.Accessor_declarationsContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.accessor_declarations"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitAccessor_declarations([NotNull] calculatorParser.Accessor_declarationsContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.get_accessor_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterGet_accessor_declaration([NotNull] calculatorParser.Get_accessor_declarationContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.get_accessor_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitGet_accessor_declaration([NotNull] calculatorParser.Get_accessor_declarationContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.set_accessor_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterSet_accessor_declaration([NotNull] calculatorParser.Set_accessor_declarationContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.set_accessor_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitSet_accessor_declaration([NotNull] calculatorParser.Set_accessor_declarationContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.accessor_modifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterAccessor_modifier([NotNull] calculatorParser.Accessor_modifierContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.accessor_modifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitAccessor_modifier([NotNull] calculatorParser.Accessor_modifierContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.accessor_body"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterAccessor_body([NotNull] calculatorParser.Accessor_bodyContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.accessor_body"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitAccessor_body([NotNull] calculatorParser.Accessor_bodyContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.event_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterEvent_declaration([NotNull] calculatorParser.Event_declarationContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.event_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitEvent_declaration([NotNull] calculatorParser.Event_declarationContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.event_modifiers"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterEvent_modifiers([NotNull] calculatorParser.Event_modifiersContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.event_modifiers"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitEvent_modifiers([NotNull] calculatorParser.Event_modifiersContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.event_modifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterEvent_modifier([NotNull] calculatorParser.Event_modifierContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.event_modifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitEvent_modifier([NotNull] calculatorParser.Event_modifierContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.event_accessor_declarations"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterEvent_accessor_declarations([NotNull] calculatorParser.Event_accessor_declarationsContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.event_accessor_declarations"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitEvent_accessor_declarations([NotNull] calculatorParser.Event_accessor_declarationsContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.add_accessor_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterAdd_accessor_declaration([NotNull] calculatorParser.Add_accessor_declarationContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.add_accessor_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitAdd_accessor_declaration([NotNull] calculatorParser.Add_accessor_declarationContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.remove_accessor_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterRemove_accessor_declaration([NotNull] calculatorParser.Remove_accessor_declarationContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.remove_accessor_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitRemove_accessor_declaration([NotNull] calculatorParser.Remove_accessor_declarationContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.indexer_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterIndexer_declaration([NotNull] calculatorParser.Indexer_declarationContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.indexer_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitIndexer_declaration([NotNull] calculatorParser.Indexer_declarationContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.indexer_modifiers"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterIndexer_modifiers([NotNull] calculatorParser.Indexer_modifiersContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.indexer_modifiers"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitIndexer_modifiers([NotNull] calculatorParser.Indexer_modifiersContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.indexer_modifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterIndexer_modifier([NotNull] calculatorParser.Indexer_modifierContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.indexer_modifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitIndexer_modifier([NotNull] calculatorParser.Indexer_modifierContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.indexer_declarator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterIndexer_declarator([NotNull] calculatorParser.Indexer_declaratorContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.indexer_declarator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitIndexer_declarator([NotNull] calculatorParser.Indexer_declaratorContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.operator_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterOperator_declaration([NotNull] calculatorParser.Operator_declarationContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.operator_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitOperator_declaration([NotNull] calculatorParser.Operator_declarationContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.operator_modifiers"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterOperator_modifiers([NotNull] calculatorParser.Operator_modifiersContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.operator_modifiers"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitOperator_modifiers([NotNull] calculatorParser.Operator_modifiersContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.operator_modifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterOperator_modifier([NotNull] calculatorParser.Operator_modifierContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.operator_modifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitOperator_modifier([NotNull] calculatorParser.Operator_modifierContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.operator_declarator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterOperator_declarator([NotNull] calculatorParser.Operator_declaratorContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.operator_declarator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitOperator_declarator([NotNull] calculatorParser.Operator_declaratorContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.unary_operator_declarator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterUnary_operator_declarator([NotNull] calculatorParser.Unary_operator_declaratorContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.unary_operator_declarator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitUnary_operator_declarator([NotNull] calculatorParser.Unary_operator_declaratorContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.overloadable_unary_operator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterOverloadable_unary_operator([NotNull] calculatorParser.Overloadable_unary_operatorContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.overloadable_unary_operator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitOverloadable_unary_operator([NotNull] calculatorParser.Overloadable_unary_operatorContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.binary_operator_declarator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterBinary_operator_declarator([NotNull] calculatorParser.Binary_operator_declaratorContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.binary_operator_declarator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitBinary_operator_declarator([NotNull] calculatorParser.Binary_operator_declaratorContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.overloadable_binary_operator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterOverloadable_binary_operator([NotNull] calculatorParser.Overloadable_binary_operatorContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.overloadable_binary_operator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitOverloadable_binary_operator([NotNull] calculatorParser.Overloadable_binary_operatorContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.overloadable_operator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterOverloadable_operator([NotNull] calculatorParser.Overloadable_operatorContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.overloadable_operator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitOverloadable_operator([NotNull] calculatorParser.Overloadable_operatorContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.conversion_operator_declarator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterConversion_operator_declarator([NotNull] calculatorParser.Conversion_operator_declaratorContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.conversion_operator_declarator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitConversion_operator_declarator([NotNull] calculatorParser.Conversion_operator_declaratorContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.operator_body"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterOperator_body([NotNull] calculatorParser.Operator_bodyContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.operator_body"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitOperator_body([NotNull] calculatorParser.Operator_bodyContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.constructor_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterConstructor_declaration([NotNull] calculatorParser.Constructor_declarationContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.constructor_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitConstructor_declaration([NotNull] calculatorParser.Constructor_declarationContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.constructor_modifiers"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterConstructor_modifiers([NotNull] calculatorParser.Constructor_modifiersContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.constructor_modifiers"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitConstructor_modifiers([NotNull] calculatorParser.Constructor_modifiersContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.constructor_modifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterConstructor_modifier([NotNull] calculatorParser.Constructor_modifierContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.constructor_modifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitConstructor_modifier([NotNull] calculatorParser.Constructor_modifierContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.constructor_declarator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterConstructor_declarator([NotNull] calculatorParser.Constructor_declaratorContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.constructor_declarator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitConstructor_declarator([NotNull] calculatorParser.Constructor_declaratorContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.constructor_initializer"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterConstructor_initializer([NotNull] calculatorParser.Constructor_initializerContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.constructor_initializer"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitConstructor_initializer([NotNull] calculatorParser.Constructor_initializerContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.constructor_body"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterConstructor_body([NotNull] calculatorParser.Constructor_bodyContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.constructor_body"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitConstructor_body([NotNull] calculatorParser.Constructor_bodyContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.static_constructor_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterStatic_constructor_declaration([NotNull] calculatorParser.Static_constructor_declarationContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.static_constructor_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitStatic_constructor_declaration([NotNull] calculatorParser.Static_constructor_declarationContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.static_constructor_modifiers"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterStatic_constructor_modifiers([NotNull] calculatorParser.Static_constructor_modifiersContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.static_constructor_modifiers"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitStatic_constructor_modifiers([NotNull] calculatorParser.Static_constructor_modifiersContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.static_constructor_body"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterStatic_constructor_body([NotNull] calculatorParser.Static_constructor_bodyContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.static_constructor_body"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitStatic_constructor_body([NotNull] calculatorParser.Static_constructor_bodyContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.destructor_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterDestructor_declaration([NotNull] calculatorParser.Destructor_declarationContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.destructor_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitDestructor_declaration([NotNull] calculatorParser.Destructor_declarationContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.destructor_body"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterDestructor_body([NotNull] calculatorParser.Destructor_bodyContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.destructor_body"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitDestructor_body([NotNull] calculatorParser.Destructor_bodyContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.body"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterBody([NotNull] calculatorParser.BodyContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.body"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitBody([NotNull] calculatorParser.BodyContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.struct_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterStruct_declaration([NotNull] calculatorParser.Struct_declarationContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.struct_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitStruct_declaration([NotNull] calculatorParser.Struct_declarationContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.struct_modifiers"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterStruct_modifiers([NotNull] calculatorParser.Struct_modifiersContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.struct_modifiers"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitStruct_modifiers([NotNull] calculatorParser.Struct_modifiersContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.struct_modifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterStruct_modifier([NotNull] calculatorParser.Struct_modifierContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.struct_modifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitStruct_modifier([NotNull] calculatorParser.Struct_modifierContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.struct_interfaces"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterStruct_interfaces([NotNull] calculatorParser.Struct_interfacesContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.struct_interfaces"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitStruct_interfaces([NotNull] calculatorParser.Struct_interfacesContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.struct_body"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterStruct_body([NotNull] calculatorParser.Struct_bodyContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.struct_body"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitStruct_body([NotNull] calculatorParser.Struct_bodyContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.struct_member_declarations"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterStruct_member_declarations([NotNull] calculatorParser.Struct_member_declarationsContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.struct_member_declarations"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitStruct_member_declarations([NotNull] calculatorParser.Struct_member_declarationsContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.struct_member_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterStruct_member_declaration([NotNull] calculatorParser.Struct_member_declarationContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.struct_member_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitStruct_member_declaration([NotNull] calculatorParser.Struct_member_declarationContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.array_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterArray_type([NotNull] calculatorParser.Array_typeContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.array_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitArray_type([NotNull] calculatorParser.Array_typeContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.non_array_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterNon_array_type([NotNull] calculatorParser.Non_array_typeContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.non_array_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitNon_array_type([NotNull] calculatorParser.Non_array_typeContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="calculatorParser.rank_specifiers"/>.
 	/// </summary>
@@ -670,6 +2804,806 @@ public interface IcalculatorListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitVariable_initializer_list([NotNull] calculatorParser.Variable_initializer_listContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.interface_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterInterface_declaration([NotNull] calculatorParser.Interface_declarationContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.interface_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitInterface_declaration([NotNull] calculatorParser.Interface_declarationContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.interface_modifiers"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterInterface_modifiers([NotNull] calculatorParser.Interface_modifiersContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.interface_modifiers"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitInterface_modifiers([NotNull] calculatorParser.Interface_modifiersContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.interface_modifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterInterface_modifier([NotNull] calculatorParser.Interface_modifierContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.interface_modifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitInterface_modifier([NotNull] calculatorParser.Interface_modifierContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.variant_type_parameter_list"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterVariant_type_parameter_list([NotNull] calculatorParser.Variant_type_parameter_listContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.variant_type_parameter_list"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitVariant_type_parameter_list([NotNull] calculatorParser.Variant_type_parameter_listContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.variant_type_parameters"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterVariant_type_parameters([NotNull] calculatorParser.Variant_type_parametersContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.variant_type_parameters"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitVariant_type_parameters([NotNull] calculatorParser.Variant_type_parametersContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.variance_annotation"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterVariance_annotation([NotNull] calculatorParser.Variance_annotationContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.variance_annotation"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitVariance_annotation([NotNull] calculatorParser.Variance_annotationContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.interface_base"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterInterface_base([NotNull] calculatorParser.Interface_baseContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.interface_base"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitInterface_base([NotNull] calculatorParser.Interface_baseContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.interface_body"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterInterface_body([NotNull] calculatorParser.Interface_bodyContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.interface_body"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitInterface_body([NotNull] calculatorParser.Interface_bodyContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.interface_member_declarations"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterInterface_member_declarations([NotNull] calculatorParser.Interface_member_declarationsContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.interface_member_declarations"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitInterface_member_declarations([NotNull] calculatorParser.Interface_member_declarationsContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.interface_member_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterInterface_member_declaration([NotNull] calculatorParser.Interface_member_declarationContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.interface_member_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitInterface_member_declaration([NotNull] calculatorParser.Interface_member_declarationContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.interface_method_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterInterface_method_declaration([NotNull] calculatorParser.Interface_method_declarationContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.interface_method_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitInterface_method_declaration([NotNull] calculatorParser.Interface_method_declarationContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.interface_property_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterInterface_property_declaration([NotNull] calculatorParser.Interface_property_declarationContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.interface_property_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitInterface_property_declaration([NotNull] calculatorParser.Interface_property_declarationContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.interface_accessors"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterInterface_accessors([NotNull] calculatorParser.Interface_accessorsContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.interface_accessors"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitInterface_accessors([NotNull] calculatorParser.Interface_accessorsContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.interface_event_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterInterface_event_declaration([NotNull] calculatorParser.Interface_event_declarationContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.interface_event_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitInterface_event_declaration([NotNull] calculatorParser.Interface_event_declarationContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.interface_indexer_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterInterface_indexer_declaration([NotNull] calculatorParser.Interface_indexer_declarationContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.interface_indexer_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitInterface_indexer_declaration([NotNull] calculatorParser.Interface_indexer_declarationContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.enum_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterEnum_declaration([NotNull] calculatorParser.Enum_declarationContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.enum_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitEnum_declaration([NotNull] calculatorParser.Enum_declarationContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.enum_base"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterEnum_base([NotNull] calculatorParser.Enum_baseContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.enum_base"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitEnum_base([NotNull] calculatorParser.Enum_baseContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.enum_body"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterEnum_body([NotNull] calculatorParser.Enum_bodyContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.enum_body"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitEnum_body([NotNull] calculatorParser.Enum_bodyContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.enum_modifiers"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterEnum_modifiers([NotNull] calculatorParser.Enum_modifiersContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.enum_modifiers"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitEnum_modifiers([NotNull] calculatorParser.Enum_modifiersContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.enum_modifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterEnum_modifier([NotNull] calculatorParser.Enum_modifierContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.enum_modifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitEnum_modifier([NotNull] calculatorParser.Enum_modifierContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.enum_member_declarations"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterEnum_member_declarations([NotNull] calculatorParser.Enum_member_declarationsContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.enum_member_declarations"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitEnum_member_declarations([NotNull] calculatorParser.Enum_member_declarationsContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.enum_member_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterEnum_member_declaration([NotNull] calculatorParser.Enum_member_declarationContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.enum_member_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitEnum_member_declaration([NotNull] calculatorParser.Enum_member_declarationContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.delegate_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterDelegate_declaration([NotNull] calculatorParser.Delegate_declarationContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.delegate_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitDelegate_declaration([NotNull] calculatorParser.Delegate_declarationContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.delegate_modifiers"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterDelegate_modifiers([NotNull] calculatorParser.Delegate_modifiersContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.delegate_modifiers"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitDelegate_modifiers([NotNull] calculatorParser.Delegate_modifiersContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.delegate_modifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterDelegate_modifier([NotNull] calculatorParser.Delegate_modifierContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.delegate_modifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitDelegate_modifier([NotNull] calculatorParser.Delegate_modifierContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.global_attributes"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterGlobal_attributes([NotNull] calculatorParser.Global_attributesContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.global_attributes"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitGlobal_attributes([NotNull] calculatorParser.Global_attributesContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.global_attribute_sections"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterGlobal_attribute_sections([NotNull] calculatorParser.Global_attribute_sectionsContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.global_attribute_sections"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitGlobal_attribute_sections([NotNull] calculatorParser.Global_attribute_sectionsContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.global_attribute_section"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterGlobal_attribute_section([NotNull] calculatorParser.Global_attribute_sectionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.global_attribute_section"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitGlobal_attribute_section([NotNull] calculatorParser.Global_attribute_sectionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.global_attribute_target_specifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterGlobal_attribute_target_specifier([NotNull] calculatorParser.Global_attribute_target_specifierContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.global_attribute_target_specifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitGlobal_attribute_target_specifier([NotNull] calculatorParser.Global_attribute_target_specifierContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.global_attribute_target"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterGlobal_attribute_target([NotNull] calculatorParser.Global_attribute_targetContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.global_attribute_target"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitGlobal_attribute_target([NotNull] calculatorParser.Global_attribute_targetContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.attributes"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterAttributes([NotNull] calculatorParser.AttributesContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.attributes"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitAttributes([NotNull] calculatorParser.AttributesContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.attribute_sections"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterAttribute_sections([NotNull] calculatorParser.Attribute_sectionsContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.attribute_sections"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitAttribute_sections([NotNull] calculatorParser.Attribute_sectionsContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.attribute_section"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterAttribute_section([NotNull] calculatorParser.Attribute_sectionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.attribute_section"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitAttribute_section([NotNull] calculatorParser.Attribute_sectionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.attribute_target_specifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterAttribute_target_specifier([NotNull] calculatorParser.Attribute_target_specifierContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.attribute_target_specifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitAttribute_target_specifier([NotNull] calculatorParser.Attribute_target_specifierContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.attribute_target"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterAttribute_target([NotNull] calculatorParser.Attribute_targetContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.attribute_target"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitAttribute_target([NotNull] calculatorParser.Attribute_targetContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.attribute_list"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterAttribute_list([NotNull] calculatorParser.Attribute_listContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.attribute_list"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitAttribute_list([NotNull] calculatorParser.Attribute_listContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.attribute"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterAttribute([NotNull] calculatorParser.AttributeContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.attribute"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitAttribute([NotNull] calculatorParser.AttributeContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.attribute_name"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterAttribute_name([NotNull] calculatorParser.Attribute_nameContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.attribute_name"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitAttribute_name([NotNull] calculatorParser.Attribute_nameContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.attribute_arguments"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterAttribute_arguments([NotNull] calculatorParser.Attribute_argumentsContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.attribute_arguments"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitAttribute_arguments([NotNull] calculatorParser.Attribute_argumentsContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.positional_argument_list"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterPositional_argument_list([NotNull] calculatorParser.Positional_argument_listContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.positional_argument_list"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitPositional_argument_list([NotNull] calculatorParser.Positional_argument_listContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.positional_argument"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterPositional_argument([NotNull] calculatorParser.Positional_argumentContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.positional_argument"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitPositional_argument([NotNull] calculatorParser.Positional_argumentContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.named_argument_list"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterNamed_argument_list([NotNull] calculatorParser.Named_argument_listContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.named_argument_list"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitNamed_argument_list([NotNull] calculatorParser.Named_argument_listContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.named_argument"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterNamed_argument([NotNull] calculatorParser.Named_argumentContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.named_argument"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitNamed_argument([NotNull] calculatorParser.Named_argumentContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.attribute_argument_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterAttribute_argument_expression([NotNull] calculatorParser.Attribute_argument_expressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.attribute_argument_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitAttribute_argument_expression([NotNull] calculatorParser.Attribute_argument_expressionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.class_modifier_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterClass_modifier_unsafe([NotNull] calculatorParser.Class_modifier_unsafeContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.class_modifier_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitClass_modifier_unsafe([NotNull] calculatorParser.Class_modifier_unsafeContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.struct_modifier_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterStruct_modifier_unsafe([NotNull] calculatorParser.Struct_modifier_unsafeContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.struct_modifier_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitStruct_modifier_unsafe([NotNull] calculatorParser.Struct_modifier_unsafeContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.interface_modifier_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterInterface_modifier_unsafe([NotNull] calculatorParser.Interface_modifier_unsafeContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.interface_modifier_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitInterface_modifier_unsafe([NotNull] calculatorParser.Interface_modifier_unsafeContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.delegate_modifier_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterDelegate_modifier_unsafe([NotNull] calculatorParser.Delegate_modifier_unsafeContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.delegate_modifier_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitDelegate_modifier_unsafe([NotNull] calculatorParser.Delegate_modifier_unsafeContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.field_modifier_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterField_modifier_unsafe([NotNull] calculatorParser.Field_modifier_unsafeContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.field_modifier_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitField_modifier_unsafe([NotNull] calculatorParser.Field_modifier_unsafeContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.method_modifier_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterMethod_modifier_unsafe([NotNull] calculatorParser.Method_modifier_unsafeContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.method_modifier_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitMethod_modifier_unsafe([NotNull] calculatorParser.Method_modifier_unsafeContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.property_modifier_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterProperty_modifier_unsafe([NotNull] calculatorParser.Property_modifier_unsafeContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.property_modifier_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitProperty_modifier_unsafe([NotNull] calculatorParser.Property_modifier_unsafeContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.event_modifier_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterEvent_modifier_unsafe([NotNull] calculatorParser.Event_modifier_unsafeContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.event_modifier_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitEvent_modifier_unsafe([NotNull] calculatorParser.Event_modifier_unsafeContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.indexer_modifier_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterIndexer_modifier_unsafe([NotNull] calculatorParser.Indexer_modifier_unsafeContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.indexer_modifier_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitIndexer_modifier_unsafe([NotNull] calculatorParser.Indexer_modifier_unsafeContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.operator_modifier_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterOperator_modifier_unsafe([NotNull] calculatorParser.Operator_modifier_unsafeContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.operator_modifier_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitOperator_modifier_unsafe([NotNull] calculatorParser.Operator_modifier_unsafeContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.constructor_modifier_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterConstructor_modifier_unsafe([NotNull] calculatorParser.Constructor_modifier_unsafeContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.constructor_modifier_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitConstructor_modifier_unsafe([NotNull] calculatorParser.Constructor_modifier_unsafeContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.destructor_declaration_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterDestructor_declaration_unsafe([NotNull] calculatorParser.Destructor_declaration_unsafeContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.destructor_declaration_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitDestructor_declaration_unsafe([NotNull] calculatorParser.Destructor_declaration_unsafeContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.static_constructor_modifiers_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterStatic_constructor_modifiers_unsafe([NotNull] calculatorParser.Static_constructor_modifiers_unsafeContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.static_constructor_modifiers_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitStatic_constructor_modifiers_unsafe([NotNull] calculatorParser.Static_constructor_modifiers_unsafeContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.embedded_statement_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterEmbedded_statement_unsafe([NotNull] calculatorParser.Embedded_statement_unsafeContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.embedded_statement_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitEmbedded_statement_unsafe([NotNull] calculatorParser.Embedded_statement_unsafeContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.unsafe_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterUnsafe_statement([NotNull] calculatorParser.Unsafe_statementContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.unsafe_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitUnsafe_statement([NotNull] calculatorParser.Unsafe_statementContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.type_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterType_unsafe([NotNull] calculatorParser.Type_unsafeContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.type_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitType_unsafe([NotNull] calculatorParser.Type_unsafeContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.pointer_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterPointer_type([NotNull] calculatorParser.Pointer_typeContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.pointer_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitPointer_type([NotNull] calculatorParser.Pointer_typeContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.unmanaged_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterUnmanaged_type([NotNull] calculatorParser.Unmanaged_typeContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.unmanaged_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitUnmanaged_type([NotNull] calculatorParser.Unmanaged_typeContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.primary_no_array_creation_expression_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterPrimary_no_array_creation_expression_unsafe([NotNull] calculatorParser.Primary_no_array_creation_expression_unsafeContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.primary_no_array_creation_expression_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitPrimary_no_array_creation_expression_unsafe([NotNull] calculatorParser.Primary_no_array_creation_expression_unsafeContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.unary_expression_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterUnary_expression_unsafe([NotNull] calculatorParser.Unary_expression_unsafeContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.unary_expression_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitUnary_expression_unsafe([NotNull] calculatorParser.Unary_expression_unsafeContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.pointer_indirection_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterPointer_indirection_expression([NotNull] calculatorParser.Pointer_indirection_expressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.pointer_indirection_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitPointer_indirection_expression([NotNull] calculatorParser.Pointer_indirection_expressionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.addressof_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterAddressof_expression([NotNull] calculatorParser.Addressof_expressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.addressof_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitAddressof_expression([NotNull] calculatorParser.Addressof_expressionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.sizeof_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterSizeof_expression([NotNull] calculatorParser.Sizeof_expressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.sizeof_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitSizeof_expression([NotNull] calculatorParser.Sizeof_expressionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.fixed_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterFixed_statement([NotNull] calculatorParser.Fixed_statementContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.fixed_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitFixed_statement([NotNull] calculatorParser.Fixed_statementContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.fixed_pointer_declarators"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterFixed_pointer_declarators([NotNull] calculatorParser.Fixed_pointer_declaratorsContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.fixed_pointer_declarators"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitFixed_pointer_declarators([NotNull] calculatorParser.Fixed_pointer_declaratorsContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.fixed_pointer_declarator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterFixed_pointer_declarator([NotNull] calculatorParser.Fixed_pointer_declaratorContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.fixed_pointer_declarator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitFixed_pointer_declarator([NotNull] calculatorParser.Fixed_pointer_declaratorContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.fixed_pointer_initializer"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterFixed_pointer_initializer([NotNull] calculatorParser.Fixed_pointer_initializerContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.fixed_pointer_initializer"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitFixed_pointer_initializer([NotNull] calculatorParser.Fixed_pointer_initializerContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.struct_member_declaration_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterStruct_member_declaration_unsafe([NotNull] calculatorParser.Struct_member_declaration_unsafeContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.struct_member_declaration_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitStruct_member_declaration_unsafe([NotNull] calculatorParser.Struct_member_declaration_unsafeContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.fixed_size_buffer_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterFixed_size_buffer_declaration([NotNull] calculatorParser.Fixed_size_buffer_declarationContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.fixed_size_buffer_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitFixed_size_buffer_declaration([NotNull] calculatorParser.Fixed_size_buffer_declarationContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.fixed_size_buffer_modifiers"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterFixed_size_buffer_modifiers([NotNull] calculatorParser.Fixed_size_buffer_modifiersContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.fixed_size_buffer_modifiers"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitFixed_size_buffer_modifiers([NotNull] calculatorParser.Fixed_size_buffer_modifiersContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.fixed_size_buffer_modifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterFixed_size_buffer_modifier([NotNull] calculatorParser.Fixed_size_buffer_modifierContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.fixed_size_buffer_modifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitFixed_size_buffer_modifier([NotNull] calculatorParser.Fixed_size_buffer_modifierContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.buffer_element_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterBuffer_element_type([NotNull] calculatorParser.Buffer_element_typeContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.buffer_element_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitBuffer_element_type([NotNull] calculatorParser.Buffer_element_typeContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.fixed_size_buffer_declarators"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterFixed_size_buffer_declarators([NotNull] calculatorParser.Fixed_size_buffer_declaratorsContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.fixed_size_buffer_declarators"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitFixed_size_buffer_declarators([NotNull] calculatorParser.Fixed_size_buffer_declaratorsContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.fixed_size_buffer_declarator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterFixed_size_buffer_declarator([NotNull] calculatorParser.Fixed_size_buffer_declaratorContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.fixed_size_buffer_declarator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitFixed_size_buffer_declarator([NotNull] calculatorParser.Fixed_size_buffer_declaratorContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.local_variable_initializer_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterLocal_variable_initializer_unsafe([NotNull] calculatorParser.Local_variable_initializer_unsafeContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.local_variable_initializer_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitLocal_variable_initializer_unsafe([NotNull] calculatorParser.Local_variable_initializer_unsafeContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.stackalloc_initializer"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterStackalloc_initializer([NotNull] calculatorParser.Stackalloc_initializerContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.stackalloc_initializer"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitStackalloc_initializer([NotNull] calculatorParser.Stackalloc_initializerContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="calculatorParser.from_contextual_keyword"/>.
 	/// </summary>
@@ -950,6 +3884,216 @@ public interface IcalculatorListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitKeyword([NotNull] calculatorParser.KeywordContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.class_definition"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterClass_definition([NotNull] calculatorParser.Class_definitionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.class_definition"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitClass_definition([NotNull] calculatorParser.Class_definitionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.struct_definition"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterStruct_definition([NotNull] calculatorParser.Struct_definitionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.struct_definition"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitStruct_definition([NotNull] calculatorParser.Struct_definitionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.interface_definition"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterInterface_definition([NotNull] calculatorParser.Interface_definitionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.interface_definition"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitInterface_definition([NotNull] calculatorParser.Interface_definitionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.enum_definition"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterEnum_definition([NotNull] calculatorParser.Enum_definitionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.enum_definition"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitEnum_definition([NotNull] calculatorParser.Enum_definitionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.delegate_definition"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterDelegate_definition([NotNull] calculatorParser.Delegate_definitionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.delegate_definition"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitDelegate_definition([NotNull] calculatorParser.Delegate_definitionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.event_declaration2"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterEvent_declaration2([NotNull] calculatorParser.Event_declaration2Context context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.event_declaration2"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitEvent_declaration2([NotNull] calculatorParser.Event_declaration2Context context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.field_declaration2"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterField_declaration2([NotNull] calculatorParser.Field_declaration2Context context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.field_declaration2"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitField_declaration2([NotNull] calculatorParser.Field_declaration2Context context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.property_declaration2"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterProperty_declaration2([NotNull] calculatorParser.Property_declaration2Context context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.property_declaration2"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitProperty_declaration2([NotNull] calculatorParser.Property_declaration2Context context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.constant_declaration2"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterConstant_declaration2([NotNull] calculatorParser.Constant_declaration2Context context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.constant_declaration2"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitConstant_declaration2([NotNull] calculatorParser.Constant_declaration2Context context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.indexer_declaration2"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterIndexer_declaration2([NotNull] calculatorParser.Indexer_declaration2Context context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.indexer_declaration2"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitIndexer_declaration2([NotNull] calculatorParser.Indexer_declaration2Context context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.destructor_definition"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterDestructor_definition([NotNull] calculatorParser.Destructor_definitionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.destructor_definition"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitDestructor_definition([NotNull] calculatorParser.Destructor_definitionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.constructor_declaration2"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterConstructor_declaration2([NotNull] calculatorParser.Constructor_declaration2Context context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.constructor_declaration2"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitConstructor_declaration2([NotNull] calculatorParser.Constructor_declaration2Context context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.method_declaration2"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterMethod_declaration2([NotNull] calculatorParser.Method_declaration2Context context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.method_declaration2"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitMethod_declaration2([NotNull] calculatorParser.Method_declaration2Context context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.method_member_name"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterMethod_member_name([NotNull] calculatorParser.Method_member_nameContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.method_member_name"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitMethod_member_name([NotNull] calculatorParser.Method_member_nameContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.method_member_name2"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterMethod_member_name2([NotNull] calculatorParser.Method_member_name2Context context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.method_member_name2"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitMethod_member_name2([NotNull] calculatorParser.Method_member_name2Context context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.operator_declaration2"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterOperator_declaration2([NotNull] calculatorParser.Operator_declaration2Context context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.operator_declaration2"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitOperator_declaration2([NotNull] calculatorParser.Operator_declaration2Context context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.interface_method_declaration2"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterInterface_method_declaration2([NotNull] calculatorParser.Interface_method_declaration2Context context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.interface_method_declaration2"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitInterface_method_declaration2([NotNull] calculatorParser.Interface_method_declaration2Context context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.interface_property_declaration2"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterInterface_property_declaration2([NotNull] calculatorParser.Interface_property_declaration2Context context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.interface_property_declaration2"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitInterface_property_declaration2([NotNull] calculatorParser.Interface_property_declaration2Context context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.interface_event_declaration2"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterInterface_event_declaration2([NotNull] calculatorParser.Interface_event_declaration2Context context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.interface_event_declaration2"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitInterface_event_declaration2([NotNull] calculatorParser.Interface_event_declaration2Context context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.interface_indexer_declaration2"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterInterface_indexer_declaration2([NotNull] calculatorParser.Interface_indexer_declaration2Context context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.interface_indexer_declaration2"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitInterface_indexer_declaration2([NotNull] calculatorParser.Interface_indexer_declaration2Context context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="calculatorParser.member_access2"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterMember_access2([NotNull] calculatorParser.Member_access2Context context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="calculatorParser.member_access2"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitMember_access2([NotNull] calculatorParser.Member_access2Context context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="calculatorParser.method_invocation2"/>.
 	/// </summary>

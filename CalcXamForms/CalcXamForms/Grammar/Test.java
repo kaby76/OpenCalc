@@ -10,7 +10,7 @@ public class Test {
 	calculatorLexer lexer = new calculatorLexer(input);
 	CommonTokenStream tokes = new CommonTokenStream(lexer);
 	calculatorParser parser = new calculatorParser(tokes);
-	ParseTree tree = parser.expression();
+	ParseTree tree = parser.expressionResult();
 	String str = tree.toStringTree(parser);
 	System.out.println(str);
     }
