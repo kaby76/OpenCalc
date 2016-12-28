@@ -41,17 +41,19 @@ namespace CalcXamForms.ViewModels
                     // Insert a copy of the command into top (or overwrite if empty).
                     string command = _singleton._calculation_buffer[found];
                     HtmlLabel results = _singleton._display_buffer[found];
-                    if (_singleton._calculation_buffer[_singleton._calculation_buffer.Count - 1] == "")
+                    //if (_singleton._calculation_buffer[_singleton._calculation_buffer.Count - 1] == "")
+                    //{
+                    //    _singleton._calculation_buffer[_singleton._calculation_buffer.Count - 1] = command;
+                    //    _singleton._display_buffer[_singleton._calculation_buffer.Count - 1] = results;
+                    //    _singleton._page_calc.DoScroll(results);
+                    //}
+                    //else
                     {
-                        _singleton._calculation_buffer[_singleton._calculation_buffer.Count - 1] = command;
-                        _singleton._display_buffer[_singleton._calculation_buffer.Count - 1] = results;
-                    }
-                    else
-                    {
-                        _singleton._display_buffer.Add(new HtmlLabel() { Align = HtmlLabel.Alignment.Right });
+                        HtmlLabel r = new HtmlLabel() {Align = HtmlLabel.Alignment.Right};
+                        _singleton._display_buffer.Add(r);
                         _singleton._calculation_buffer.Add("");
                         _singleton._calculation_buffer[_singleton._calculation_buffer.Count - 1] = command;
-                        _singleton._display_buffer[_singleton._display_buffer.Count - 1] = results;
+                        _singleton._page_calc.DoScroll(r);
                     }
                     _singleton.NotifyPropertyChanged("Results");
                 }
