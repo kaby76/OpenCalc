@@ -44,6 +44,7 @@
     <Compile Include="Grammar\calculatorListener.cs" />
     <Compile Include="Grammar\calculatorParser.cs" />
     <Compile Include="Grammar\calculatorVisitor.cs" />
+    <Compile Include="Helpers\EvaluationException.cs" />
     <Compile Include="Trees\ComputeCompleteness.cs" />
     <Compile Include="Trees\ComputeLinqExpr.cs" />
     <Compile Include="Trees\DFSVisitor.cs" />
@@ -64,6 +65,8 @@
     <Compile Include="ViewModels\PageCalcViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="app.config" />
+    <None Include="Grammar\calculatorLexer.g4" />
+    <None Include="Grammar\calculatorPreProcessor.g4" />
     <None Include="packages.config" />
     <Compile Include="Pages\RootPage.xaml.cs">
       <DependentUpon>RootPage.xaml</DependentUpon>

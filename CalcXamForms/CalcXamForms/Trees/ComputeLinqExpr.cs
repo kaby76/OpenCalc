@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Linq.Expressions;
+using System.Text.RegularExpressions;
 using Antlr4.Runtime;
 using Antlr4.Runtime.Misc;
 using Antlr4.Runtime.Tree;
@@ -830,9 +831,34 @@ namespace CalcXamForms.Trees
             return null;
         }
 
-        public override Expression Visit(IParseTree tree)
+        public override Expression Visit(IParseTree node)
         {
-            return tree.Accept(this);
+            // Hack. There is no language construct that says "all Visit*()"
+            // methods must be implemented all tree node types used.
+            // So, get the node type, and use reflection on this class to find
+            // a visit method overriden for the node type. If not, throw
+            // "not implemented".
+            if (node as TerminalNodeImpl == null)
+            {
+                Type type = node.GetType();
+                Type this_type = this.GetType();
+                string type_name = type.Name;
+                // node type:   Parenthesized_expressionContext
+                // method name: VisitParenthesized_expression
+                Regex regex = new Regex("Context$");
+                string name = regex.Replace(type_name, "");
+                string method_name = "Visit" + name;
+                IEnumerable<MethodInfo> m = this_type.GetTypeInfo().GetDeclaredMethods(method_name);
+                if (!m.GetEnumerator().MoveNext())
+                {
+                    ParserRuleContext where = node as ParserRuleContext;
+                    IToken token = where.Start;
+                    int index = token.StartIndex;
+                    // No method by the given name exists, which means it's unimplemented.
+                    throw new Helpers.EvaluationException("unimplemented feature (" + name + ")", index);
+                }
+            }
+            return node.Accept(this);
         }
     }
 }

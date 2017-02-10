@@ -333,6 +333,7 @@ namespace CalcXamForms.ViewModels
             if (enn == null) return false;
 
             int ErrorPos = enn.Payload.StartIndex;
+            if (ErrorPos < 0) ErrorPos = 0;
 
             string result = "Extraneous input.";
             _display_buffer[_display_buffer.Count - 1].Text = BuildFormattedCommandAndResult(plain_ole_command, ErrorPos, result);
@@ -386,6 +387,11 @@ namespace CalcXamForms.ViewModels
                 //Res res;
                 //visitor.Results.TryGetValue(parent != null ? parent : child, out res);
                 //result = res.Value.ToString();
+            }
+            catch (Helpers.EvaluationException e)
+            {
+                ErrorPos = e.ErrorPos;
+                result = e.Message;
             }
             catch (Exception e)
             {
