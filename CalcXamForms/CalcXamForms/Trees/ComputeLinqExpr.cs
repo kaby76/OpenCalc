@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Linq.Expressions;
+using System.Text.RegularExpressions;
 using Antlr4.Runtime;
 using Antlr4.Runtime.Misc;
 using Antlr4.Runtime.Tree;
@@ -228,9 +229,9 @@ namespace CalcXamForms.Trees
                 }
             if (_completeness.Results[context])
             {
-                Expression lhs = Results[context.GetChild(0)];
                 if (context.ChildCount == 1)
                 {
+                    Expression lhs = Results[context.GetChild(0)];
                     Results[context] = lhs;
                     return lhs;
                 }
@@ -267,9 +268,9 @@ namespace CalcXamForms.Trees
                 }
             if (_completeness.Results[context])
             {
-                Expression lhs = Results[context.GetChild(0)];
                 if (context.ChildCount == 1)
                 {
+                    Expression lhs = Results[context.GetChild(0)];
                     Results[context] = lhs;
                     return lhs;
                 }
@@ -289,349 +290,459 @@ namespace CalcXamForms.Trees
         public override Expression VisitAdditive_expression([NotNull] calculatorParser.Additive_expressionContext context)
         {
             if (context.children != null)
-                foreach (IParseTree c in context.children)
-                {
-                    Visit(c);
-                }
-            if (_completeness.Results[context])
+                foreach (IParseTree c in context.children) Visit(c);
+            if (context.ChildCount == 0)
             {
-                Expression lhs = Results[context.GetChild(0)];
-                if (context.ChildCount == 1)
-                {
-                    Results[context] = lhs;
-                    return lhs;
-                }
-                int count = 0;
-                for (; count < context.ChildCount && count + 2 < context.ChildCount;)
-                {
-                    Expression rhs = Results[context.GetChild(count + 2)];
-                    IParseTree op_pt = context.GetChild(count + 1);
-                    string op = op_pt.GetText();
-                    if (op == "+") lhs = Expression.Add(lhs, rhs);
-                    else if (op == "-") lhs = Expression.Subtract(lhs, rhs);
-                    count += 2;
-                }
+                Results[context] = null;
+                return null;
+            }
+            Expression lhs = Results[context.GetChild(0)];
+            if (context.ChildCount == 1)
+            {
                 Results[context] = lhs;
                 return lhs;
             }
-            Results[context] = null;
-            return null;
+            int count = 0;
+            for (; count < context.ChildCount;)
+            {
+                // LHS partially computed.
+
+                // Get op.
+                string op = "";
+                if (count + 1 < context.ChildCount)
+                {
+                    IParseTree op_pt = context.GetChild(count + 1);
+                    op = op_pt.GetText();
+                }
+
+                // Get RHS, and update LHS.
+                if (count + 2 < context.ChildCount && _completeness.Results[context.GetChild(count + 2)])
+                {
+                    Expression rhs = Results[context.GetChild(count + 2)];
+                    if (op == "+") lhs = Expression.Add(lhs, rhs);
+                    else if (op == "-") lhs = Expression.Subtract(lhs, rhs);
+                }
+
+                count += 2;
+            }
+            Results[context] = lhs;
+            return lhs;
         }
 
         public override Expression VisitMultiplicative_expression([NotNull] calculatorParser.Multiplicative_expressionContext context)
         {
             if (context.children != null)
-                foreach (IParseTree c in context.children)
-                {
-                    Visit(c);
-                }
-            if (_completeness.Results[context])
+                foreach (IParseTree c in context.children) Visit(c);
+            if (context.ChildCount == 0)
             {
-                Expression lhs = Results[context.GetChild(0)];
-                if (context.ChildCount == 1)
-                {
-                    Results[context] = lhs;
-                    return lhs;
-                }
-                int count = 0;
-                for (; count < context.ChildCount && count + 2 < context.ChildCount;)
-                {
-                    Expression rhs = Results[context.GetChild(count + 2)];
-                    IParseTree op_pt = context.GetChild(count + 1);
-                    string op = op_pt.GetText();
-                    if (op == "*") lhs = Expression.Multiply(lhs, rhs);
-                    else if (op == "/") lhs = Expression.Divide(lhs, rhs);
-                    count += 2;
-                }
+                Results[context] = null;
+                return null;
+            }
+            Expression lhs = Results[context.GetChild(0)];
+            if (context.ChildCount == 1)
+            {
                 Results[context] = lhs;
                 return lhs;
             }
-            Results[context] = null;
-            return null;
+            int count = 0;
+            for (; count < context.ChildCount;)
+            {
+                // LHS partially computed.
+
+                // Get op.
+                string op = "";
+                if (count + 1 < context.ChildCount)
+                {
+                    IParseTree op_pt = context.GetChild(count + 1);
+                    op = op_pt.GetText();
+                }
+
+                // Get RHS, and update LHS.
+                if (count + 2 < context.ChildCount && _completeness.Results[context.GetChild(count + 2)])
+                {
+                    Expression rhs = Results[context.GetChild(count + 2)];
+                    if (op == "*") lhs = Expression.Multiply(lhs, rhs);
+                    else if (op == "/") lhs = Expression.Divide(lhs, rhs);
+                }
+
+                count += 2;
+            }
+            Results[context] = lhs;
+            return lhs;
         }
 
         public override Expression VisitShift_expression([NotNull] calculatorParser.Shift_expressionContext context)
         {
             if (context.children != null)
-                foreach (IParseTree c in context.children)
-                {
-                    Visit(c);
-                }
-            if (_completeness.Results[context])
+                foreach (IParseTree c in context.children) Visit(c);
+            if (context.ChildCount == 0)
             {
-                Expression lhs = Results[context.GetChild(0)];
-                if (context.ChildCount == 1)
-                {
-                    Results[context] = lhs;
-                    return lhs;
-                }
-                int count = 0;
-                for (; count < context.ChildCount && count + 2 < context.ChildCount;)
-                {
-                    Expression rhs = Results[context.GetChild(count + 2)];
-                    IParseTree op_pt = context.GetChild(count + 1);
-                    string op = op_pt.GetText();
-                    if (op == ">>") lhs = Expression.RightShift(lhs, rhs);
-                    else if (op == "<<") lhs = Expression.LeftShift(lhs, rhs);
-                    count += 2;
-                }
+                Results[context] = null;
+                return null;
+            }
+            Expression lhs = Results[context.GetChild(0)];
+            if (context.ChildCount == 1)
+            {
                 Results[context] = lhs;
                 return lhs;
             }
-            Results[context] = null;
-            return null;
+            int count = 0;
+            for (; count < context.ChildCount;)
+            {
+                // LHS partially computed.
+
+                // Get op.
+                string op = "";
+                if (count + 1 < context.ChildCount)
+                {
+                    IParseTree op_pt = context.GetChild(count + 1);
+                    op = op_pt.GetText();
+                }
+
+                // Get RHS, and update LHS.
+                if (count + 2 < context.ChildCount && _completeness.Results[context.GetChild(count + 2)])
+                {
+                    Expression rhs = Results[context.GetChild(count + 2)];
+                    if (op == ">>") lhs = Expression.RightShift(lhs, rhs);
+                    else if (op == "<<") lhs = Expression.LeftShift(lhs, rhs);
+                }
+
+                count += 2;
+            }
+            Results[context] = lhs;
+            return lhs;
         }
 
         public override Expression VisitRelational_expression([NotNull] calculatorParser.Relational_expressionContext context)
         {
             if (context.children != null)
-                foreach (IParseTree c in context.children)
-                {
-                    Visit(c);
-                }
-            if (_completeness.Results[context])
+                foreach (IParseTree c in context.children) Visit(c);
+            if (context.ChildCount == 0)
             {
-                Expression lhs = Results[context.GetChild(0)];
-                if (context.ChildCount == 1)
+                Results[context] = null;
+                return null;
+            }
+            Expression lhs = Results[context.GetChild(0)];
+            if (context.ChildCount == 1)
+            {
+                Results[context] = lhs;
+                return lhs;
+            }
+            int count = 0;
+            for (; count < context.ChildCount;)
+            {
+                // LHS partially computed.
+
+                // Get op.
+                string op = "";
+                if (count + 1 < context.ChildCount)
                 {
-                    Results[context] = lhs;
-                    return lhs;
+                    IParseTree op_pt = context.GetChild(count + 1);
+                    op = op_pt.GetText();
                 }
-                int count = 0;
-                for (; count < context.ChildCount && count + 2 < context.ChildCount;)
+
+                // Get RHS, and update LHS.
+                if (count + 2 < context.ChildCount && _completeness.Results[context.GetChild(count + 2)])
                 {
                     Expression rhs = Results[context.GetChild(count + 2)];
-                    IParseTree op_pt = context.GetChild(count + 1);
-                    string op = op_pt.GetText();
                     if (op == ">") lhs = Expression.GreaterThan(lhs, rhs);
                     else if (op == "<") lhs = Expression.LessThan(lhs, rhs);
                     else if (op == ">=") lhs = Expression.GreaterThanOrEqual(lhs, rhs);
                     else if (op == "<=") lhs = Expression.LessThanOrEqual(lhs, rhs);
-                    count += 2;
                 }
-                Results[context] = lhs;
-                return lhs;
+
+                count += 2;
             }
-            Results[context] = null;
-            return null;
+            Results[context] = lhs;
+            return lhs;
         }
 
         public override Expression VisitEquality_expression([NotNull] calculatorParser.Equality_expressionContext context)
         {
             if (context.children != null)
-                foreach (IParseTree c in context.children)
-                {
-                    Visit(c);
-                }
-            if (_completeness.Results[context])
+                foreach (IParseTree c in context.children) Visit(c);
+            if (context.ChildCount == 0)
             {
-                Expression lhs = Results[context.GetChild(0)];
-                if (context.ChildCount == 1)
-                {
-                    Results[context] = lhs;
-                    return lhs;
-                }
-                int count = 0;
-                for (; count < context.ChildCount && count + 2 < context.ChildCount;)
-                {
-                    Expression rhs = Results[context.GetChild(count + 2)];
-                    IParseTree op_pt = context.GetChild(count + 1);
-                    string op = op_pt.GetText();
-                    if (op == "==") lhs = Expression.Equal(lhs, rhs);
-                    else if (op == "!=") lhs = Expression.NotEqual(lhs, rhs);
-                    count += 2;
-                }
+                Results[context] = null;
+                return null;
+            }
+            Expression lhs = Results[context.GetChild(0)];
+            if (context.ChildCount == 1)
+            {
                 Results[context] = lhs;
                 return lhs;
             }
-            Results[context] = null;
-            return null;
+            int count = 0;
+            for (; count < context.ChildCount;)
+            {
+                // LHS partially computed.
+
+                // Get op.
+                string op = "";
+                if (count + 1 < context.ChildCount)
+                {
+                    IParseTree op_pt = context.GetChild(count + 1);
+                    op = op_pt.GetText();
+                }
+
+                // Get RHS, and update LHS.
+                if (count + 2 < context.ChildCount && _completeness.Results[context.GetChild(count + 2)])
+                {
+                    Expression rhs = Results[context.GetChild(count + 2)];
+                    if (op == "==") lhs = Expression.Equal(lhs, rhs);
+                    else if (op == "!=") lhs = Expression.NotEqual(lhs, rhs);
+                }
+
+                count += 2;
+            }
+            Results[context] = lhs;
+            return lhs;
         }
 
         public override Expression VisitAnd_expression([NotNull] calculatorParser.And_expressionContext context)
         {
             if (context.children != null)
-                foreach (IParseTree c in context.children)
-                {
-                    Visit(c);
-                }
-            if (_completeness.Results[context])
+                foreach (IParseTree c in context.children) Visit(c);
+            if (context.ChildCount == 0)
             {
-                Expression lhs = Results[context.GetChild(0)];
-                if (context.ChildCount == 1)
-                {
-                    Results[context] = lhs;
-                    return lhs;
-                }
-                int count = 0;
-                for (; count < context.ChildCount && count + 2 < context.ChildCount;)
-                {
-                    Expression rhs = Results[context.GetChild(count + 2)];
-                    IParseTree op_pt = context.GetChild(count + 1);
-                    string op = op_pt.GetText();
-                    if (op == "&") lhs = Expression.And(lhs, rhs);
-                    count += 2;
-                }
+                Results[context] = null;
+                return null;
+            }
+            Expression lhs = Results[context.GetChild(0)];
+            if (context.ChildCount == 1)
+            {
                 Results[context] = lhs;
                 return lhs;
             }
-            Results[context] = null;
-            return null;
+            int count = 0;
+            for (; count < context.ChildCount;)
+            {
+                // LHS partially computed.
+
+                // Get op.
+                string op = "";
+                if (count + 1 < context.ChildCount)
+                {
+                    IParseTree op_pt = context.GetChild(count + 1);
+                    op = op_pt.GetText();
+                }
+
+                // Get RHS, and update LHS.
+                if (count + 2 < context.ChildCount && _completeness.Results[context.GetChild(count + 2)])
+                {
+                    Expression rhs = Results[context.GetChild(count + 2)];
+                    if (op == "&") lhs = Expression.And(lhs, rhs);
+                }
+
+                count += 2;
+            }
+            Results[context] = lhs;
+            return lhs;
         }
 
         public override Expression VisitInclusive_or_expression([NotNull] calculatorParser.Inclusive_or_expressionContext context)
         {
             if (context.children != null)
-                foreach (IParseTree c in context.children)
-                {
-                    Visit(c);
-                }
-            if (_completeness.Results[context])
+                foreach (IParseTree c in context.children) Visit(c);
+            if (context.ChildCount == 0)
             {
-                Expression lhs = Results[context.GetChild(0)];
-                if (context.ChildCount == 1)
-                {
-                    Results[context] = lhs;
-                    return lhs;
-                }
-                int count = 0;
-                for (; count < context.ChildCount && count + 2 < context.ChildCount;)
-                {
-                    Expression rhs = Results[context.GetChild(count + 2)];
-                    IParseTree op_pt = context.GetChild(count + 1);
-                    string op = op_pt.GetText();
-                    if (op == "|") lhs = Expression.Or(lhs, rhs);
-                    count += 2;
-                }
+                Results[context] = null;
+                return null;
+            }
+            Expression lhs = Results[context.GetChild(0)];
+            if (context.ChildCount == 1)
+            {
                 Results[context] = lhs;
                 return lhs;
             }
-            Results[context] = null;
-            return null;
+            int count = 0;
+            for (; count < context.ChildCount;)
+            {
+                // LHS partially computed.
+
+                // Get op.
+                string op = "";
+                if (count + 1 < context.ChildCount)
+                {
+                    IParseTree op_pt = context.GetChild(count + 1);
+                    op = op_pt.GetText();
+                }
+
+                // Get RHS, and update LHS.
+                if (count + 2 < context.ChildCount && _completeness.Results[context.GetChild(count + 2)])
+                {
+                    Expression rhs = Results[context.GetChild(count + 2)];
+                    if (op == "|") lhs = Expression.Or(lhs, rhs);
+                }
+
+                count += 2;
+            }
+            Results[context] = lhs;
+            return lhs;
         }
 
         public override Expression VisitExclusive_or_expression([NotNull] calculatorParser.Exclusive_or_expressionContext context)
         {
             if (context.children != null)
-                foreach (IParseTree c in context.children)
-                {
-                    Visit(c);
-                }
-            if (_completeness.Results[context])
+                foreach (IParseTree c in context.children) Visit(c);
+            if (context.ChildCount == 0)
             {
-                Expression lhs = Results[context.GetChild(0)];
-                if (context.ChildCount == 1)
-                {
-                    Results[context] = lhs;
-                    return lhs;
-                }
-                int count = 0;
-                for (; count < context.ChildCount && count + 2 < context.ChildCount;)
-                {
-                    Expression rhs = Results[context.GetChild(count + 2)];
-                    IParseTree op_pt = context.GetChild(count + 1);
-                    string op = op_pt.GetText();
-                    if (op == "^") lhs = Expression.ExclusiveOr(lhs, rhs);
-                    count += 2;
-                }
+                Results[context] = null;
+                return null;
+            }
+            Expression lhs = Results[context.GetChild(0)];
+            if (context.ChildCount == 1)
+            {
                 Results[context] = lhs;
                 return lhs;
             }
-            Results[context] = null;
-            return null;
+            int count = 0;
+            for (; count < context.ChildCount;)
+            {
+                // LHS partially computed.
+
+                // Get op.
+                string op = "";
+                if (count + 1 < context.ChildCount)
+                {
+                    IParseTree op_pt = context.GetChild(count + 1);
+                    op = op_pt.GetText();
+                }
+
+                // Get RHS, and update LHS.
+                if (count + 2 < context.ChildCount && _completeness.Results[context.GetChild(count + 2)])
+                {
+                    Expression rhs = Results[context.GetChild(count + 2)];
+                    if (op == "^") lhs = Expression.ExclusiveOr(lhs, rhs);
+                }
+
+                count += 2;
+            }
+            Results[context] = lhs;
+            return lhs;
         }
 
         public override Expression VisitConditional_and_expression([NotNull] calculatorParser.Conditional_and_expressionContext context)
         {
             if (context.children != null)
-                foreach (IParseTree c in context.children)
-                {
-                    Visit(c);
-                }
-            if (_completeness.Results[context])
+                foreach (IParseTree c in context.children) Visit(c);
+            if (context.ChildCount == 0)
             {
-                Expression lhs = Results[context.GetChild(0)];
-                if (context.ChildCount == 1)
-                {
-                    Results[context] = lhs;
-                    return lhs;
-                }
-                int count = 0;
-                for (; count < context.ChildCount && count + 2 < context.ChildCount;)
-                {
-                    Expression rhs = Results[context.GetChild(count + 2)];
-                    IParseTree op_pt = context.GetChild(count + 1);
-                    string op = op_pt.GetText();
-                    if (op == "&&") lhs = Expression.And(lhs, rhs);
-                    count += 2;
-                }
+                Results[context] = null;
+                return null;
+            }
+            Expression lhs = Results[context.GetChild(0)];
+            if (context.ChildCount == 1)
+            {
                 Results[context] = lhs;
                 return lhs;
             }
-            Results[context] = null;
-            return null;
+            int count = 0;
+            for (; count < context.ChildCount;)
+            {
+                // LHS partially computed.
+
+                // Get op.
+                string op = "";
+                if (count + 1 < context.ChildCount)
+                {
+                    IParseTree op_pt = context.GetChild(count + 1);
+                    op = op_pt.GetText();
+                }
+
+                // Get RHS, and update LHS.
+                if (count + 2 < context.ChildCount && _completeness.Results[context.GetChild(count + 2)])
+                {
+                    Expression rhs = Results[context.GetChild(count + 2)];
+                    if (op == "&&") lhs = Expression.And(lhs, rhs);
+                }
+
+                count += 2;
+            }
+            Results[context] = lhs;
+            return lhs;
         }
 
         public override Expression VisitConditional_or_expression([NotNull] calculatorParser.Conditional_or_expressionContext context)
         {
             if (context.children != null)
-                foreach (IParseTree c in context.children)
-                {
-                    Visit(c);
-                }
-            if (_completeness.Results[context])
+                foreach (IParseTree c in context.children) Visit(c);
+            if (context.ChildCount == 0)
             {
-                Expression lhs = Results[context.GetChild(0)];
-                if (context.ChildCount == 1)
-                {
-                    Results[context] = lhs;
-                    return lhs;
-                }
-                int count = 0;
-                for (; count < context.ChildCount && count + 2 < context.ChildCount;)
-                {
-                    Expression rhs = Results[context.GetChild(count + 2)];
-                    IParseTree op_pt = context.GetChild(count + 1);
-                    string op = op_pt.GetText();
-                    if (op == "||") lhs = Expression.Or(lhs, rhs);
-                    count += 2;
-                }
+                Results[context] = null;
+                return null;
+            }
+            Expression lhs = Results[context.GetChild(0)];
+            if (context.ChildCount == 1)
+            {
                 Results[context] = lhs;
                 return lhs;
             }
-            Results[context] = null;
-            return null;
+            int count = 0;
+            for (; count < context.ChildCount;)
+            {
+                // LHS partially computed.
+
+                // Get op.
+                string op = "";
+                if (count + 1 < context.ChildCount)
+                {
+                    IParseTree op_pt = context.GetChild(count + 1);
+                    op = op_pt.GetText();
+                }
+
+                // Get RHS, and update LHS.
+                if (count + 2 < context.ChildCount && _completeness.Results[context.GetChild(count + 2)])
+                {
+                    Expression rhs = Results[context.GetChild(count + 2)];
+                    if (op == "||") lhs = Expression.Or(lhs, rhs);
+                }
+
+                count += 2;
+            }
+            Results[context] = lhs;
+            return lhs;
         }
 
         public override Expression VisitNull_coalescing_expression([NotNull] calculatorParser.Null_coalescing_expressionContext context)
         {
             if (context.children != null)
-                foreach (IParseTree c in context.children)
-                {
-                    Visit(c);
-                }
-            if (_completeness.Results[context])
+                foreach (IParseTree c in context.children) Visit(c);
+            if (context.ChildCount == 0)
             {
-                Expression lhs = Results[context.GetChild(0)];
-                if (context.ChildCount == 1)
-                {
-                    Results[context] = lhs;
-                    return lhs;
-                }
-                int count = 0;
-                for (; count < context.ChildCount && count + 2 < context.ChildCount;)
-                {
-                    Expression rhs = Results[context.GetChild(count + 2)];
-                    IParseTree op_pt = context.GetChild(count + 1);
-                    string op = op_pt.GetText();
-                    if (op == "??") lhs = rhs;
-                    count += 2;
-                }
+                Results[context] = null;
+                return null;
+            }
+            Expression lhs = Results[context.GetChild(0)];
+            if (context.ChildCount == 1)
+            {
                 Results[context] = lhs;
                 return lhs;
             }
-            Results[context] = null;
-            return null;
+            int count = 0;
+            for (; count < context.ChildCount;)
+            {
+                // LHS partially computed.
+
+                // Get op.
+                string op = "";
+                if (count + 1 < context.ChildCount)
+                {
+                    IParseTree op_pt = context.GetChild(count + 1);
+                    op = op_pt.GetText();
+                }
+
+                // Get RHS, and update LHS.
+                if (count + 2 < context.ChildCount && _completeness.Results[context.GetChild(count + 2)])
+                {
+                    Expression rhs = Results[context.GetChild(count + 2)];
+                    if (op == "??") lhs = rhs;
+                }
+
+                count += 2;
+            }
+            Results[context] = lhs;
+            return lhs;
         }
 
         public override Expression VisitConditional_expression([NotNull] calculatorParser.Conditional_expressionContext context)
@@ -643,9 +754,9 @@ namespace CalcXamForms.Trees
                 }
             if (_completeness.Results[context])
             {
-                Expression lhs = Results[context.GetChild(0)];
                 if (context.ChildCount == 1)
                 {
+                    Expression lhs = Results[context.GetChild(0)];
                     Results[context] = lhs;
                     return lhs;
                 }
@@ -663,9 +774,9 @@ namespace CalcXamForms.Trees
                 }
             if (_completeness.Results[context])
             {
-                Expression lhs = Results[context.GetChild(0)];
                 if (context.ChildCount == 1)
                 {
+                    Expression lhs = Results[context.GetChild(0)];
                     Results[context] = lhs;
                     return lhs;
                 }
@@ -683,9 +794,9 @@ namespace CalcXamForms.Trees
                 }
             if (_completeness.Results[context])
             {
-                Expression lhs = Results[context.GetChild(0)];
                 if (context.ChildCount == 1)
                 {
+                    Expression lhs = Results[context.GetChild(0)];
                     Results[context] = lhs;
                     return lhs;
                 }
@@ -703,9 +814,15 @@ namespace CalcXamForms.Trees
                 }
             if (_completeness.Results[context])
             {
-                Expression lhs = Results[context.GetChild(0)];
                 if (context.ChildCount == 1)
                 {
+                    Expression lhs = Results[context.GetChild(0)];
+                    Results[context] = lhs;
+                    return lhs;
+                }
+                if (context.ChildCount == 3)
+                {
+                    Expression lhs = Results[context.GetChild(1)];
                     Results[context] = lhs;
                     return lhs;
                 }
@@ -714,9 +831,34 @@ namespace CalcXamForms.Trees
             return null;
         }
 
-        public override Expression Visit(IParseTree tree)
+        public override Expression Visit(IParseTree node)
         {
-            return tree.Accept(this);
+            // Hack. There is no language construct that says "all Visit*()"
+            // methods must be implemented all tree node types used.
+            // So, get the node type, and use reflection on this class to find
+            // a visit method overriden for the node type. If not, throw
+            // "not implemented".
+            if (node as TerminalNodeImpl == null)
+            {
+                Type type = node.GetType();
+                Type this_type = this.GetType();
+                string type_name = type.Name;
+                // node type:   Parenthesized_expressionContext
+                // method name: VisitParenthesized_expression
+                Regex regex = new Regex("Context$");
+                string name = regex.Replace(type_name, "");
+                string method_name = "Visit" + name;
+                IEnumerable<MethodInfo> m = this_type.GetTypeInfo().GetDeclaredMethods(method_name);
+                if (!m.GetEnumerator().MoveNext())
+                {
+                    ParserRuleContext where = node as ParserRuleContext;
+                    IToken token = where.Start;
+                    int index = token.StartIndex;
+                    // No method by the given name exists, which means it's unimplemented.
+                    throw new Helpers.EvaluationException("unimplemented feature (" + name + ")", index);
+                }
+            }
+            return node.Accept(this);
         }
     }
 }

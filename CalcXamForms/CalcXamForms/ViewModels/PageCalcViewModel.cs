@@ -41,17 +41,19 @@ namespace CalcXamForms.ViewModels
                     // Insert a copy of the command into top (or overwrite if empty).
                     string command = _singleton._calculation_buffer[found];
                     HtmlLabel results = _singleton._display_buffer[found];
-                    if (_singleton._calculation_buffer[_singleton._calculation_buffer.Count - 1] == "")
+                    //if (_singleton._calculation_buffer[_singleton._calculation_buffer.Count - 1] == "")
+                    //{
+                    //    _singleton._calculation_buffer[_singleton._calculation_buffer.Count - 1] = command;
+                    //    _singleton._display_buffer[_singleton._calculation_buffer.Count - 1] = results;
+                    //    _singleton._page_calc.DoScroll(results);
+                    //}
+                    //else
                     {
-                        _singleton._calculation_buffer[_singleton._calculation_buffer.Count - 1] = command;
-                        _singleton._display_buffer[_singleton._calculation_buffer.Count - 1] = results;
-                    }
-                    else
-                    {
-                        _singleton._display_buffer.Add(new HtmlLabel() { Align = HtmlLabel.Alignment.Right });
+                        HtmlLabel r = new HtmlLabel() {Align = HtmlLabel.Alignment.Right};
+                        _singleton._display_buffer.Add(r);
                         _singleton._calculation_buffer.Add("");
                         _singleton._calculation_buffer[_singleton._calculation_buffer.Count - 1] = command;
-                        _singleton._display_buffer[_singleton._display_buffer.Count - 1] = results;
+                        _singleton._page_calc.DoScroll(r);
                     }
                     _singleton.NotifyPropertyChanged("Results");
                 }
@@ -182,7 +184,7 @@ namespace CalcXamForms.ViewModels
         public ICommand BSlash { get; set; } = new Command((nothing) => _singleton.InOperator("/"));
         public ICommand BEquals { get; set; } = new Command((nothing) =>
         {
-            _singleton.InOperator("=");
+            _singleton.InOperator("");
             _singleton._display_buffer.Add(new HtmlLabel() { Align = HtmlLabel.Alignment.Right });
             _singleton._calculation_buffer.Add("");
             HtmlLabel item = _singleton._display_buffer[_singleton._display_buffer.Count - 1];
@@ -331,6 +333,7 @@ namespace CalcXamForms.ViewModels
             if (enn == null) return false;
 
             int ErrorPos = enn.Payload.StartIndex;
+            if (ErrorPos < 0) ErrorPos = 0;
 
             string result = "Extraneous input.";
             _display_buffer[_display_buffer.Count - 1].Text = BuildFormattedCommandAndResult(plain_ole_command, ErrorPos, result);
@@ -384,6 +387,11 @@ namespace CalcXamForms.ViewModels
                 //Res res;
                 //visitor.Results.TryGetValue(parent != null ? parent : child, out res);
                 //result = res.Value.ToString();
+            }
+            catch (Helpers.EvaluationException e)
+            {
+                ErrorPos = e.ErrorPos;
+                result = e.Message;
             }
             catch (Exception e)
             {

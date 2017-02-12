@@ -38,17 +38,131 @@ public interface IcalculatorVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitExpressionResult([NotNull] calculatorParser.ExpressionResultContext context);
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.namespace_name"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitNamespace_name([NotNull] calculatorParser.Namespace_nameContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.type_name"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitType_name([NotNull] calculatorParser.Type_nameContext context);
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="calculatorParser.identifier"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitIdentifier([NotNull] calculatorParser.IdentifierContext context);
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.namespace_or_type_name"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitNamespace_or_type_name([NotNull] calculatorParser.Namespace_or_type_nameContext context);
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="calculatorParser.type_argument_list_opt"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitType_argument_list_opt([NotNull] calculatorParser.Type_argument_list_optContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitType([NotNull] calculatorParser.TypeContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.base_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitBase_type([NotNull] calculatorParser.Base_typeContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.simple_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitSimple_type([NotNull] calculatorParser.Simple_typeContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.numeric_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitNumeric_type([NotNull] calculatorParser.Numeric_typeContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.integral_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitIntegral_type([NotNull] calculatorParser.Integral_typeContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.floating_point_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitFloating_point_type([NotNull] calculatorParser.Floating_point_typeContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.nullable_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitNullable_type([NotNull] calculatorParser.Nullable_typeContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.non_nullable_value_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitNon_nullable_value_type([NotNull] calculatorParser.Non_nullable_value_typeContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.reference_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitReference_type([NotNull] calculatorParser.Reference_typeContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.class_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitClass_type([NotNull] calculatorParser.Class_typeContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.interface_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitInterface_type([NotNull] calculatorParser.Interface_typeContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.delegate_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitDelegate_type([NotNull] calculatorParser.Delegate_typeContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.type_argument_list"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitType_argument_list([NotNull] calculatorParser.Type_argument_listContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.type_arguments"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitType_arguments([NotNull] calculatorParser.Type_argumentsContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.type_argument"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitType_argument([NotNull] calculatorParser.Type_argumentContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.type_void"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitType_void([NotNull] calculatorParser.Type_voidContext context);
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="calculatorParser.variable_reference"/>.
 	/// </summary>
@@ -134,6 +248,18 @@ public interface IcalculatorVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitThis_access([NotNull] calculatorParser.This_accessContext context);
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.base_access"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitBase_access([NotNull] calculatorParser.Base_accessContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.object_creation_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitObject_creation_expression([NotNull] calculatorParser.Object_creation_expressionContext context);
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="calculatorParser.object_or_collection_initializer"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -182,6 +308,30 @@ public interface IcalculatorVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitElement_initializer([NotNull] calculatorParser.Element_initializerContext context);
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.array_creation_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitArray_creation_expression([NotNull] calculatorParser.Array_creation_expressionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.delegate_creation_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitDelegate_creation_expression([NotNull] calculatorParser.Delegate_creation_expressionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.anonymous_object_creation_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitAnonymous_object_creation_expression([NotNull] calculatorParser.Anonymous_object_creation_expressionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.anonymous_object_initializer"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitAnonymous_object_initializer([NotNull] calculatorParser.Anonymous_object_initializerContext context);
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="calculatorParser.member_declarator_list"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -193,6 +343,12 @@ public interface IcalculatorVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitMember_declarator([NotNull] calculatorParser.Member_declaratorContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.typeof_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitTypeof_expression([NotNull] calculatorParser.Typeof_expressionContext context);
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="calculatorParser.unbound_type_name"/>.
 	/// </summary>
@@ -224,11 +380,23 @@ public interface IcalculatorVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitUnchecked_expression([NotNull] calculatorParser.Unchecked_expressionContext context);
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.default_value_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitDefault_value_expression([NotNull] calculatorParser.Default_value_expressionContext context);
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="calculatorParser.unary_expression"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitUnary_expression([NotNull] calculatorParser.Unary_expressionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.scan_for_cast_generic_precedence"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitScan_for_cast_generic_precedence([NotNull] calculatorParser.Scan_for_cast_generic_precedenceContext context);
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="calculatorParser.cast_disambiguation_token"/>.
 	/// </summary>
@@ -247,6 +415,12 @@ public interface IcalculatorVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitPre_decrement_expression([NotNull] calculatorParser.Pre_decrement_expressionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.cast_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitCast_expression([NotNull] calculatorParser.Cast_expressionContext context);
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="calculatorParser.multiplicative_expression"/>.
 	/// </summary>
@@ -272,11 +446,23 @@ public interface IcalculatorVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitRelational_expression([NotNull] calculatorParser.Relational_expressionContext context);
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.scan_for_shift_generic_precedence"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitScan_for_shift_generic_precedence([NotNull] calculatorParser.Scan_for_shift_generic_precedenceContext context);
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="calculatorParser.shift_disambiguation_token"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitShift_disambiguation_token([NotNull] calculatorParser.Shift_disambiguation_tokenContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.isType"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitIsType([NotNull] calculatorParser.IsTypeContext context);
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="calculatorParser.is_disambiguation_token"/>.
 	/// </summary>
@@ -332,6 +518,180 @@ public interface IcalculatorVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitConditional_expression([NotNull] calculatorParser.Conditional_expressionContext context);
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.lambda_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitLambda_expression([NotNull] calculatorParser.Lambda_expressionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.anonymous_method_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitAnonymous_method_expression([NotNull] calculatorParser.Anonymous_method_expressionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.anonymous_function_signature"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitAnonymous_function_signature([NotNull] calculatorParser.Anonymous_function_signatureContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.explicit_anonymous_function_signature"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitExplicit_anonymous_function_signature([NotNull] calculatorParser.Explicit_anonymous_function_signatureContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.explicit_anonymous_function_parameter_list"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitExplicit_anonymous_function_parameter_list([NotNull] calculatorParser.Explicit_anonymous_function_parameter_listContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.explicit_anonymous_function_parameter"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitExplicit_anonymous_function_parameter([NotNull] calculatorParser.Explicit_anonymous_function_parameterContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.anonymous_function_parameter_modifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitAnonymous_function_parameter_modifier([NotNull] calculatorParser.Anonymous_function_parameter_modifierContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.implicit_anonymous_function_signature"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitImplicit_anonymous_function_signature([NotNull] calculatorParser.Implicit_anonymous_function_signatureContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.implicit_anonymous_function_parameter_list"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitImplicit_anonymous_function_parameter_list([NotNull] calculatorParser.Implicit_anonymous_function_parameter_listContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.implicit_anonymous_function_parameter"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitImplicit_anonymous_function_parameter([NotNull] calculatorParser.Implicit_anonymous_function_parameterContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.anonymous_function_body"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitAnonymous_function_body([NotNull] calculatorParser.Anonymous_function_bodyContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.query_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitQuery_expression([NotNull] calculatorParser.Query_expressionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.from_clause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitFrom_clause([NotNull] calculatorParser.From_clauseContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.query_body"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitQuery_body([NotNull] calculatorParser.Query_bodyContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.query_body_clauses"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitQuery_body_clauses([NotNull] calculatorParser.Query_body_clausesContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.query_body_clause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitQuery_body_clause([NotNull] calculatorParser.Query_body_clauseContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.let_clause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitLet_clause([NotNull] calculatorParser.Let_clauseContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.where_clause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitWhere_clause([NotNull] calculatorParser.Where_clauseContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.join_clause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitJoin_clause([NotNull] calculatorParser.Join_clauseContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.join_into_clause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitJoin_into_clause([NotNull] calculatorParser.Join_into_clauseContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.combined_join_clause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitCombined_join_clause([NotNull] calculatorParser.Combined_join_clauseContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.orderby_clause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitOrderby_clause([NotNull] calculatorParser.Orderby_clauseContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.orderings"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitOrderings([NotNull] calculatorParser.OrderingsContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.ordering"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitOrdering([NotNull] calculatorParser.OrderingContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.ordering_direction"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitOrdering_direction([NotNull] calculatorParser.Ordering_directionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.select_or_group_clause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitSelect_or_group_clause([NotNull] calculatorParser.Select_or_group_clauseContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.select_clause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitSelect_clause([NotNull] calculatorParser.Select_clauseContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.group_clause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitGroup_clause([NotNull] calculatorParser.Group_clauseContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.query_continuation"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitQuery_continuation([NotNull] calculatorParser.Query_continuationContext context);
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="calculatorParser.assignment"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -368,6 +728,548 @@ public interface IcalculatorVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitBoolean_expression([NotNull] calculatorParser.Boolean_expressionContext context);
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitStatement([NotNull] calculatorParser.StatementContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.embedded_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitEmbedded_statement([NotNull] calculatorParser.Embedded_statementContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.simple_embedded_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitSimple_embedded_statement([NotNull] calculatorParser.Simple_embedded_statementContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.block"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitBlock([NotNull] calculatorParser.BlockContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.statement_list"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitStatement_list([NotNull] calculatorParser.Statement_listContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.empty_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitEmpty_statement([NotNull] calculatorParser.Empty_statementContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.labeled_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitLabeled_statement([NotNull] calculatorParser.Labeled_statementContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.declaration_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitDeclaration_statement([NotNull] calculatorParser.Declaration_statementContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.local_variable_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitLocal_variable_declaration([NotNull] calculatorParser.Local_variable_declarationContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.local_variable_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitLocal_variable_type([NotNull] calculatorParser.Local_variable_typeContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.local_variable_declarators"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitLocal_variable_declarators([NotNull] calculatorParser.Local_variable_declaratorsContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.local_variable_declarator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitLocal_variable_declarator([NotNull] calculatorParser.Local_variable_declaratorContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.local_variable_initializer"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitLocal_variable_initializer([NotNull] calculatorParser.Local_variable_initializerContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.local_constant_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitLocal_constant_declaration([NotNull] calculatorParser.Local_constant_declarationContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.expression_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitExpression_statement([NotNull] calculatorParser.Expression_statementContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.statement_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitStatement_expression([NotNull] calculatorParser.Statement_expressionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.selection_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitSelection_statement([NotNull] calculatorParser.Selection_statementContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>ifBodyBlock</c>
+	/// labeled alternative in <see cref="calculatorParser.if_body"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitIfBodyBlock([NotNull] calculatorParser.IfBodyBlockContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>ifBodySingle</c>
+	/// labeled alternative in <see cref="calculatorParser.if_body"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitIfBodySingle([NotNull] calculatorParser.IfBodySingleContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.if_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitIf_statement([NotNull] calculatorParser.If_statementContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.switch_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitSwitch_statement([NotNull] calculatorParser.Switch_statementContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.switch_block"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitSwitch_block([NotNull] calculatorParser.Switch_blockContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.switch_sections"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitSwitch_sections([NotNull] calculatorParser.Switch_sectionsContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.switch_section"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitSwitch_section([NotNull] calculatorParser.Switch_sectionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.switch_labels"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitSwitch_labels([NotNull] calculatorParser.Switch_labelsContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.switch_label"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitSwitch_label([NotNull] calculatorParser.Switch_labelContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.iteration_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitIteration_statement([NotNull] calculatorParser.Iteration_statementContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.while_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitWhile_statement([NotNull] calculatorParser.While_statementContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.do_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitDo_statement([NotNull] calculatorParser.Do_statementContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.for_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitFor_statement([NotNull] calculatorParser.For_statementContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.for_initializer"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitFor_initializer([NotNull] calculatorParser.For_initializerContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.for_condition"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitFor_condition([NotNull] calculatorParser.For_conditionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.for_iterator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitFor_iterator([NotNull] calculatorParser.For_iteratorContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.statement_expression_list"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitStatement_expression_list([NotNull] calculatorParser.Statement_expression_listContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.foreach_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitForeach_statement([NotNull] calculatorParser.Foreach_statementContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.jump_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitJump_statement([NotNull] calculatorParser.Jump_statementContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.break_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitBreak_statement([NotNull] calculatorParser.Break_statementContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.continue_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitContinue_statement([NotNull] calculatorParser.Continue_statementContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.goto_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitGoto_statement([NotNull] calculatorParser.Goto_statementContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.return_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitReturn_statement([NotNull] calculatorParser.Return_statementContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.throw_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitThrow_statement([NotNull] calculatorParser.Throw_statementContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.try_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitTry_statement([NotNull] calculatorParser.Try_statementContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.catch_clauses"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitCatch_clauses([NotNull] calculatorParser.Catch_clausesContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.specific_catch_clauses"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitSpecific_catch_clauses([NotNull] calculatorParser.Specific_catch_clausesContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.specific_catch_clause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitSpecific_catch_clause([NotNull] calculatorParser.Specific_catch_clauseContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.general_catch_clause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitGeneral_catch_clause([NotNull] calculatorParser.General_catch_clauseContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.finally_clause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitFinally_clause([NotNull] calculatorParser.Finally_clauseContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.checked_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitChecked_statement([NotNull] calculatorParser.Checked_statementContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.unchecked_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitUnchecked_statement([NotNull] calculatorParser.Unchecked_statementContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.lock_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitLock_statement([NotNull] calculatorParser.Lock_statementContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.using_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitUsing_statement([NotNull] calculatorParser.Using_statementContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.resource_acquisition"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitResource_acquisition([NotNull] calculatorParser.Resource_acquisitionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.yield_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitYield_statement([NotNull] calculatorParser.Yield_statementContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.compilation_unit"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitCompilation_unit([NotNull] calculatorParser.Compilation_unitContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.namespace_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitNamespace_declaration([NotNull] calculatorParser.Namespace_declarationContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.qualified_identifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitQualified_identifier([NotNull] calculatorParser.Qualified_identifierContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.namespace_body"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitNamespace_body([NotNull] calculatorParser.Namespace_bodyContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.extern_alias_directives"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitExtern_alias_directives([NotNull] calculatorParser.Extern_alias_directivesContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.extern_alias_directive"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitExtern_alias_directive([NotNull] calculatorParser.Extern_alias_directiveContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.using_directives"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitUsing_directives([NotNull] calculatorParser.Using_directivesContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.using_directive"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitUsing_directive([NotNull] calculatorParser.Using_directiveContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.using_alias_directive"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitUsing_alias_directive([NotNull] calculatorParser.Using_alias_directiveContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.using_namespace_directive"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitUsing_namespace_directive([NotNull] calculatorParser.Using_namespace_directiveContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.namespace_member_declarations"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitNamespace_member_declarations([NotNull] calculatorParser.Namespace_member_declarationsContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.namespace_member_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitNamespace_member_declaration([NotNull] calculatorParser.Namespace_member_declarationContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.type_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitType_declaration([NotNull] calculatorParser.Type_declarationContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.qualified_alias_member"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitQualified_alias_member([NotNull] calculatorParser.Qualified_alias_memberContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.class_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitClass_declaration([NotNull] calculatorParser.Class_declarationContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.class_modifiers"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitClass_modifiers([NotNull] calculatorParser.Class_modifiersContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.class_modifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitClass_modifier([NotNull] calculatorParser.Class_modifierContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.type_parameter_list"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitType_parameter_list([NotNull] calculatorParser.Type_parameter_listContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.type_parameters"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitType_parameters([NotNull] calculatorParser.Type_parametersContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.type_parameter"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitType_parameter([NotNull] calculatorParser.Type_parameterContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.class_base"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitClass_base([NotNull] calculatorParser.Class_baseContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.interface_type_list"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitInterface_type_list([NotNull] calculatorParser.Interface_type_listContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.type_parameter_constraints_clauses"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitType_parameter_constraints_clauses([NotNull] calculatorParser.Type_parameter_constraints_clausesContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.type_parameter_constraints_clause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitType_parameter_constraints_clause([NotNull] calculatorParser.Type_parameter_constraints_clauseContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.type_parameter_constraints"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitType_parameter_constraints([NotNull] calculatorParser.Type_parameter_constraintsContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.primary_constraint"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitPrimary_constraint([NotNull] calculatorParser.Primary_constraintContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.secondary_constraints"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitSecondary_constraints([NotNull] calculatorParser.Secondary_constraintsContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.constructor_constraint"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitConstructor_constraint([NotNull] calculatorParser.Constructor_constraintContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.class_body"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitClass_body([NotNull] calculatorParser.Class_bodyContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.class_member_declarations"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitClass_member_declarations([NotNull] calculatorParser.Class_member_declarationsContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.class_member_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitClass_member_declaration([NotNull] calculatorParser.Class_member_declarationContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.all_member_modifiers"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitAll_member_modifiers([NotNull] calculatorParser.All_member_modifiersContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.all_member_modifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitAll_member_modifier([NotNull] calculatorParser.All_member_modifierContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.common_member_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitCommon_member_declaration([NotNull] calculatorParser.Common_member_declarationContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.typed_member_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitTyped_member_declaration([NotNull] calculatorParser.Typed_member_declarationContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.constant_declarators"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitConstant_declarators([NotNull] calculatorParser.Constant_declaratorsContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.constant_declarator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitConstant_declarator([NotNull] calculatorParser.Constant_declaratorContext context);
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="calculatorParser.variable_declarators"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -385,6 +1287,384 @@ public interface IcalculatorVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitVariable_initializer([NotNull] calculatorParser.Variable_initializerContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.method_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitMethod_declaration([NotNull] calculatorParser.Method_declarationContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.method_header"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitMethod_header([NotNull] calculatorParser.Method_headerContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.method_modifiers"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitMethod_modifiers([NotNull] calculatorParser.Method_modifiersContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.method_modifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitMethod_modifier([NotNull] calculatorParser.Method_modifierContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.return_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitReturn_type([NotNull] calculatorParser.Return_typeContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.member_name"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitMember_name([NotNull] calculatorParser.Member_nameContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.method_body"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitMethod_body([NotNull] calculatorParser.Method_bodyContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.formal_parameter_list"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitFormal_parameter_list([NotNull] calculatorParser.Formal_parameter_listContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.fixed_parameters"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitFixed_parameters([NotNull] calculatorParser.Fixed_parametersContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.fixed_parameter"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitFixed_parameter([NotNull] calculatorParser.Fixed_parameterContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.default_argument"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitDefault_argument([NotNull] calculatorParser.Default_argumentContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.parameter_modifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitParameter_modifier([NotNull] calculatorParser.Parameter_modifierContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.parameter_array"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitParameter_array([NotNull] calculatorParser.Parameter_arrayContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.property_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitProperty_declaration([NotNull] calculatorParser.Property_declarationContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.property_modifiers"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitProperty_modifiers([NotNull] calculatorParser.Property_modifiersContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.property_modifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitProperty_modifier([NotNull] calculatorParser.Property_modifierContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.accessor_declarations"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitAccessor_declarations([NotNull] calculatorParser.Accessor_declarationsContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.get_accessor_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitGet_accessor_declaration([NotNull] calculatorParser.Get_accessor_declarationContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.set_accessor_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitSet_accessor_declaration([NotNull] calculatorParser.Set_accessor_declarationContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.accessor_modifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitAccessor_modifier([NotNull] calculatorParser.Accessor_modifierContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.accessor_body"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitAccessor_body([NotNull] calculatorParser.Accessor_bodyContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.event_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitEvent_declaration([NotNull] calculatorParser.Event_declarationContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.event_modifiers"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitEvent_modifiers([NotNull] calculatorParser.Event_modifiersContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.event_modifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitEvent_modifier([NotNull] calculatorParser.Event_modifierContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.event_accessor_declarations"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitEvent_accessor_declarations([NotNull] calculatorParser.Event_accessor_declarationsContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.add_accessor_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitAdd_accessor_declaration([NotNull] calculatorParser.Add_accessor_declarationContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.remove_accessor_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitRemove_accessor_declaration([NotNull] calculatorParser.Remove_accessor_declarationContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.indexer_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitIndexer_declaration([NotNull] calculatorParser.Indexer_declarationContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.indexer_modifiers"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitIndexer_modifiers([NotNull] calculatorParser.Indexer_modifiersContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.indexer_modifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitIndexer_modifier([NotNull] calculatorParser.Indexer_modifierContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.indexer_declarator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitIndexer_declarator([NotNull] calculatorParser.Indexer_declaratorContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.operator_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitOperator_declaration([NotNull] calculatorParser.Operator_declarationContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.operator_modifiers"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitOperator_modifiers([NotNull] calculatorParser.Operator_modifiersContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.operator_modifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitOperator_modifier([NotNull] calculatorParser.Operator_modifierContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.operator_declarator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitOperator_declarator([NotNull] calculatorParser.Operator_declaratorContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.unary_operator_declarator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitUnary_operator_declarator([NotNull] calculatorParser.Unary_operator_declaratorContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.overloadable_unary_operator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitOverloadable_unary_operator([NotNull] calculatorParser.Overloadable_unary_operatorContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.binary_operator_declarator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitBinary_operator_declarator([NotNull] calculatorParser.Binary_operator_declaratorContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.overloadable_binary_operator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitOverloadable_binary_operator([NotNull] calculatorParser.Overloadable_binary_operatorContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.overloadable_operator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitOverloadable_operator([NotNull] calculatorParser.Overloadable_operatorContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.conversion_operator_declarator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitConversion_operator_declarator([NotNull] calculatorParser.Conversion_operator_declaratorContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.operator_body"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitOperator_body([NotNull] calculatorParser.Operator_bodyContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.constructor_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitConstructor_declaration([NotNull] calculatorParser.Constructor_declarationContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.constructor_modifiers"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitConstructor_modifiers([NotNull] calculatorParser.Constructor_modifiersContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.constructor_modifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitConstructor_modifier([NotNull] calculatorParser.Constructor_modifierContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.constructor_declarator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitConstructor_declarator([NotNull] calculatorParser.Constructor_declaratorContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.constructor_initializer"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitConstructor_initializer([NotNull] calculatorParser.Constructor_initializerContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.constructor_body"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitConstructor_body([NotNull] calculatorParser.Constructor_bodyContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.static_constructor_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitStatic_constructor_declaration([NotNull] calculatorParser.Static_constructor_declarationContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.static_constructor_modifiers"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitStatic_constructor_modifiers([NotNull] calculatorParser.Static_constructor_modifiersContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.static_constructor_body"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitStatic_constructor_body([NotNull] calculatorParser.Static_constructor_bodyContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.destructor_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitDestructor_declaration([NotNull] calculatorParser.Destructor_declarationContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.destructor_body"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitDestructor_body([NotNull] calculatorParser.Destructor_bodyContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.body"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitBody([NotNull] calculatorParser.BodyContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.struct_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitStruct_declaration([NotNull] calculatorParser.Struct_declarationContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.struct_modifiers"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitStruct_modifiers([NotNull] calculatorParser.Struct_modifiersContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.struct_modifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitStruct_modifier([NotNull] calculatorParser.Struct_modifierContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.struct_interfaces"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitStruct_interfaces([NotNull] calculatorParser.Struct_interfacesContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.struct_body"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitStruct_body([NotNull] calculatorParser.Struct_bodyContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.struct_member_declarations"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitStruct_member_declarations([NotNull] calculatorParser.Struct_member_declarationsContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.struct_member_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitStruct_member_declaration([NotNull] calculatorParser.Struct_member_declarationContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.array_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitArray_type([NotNull] calculatorParser.Array_typeContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.non_array_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitNon_array_type([NotNull] calculatorParser.Non_array_typeContext context);
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="calculatorParser.rank_specifiers"/>.
 	/// </summary>
@@ -415,6 +1695,486 @@ public interface IcalculatorVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitVariable_initializer_list([NotNull] calculatorParser.Variable_initializer_listContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.interface_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitInterface_declaration([NotNull] calculatorParser.Interface_declarationContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.interface_modifiers"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitInterface_modifiers([NotNull] calculatorParser.Interface_modifiersContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.interface_modifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitInterface_modifier([NotNull] calculatorParser.Interface_modifierContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.variant_type_parameter_list"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitVariant_type_parameter_list([NotNull] calculatorParser.Variant_type_parameter_listContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.variant_type_parameters"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitVariant_type_parameters([NotNull] calculatorParser.Variant_type_parametersContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.variance_annotation"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitVariance_annotation([NotNull] calculatorParser.Variance_annotationContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.interface_base"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitInterface_base([NotNull] calculatorParser.Interface_baseContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.interface_body"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitInterface_body([NotNull] calculatorParser.Interface_bodyContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.interface_member_declarations"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitInterface_member_declarations([NotNull] calculatorParser.Interface_member_declarationsContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.interface_member_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitInterface_member_declaration([NotNull] calculatorParser.Interface_member_declarationContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.interface_method_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitInterface_method_declaration([NotNull] calculatorParser.Interface_method_declarationContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.interface_property_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitInterface_property_declaration([NotNull] calculatorParser.Interface_property_declarationContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.interface_accessors"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitInterface_accessors([NotNull] calculatorParser.Interface_accessorsContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.interface_event_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitInterface_event_declaration([NotNull] calculatorParser.Interface_event_declarationContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.interface_indexer_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitInterface_indexer_declaration([NotNull] calculatorParser.Interface_indexer_declarationContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.enum_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitEnum_declaration([NotNull] calculatorParser.Enum_declarationContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.enum_base"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitEnum_base([NotNull] calculatorParser.Enum_baseContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.enum_body"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitEnum_body([NotNull] calculatorParser.Enum_bodyContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.enum_modifiers"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitEnum_modifiers([NotNull] calculatorParser.Enum_modifiersContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.enum_modifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitEnum_modifier([NotNull] calculatorParser.Enum_modifierContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.enum_member_declarations"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitEnum_member_declarations([NotNull] calculatorParser.Enum_member_declarationsContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.enum_member_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitEnum_member_declaration([NotNull] calculatorParser.Enum_member_declarationContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.delegate_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitDelegate_declaration([NotNull] calculatorParser.Delegate_declarationContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.delegate_modifiers"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitDelegate_modifiers([NotNull] calculatorParser.Delegate_modifiersContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.delegate_modifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitDelegate_modifier([NotNull] calculatorParser.Delegate_modifierContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.global_attributes"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitGlobal_attributes([NotNull] calculatorParser.Global_attributesContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.global_attribute_sections"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitGlobal_attribute_sections([NotNull] calculatorParser.Global_attribute_sectionsContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.global_attribute_section"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitGlobal_attribute_section([NotNull] calculatorParser.Global_attribute_sectionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.global_attribute_target_specifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitGlobal_attribute_target_specifier([NotNull] calculatorParser.Global_attribute_target_specifierContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.global_attribute_target"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitGlobal_attribute_target([NotNull] calculatorParser.Global_attribute_targetContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.attributes"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitAttributes([NotNull] calculatorParser.AttributesContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.attribute_sections"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitAttribute_sections([NotNull] calculatorParser.Attribute_sectionsContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.attribute_section"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitAttribute_section([NotNull] calculatorParser.Attribute_sectionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.attribute_target_specifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitAttribute_target_specifier([NotNull] calculatorParser.Attribute_target_specifierContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.attribute_target"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitAttribute_target([NotNull] calculatorParser.Attribute_targetContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.attribute_list"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitAttribute_list([NotNull] calculatorParser.Attribute_listContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.attribute"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitAttribute([NotNull] calculatorParser.AttributeContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.attribute_name"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitAttribute_name([NotNull] calculatorParser.Attribute_nameContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.attribute_arguments"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitAttribute_arguments([NotNull] calculatorParser.Attribute_argumentsContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.positional_argument_list"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitPositional_argument_list([NotNull] calculatorParser.Positional_argument_listContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.positional_argument"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitPositional_argument([NotNull] calculatorParser.Positional_argumentContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.named_argument_list"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitNamed_argument_list([NotNull] calculatorParser.Named_argument_listContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.named_argument"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitNamed_argument([NotNull] calculatorParser.Named_argumentContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.attribute_argument_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitAttribute_argument_expression([NotNull] calculatorParser.Attribute_argument_expressionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.class_modifier_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitClass_modifier_unsafe([NotNull] calculatorParser.Class_modifier_unsafeContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.struct_modifier_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitStruct_modifier_unsafe([NotNull] calculatorParser.Struct_modifier_unsafeContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.interface_modifier_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitInterface_modifier_unsafe([NotNull] calculatorParser.Interface_modifier_unsafeContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.delegate_modifier_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitDelegate_modifier_unsafe([NotNull] calculatorParser.Delegate_modifier_unsafeContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.field_modifier_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitField_modifier_unsafe([NotNull] calculatorParser.Field_modifier_unsafeContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.method_modifier_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitMethod_modifier_unsafe([NotNull] calculatorParser.Method_modifier_unsafeContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.property_modifier_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitProperty_modifier_unsafe([NotNull] calculatorParser.Property_modifier_unsafeContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.event_modifier_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitEvent_modifier_unsafe([NotNull] calculatorParser.Event_modifier_unsafeContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.indexer_modifier_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitIndexer_modifier_unsafe([NotNull] calculatorParser.Indexer_modifier_unsafeContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.operator_modifier_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitOperator_modifier_unsafe([NotNull] calculatorParser.Operator_modifier_unsafeContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.constructor_modifier_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitConstructor_modifier_unsafe([NotNull] calculatorParser.Constructor_modifier_unsafeContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.destructor_declaration_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitDestructor_declaration_unsafe([NotNull] calculatorParser.Destructor_declaration_unsafeContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.static_constructor_modifiers_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitStatic_constructor_modifiers_unsafe([NotNull] calculatorParser.Static_constructor_modifiers_unsafeContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.embedded_statement_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitEmbedded_statement_unsafe([NotNull] calculatorParser.Embedded_statement_unsafeContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.unsafe_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitUnsafe_statement([NotNull] calculatorParser.Unsafe_statementContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.type_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitType_unsafe([NotNull] calculatorParser.Type_unsafeContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.pointer_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitPointer_type([NotNull] calculatorParser.Pointer_typeContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.unmanaged_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitUnmanaged_type([NotNull] calculatorParser.Unmanaged_typeContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.primary_no_array_creation_expression_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitPrimary_no_array_creation_expression_unsafe([NotNull] calculatorParser.Primary_no_array_creation_expression_unsafeContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.unary_expression_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitUnary_expression_unsafe([NotNull] calculatorParser.Unary_expression_unsafeContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.pointer_indirection_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitPointer_indirection_expression([NotNull] calculatorParser.Pointer_indirection_expressionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.addressof_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitAddressof_expression([NotNull] calculatorParser.Addressof_expressionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.sizeof_expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitSizeof_expression([NotNull] calculatorParser.Sizeof_expressionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.fixed_statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitFixed_statement([NotNull] calculatorParser.Fixed_statementContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.fixed_pointer_declarators"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitFixed_pointer_declarators([NotNull] calculatorParser.Fixed_pointer_declaratorsContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.fixed_pointer_declarator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitFixed_pointer_declarator([NotNull] calculatorParser.Fixed_pointer_declaratorContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.fixed_pointer_initializer"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitFixed_pointer_initializer([NotNull] calculatorParser.Fixed_pointer_initializerContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.struct_member_declaration_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitStruct_member_declaration_unsafe([NotNull] calculatorParser.Struct_member_declaration_unsafeContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.fixed_size_buffer_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitFixed_size_buffer_declaration([NotNull] calculatorParser.Fixed_size_buffer_declarationContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.fixed_size_buffer_modifiers"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitFixed_size_buffer_modifiers([NotNull] calculatorParser.Fixed_size_buffer_modifiersContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.fixed_size_buffer_modifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitFixed_size_buffer_modifier([NotNull] calculatorParser.Fixed_size_buffer_modifierContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.buffer_element_type"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitBuffer_element_type([NotNull] calculatorParser.Buffer_element_typeContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.fixed_size_buffer_declarators"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitFixed_size_buffer_declarators([NotNull] calculatorParser.Fixed_size_buffer_declaratorsContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.fixed_size_buffer_declarator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitFixed_size_buffer_declarator([NotNull] calculatorParser.Fixed_size_buffer_declaratorContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.local_variable_initializer_unsafe"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitLocal_variable_initializer_unsafe([NotNull] calculatorParser.Local_variable_initializer_unsafeContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.stackalloc_initializer"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitStackalloc_initializer([NotNull] calculatorParser.Stackalloc_initializerContext context);
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="calculatorParser.from_contextual_keyword"/>.
 	/// </summary>
@@ -583,6 +2343,132 @@ public interface IcalculatorVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitKeyword([NotNull] calculatorParser.KeywordContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.class_definition"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitClass_definition([NotNull] calculatorParser.Class_definitionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.struct_definition"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitStruct_definition([NotNull] calculatorParser.Struct_definitionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.interface_definition"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitInterface_definition([NotNull] calculatorParser.Interface_definitionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.enum_definition"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitEnum_definition([NotNull] calculatorParser.Enum_definitionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.delegate_definition"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitDelegate_definition([NotNull] calculatorParser.Delegate_definitionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.event_declaration2"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitEvent_declaration2([NotNull] calculatorParser.Event_declaration2Context context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.field_declaration2"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitField_declaration2([NotNull] calculatorParser.Field_declaration2Context context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.property_declaration2"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitProperty_declaration2([NotNull] calculatorParser.Property_declaration2Context context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.constant_declaration2"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitConstant_declaration2([NotNull] calculatorParser.Constant_declaration2Context context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.indexer_declaration2"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitIndexer_declaration2([NotNull] calculatorParser.Indexer_declaration2Context context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.destructor_definition"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitDestructor_definition([NotNull] calculatorParser.Destructor_definitionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.constructor_declaration2"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitConstructor_declaration2([NotNull] calculatorParser.Constructor_declaration2Context context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.method_declaration2"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitMethod_declaration2([NotNull] calculatorParser.Method_declaration2Context context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.method_member_name"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitMethod_member_name([NotNull] calculatorParser.Method_member_nameContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.method_member_name2"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitMethod_member_name2([NotNull] calculatorParser.Method_member_name2Context context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.operator_declaration2"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitOperator_declaration2([NotNull] calculatorParser.Operator_declaration2Context context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.interface_method_declaration2"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitInterface_method_declaration2([NotNull] calculatorParser.Interface_method_declaration2Context context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.interface_property_declaration2"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitInterface_property_declaration2([NotNull] calculatorParser.Interface_property_declaration2Context context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.interface_event_declaration2"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitInterface_event_declaration2([NotNull] calculatorParser.Interface_event_declaration2Context context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.interface_indexer_declaration2"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitInterface_indexer_declaration2([NotNull] calculatorParser.Interface_indexer_declaration2Context context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="calculatorParser.member_access2"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitMember_access2([NotNull] calculatorParser.Member_access2Context context);
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="calculatorParser.method_invocation2"/>.
 	/// </summary>
