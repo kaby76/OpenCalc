@@ -21,6 +21,21 @@ namespace CalcXamForms.ViewModels
 {
     public class PageCalcViewModel : BindableObject, INotifyPropertyChanged
     {
+        public class DisplayResults
+        {
+            public HtmlLabel resultname
+            {
+                get;
+                set;
+            }
+
+            public HtmlLabel result
+            {
+                get;
+                set;
+            }
+        }
+
         private static PageCalcViewModel _singleton;
         public static PageCalcViewModel Singleton(PageCalc cp = null)
         {
@@ -33,27 +48,32 @@ namespace CalcXamForms.ViewModels
             HtmlLabel label = o as HtmlLabel;
             if (label != null)
             {
-                int found = _singleton.Results.IndexOf(label);
+                int found = _singleton.Results.Select((f, i) => new { Field = f, Index = i })
+                    .Where(x => x.Field.result == label)
+                    .Select(x => x.Index)
+                    .DefaultIfEmpty(-1)
+                    .FirstOrDefault();
+
+                //int found = _singleton.Results.IndexOf(label);
                 if (found < 0)
                     return;
                 else
                 {
                     // Insert a copy of the command into top (or overwrite if empty).
                     string command = _singleton._calculation_buffer[found];
-                    HtmlLabel results = _singleton._display_buffer[found];
-                    //if (_singleton._calculation_buffer[_singleton._calculation_buffer.Count - 1] == "")
-                    //{
-                    //    _singleton._calculation_buffer[_singleton._calculation_buffer.Count - 1] = command;
-                    //    _singleton._display_buffer[_singleton._calculation_buffer.Count - 1] = results;
-                    //    _singleton._page_calc.DoScroll(results);
-                    //}
-                    //else
+                    HtmlLabel results = _singleton.Results[found].result;
                     {
-                        HtmlLabel r = new HtmlLabel() {Align = HtmlLabel.Alignment.Right};
-                        _singleton._display_buffer.Add(r);
+                        int count = _singleton.Results.Count;
+                        string text = "<big>" + count + "</big>";
+                        var dr = new DisplayResults()
+                        {
+                            resultname = new HtmlLabel(text) {Align = HtmlLabel.Alignment.Left},
+                            result = new HtmlLabel() { Align = HtmlLabel.Alignment.Right }
+                        };
+                        _singleton.Results.Add(dr);
                         _singleton._calculation_buffer.Add("");
                         _singleton._calculation_buffer[_singleton._calculation_buffer.Count - 1] = command;
-                        _singleton._page_calc.DoScroll(r);
+                        _singleton._page_calc.DoScroll(dr);
                     }
                     _singleton.NotifyPropertyChanged("Results");
                 }
@@ -97,7 +117,7 @@ namespace CalcXamForms.ViewModels
             fs.Append("<big><big><big><big><big>" + result + "</big></big></big></big></big>");
             return fs.ToString();
         }
-        private ObservableCollection<HtmlLabel> _display_buffer = new ObservableCollection<HtmlLabel>();
+        private ObservableCollection<DisplayResults> _results_buffer = new ObservableCollection<DisplayResults>();
         private ObservableCollection<string> _calculation_buffer = new ObservableCollection<string>();
         public ObservableCollection<string> Commands
         {
@@ -107,11 +127,11 @@ namespace CalcXamForms.ViewModels
                 NotifyPropertyChanged();
             }
         }
-        public ObservableCollection<HtmlLabel> Results
+        public ObservableCollection<DisplayResults> Results
         {
             get
             {
-                return _display_buffer;
+                return _results_buffer;
             }
             set
             {
@@ -185,9 +205,14 @@ namespace CalcXamForms.ViewModels
         public ICommand BEquals { get; set; } = new Command((nothing) =>
         {
             _singleton.InOperator("");
-            _singleton._display_buffer.Add(new HtmlLabel() { Align = HtmlLabel.Alignment.Right });
+            int count = _singleton.Results.Count;
+            _singleton.Results.Add(
+                new DisplayResults() {
+                    result = new HtmlLabel() { Align = HtmlLabel.Alignment.Right },
+                    resultname = new HtmlLabel("<big>" + count + "</big>") { Align = HtmlLabel.Alignment.Left }
+                });
             _singleton._calculation_buffer.Add("");
-            HtmlLabel item = _singleton._display_buffer[_singleton._display_buffer.Count - 1];
+            DisplayResults item = _singleton.Results[_singleton.Results.Count - 1];
             _singleton._page_calc.DoScroll(item);
         });
         public ICommand BSin { get; set; } = new Command((nothing) => _singleton.InOperator("sin "));
@@ -224,7 +249,14 @@ namespace CalcXamForms.ViewModels
         private PageCalcViewModel(PageCalc page_calc)
         {
             _page_calc = page_calc;
-            _display_buffer.Add(new HtmlLabel() { Align = HtmlLabel.Alignment.Right });
+            int count = Results.Count;
+            Results.Add(
+                new DisplayResults()
+                {
+                    result = new HtmlLabel() {Align = HtmlLabel.Alignment.Right},
+                    resultname = new HtmlLabel() {Align = HtmlLabel.Alignment.Left}
+                });
+
             _calculation_buffer.Add("");
         }
 
@@ -243,7 +275,7 @@ namespace CalcXamForms.ViewModels
 
         private void InOperator(string op)
         {
-            HtmlLabel item = _singleton._display_buffer[_singleton._display_buffer.Count - 1];
+            DisplayResults item = _singleton.Results[_singleton.Results.Count - 1];
             _singleton._page_calc.DoScroll(item);
 
             string plain_ole_command = _calculation_buffer[_singleton._calculation_buffer.Count - 1] + op;
@@ -257,13 +289,13 @@ namespace CalcXamForms.ViewModels
             if (CheckForResult(plain_ole_command, parser, tree, all_nodes)) return;
 
             string result = "Unknown.";
-            _display_buffer[_display_buffer.Count - 1].Text = BuildFormattedCommandAndResult(plain_ole_command, 0, result);
+            Results[Results.Count - 1].result.Text = BuildFormattedCommandAndResult(plain_ole_command, 0, result);
             NotifyPropertyChanged("Results");
         }
 
         private void InDigit(string digit)
         {
-            HtmlLabel item = _singleton._display_buffer[_singleton._display_buffer.Count - 1];
+            DisplayResults item = _singleton.Results[_singleton.Results.Count - 1];
             _singleton._page_calc.DoScroll(item);
 
             string plain_ole_command = _calculation_buffer[_calculation_buffer.Count - 1] + digit;
@@ -279,7 +311,7 @@ namespace CalcXamForms.ViewModels
             IParseTree tree = pp.expressionResult();
             ITokenStream ts = pp.TokenStream;
             string result = AllTokens(ts).Reverse().Skip(1).First().Text;
-            _display_buffer[_display_buffer.Count - 1].Text = BuildFormattedCommandAndResult(plain_ole_command, ErrorPos, result);
+            Results[Results.Count - 1].result.Text = BuildFormattedCommandAndResult(plain_ole_command, ErrorPos, result);
             NotifyPropertyChanged("Results");
         }
 
@@ -303,7 +335,7 @@ namespace CalcXamForms.ViewModels
             int ErrorPos = re.OffendingToken.StartIndex;
 
             string result = error_str;
-            _display_buffer[_display_buffer.Count - 1].Text = BuildFormattedCommandAndResult(plain_ole_command, ErrorPos, result);
+            Results[Results.Count - 1].result.Text = BuildFormattedCommandAndResult(plain_ole_command, ErrorPos, result);
             NotifyPropertyChanged("Results");
 
             return true;
@@ -336,7 +368,7 @@ namespace CalcXamForms.ViewModels
             if (ErrorPos < 0) ErrorPos = 0;
 
             string result = "Extraneous input.";
-            _display_buffer[_display_buffer.Count - 1].Text = BuildFormattedCommandAndResult(plain_ole_command, ErrorPos, result);
+            Results[Results.Count - 1].result.Text = BuildFormattedCommandAndResult(plain_ole_command, ErrorPos, result);
             NotifyPropertyChanged("Results");
 
             return true;
@@ -399,7 +431,7 @@ namespace CalcXamForms.ViewModels
                 result = e.Message;
             }
 
-            _display_buffer[_display_buffer.Count - 1].Text = BuildFormattedCommandAndResult(plain_ole_command, ErrorPos, result);
+            Results[Results.Count - 1].result.Text = BuildFormattedCommandAndResult(plain_ole_command, ErrorPos, result);
             NotifyPropertyChanged("Results");
 
             return true;
@@ -407,7 +439,7 @@ namespace CalcXamForms.ViewModels
 
         public void CompileAndRun()
         {
-            HtmlLabel item = _singleton._display_buffer[_singleton._display_buffer.Count - 1];
+            DisplayResults item = _singleton.Results[_singleton.Results.Count - 1];
             _singleton._page_calc.DoScroll(item);
 
             string plain_ole_command = _calculation_buffer[_calculation_buffer.Count - 1];
@@ -422,7 +454,7 @@ namespace CalcXamForms.ViewModels
 
             string result = "Unknown.";
 
-            _display_buffer[_display_buffer.Count - 1].Text = BuildFormattedCommandAndResult(plain_ole_command, 0, result);
+            Results[Results.Count - 1].result.Text = BuildFormattedCommandAndResult(plain_ole_command, 0, result);
             NotifyPropertyChanged("Results");
         }
     }

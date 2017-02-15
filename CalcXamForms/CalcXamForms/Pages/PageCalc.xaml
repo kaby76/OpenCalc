@@ -33,7 +33,15 @@
           <controls:MyListView.ItemTemplate>
             <DataTemplate>
               <ViewCell>
-                <ContentView Content="{Binding Path=.}" />
+                <StackLayout Orientation="Horizontal" >
+                  <StackLayout HorizontalOptions="Start">
+                    <ContentView Content="{Binding Path=resultname}" />
+                  </StackLayout>
+                  <controls:HtmlLabel Text="" HorizontalOptions="FillAndExpand" />
+                  <StackLayout HorizontalOptions="End">
+                    <ContentView Content="{Binding Path=result}"  />
+                  </StackLayout>
+                </StackLayout>
               </ViewCell>
             </DataTemplate>
           </controls:MyListView.ItemTemplate>

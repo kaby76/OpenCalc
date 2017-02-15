@@ -22,7 +22,7 @@ namespace CalcXamForms.Pages
             }
         }
 
-        public void DoScroll(HtmlLabel item)
+        public void DoScroll(PageCalcViewModel.DisplayResults item)
         {
             Display.ScrollTo(item, ScrollToPosition.Start, false);
         }

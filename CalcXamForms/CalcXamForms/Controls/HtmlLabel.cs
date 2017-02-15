@@ -15,6 +15,12 @@ namespace CalcXamForms.Controls
             Text = "";
         }
 
+        public HtmlLabel(string t)
+            : base()
+        {
+            Text = t;
+        }
+
         public Alignment Align
         {
             get; set;
