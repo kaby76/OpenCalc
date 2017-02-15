@@ -9,6 +9,8 @@
   <StackLayout VerticalOptions="FillAndExpand" BackgroundColor="White" Padding="0,0,0,0">
     <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" RowSpacing="1" ColumnSpacing="1" >
       <Grid.RowDefinitions>
+        <!-- Set height for keypad to be what ever it wants. -->
+        <RowDefinition Height="Auto" />
         <!-- Set all available height for display. -->
         <RowDefinition Height="*" />
         <!-- Set height for keypad to be what ever it wants. -->
@@ -19,13 +21,39 @@
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
       
+      <StackLayout Grid.Row="0" Orientation="Horizontal" VerticalOptions="End" >
+        <StackLayout.BackgroundColor>
+          <OnPlatform x:TypeArguments="Color" iOS="#a4eaff" Android="#2c3e50" WinPhone="#2c3e50" />
+        </StackLayout.BackgroundColor>
+        <StackLayout HorizontalOptions="Start">
+          <controls:HtmlLabel>
+            <controls:HtmlLabel.Text>&lt;big&gt;&lt;big&gt;&lt;big&gt;Variable&lt;/big&gt;&lt;/big&gt;&lt;/big&gt;</controls:HtmlLabel.Text>
+            <controls:HtmlLabel.BackgroundColor >
+              <OnPlatform x:TypeArguments="Color" iOS="#a4eaff" Android="#2c3e50" WinPhone="#2c3e50" />
+            </controls:HtmlLabel.BackgroundColor>
+          </controls:HtmlLabel>
+        </StackLayout>
+        <controls:HtmlLabel Text="" HorizontalOptions="FillAndExpand" >
+          <controls:HtmlLabel.BackgroundColor >
+            <OnPlatform x:TypeArguments="Color" iOS="#a4eaff" Android="#2c3e50" WinPhone="#2c3e50" />
+          </controls:HtmlLabel.BackgroundColor>
+        </controls:HtmlLabel>
+        <StackLayout HorizontalOptions="End">
+          <controls:HtmlLabel Text="&lt;big&gt;&lt;big&gt;&lt;big&gt;Value&lt;/big&gt;&lt;/big&gt;&lt;/big&gt;" >
+            <controls:HtmlLabel.BackgroundColor >
+              <OnPlatform x:TypeArguments="Color" iOS="#a4eaff" Android="#2c3e50" WinPhone="#2c3e50" />
+            </controls:HtmlLabel.BackgroundColor>
+          </controls:HtmlLabel>
+        </StackLayout>
+      </StackLayout>
+      
       <!-- Results display. MyListView implements scrolling. The
       input source is the list of HtmlLabel recording the entire
       history of calculations, including the current. MyListView
       implements bottom-up stacking, so the most-recent calculation
       is at the bottom of the view, next to the keypad.
       -->
-      <StackLayout Grid.Row="0" VerticalOptions="End" BackgroundColor="Blue" >
+      <StackLayout Grid.Row="1" VerticalOptions="End" BackgroundColor="Blue" >
         <controls:MyListView x:Name="Display" ItemClickCommand="{Binding OnTap}" ItemsSource="{Binding Results}" VerticalOptions="End" >
           <controls:MyListView.BackgroundColor >
             <OnPlatform x:TypeArguments="Color" iOS="#a4eaff" Android="#2c3e50" WinPhone="#2c3e50" />
@@ -55,7 +83,7 @@
       containing trig functions. For landscape mode, the trig keypad
       is placed to the right.
       -->
-      <StackLayout Grid.Row="1" IsVisible="{Binding IsPortraitMode}" HeightRequest="{Binding KeypadHeight}"
+      <StackLayout Grid.Row="2" IsVisible="{Binding IsPortraitMode}" HeightRequest="{Binding KeypadHeight}"
           VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Blue" >
         <Grid RowSpacing="1" ColumnSpacing="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
           <Grid.ColumnDefinitions>
@@ -106,7 +134,7 @@
         </Grid>
       </StackLayout>
 
-      <StackLayout IsVisible="{Binding IsLandscapeMode}" Grid.Row="1" HeightRequest="{Binding KeypadHeight}"
+      <StackLayout  Grid.Row="2" IsVisible="{Binding IsLandscapeMode}" HeightRequest="{Binding KeypadHeight}"
         VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Blue" >
         <Grid RowSpacing="1" ColumnSpacing="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
           <Grid.ColumnDefinitions>

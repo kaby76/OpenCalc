@@ -64,11 +64,10 @@ namespace CalcXamForms.ViewModels
                     HtmlLabel results = _singleton.Results[found].result;
                     {
                         int count = _singleton.Results.Count;
-                        string text = "<big>" + count + "</big>";
                         var dr = new DisplayResults()
                         {
-                            resultname = new HtmlLabel(text) {Align = HtmlLabel.Alignment.Left},
-                            result = new HtmlLabel() { Align = HtmlLabel.Alignment.Right }
+                            resultname = new HtmlLabel("<big>h" + count + "</big>"),
+                            result = new HtmlLabel()
                         };
                         _singleton.Results.Add(dr);
                         _singleton._calculation_buffer.Add("");
@@ -208,8 +207,8 @@ namespace CalcXamForms.ViewModels
             int count = _singleton.Results.Count;
             _singleton.Results.Add(
                 new DisplayResults() {
-                    result = new HtmlLabel() { Align = HtmlLabel.Alignment.Right },
-                    resultname = new HtmlLabel("<big>" + count + "</big>") { Align = HtmlLabel.Alignment.Left }
+                    result = new HtmlLabel(),
+                    resultname = new HtmlLabel("<big>h" + count + "</big>")
                 });
             _singleton._calculation_buffer.Add("");
             DisplayResults item = _singleton.Results[_singleton.Results.Count - 1];
@@ -253,8 +252,8 @@ namespace CalcXamForms.ViewModels
             Results.Add(
                 new DisplayResults()
                 {
-                    result = new HtmlLabel() {Align = HtmlLabel.Alignment.Right},
-                    resultname = new HtmlLabel() {Align = HtmlLabel.Alignment.Left}
+                    result = new HtmlLabel(),
+                    resultname = new HtmlLabel("<big>h" + count + "</big>")
                 });
 
             _calculation_buffer.Add("");
