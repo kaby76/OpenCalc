@@ -14,6 +14,8 @@ namespace CalcXamForms
             //MainPage = new PageCalc();
             switch (Device.OS)
             {
+                //case TargetPlatform.iOS:
+                case TargetPlatform.iOS:
                 case TargetPlatform.Android:
                     MainPage = new RootPage();
                     break;

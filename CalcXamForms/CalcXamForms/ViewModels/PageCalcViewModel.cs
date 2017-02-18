@@ -45,11 +45,11 @@ namespace CalcXamForms.ViewModels
         private PageCalc _page_calc;
         public ICommand OnTap { get; set; } = new Command(async (o) =>
         {
-            HtmlLabel label = o as HtmlLabel;
-            if (label != null)
+            DisplayResults tapped_dr = o as DisplayResults;
+            if (tapped_dr != null)
             {
                 int found = _singleton.Results.Select((f, i) => new { Field = f, Index = i })
-                    .Where(x => x.Field.result == label)
+                    .Where(x => x.Field.result == tapped_dr.result)
                     .Select(x => x.Index)
                     .DefaultIfEmpty(-1)
                     .FirstOrDefault();
