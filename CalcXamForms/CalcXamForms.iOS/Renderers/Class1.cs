@@ -36,6 +36,14 @@ namespace CalcXamForms.iOS.Renderers
             var text = Control.Text.AsAttributedString(NSDocumentType.HTML);
             Control.AttributedText = new UITextView { AttributedText = text }.AttributedText;
             Control.TextColor = UIColor.White;
+            HtmlLabel wer = Element as HtmlLabel;
+            UILabel x = Control;
+            if (wer != null && wer.Align == HtmlLabel.Alignment.Right)
+                x.TextAlignment = UITextAlignment.Right;
+            else if (wer != null && wer.Align == HtmlLabel.Alignment.Center)
+                x.TextAlignment = UITextAlignment.Center;
+            else if (wer != null && wer.Align == HtmlLabel.Alignment.Left)
+                x.TextAlignment = UITextAlignment.Left;
         }
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -50,6 +58,13 @@ namespace CalcXamForms.iOS.Renderers
                     var text = Control.Text.AsAttributedString(NSDocumentType.HTML);
                     Control.AttributedText = new UITextView { AttributedText = text }.AttributedText;
                     Control.TextColor = UIColor.White;
+                    UILabel x = Control;
+                    if (wer != null && wer.Align == HtmlLabel.Alignment.Right)
+                        x.TextAlignment = UITextAlignment.Right;
+                    else if (wer != null && wer.Align == HtmlLabel.Alignment.Center)
+                        x.TextAlignment = UITextAlignment.Center;
+                    else if (wer != null && wer.Align == HtmlLabel.Alignment.Left)
+                        x.TextAlignment = UITextAlignment.Left;
                 }
             }
         }
